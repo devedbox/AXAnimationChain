@@ -15,6 +15,8 @@
 		DC5E8AB11DFBEBC400597663 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DC5E8AAF1DFBEBC400597663 /* LaunchScreen.storyboard */; };
 		DC5E8ABC1DFBEBC400597663 /* AXAnimationChainTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DC5E8ABB1DFBEBC400597663 /* AXAnimationChainTests.m */; };
 		DC5E8AC71DFBEBC400597663 /* AXAnimationChainUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = DC5E8AC61DFBEBC400597663 /* AXAnimationChainUITests.m */; };
+		DC5E8AD71DFBED0000597663 /* UIView+AnimationChain.m in Sources */ = {isa = PBXBuildFile; fileRef = DC5E8AD61DFBED0000597663 /* UIView+AnimationChain.m */; };
+		DC5E8ADA1DFBED8B00597663 /* AXAnimationChain.m in Sources */ = {isa = PBXBuildFile; fileRef = DC5E8AD91DFBED8B00597663 /* AXAnimationChain.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +53,11 @@
 		DC5E8AC21DFBEBC400597663 /* AXAnimationChainUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AXAnimationChainUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC5E8AC61DFBEBC400597663 /* AXAnimationChainUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AXAnimationChainUITests.m; sourceTree = "<group>"; };
 		DC5E8AC81DFBEBC400597663 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DC5E8AD51DFBED0000597663 /* UIView+AnimationChain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+AnimationChain.h"; sourceTree = "<group>"; };
+		DC5E8AD61DFBED0000597663 /* UIView+AnimationChain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+AnimationChain.m"; sourceTree = "<group>"; };
+		DC5E8AD81DFBED8B00597663 /* AXAnimationChain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AXAnimationChain.h; sourceTree = "<group>"; };
+		DC5E8AD91DFBED8B00597663 /* AXAnimationChain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AXAnimationChain.m; sourceTree = "<group>"; };
+		DC5E8ADB1DFD006700597663 /* AXAnimationChainAnimator+Block.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AXAnimationChainAnimator+Block.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +112,7 @@
 				DC5E8AA51DFBEBC400597663 /* AppDelegate.m */,
 				DC5E8AA71DFBEBC400597663 /* ViewController.h */,
 				DC5E8AA81DFBEBC400597663 /* ViewController.m */,
+				DC5E8AD41DFBEC6A00597663 /* Classes */,
 				DC5E8AAA1DFBEBC400597663 /* Main.storyboard */,
 				DC5E8AAD1DFBEBC400597663 /* Assets.xcassets */,
 				DC5E8AAF1DFBEBC400597663 /* LaunchScreen.storyboard */,
@@ -138,6 +146,18 @@
 				DC5E8AC81DFBEBC400597663 /* Info.plist */,
 			);
 			path = AXAnimationChainUITests;
+			sourceTree = "<group>";
+		};
+		DC5E8AD41DFBEC6A00597663 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				DC5E8AD51DFBED0000597663 /* UIView+AnimationChain.h */,
+				DC5E8AD61DFBED0000597663 /* UIView+AnimationChain.m */,
+				DC5E8ADB1DFD006700597663 /* AXAnimationChainAnimator+Block.h */,
+				DC5E8AD81DFBED8B00597663 /* AXAnimationChain.h */,
+				DC5E8AD91DFBED8B00597663 /* AXAnimationChain.m */,
+			);
+			path = Classes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -277,6 +297,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				DC5E8AA91DFBEBC400597663 /* ViewController.m in Sources */,
+				DC5E8AD71DFBED0000597663 /* UIView+AnimationChain.m in Sources */,
+				DC5E8ADA1DFBED8B00597663 /* AXAnimationChain.m in Sources */,
 				DC5E8AA61DFBEBC400597663 /* AppDelegate.m in Sources */,
 				DC5E8AA31DFBEBC400597663 /* main.m in Sources */,
 			);
