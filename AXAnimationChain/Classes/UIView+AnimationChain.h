@@ -7,16 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "AXAnimationChain.h"
-#import "AXAnimationChainAnimator+Block.h"
+#import "AXChainAnimator.h"
+#import "AXChainAnimator+Block.h"
 NS_ASSUME_NONNULL_BEGIN
 @protocol AXAnimationChainViewDelegate <NSObject>
 /// Animation chain object.
-@property(readonly, nonatomic, nonnull) id<AXAnimationChainDelegate> animationChain;
+@property(readonly, nonatomic, nonnull) id<AXAnimatorChainDelegate> animationChain;
 @end
 
 @interface UIView (AnimationChain) <AXAnimationChainViewDelegate>
 /// Animation chain object.
-@property(readonly, nonatomic, nonnull) AXAnimationChainAnimator *animationChain;
+@property(readonly, nonatomic, nonnull) AXChainAnimator *animationChain;
 @end
 NS_ASSUME_NONNULL_END

@@ -10,10 +10,10 @@
 #import <objc/runtime.h>
 
 @implementation UIView (AnimationChain)
-- (AXAnimationChainAnimator *)animationChain {
-    AXAnimationChainAnimator *chain = objc_getAssociatedObject(self, _cmd);
+- (AXChainAnimator *)animationChain {
+    AXChainAnimator *chain = objc_getAssociatedObject(self, _cmd);
     if (!chain) {
-        chain = [[AXAnimationChainAnimator alloc] init];
+        chain = [[AXChainAnimator alloc] init];
         chain.animatedView = self;
         objc_setAssociatedObject(self, _cmd, chain, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     }
