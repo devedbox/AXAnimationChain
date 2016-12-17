@@ -29,11 +29,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol AXAnimatorChainDelegate <NSObject>
 /// Father animator object.
-@property(weak,   nonatomic, nullable) id<AXAnimatorChainDelegate> superior;
+@property(weak,   nonatomic, nullable) id<AXAnimatorChainDelegate> superAnimator;
 /// Child animator object.
-@property(strong, nonatomic, nullable) id<AXAnimatorChainDelegate> child;
+@property(strong, nonatomic, nullable) id<AXAnimatorChainDelegate> childAnimator;
 /// Brothers animator objects.
-@property(strong, nonatomic, nullable) NSArray<id<AXAnimatorChainDelegate>> *brothers;
+@property(strong, nonatomic, nullable) NSArray<id<AXAnimatorChainDelegate>> *combinedAnimators;
 /// Core animation of the animator.
 @property(readonly, nonatomic) CAAnimation *animation;
 /// Basic animator. Begin with basic animation.
@@ -100,11 +100,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface AXChainAnimator : NSObject <AXChainAnimatorDelegate>
 /// Father animator.
-@property(weak,   nonatomic, nullable) AXChainAnimator *superior;
+@property(weak,   nonatomic, nullable) AXChainAnimator *superAnimator;
 /// Next to animator.
-@property(strong, nonatomic, nullable) AXChainAnimator *child;
+@property(strong, nonatomic, nullable) AXChainAnimator *childAnimator;
 /// Combined animators.
-@property(strong, nonatomic, nullable) NSArray<AXChainAnimator *> *brothers;
+@property(strong, nonatomic, nullable) NSArray<AXChainAnimator *> *combinedAnimators;
 /// Animated view.
 @property(weak, nonatomic) UIView *animatedView;
 /// Create a animator with a specific core animation object.

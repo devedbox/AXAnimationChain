@@ -15,6 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
     /// Is animations in traansaction.
     BOOL _inTransaction;
 }
+/// Next to animation.
+@property(strong, nonatomic) CAAnimation *nextToAnimation;
 /// Set animation object to the animator.
 - (void)_setAnimation:(CAAnimation *)animation;
 @end
@@ -35,36 +37,36 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 - (nullable instancetype)nextTo:(nonnull AXChainAnimator *)animator {
-    AXChainAnimator *superior = animator.superior?:animator;
-    AXChainAnimator *superFather = superior;
-    while (superior) {
-        superior = superior.superior;
-        if (superior) {
-            superFather = superior;
-            if (superFather == self) {
+    AXChainAnimator *superAnimator = animator.superAnimator?:animator;
+    AXChainAnimator *superSuperAnimator = superAnimator;
+    while (superAnimator) {
+        superAnimator = superAnimator.superAnimator;
+        if (superAnimator) {
+            superSuperAnimator = superAnimator;
+            if (superAnimator == self) {
                 return animator;
             }
         }
     }
-    _child = superFather;
-    _child.superior = self;
-    return _child;
+    _childAnimator = superSuperAnimator;
+    _childAnimator.superAnimator = self;
+    return _childAnimator;
 }
 
 - (nullable instancetype)combineWith:(nonnull AXChainAnimator *)animator {
-    NSMutableArray *animators = [_brothers mutableCopy];
+    NSMutableArray *animators = [_combinedAnimators mutableCopy];
     if (!animators) animators = [NSMutableArray array];
-    AXChainAnimator *superior = animator.superior?:animator;
-    AXChainAnimator *superFather = superior;
-    while (superior) {
-        superior = superior.superior;
-        if (superior) {
-            superFather = superior;
+    AXChainAnimator *superAnimator = animator.superAnimator?:animator;
+    AXChainAnimator *superSuperAnimator = superAnimator;
+    while (superAnimator) {
+        superAnimator = superAnimator.superAnimator;
+        if (superAnimator) {
+            superSuperAnimator = superAnimator;
         }
     }
-    [animators addObject:superFather];
-    animator.superior = self;
-    _brothers = [NSSet setWithArray:animators].allObjects;
+    [animators addObject:superSuperAnimator];
+    animator.superAnimator = self;
+    _combinedAnimators = [NSSet setWithArray:animators].allObjects;
     return animator;
 }
 
@@ -111,29 +113,33 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark - AXAnimationChainDelegate.
 - (void)start {
     NSAssert(_animatedView, @"Animation chain cannot be created because animated view is null.");
-    AXChainAnimator *superior = _superior;
-    AXChainAnimator *superFather = _superior;
-    while (superior) {
-        superior = superior.superior;
-        if (superior) {
-            superFather = superior;
+    AXChainAnimator *superAnimator = _superAnimator;
+    AXChainAnimator *superSuperAnimator = _superAnimator;
+    while (superAnimator) {
+        superAnimator = superAnimator.superAnimator;
+        if (superAnimator) {
+            superSuperAnimator = superAnimator;
         }
     }
-    if (superFather) {
-        [superFather start];
+    if (superSuperAnimator) {
+        [superSuperAnimator start];
     } else {
-        if (_inTransaction) return;
-        [CATransaction begin];
-        _inTransaction = YES;
-        [CATransaction setDisableActions:YES];
-        [CATransaction setCompletionBlock:^{
-            _inTransaction = NO;
-        }];
-        CAAnimation *animation = [self _animationGroups];
-        [_animatedView.layer addAnimation:animation forKey:[NSString stringWithFormat:@"%p", self]];
-        
-        [CATransaction commit];
+        [self _beginAnimating];
     }
+}
+
+- (void)_beginAnimating {
+    if (_inTransaction) return;
+    [CATransaction begin];
+    _inTransaction = YES;
+    [CATransaction setDisableActions:YES];
+    [CATransaction setCompletionBlock:^{
+        _inTransaction = NO;
+    }];
+    CAAnimation *animation = [self _animationGroups];
+    [_animatedView.layer addAnimation:animation forKey:[NSString stringWithFormat:@"%p", self]];
+    
+    [CATransaction commit];
 }
 
 - (nullable instancetype)beginTime:(NSTimeInterval)beginTime {
@@ -286,17 +292,17 @@ NS_ASSUME_NONNULL_BEGIN
     NSMutableArray *animations = [(*group).animations mutableCopy];
     NSTimeInterval duration = (*group).duration;
     
-    for (AXChainAnimator *animator in _brothers) {
+    for (AXChainAnimator *animator in _combinedAnimators) {
         CAAnimation *animation = [animator animation];
         [animations addObject:animation];
         duration = MAX(duration, animation.duration);
-        if (animator.brothers) {
+        if (animator.combinedAnimators) {
             [(*group) setAnimations:animations];
             (*group).duration = duration;
             [animator _animationGroupsForCombinedWithGroup:group];
             animations = [(*group).animations mutableCopy];
             duration = (*group).duration;
-        } else if (animator.child) {
+        } else if (animator.childAnimator) {
             [(*group) setAnimations:animations];
             (*group).duration = duration;
             [animator _animationGroupsForNextToWithGroup:group];
@@ -310,7 +316,7 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 - (void)_animationGroupsForNextToWithGroup:(CAAnimationGroup **)group {
-    AXChainAnimator *animator = self.child;
+    AXChainAnimator *animator = self.childAnimator;
     while (animator) {
         CAAnimation *nextAnimation = [animator animation];
         nextAnimation.beginTime += (*group).duration;
@@ -318,7 +324,7 @@ NS_ASSUME_NONNULL_BEGIN
         NSMutableArray *animations = [[(*group) animations] mutableCopy];
         [animations addObject:nextAnimation];
         (*group).animations = animations;
-        animator = animator.child;
+        animator = animator.childAnimator;
     }
 }
 @end
