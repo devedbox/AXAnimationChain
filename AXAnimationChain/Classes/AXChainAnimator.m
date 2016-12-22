@@ -110,7 +110,7 @@ NS_ASSUME_NONNULL_BEGIN
     transition.animatedView = _animatedView;
     return transition;
 }
-#pragma mark - AXAnimationChainDelegate.
+#pragma mark - AXAnimatorChainDelegate.
 - (void)start {
     NSAssert(_animatedView, @"Animation chain cannot be created because animated view is null.");
     AXChainAnimator *superAnimator = _superAnimator;
@@ -135,6 +135,7 @@ NS_ASSUME_NONNULL_BEGIN
     [CATransaction setDisableActions:YES];
     [CATransaction setCompletionBlock:^{
         _inTransaction = NO;
+        NSLog(@"%s", __FUNCTION__);
     }];
     CAAnimation *animation = [self _animationGroups];
     [_animatedView.layer addAnimation:animation forKey:[NSString stringWithFormat:@"%p", self]];
@@ -280,7 +281,9 @@ NS_ASSUME_NONNULL_BEGIN
     group.fillMode = _animation.fillMode;
     group.timingFunction = _animation.timingFunction;
     group.animations = @[_animation];
-    group.duration = _animation.duration;
+    // Calculate the animation duration of animation.
+    NSTimeInterval _duration = [self _animationDurationForAnimation:_animation];
+    group.duration = _duration;
     
     [self _animationGroupsForCombinedWithGroup:&group];
     [self _animationGroupsForNextToWithGroup:&group];
@@ -295,7 +298,9 @@ NS_ASSUME_NONNULL_BEGIN
     for (AXChainAnimator *animator in _combinedAnimators) {
         CAAnimation *animation = [animator animation];
         [animations addObject:animation];
-        duration = MAX(duration, animation.duration);
+        // Calculate the animation duration of animation.
+        NSTimeInterval _duration = [self _animationDurationForAnimation:animation];
+        duration = MAX(duration, _duration);
         if (animator.combinedAnimators) {
             [(*group) setAnimations:animations];
             (*group).duration = duration;
@@ -320,12 +325,26 @@ NS_ASSUME_NONNULL_BEGIN
     while (animator) {
         CAAnimation *nextAnimation = [animator animation];
         nextAnimation.beginTime += (*group).duration;
-        (*group).duration += nextAnimation.duration + nextAnimation.beginTime;
+        (*group).duration += [self _animationDurationForAnimation:nextAnimation] + nextAnimation.beginTime;
         NSMutableArray *animations = [[(*group) animations] mutableCopy];
         [animations addObject:nextAnimation];
         (*group).animations = animations;
         animator = animator.childAnimator;
     }
+}
+
+- (NSTimeInterval)_animationDurationForAnimation:(CAAnimation *)animation {
+    NSTimeInterval _duration;
+    if (animation.repeatCount && animation.repeatDuration) {
+        _duration = MIN(animation.duration/(animation.speed?:1)*animation.repeatCount, animation.repeatDuration/(animation.speed?:1))*(animation.autoreverses?2:1)+animation.beginTime;
+    } else if (_animation.repeatCount) {
+        _duration = animation.duration/(animation.speed?:1)*animation.repeatCount*(animation.autoreverses?2:1)+animation.beginTime;
+    } else if (_animation.repeatDuration) {
+        _duration = animation.repeatDuration/(animation.speed?:1)*(animation.autoreverses?2:1)+animation.beginTime;
+    } else {
+        _duration = animation.duration/(animation.speed?:1)*(animation.autoreverses?2:1)+animation.beginTime;
+    }
+    return _duration;
 }
 @end
 
