@@ -12,11 +12,11 @@
 NS_ASSUME_NONNULL_BEGIN
 @protocol AXAnimationChainViewDelegate <NSObject>
 /// Animation chain object.
-@property(readonly, nonatomic, nonnull) id<AXAnimatorChainDelegate> animationChain;
+@property(readonly, nonatomic, nonnull) id<AXAnimatorChainDelegate> chainAnimator;
 @end
 
-@interface UIView (AnimationChain) <AXAnimationChainViewDelegate>
+@interface UIView (ChainAnimator) <AXAnimationChainViewDelegate>
 /// Animation chain object.
-@property(readonly, nonatomic, nonnull) AXChainAnimator *animationChain;
+@property(readonly, nonatomic, nonnull) AXChainAnimator *chainAnimator;
 @end
 NS_ASSUME_NONNULL_END

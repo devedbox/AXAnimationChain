@@ -7,7 +7,7 @@
 //
 
 #import "ViewController.h"
-#import "UIView+AnimationChain.h"
+#import "UIView+ChainAnimator.h"
 
 @interface ViewController ()
 /// Transition view.
@@ -29,7 +29,7 @@
     _sublayer = layer;
      */
 //    [[[[self.view.animationChain beginWith:[CAAnimation animation]] nextTo:[CAKeyframeAnimation animation]] nextTo:[CAAnimationGroup animation]] combineWith:[CABasicAnimation animation]];
-    NSLog(@"%@", self.view.animationChain.basic);
+    NSLog(@"%@", self.view.chainAnimator.basic);
     
     
 }
@@ -59,7 +59,7 @@
 
 //    _transitionView.animationChain.basic.property(@"position").toValue([NSValue valueWithCGPoint:CGPointMake(100, 300)]).duration(0.5).nextTo(_transitionView.animationChain.basic).property(@"transform.rotation").toValue(@(M_PI_4)).easeInOut.duration(1.5).nextTo(_transitionView.animationChain.basic).property(@"bounds").toValue([NSValue valueWithCGRect:CGRectMake(0, 0, 100, 100)]).duration(2.0).nextTo(_transitionView.animationChain.basic).property(@"position").toValue([NSValue valueWithCGPoint:self.view.center]).duration(2.0).animate();
     
-    _transitionView.animationChain.basic.property(@"position").toValue([NSValue valueWithCGPoint:CGPointMake(100, self.view.center.y)]).easeOut.duration(0.5).combineWith(_transitionView.animationChain.spring.property(@"bounds")).toValue([NSValue valueWithCGRect:CGRectMake(0, 0, 100, 100)]).duration(0.5).repeatCount(3).autoreverses.combineWith(_transitionView.animationChain.spring.property(@"transform.rotation")).toValue(@(M_PI_4)).duration(0.5).repeatCount(3).beginTime(1.0).autoreverses.nextTo(_transitionView.animationChain.basic).property(@"position").toValue([NSValue valueWithCGPoint:self.view.center]).duration(0.5).combineWith(_transitionView.animationChain.spring.property(@"bounds")).toValue([NSValue valueWithCGRect:CGRectMake(0, 0, 100, 100)]).duration(1.0).nextTo(_transitionView.animationChain.spring.property(@"transform.rotation")).toValue(@(M_PI_4)).duration(1.0).animate();
+    _transitionView.chainAnimator.basic.property(@"position").toValue([NSValue valueWithCGPoint:CGPointMake(100, self.view.center.y)]).easeOut.duration(0.5).combineWith(_transitionView.chainAnimator.spring.property(@"bounds")).toValue([NSValue valueWithCGRect:CGRectMake(0, 0, 100, 100)]).duration(0.5).repeatCount(3).autoreverses.combineWith(_transitionView.chainAnimator.spring.property(@"transform.rotation")).toValue(@(M_PI_4)).duration(0.5).repeatCount(3).beginTime(1.0).autoreverses.nextTo(_transitionView.chainAnimator.basic).property(@"position").toValue([NSValue valueWithCGPoint:self.view.center]).duration(0.5).combineWith(_transitionView.chainAnimator.spring.property(@"bounds")).toValue([NSValue valueWithCGRect:CGRectMake(0, 0, 100, 100)]).duration(0.8).nextTo(_transitionView.chainAnimator.spring.property(@"transform.rotation")).toValue(@(M_PI_4)).duration(1.0).animate();
     
 //    _transitionView.animationChain.basic.property(@"position").toValue([NSValue valueWithCGPoint:CGPointMake(100, 300)]).easeInOut.duration(0.5).repeatCount(2).repeatDuration(.0).autoreverses.animate();
     

@@ -6,11 +6,11 @@
 //  Copyright © 2016年 devedbox. All rights reserved.
 //
 
-#import "UIView+AnimationChain.h"
+#import "UIView+ChainAnimator.h"
 #import <objc/runtime.h>
 
-@implementation UIView (AnimationChain)
-- (AXChainAnimator *)animationChain {
+@implementation UIView (ChainAnimator)
+- (AXChainAnimator *)chainAnimator {
     AXChainAnimator *chain = objc_getAssociatedObject(self, _cmd);
     if (!chain) {
         chain = [[AXChainAnimator alloc] init];

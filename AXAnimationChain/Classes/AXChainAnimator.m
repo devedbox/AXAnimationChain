@@ -166,7 +166,6 @@ NS_ASSUME_NONNULL_BEGIN
     
     [CATransaction setCompletionBlock:^() {
         _inTransaction = NO;
-        NSLog(@"%s", __FUNCTION__);
         if (_childAnimator && [_animatedView.layer animationForKey:[NSString stringWithFormat:@"%p", _animation]]) {
             [_childAnimator _beginAnimating];
         }
