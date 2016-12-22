@@ -37,34 +37,59 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 - (nullable instancetype)nextTo:(nonnull AXChainAnimator *)animator {
+    // Get supper animator.
     AXChainAnimator *superAnimator = animator.superAnimator?:animator;
+    // Get super super animator.
     AXChainAnimator *superSuperAnimator = superAnimator;
+    
     while (superAnimator) {
         superAnimator = superAnimator.superAnimator;
         if (superAnimator) {
             superSuperAnimator = superAnimator;
-            if (superAnimator == self) {
+            if (superAnimator == self) { // If super animator contains SELF then ignore the animator and return.
                 return animator;
             }
         }
     }
-    _childAnimator = superSuperAnimator;
-    _childAnimator.superAnimator = self;
-    return _childAnimator;
+    // Find the super super animator of SELF.
+    AXChainAnimator *ssuper = self;
+    while (ssuper) {
+        ssuper = ssuper.superAnimator;
+        if (!ssuper.superAnimator) {
+            break;
+        }
+    }
+    AXChainAnimator *child = ssuper;
+    // Find the last child animator.
+    while (child) {
+        AXChainAnimator *_child = child.childAnimator;
+        if (!_child) {// Append the next to animator to the last child animator.
+            child.childAnimator = superSuperAnimator;
+            child.childAnimator.superAnimator = child;
+            break;
+        }
+        child = _child;
+    }
+
+    return superSuperAnimator;
 }
 
 - (nullable instancetype)combineWith:(nonnull AXChainAnimator *)animator {
+    // Get the mutable copy of combined animators.
     NSMutableArray *animators = [_combinedAnimators mutableCopy];
+    // Initialize a new container of combined animators.
     if (!animators) animators = [NSMutableArray array];
+    // Get the super super animator of the combined animator.
     AXChainAnimator *superAnimator = animator.superAnimator?:animator;
     AXChainAnimator *superSuperAnimator = superAnimator;
     while (superAnimator) {
         superAnimator = superAnimator.superAnimator;
-        if (superAnimator) {
+        if (superAnimator) {// Combine the super super animator instead of animator.
             superSuperAnimator = superAnimator;
         }
     }
     [animators addObject:superSuperAnimator];
+    // Set the super animator to SELF.
     animator.superAnimator = self;
     _combinedAnimators = [NSSet setWithArray:animators].allObjects;
     return animator;
@@ -133,14 +158,34 @@ NS_ASSUME_NONNULL_BEGIN
     [CATransaction begin];
     _inTransaction = YES;
     [CATransaction setDisableActions:YES];
-    [CATransaction setCompletionBlock:^{
-        _inTransaction = NO;
-        NSLog(@"%s", __FUNCTION__);
-    }];
+    /*
     CAAnimation *animation = [self _animationGroups];
     [_animatedView.layer addAnimation:animation forKey:[NSString stringWithFormat:@"%p", self]];
+     */
+    
+    [CATransaction setCompletionBlock:^() {
+        _inTransaction = NO;
+        NSLog(@"%s", __FUNCTION__);
+        if (_childAnimator && [_animatedView.layer animationForKey:[NSString stringWithFormat:@"%p", _animation]]) {
+            [_childAnimator _beginAnimating];
+        }
+    }];
+    
+    [self _addAnimationsToAnimatedLayer];
     
     [CATransaction commit];
+}
+
+- (void)_addAnimationsToAnimatedLayer {
+    if ([_animation isKindOfClass:CASpringAnimation.class]) {
+        if (!_animation.duration) {
+            _animation.duration = [(CASpringAnimation *)_animation settlingDuration];
+        }
+    }
+    [_animatedView.layer addAnimation:_animation forKey:[NSString stringWithFormat:@"%p", _animation]];
+    for (AXChainAnimator *animator in _combinedAnimators) {
+        [animator _addAnimationsToAnimatedLayer];
+    }
 }
 
 - (nullable instancetype)beginTime:(NSTimeInterval)beginTime {
@@ -277,9 +322,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (nonnull CAAnimation *)_animationGroups {
     CAAnimationGroup *group = [CAAnimationGroup animation];
-    group.removedOnCompletion = _animation.removedOnCompletion;
-    group.fillMode = _animation.fillMode;
-    group.timingFunction = _animation.timingFunction;
+    group.removedOnCompletion = NO;
+    group.fillMode = kCAFillModeBoth;
     group.animations = @[_animation];
     // Calculate the animation duration of animation.
     NSTimeInterval _duration = [self _animationDurationForAnimation:_animation];
@@ -298,6 +342,15 @@ NS_ASSUME_NONNULL_BEGIN
     for (AXChainAnimator *animator in _combinedAnimators) {
         CAAnimation *animation = [animator animation];
         [animations addObject:animation];
+        // Fixs the spring animation of duration.
+        if ([animation isMemberOfClass:CASpringAnimation.class]) {
+            CASpringAnimation *springAnimation = (CASpringAnimation *)animation;
+            if (springAnimation.duration) {
+                springAnimation.duration = MIN(springAnimation.duration, springAnimation.settlingDuration);
+            } else {
+                springAnimation.duration = springAnimation.settlingDuration;
+            }
+        }
         // Calculate the animation duration of animation.
         NSTimeInterval _duration = [self _animationDurationForAnimation:animation];
         duration = MAX(duration, _duration);
@@ -324,6 +377,15 @@ NS_ASSUME_NONNULL_BEGIN
     AXChainAnimator *animator = self.childAnimator;
     while (animator) {
         CAAnimation *nextAnimation = [animator animation];
+        // Fixs the spring animation of duration.
+        if ([nextAnimation isMemberOfClass:CASpringAnimation.class]) {
+            CASpringAnimation *springAnimation = (CASpringAnimation *)nextAnimation;
+            if (springAnimation.duration) {
+                springAnimation.duration = MIN(springAnimation.duration, springAnimation.settlingDuration);
+            } else {
+                springAnimation.duration = springAnimation.settlingDuration;
+            }
+        }
         nextAnimation.beginTime += (*group).duration;
         (*group).duration += [self _animationDurationForAnimation:nextAnimation] + nextAnimation.beginTime;
         NSMutableArray *animations = [[(*group) animations] mutableCopy];
@@ -335,14 +397,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (NSTimeInterval)_animationDurationForAnimation:(CAAnimation *)animation {
     NSTimeInterval _duration;
+    NSTimeInterval animationDuration = animation.duration;
     if (animation.repeatCount && animation.repeatDuration) {
-        _duration = MIN(animation.duration/(animation.speed?:1)*animation.repeatCount, animation.repeatDuration/(animation.speed?:1))*(animation.autoreverses?2:1)+animation.beginTime;
+        _duration = MIN(animationDuration/(animation.speed?:1)*animation.repeatCount, animation.repeatDuration/(animation.speed?:1))*(animation.autoreverses?2:1)+animation.beginTime;
     } else if (_animation.repeatCount) {
-        _duration = animation.duration/(animation.speed?:1)*animation.repeatCount*(animation.autoreverses?2:1)+animation.beginTime;
+        _duration = animationDuration/(animation.speed?:1)*animation.repeatCount*(animation.autoreverses?2:1)+animation.beginTime;
     } else if (_animation.repeatDuration) {
         _duration = animation.repeatDuration/(animation.speed?:1)*(animation.autoreverses?2:1)+animation.beginTime;
     } else {
-        _duration = animation.duration/(animation.speed?:1)*(animation.autoreverses?2:1)+animation.beginTime;
+        _duration = animationDuration/(animation.speed?:1)*(animation.autoreverses?2:1)+animation.beginTime;
     }
     return _duration;
 }
@@ -657,6 +720,7 @@ NS_ASSUME_NONNULL_BEGIN
 @dynamic animation;
 #pragma mark - Override.
 - (nullable instancetype)duration:(NSTimeInterval)duration {
+    self.animation.duration = duration;
     return self;
 }
 #pragma mark - Getters.
