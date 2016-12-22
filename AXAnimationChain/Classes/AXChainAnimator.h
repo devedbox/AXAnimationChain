@@ -145,4 +145,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// Transition animator. Begin with transition animation.
 @property(readonly, nonatomic, null_resettable) AXTransitionChainAnimator *transition;
 @end
+
+@interface AXChainAnimator (TopAnimator)
+/// Top animator. Might be SELF if there is not any child animator.
+@property(readonly, nonatomic, nonnull) AXChainAnimator *topAnimator;
+@end
 NS_ASSUME_NONNULL_END

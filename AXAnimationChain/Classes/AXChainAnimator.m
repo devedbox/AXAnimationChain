@@ -135,6 +135,19 @@ NS_ASSUME_NONNULL_BEGIN
     transition.animatedView = _animatedView;
     return transition;
 }
+
+- (AXChainAnimator *)topAnimator {
+    AXChainAnimator *child = self;
+    // Find the last child animator.
+    while (child) {
+        AXChainAnimator *_child = child.childAnimator;
+        if (!_child) {// Return the result.
+            return child;
+        }
+        child = _child;
+    }
+    return child;
+}
 #pragma mark - AXAnimatorChainDelegate.
 - (void)start {
     NSAssert(_animatedView, @"Animation chain cannot be created because animated view is null.");
