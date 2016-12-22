@@ -148,6 +148,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface AXChainAnimator (TopAnimator)
 /// Top animator. Might be SELF if there is not any child animator.
-@property(readonly, nonatomic, nonnull) AXChainAnimator *topAnimator;
+@property(readonly, nonatomic, nonnull) __kindof AXChainAnimator *topAnimator;
 @end
 NS_ASSUME_NONNULL_END
