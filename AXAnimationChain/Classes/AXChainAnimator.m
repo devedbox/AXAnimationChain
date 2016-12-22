@@ -155,6 +155,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)_beginAnimating {
     if (_inTransaction) return;
+    [CATransaction flush];
     [CATransaction begin];
     _inTransaction = YES;
     [CATransaction setDisableActions:YES];
@@ -189,7 +190,7 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 - (nullable instancetype)beginTime:(NSTimeInterval)beginTime {
-    _animation.beginTime = beginTime;
+    _animation.beginTime = beginTime+CACurrentMediaTime();
     return self;
 }
 
