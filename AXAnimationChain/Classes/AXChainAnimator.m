@@ -15,8 +15,6 @@ NS_ASSUME_NONNULL_BEGIN
     /// Is animations in traansaction.
     BOOL _inTransaction;
 }
-/// Next to animation.
-@property(strong, nonatomic) CAAnimation *nextToAnimation;
 /// Set animation object to the animator.
 - (void)_setAnimation:(CAAnimation *)animation;
 @end
