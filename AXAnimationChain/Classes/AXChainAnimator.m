@@ -30,6 +30,13 @@ NS_ASSUME_NONNULL_BEGIN
     return obj;
 }
 
+- (instancetype)init {
+    if (self = [super init]) {
+        [self _setAnimation:[self _defaultAnimation]];
+    }
+    return self;
+}
+
 #pragma mark - ChainHandler.
 - (nullable instancetype)beginWith:(nonnull AXChainAnimator *)animator {
     [self _setAnimation:animator.animation];
@@ -243,6 +250,7 @@ NS_ASSUME_NONNULL_BEGIN
     
     [CATransaction setCompletionBlock:^() {
         _inTransaction = NO;
+        if (!_childAnimator) [self _clear];
         if (_childAnimator && [_animatedView.layer animationForKey:[NSString stringWithFormat:@"%p", _animation]]/* && [UIApplication sharedApplication].applicationState == UIApplicationStateActive*/) {
             [_childAnimator _beginAnimating];
         }
@@ -401,6 +409,12 @@ NS_ASSUME_NONNULL_BEGIN
     _animation = [animation copy];
 }
 
+- (CAAnimation *)_defaultAnimation {
+    CAAnimation *animation = [CAAnimation animation];
+    animation.removedOnCompletion = NO;
+    return animation;
+}
+
 - (nonnull CAAnimation *)_animationGroups {
     CAAnimationGroup *group = [CAAnimationGroup animation];
     group.removedOnCompletion = NO;
@@ -489,6 +503,16 @@ NS_ASSUME_NONNULL_BEGIN
         _duration = animationDuration/(animation.speed?:1)*(animation.autoreverses?2:1)+animation.beginTime;
     }
     return _duration;
+}
+
+- (void)_clear {
+    if (_childAnimator) [_childAnimator _clear]; else {
+        if (self.superAnimator) {
+            self.superAnimator.childAnimator = nil;
+        }
+    }
+    _combinedAnimators = nil;
+    [self _setAnimation:[self _defaultAnimation]];
 }
 @end
 
