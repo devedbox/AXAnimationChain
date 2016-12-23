@@ -36,28 +36,28 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 #pragma mark - ChainHandler.
-- (nullable instancetype)beginWith:(nonnull AXChainAnimator *)animator {
+- (instancetype)beginWith:(nonnull AXChainAnimator *)animator {
     [self _setAnimation:animator.animation];
     return self;
 }
 
-- (nullable instancetype)beginBasic {
+- (instancetype)beginBasic {
    return [self beginWith:[self _basicAnimator]];
 }
 
-- (nullable instancetype)beginSpring {
+- (instancetype)beginSpring {
     return [self beginWith:[self _springAnimator]];
 }
 
-- (nullable instancetype)beginKeyframe {
+- (instancetype)beginKeyframe {
     return [self beginWith:[self _keyframeAnimator]];
 }
 
-- (nullable instancetype)beginTransition {
+- (instancetype)beginTransition {
     return [self beginWith:[self _transitionAnimator]];
 }
 
-- (nullable instancetype)nextTo:(nonnull AXChainAnimator *)animator {
+- (instancetype)nextTo:(nonnull AXChainAnimator *)animator {
     // Get supper animator.
     AXChainAnimator *superAnimator = animator.superAnimator?:animator;
     // Get super super animator.
@@ -95,23 +95,23 @@ NS_ASSUME_NONNULL_BEGIN
     return superSuperAnimator;
 }
 
-- (nullable instancetype)nextToBasic {
+- (instancetype)nextToBasic {
     return [self nextTo:[self _basicAnimator]];
 }
 
-- (nullable instancetype)nextToSpring {
+- (instancetype)nextToSpring {
     return [self nextTo:[self _springAnimator]];
 }
 
-- (nullable instancetype)nextToKeyframe {
+- (instancetype)nextToKeyframe {
     return [self nextTo:[self _keyframeAnimator]];
 }
 
-- (nullable instancetype)nextToTransition {
+- (instancetype)nextToTransition {
     return [self nextTo:[self _transitionAnimator]];
 }
 
-- (nullable instancetype)combineWith:(nonnull AXChainAnimator *)animator {
+- (instancetype)combineWith:(nonnull AXChainAnimator *)animator {
     // Get the mutable copy of combined animators.
     NSMutableArray *animators = [_combinedAnimators mutableCopy];
     // Initialize a new container of combined animators.
@@ -133,19 +133,19 @@ NS_ASSUME_NONNULL_BEGIN
     return animator;
 }
 
-- (nullable instancetype)combineBasic {
+- (instancetype)combineBasic {
     return [self combineWith:[self _basicAnimator]];
 }
 
-- (nullable instancetype)combineSpring {
+- (instancetype)combineSpring {
     return [self combineWith:[self _springAnimator]];
 }
 
-- (nullable instancetype)combineKeyframe {
+- (instancetype)combineKeyframe {
     return [self combineWith:[self _keyframeAnimator]];
 }
 
-- (nullable instancetype)combineTransition {
+- (instancetype)combineTransition {
     return [self combineWith:[self _transitionAnimator]];
 }
 #pragma mark - Getters.
@@ -275,62 +275,62 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 #pragma mark - Property.
-- (nullable instancetype)beginTime:(NSTimeInterval)beginTime {
+- (instancetype)beginTime:(NSTimeInterval)beginTime {
     _animation.beginTime = beginTime+CACurrentMediaTime();
     return self;
 }
 
-- (nullable instancetype)duration:(NSTimeInterval)duration {
+- (instancetype)duration:(NSTimeInterval)duration {
     _animation.duration = duration;
     return self;
 }
 
-- (nullable instancetype)speed:(CGFloat)speed {
+- (instancetype)speed:(CGFloat)speed {
     _animation.speed = speed;
     return self;
 }
 
-- (nullable instancetype)timeOffset:(NSTimeInterval)timeOffset {
+- (instancetype)timeOffset:(NSTimeInterval)timeOffset {
     _animation.timeOffset = timeOffset;
     return self;
 }
 
-- (nullable instancetype)repeatCount:(CGFloat)repeatCount {
+- (instancetype)repeatCount:(CGFloat)repeatCount {
     _animation.repeatCount = repeatCount;
     return self;
 }
 
-- (nullable instancetype)repeatDuration:(NSTimeInterval)repeatDuration {
+- (instancetype)repeatDuration:(NSTimeInterval)repeatDuration {
     _animation.repeatDuration = repeatDuration;
     return self;
 }
 
-- (nullable instancetype)autoreverses {
+- (instancetype)autoreverses {
     _animation.autoreverses = YES;
     return self;
 }
 
-- (nullable instancetype)fillMode:(NSString *)fillMode {
+- (instancetype)fillMode:(NSString *)fillMode {
     _animation.fillMode = [fillMode copy];
     return self;
 }
 
-- (nullable instancetype)linear {
+- (instancetype)linear {
     _animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
     return self;
 }
 
-- (nullable instancetype)easeIn {
+- (instancetype)easeIn {
     _animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn];
     return self;
 }
 
-- (nullable instancetype)easeOut {
+- (instancetype)easeOut {
     _animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
     return self;
 }
 
-- (nullable instancetype)easeInOut {
+- (instancetype)easeInOut {
     _animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
     return self;
 }
@@ -517,14 +517,58 @@ NS_ASSUME_NONNULL_BEGIN
 @implementation AXBasicChainAnimator
 @dynamic animation;
 #pragma mark - Override.
-
+- (instancetype)beginWith:(AXChainAnimator *)animator {
+    if ([animator.animation isMemberOfClass:CABasicAnimation.class]) return self; else
+    if ([animator.animation isMemberOfClass:CASpringAnimation.class]) {
+        CASpringAnimation *spring = (CASpringAnimation *)animator.animation;
+        spring.beginTime = self.animation.beginTime;
+        spring.duration = self.animation.duration;
+        spring.speed = self.animation.speed;
+        spring.timeOffset = self.animation.timeOffset;
+        spring.repeatCount = self.animation.repeatCount;
+        spring.repeatDuration= self.animation.repeatDuration;
+        spring.autoreverses = self.animation.autoreverses;
+        spring.fillMode = self.animation.fillMode;
+        spring.keyPath = self.animation.keyPath;
+        spring.fromValue = self.animation.fromValue;
+        spring.toValue = self.animation.toValue;
+        spring.byValue = self.animation.byValue;
+        [self _setAnimation:spring];
+    } else
+    if ([animator.animation isMemberOfClass:CAKeyframeAnimation.class]) {
+        CAKeyframeAnimation *keyframe = (CAKeyframeAnimation *)animator.animation;
+        keyframe.beginTime = self.animation.beginTime;
+        keyframe.duration = self.animation.duration;
+        keyframe.speed = self.animation.speed;
+        keyframe.timeOffset = self.animation.timeOffset;
+        keyframe.repeatCount = self.animation.repeatCount;
+        keyframe.repeatDuration= self.animation.repeatDuration;
+        keyframe.autoreverses = self.animation.autoreverses;
+        keyframe.fillMode = self.animation.fillMode;
+        keyframe.keyPath = self.animation.keyPath;
+        [self _setAnimation:keyframe];
+    } else
+    if ([animator.animation isMemberOfClass:CATransition.class]) {
+        CATransition *transition = (CATransition *)animator.animation;
+        transition.beginTime = self.animation.beginTime;
+        transition.duration = self.animation.duration;
+        transition.speed = self.animation.speed;
+        transition.timeOffset = self.animation.timeOffset;
+        transition.repeatCount = self.animation.repeatCount;
+        transition.repeatDuration= self.animation.repeatDuration;
+        transition.autoreverses = self.animation.autoreverses;
+        transition.fillMode = self.animation.fillMode;
+        [self _setAnimation:transition];
+    }
+    return self;
+}
 #pragma mark - Getters.
 - (CABasicAnimation *)animation {
     return (CABasicAnimation *)[super animation];
 }
 
 #pragma mark - PropertyHandler.
-- (nullable instancetype)property:(NSString *)property {
+- (instancetype)property:(NSString *)property {
     NSAssert([self.animation isKindOfClass:[CAPropertyAnimation class]], @"Cannot set property: %@ to animation because animation object is not subclass of CAPropertyAnimation", property);
     NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"^\\s+$" options:0 error:NULL];
     NSAssert(property.length != 0 && [regex matchesInString:property options:0 range:NSMakeRange(0, property.length)].count == 0, @"Property to be animated can not be null");
@@ -532,20 +576,23 @@ NS_ASSUME_NONNULL_BEGIN
     return self;
 }
 
-- (nullable id<AXBasicChainAnimatorDelegate>)fromValue:(id)fromValue {
-    if (self.animation.byValue && self.animation.toValue) return nil;
+- (id<AXBasicChainAnimatorDelegate>)fromValue:(id)fromValue {
+    if (![self.animation respondsToSelector:@selector(setFromValue:)]) return self;
+    if (self.animation.byValue && self.animation.toValue) return self;
     self.animation.fromValue = fromValue;
     return self;
 }
 
-- (nullable id<AXBasicChainAnimatorDelegate>)byValue:(id)byValue {
-    if (self.animation.fromValue && self.animation.toValue) return nil;
+- (id<AXBasicChainAnimatorDelegate>)byValue:(id)byValue {
+    if (![self.animation respondsToSelector:@selector(setByValue:)]) return self;
+    if (self.animation.fromValue && self.animation.toValue) return self;
     self.animation.byValue = byValue;
     return self;
 }
 
-- (nullable id<AXBasicChainAnimatorDelegate>)toValue:(id)toValue {
-    if (self.animation.fromValue && self.animation.byValue) return nil;
+- (id<AXBasicChainAnimatorDelegate>)toValue:(id)toValue {
+    if (![self.animation respondsToSelector:@selector(setToValue:)]) return self;
+    if (self.animation.fromValue && self.animation.byValue) return self;
     self.animation.toValue = toValue;
     return self;
 }
@@ -638,13 +685,56 @@ NS_ASSUME_NONNULL_BEGIN
 
 @implementation AXKeyframeChainAnimator
 @dynamic animation;
+#pragma mark - Override.
+- (instancetype)beginWith:(AXChainAnimator *)animator {
+    if ([animator.animation isMemberOfClass:CAKeyframeAnimation.class]) return self; else
+        if ([animator.animation isMemberOfClass:CASpringAnimation.class]) {
+            CASpringAnimation *spring = (CASpringAnimation *)animator.animation;
+            spring.beginTime = self.animation.beginTime;
+            spring.duration = self.animation.duration;
+            spring.speed = self.animation.speed;
+            spring.timeOffset = self.animation.timeOffset;
+            spring.repeatCount = self.animation.repeatCount;
+            spring.repeatDuration= self.animation.repeatDuration;
+            spring.autoreverses = self.animation.autoreverses;
+            spring.fillMode = self.animation.fillMode;
+            spring.keyPath = self.animation.keyPath;
+            [self _setAnimation:spring];
+        } else
+        if ([animator.animation isMemberOfClass:CABasicAnimation.class]) {
+            CABasicAnimation *basic = (CABasicAnimation *)animator.animation;
+            basic.beginTime = self.animation.beginTime;
+            basic.duration = self.animation.duration;
+            basic.speed = self.animation.speed;
+            basic.timeOffset = self.animation.timeOffset;
+            basic.repeatCount = self.animation.repeatCount;
+            basic.repeatDuration= self.animation.repeatDuration;
+            basic.autoreverses = self.animation.autoreverses;
+            basic.fillMode = self.animation.fillMode;
+            basic.keyPath = self.animation.keyPath;
+            [self _setAnimation:basic];
+        } else
+        if ([animator.animation isMemberOfClass:CATransition.class]) {
+            CATransition *transition = (CATransition *)animator.animation;
+            transition.beginTime = self.animation.beginTime;
+            transition.duration = self.animation.duration;
+            transition.speed = self.animation.speed;
+            transition.timeOffset = self.animation.timeOffset;
+            transition.repeatCount = self.animation.repeatCount;
+            transition.repeatDuration= self.animation.repeatDuration;
+            transition.autoreverses = self.animation.autoreverses;
+            transition.fillMode = self.animation.fillMode;
+            [self _setAnimation:transition];
+        }
+    return self;
+}
 #pragma mark - Getters.
 - (CAKeyframeAnimation *)animation {
     return (CAKeyframeAnimation *)[super animation];
 }
 
 #pragma mark - PropertiesHandler.
-- (nullable instancetype)property:(NSString *)property {
+- (instancetype)property:(NSString *)property {
     NSAssert([self.animation isKindOfClass:[CAPropertyAnimation class]], @"Cannot set property: %@ to animation because animation object is not subclass of CAPropertyAnimation", property);
     NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"^\\s+$" options:0 error:NULL];
     NSAssert(property.length != 0 && [regex matchesInString:property options:0 range:NSMakeRange(0, property.length)].count == 0, @"Property to be animated can not be null");
@@ -652,47 +742,56 @@ NS_ASSUME_NONNULL_BEGIN
     return self;
 }
 
-- (nullable instancetype)values:(nullable NSArray<id> *)values {
+- (instancetype)values:(nullable NSArray<id> *)values {
+    if (![self.animation respondsToSelector:@selector(setValues:)]) return self;
     self.animation.values = values;
     return self;
 }
 
-- (nullable instancetype)path:(nullable UIBezierPath *)path {
+- (instancetype)path:(nullable UIBezierPath *)path {
+    if (![self.animation respondsToSelector:@selector(setPath:)]) return self;
     self.animation.path = path.CGPath;
     return self;
 }
 
-- (nullable instancetype)keyTimes:(nullable NSArray<NSNumber *> *)keyTimes {
+- (instancetype)keyTimes:(nullable NSArray<NSNumber *> *)keyTimes {
+    if (![self.animation respondsToSelector:@selector(setKeyTimes:)]) return self;
     self.animation.keyTimes = keyTimes;
     return self;
 }
 
-- (nullable instancetype)timingFunctions:(nullable NSArray<CAMediaTimingFunction *> *)timingFunctions {
+- (instancetype)timingFunctions:(nullable NSArray<CAMediaTimingFunction *> *)timingFunctions {
+    if (![self.animation respondsToSelector:@selector(setTimingFunction:)]) return self;
     self.animation.timingFunctions = timingFunctions;
     return self;
 }
 
-- (nullable instancetype)calculationMode:(NSString *)calculationMode {
+- (instancetype)calculationMode:(NSString *)calculationMode {
+    if (![self.animation respondsToSelector:@selector(setCalculationMode:)]) return self;
     self.animation.calculationMode = calculationMode;
     return self;
 }
 
-- (nullable instancetype)tensionValues:(nullable NSArray<NSNumber *> *)tensionValues {
+- (instancetype)tensionValues:(nullable NSArray<NSNumber *> *)tensionValues {
+    if (![self.animation respondsToSelector:@selector(setTensionValues:)]) return self;
     self.animation.tensionValues = tensionValues;
     return self;
 }
 
-- (nullable instancetype)continuityValues:(nullable NSArray<NSNumber *> *)continuityValues {
+- (instancetype)continuityValues:(nullable NSArray<NSNumber *> *)continuityValues {
+    if (![self.animation respondsToSelector:@selector(setContinuityValues:)]) return self;
     self.animation.continuityValues = continuityValues;
     return self;
 }
 
-- (nullable instancetype)biasValues:(nullable NSArray<NSNumber *> *)biasValues {
+- (instancetype)biasValues:(nullable NSArray<NSNumber *> *)biasValues {
+    if (![self.animation respondsToSelector:@selector(setBiasValues:)]) return self;
     self.animation.biasValues = biasValues;
     return self;
 }
 
-- (nullable instancetype)rotationMode:(nullable NSString *)rotationMode {
+- (instancetype)rotationMode:(nullable NSString *)rotationMode {
+    if (![self.animation respondsToSelector:@selector(setRotationMode:)]) return self;
     self.animation.rotationMode = rotationMode;
     return self;
 }
@@ -822,8 +921,49 @@ NS_ASSUME_NONNULL_BEGIN
 @implementation AXSpringChainAnimator
 @dynamic animation;
 #pragma mark - Override.
-- (nullable instancetype)duration:(NSTimeInterval)duration {
-    self.animation.duration = duration;
+- (instancetype)beginWith:(AXChainAnimator *)animator {
+    if ([animator.animation isMemberOfClass:CASpringAnimation.class]) return self; else
+        if ([animator.animation isMemberOfClass:CAKeyframeAnimation.class]) {
+            CAKeyframeAnimation *keyframe = (CAKeyframeAnimation *)animator.animation;
+            keyframe.beginTime = self.animation.beginTime;
+            keyframe.duration = self.animation.duration;
+            keyframe.speed = self.animation.speed;
+            keyframe.timeOffset = self.animation.timeOffset;
+            keyframe.repeatCount = self.animation.repeatCount;
+            keyframe.repeatDuration= self.animation.repeatDuration;
+            keyframe.autoreverses = self.animation.autoreverses;
+            keyframe.fillMode = self.animation.fillMode;
+            keyframe.keyPath = self.animation.keyPath;
+            [self _setAnimation:keyframe];
+        } else
+        if ([animator.animation isMemberOfClass:CABasicAnimation.class]) {
+            CABasicAnimation *basic = (CABasicAnimation *)animator.animation;
+            basic.beginTime = self.animation.beginTime;
+            basic.duration = self.animation.duration;
+            basic.speed = self.animation.speed;
+            basic.timeOffset = self.animation.timeOffset;
+            basic.repeatCount = self.animation.repeatCount;
+            basic.repeatDuration= self.animation.repeatDuration;
+            basic.autoreverses = self.animation.autoreverses;
+            basic.fillMode = self.animation.fillMode;
+            basic.keyPath = self.animation.keyPath;
+            basic.fromValue = self.animation.fromValue;
+            basic.toValue = self.animation.toValue;
+            basic.byValue = self.animation.byValue;
+            [self _setAnimation:basic];
+        } else
+        if ([animator.animation isMemberOfClass:CATransition.class]) {
+            CATransition *transition = (CATransition *)animator.animation;
+            transition.beginTime = self.animation.beginTime;
+            transition.duration = self.animation.duration;
+            transition.speed = self.animation.speed;
+            transition.timeOffset = self.animation.timeOffset;
+            transition.repeatCount = self.animation.repeatCount;
+            transition.repeatDuration= self.animation.repeatDuration;
+            transition.autoreverses = self.animation.autoreverses;
+            transition.fillMode = self.animation.fillMode;
+            [self _setAnimation:transition];
+        }
     return self;
 }
 #pragma mark - Getters.
@@ -832,22 +972,26 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 #pragma mark - PropertiesHandler.
-- (nullable instancetype)mass:(CGFloat)mass {
+- (instancetype)mass:(CGFloat)mass {
+    if (![self.animation respondsToSelector:@selector(setMass:)]) return self;
     self.animation.mass = mass;
     return self;
 }
 
-- (nullable instancetype)stiffness:(CGFloat)stiffness {
+- (instancetype)stiffness:(CGFloat)stiffness {
+    if (![self.animation respondsToSelector:@selector(setStiffness:)]) return self;
     self.animation.stiffness = stiffness;
     return self;
 }
 
-- (nullable instancetype)damping:(CGFloat)damping {
+- (instancetype)damping:(CGFloat)damping {
+    if (![self.animation respondsToSelector:@selector(setDamping:)]) return self;
     self.animation.damping = damping;
     return self;
 }
 
-- (nullable instancetype)initialVelocity:(CGFloat)initialVelocity {
+- (instancetype)initialVelocity:(CGFloat)initialVelocity {
+    if (![self.animation respondsToSelector:@selector(setInitialVelocity:)]) return self;
     self.animation.initialVelocity = initialVelocity;
     return self;
 }
@@ -965,33 +1109,78 @@ NS_ASSUME_NONNULL_BEGIN
 @implementation AXTransitionChainAnimator
 @dynamic animation;
 #pragma mark - Override.
+- (instancetype)beginWith:(AXChainAnimator *)animator {
+    if ([animator.animation isMemberOfClass:CATransition.class]) return self; else
+        if ([animator.animation isMemberOfClass:CAKeyframeAnimation.class]) {
+            CAKeyframeAnimation *keyframe = (CAKeyframeAnimation *)animator.animation;
+            keyframe.beginTime = self.animation.beginTime;
+            keyframe.duration = self.animation.duration;
+            keyframe.speed = self.animation.speed;
+            keyframe.timeOffset = self.animation.timeOffset;
+            keyframe.repeatCount = self.animation.repeatCount;
+            keyframe.repeatDuration= self.animation.repeatDuration;
+            keyframe.autoreverses = self.animation.autoreverses;
+            keyframe.fillMode = self.animation.fillMode;
+            [self _setAnimation:keyframe];
+        } else
+        if ([animator.animation isMemberOfClass:CABasicAnimation.class]) {
+            CABasicAnimation *basic = (CABasicAnimation *)animator.animation;
+            basic.beginTime = self.animation.beginTime;
+            basic.duration = self.animation.duration;
+            basic.speed = self.animation.speed;
+            basic.timeOffset = self.animation.timeOffset;
+            basic.repeatCount = self.animation.repeatCount;
+            basic.repeatDuration= self.animation.repeatDuration;
+            basic.autoreverses = self.animation.autoreverses;
+            basic.fillMode = self.animation.fillMode;
+            [self _setAnimation:basic];
+        } else
+        if ([animator.animation isMemberOfClass:CASpringAnimation.class]) {
+            CASpringAnimation *spring = (CASpringAnimation *)animator.animation;
+            spring.beginTime = self.animation.beginTime;
+            spring.duration = self.animation.duration;
+            spring.speed = self.animation.speed;
+            spring.timeOffset = self.animation.timeOffset;
+            spring.repeatCount = self.animation.repeatCount;
+            spring.repeatDuration= self.animation.repeatDuration;
+            spring.autoreverses = self.animation.autoreverses;
+            spring.fillMode = self.animation.fillMode;
+            [self _setAnimation:spring];
+        }
+    return self;
+}
 #pragma mark - Getters.
 - (CATransition *)animation {
     return (CATransition *)[super animation];
 }
 
 #pragma mark - PropertiesHandler.
-- (nullable instancetype)type:(NSString *)type {
+- (instancetype)type:(NSString *)type {
+    if (![self.animation respondsToSelector:@selector(setType:)]) return self;
     self.animation.type = type;
     return self;
 }
 
-- (nullable instancetype)subtype:(NSString *)subtype {
+- (instancetype)subtype:(NSString *)subtype {
+    if (![self.animation respondsToSelector:@selector(setSubtype:)]) return self;
     self.animation.subtype = subtype;
     return self;
 }
 
-- (nullable instancetype)startProgress:(CGFloat)startProgress {
+- (instancetype)startProgress:(CGFloat)startProgress {
+    if (![self.animation respondsToSelector:@selector(setStartProgress:)]) return self;
     self.animation.startProgress = startProgress;
     return self;
 }
 
-- (nullable instancetype)endProgress:(CGFloat)endProgress {
+- (instancetype)endProgress:(CGFloat)endProgress {
+    if (![self.animation respondsToSelector:@selector(setEndProgress:)]) return self;
     self.animation.endProgress = endProgress;
     return self;
 }
 
-- (nullable instancetype)filter:(id)filter {
+- (instancetype)filter:(id)filter {
+    if (![self.animation respondsToSelector:@selector(setFilter:)]) return self;
     self.animation.filter = filter;
     return self;
 }

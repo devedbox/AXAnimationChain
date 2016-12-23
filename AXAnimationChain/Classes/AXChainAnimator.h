@@ -12,14 +12,14 @@
 NS_ASSUME_NONNULL_BEGIN
 @protocol AXMediaTimingDelegate <NSObject>
 // CAMediaTiming protocol reachable.
-- (nullable instancetype)beginTime:(NSTimeInterval)beginTime;
-- (nullable instancetype)duration:(NSTimeInterval)duration;
-- (nullable instancetype)speed:(CGFloat)speed;
-- (nullable instancetype)timeOffset:(NSTimeInterval)timeOffset;
-- (nullable instancetype)repeatCount:(CGFloat)repeatCount;
-- (nullable instancetype)repeatDuration:(NSTimeInterval)repeatDuration;
-- (nullable instancetype)autoreverses;
-- (nullable instancetype)fillMode:(NSString *)fillMode;
+- (instancetype)beginTime:(NSTimeInterval)beginTime;
+- (instancetype)duration:(NSTimeInterval)duration;
+- (instancetype)speed:(CGFloat)speed;
+- (instancetype)timeOffset:(NSTimeInterval)timeOffset;
+- (instancetype)repeatCount:(CGFloat)repeatCount;
+- (instancetype)repeatDuration:(NSTimeInterval)repeatDuration;
+- (instancetype)autoreverses;
+- (instancetype)fillMode:(NSString *)fillMode;
 @end
 
 @protocol AXBasicChainAnimatorDelegate;
@@ -45,57 +45,57 @@ NS_ASSUME_NONNULL_BEGIN
 /// Transition animator. Begin with transition animation.
 @property(readonly, nonatomic) id<AXTransitionChainAnimatorDelegate> transition;
 // Chain releationship manager.
-- (nullable instancetype)beginWith:(id<AXAnimatorChainDelegate>)animator;
-- (nullable instancetype)nextTo:(id<AXAnimatorChainDelegate>)animator;
-- (nullable instancetype)combineWith:(id<AXAnimatorChainDelegate>)animator;
+- (instancetype)beginWith:(id<AXAnimatorChainDelegate>)animator;
+- (instancetype)nextTo:(id<AXAnimatorChainDelegate>)animator;
+- (instancetype)combineWith:(id<AXAnimatorChainDelegate>)animator;
 - (void)start;
 @end
 
 @protocol AXChainAnimatorDelegate <AXMediaTimingDelegate, AXAnimatorChainDelegate>
 
 // CAMediaTimingFunction reachable. Default using default function.
-- (nullable instancetype)linear;
-- (nullable instancetype)easeIn;
-- (nullable instancetype)easeOut;
-- (nullable instancetype)easeInOut;
+- (instancetype)linear;
+- (instancetype)easeIn;
+- (instancetype)easeOut;
+- (instancetype)easeInOut;
 @end
 
 @protocol AXPropertyChainAnimatorDelegate <AXChainAnimatorDelegate>
 // Animated property.
-- (nullable instancetype)property:(NSString *)property;
+- (instancetype)property:(NSString *)property;
 @end
 
 @protocol AXBasicChainAnimatorDelegate <AXPropertyChainAnimatorDelegate>
-- (nullable instancetype)fromValue:(id)fromValue;
-- (nullable instancetype)toValue:(id)toValue;
-- (nullable instancetype)byValue:(id)byValue;
+- (instancetype)fromValue:(id)fromValue;
+- (instancetype)toValue:(id)toValue;
+- (instancetype)byValue:(id)byValue;
 @end
 
 @protocol AXKeyframeChainAnimatorDelegate <AXPropertyChainAnimatorDelegate>
-- (nullable instancetype)values:(nullable NSArray<id> *)values;
-- (nullable instancetype)path:(nullable UIBezierPath *)path;
-- (nullable instancetype)keyTimes:(nullable NSArray<NSNumber *> *)keyTimes;
-- (nullable instancetype)timingFunctions:(nullable NSArray<CAMediaTimingFunction *> *)timingFunctions;
-- (nullable instancetype)calculationMode:(NSString *)calculationMode;
-- (nullable instancetype)tensionValues:(nullable NSArray<NSNumber *> *)tensionValues;
-- (nullable instancetype)continuityValues:(nullable NSArray<NSNumber *> *)continuityValues;
-- (nullable instancetype)biasValues:(nullable NSArray<NSNumber *> *)biasValues;
-- (nullable instancetype)rotationMode:(nullable NSString *)rotationMode;
+- (instancetype)values:(nullable NSArray<id> *)values;
+- (instancetype)path:(nullable UIBezierPath *)path;
+- (instancetype)keyTimes:(nullable NSArray<NSNumber *> *)keyTimes;
+- (instancetype)timingFunctions:(nullable NSArray<CAMediaTimingFunction *> *)timingFunctions;
+- (instancetype)calculationMode:(NSString *)calculationMode;
+- (instancetype)tensionValues:(nullable NSArray<NSNumber *> *)tensionValues;
+- (instancetype)continuityValues:(nullable NSArray<NSNumber *> *)continuityValues;
+- (instancetype)biasValues:(nullable NSArray<NSNumber *> *)biasValues;
+- (instancetype)rotationMode:(nullable NSString *)rotationMode;
 @end
 
 @protocol AXSpringChainAnimatorDelegate <AXBasicChainAnimatorDelegate>
-- (nullable instancetype)mass:(CGFloat)mass;
-- (nullable instancetype)stiffness:(CGFloat)stiffness;
-- (nullable instancetype)damping:(CGFloat)damping;
-- (nullable instancetype)initialVelocity:(CGFloat)initialVelocity;
+- (instancetype)mass:(CGFloat)mass;
+- (instancetype)stiffness:(CGFloat)stiffness;
+- (instancetype)damping:(CGFloat)damping;
+- (instancetype)initialVelocity:(CGFloat)initialVelocity;
 @end
 
 @protocol AXTransitionChainAnimatorDelegate <AXChainAnimatorDelegate>
-- (nullable instancetype)type:(NSString *)type;
-- (nullable instancetype)subtype:(NSString *)subtype;
-- (nullable instancetype)startProgress:(CGFloat)startProgress;
-- (nullable instancetype)endProgress:(CGFloat)endProgress;
-- (nullable instancetype)filter:(id)filter;
+- (instancetype)type:(NSString *)type;
+- (instancetype)subtype:(NSString *)subtype;
+- (instancetype)startProgress:(CGFloat)startProgress;
+- (instancetype)endProgress:(CGFloat)endProgress;
+- (instancetype)filter:(id)filter;
 @end
 
 @class AXBasicChainAnimator;
@@ -115,22 +115,22 @@ NS_ASSUME_NONNULL_BEGIN
 /// Create a animator with a specific core animation object.
 + (instancetype)animatorWithAnimation:(CAAnimation *)animation;
 
-- (nullable instancetype)beginWith:(nonnull AXChainAnimator *)animator;
-- (nullable instancetype)nextTo:(nonnull AXChainAnimator *)animator;
-- (nullable instancetype)combineWith:(nonnull AXChainAnimator *)animator;
+- (instancetype)beginWith:(nonnull AXChainAnimator *)animator;
+- (instancetype)nextTo:(nonnull AXChainAnimator *)animator;
+- (instancetype)combineWith:(nonnull AXChainAnimator *)animator;
 
-- (nullable instancetype)beginBasic;
-- (nullable instancetype)beginSpring;
-- (nullable instancetype)beginKeyframe;
-- (nullable instancetype)beginTransition;
-- (nullable AXBasicChainAnimator *)combineBasic;
-- (nullable AXSpringChainAnimator *)combineSpring;
-- (nullable AXKeyframeChainAnimator *)combineKeyframe;
-- (nullable AXTransitionChainAnimator *)combineTransition;
-- (nullable AXBasicChainAnimator *)nextToBasic;
-- (nullable AXSpringChainAnimator *)nextToSpring;
-- (nullable AXKeyframeChainAnimator *)nextToKeyframe;
-- (nullable AXTransitionChainAnimator *)nextToTransition;
+- (instancetype)beginBasic;
+- (instancetype)beginSpring;
+- (instancetype)beginKeyframe;
+- (instancetype)beginTransition;
+- (AXBasicChainAnimator *)combineBasic;
+- (AXSpringChainAnimator *)combineSpring;
+- (AXKeyframeChainAnimator *)combineKeyframe;
+- (AXTransitionChainAnimator *)combineTransition;
+- (AXBasicChainAnimator *)nextToBasic;
+- (AXSpringChainAnimator *)nextToSpring;
+- (AXKeyframeChainAnimator *)nextToKeyframe;
+- (AXTransitionChainAnimator *)nextToTransition;
 @end
 
 @interface AXBasicChainAnimator : AXChainAnimator <AXBasicChainAnimatorDelegate>
