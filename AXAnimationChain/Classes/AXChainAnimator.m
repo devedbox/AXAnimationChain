@@ -9,7 +9,7 @@
 #import "AXChainAnimator.h"
 #import "AXChainAnimator+Block.h"
 NS_ASSUME_NONNULL_BEGIN
-@interface AXChainAnimator ()
+@interface AXChainAnimator () <CAAnimationDelegate>
 {
     @protected
     /// Is animations in traansaction.
@@ -34,6 +34,22 @@ NS_ASSUME_NONNULL_BEGIN
 - (nullable instancetype)beginWith:(nonnull AXChainAnimator *)animator {
     [self _setAnimation:animator.animation];
     return self;
+}
+
+- (nullable instancetype)beginBasic {
+   return [self beginWith:[self _basicAnimator]];
+}
+
+- (nullable instancetype)beginSpring {
+    return [self beginWith:[self _springAnimator]];
+}
+
+- (nullable instancetype)beginKeyframe {
+    return [self beginWith:[self _keyframeAnimator]];
+}
+
+- (nullable instancetype)beginTransition {
+    return [self beginWith:[self _transitionAnimator]];
 }
 
 - (nullable instancetype)nextTo:(nonnull AXChainAnimator *)animator {
@@ -74,6 +90,22 @@ NS_ASSUME_NONNULL_BEGIN
     return superSuperAnimator;
 }
 
+- (nullable instancetype)nextToBasic {
+    return [self nextTo:[self _basicAnimator]];
+}
+
+- (nullable instancetype)nextToSpring {
+    return [self nextTo:[self _springAnimator]];
+}
+
+- (nullable instancetype)nextToKeyframe {
+    return [self nextTo:[self _keyframeAnimator]];
+}
+
+- (nullable instancetype)nextToTransition {
+    return [self nextTo:[self _transitionAnimator]];
+}
+
 - (nullable instancetype)combineWith:(nonnull AXChainAnimator *)animator {
     // Get the mutable copy of combined animators.
     NSMutableArray *animators = [_combinedAnimators mutableCopy];
@@ -88,15 +120,31 @@ NS_ASSUME_NONNULL_BEGIN
             superSuperAnimator = superAnimator;
         }
     }
+    if ([animators containsObject:animator]) return animator;
     [animators addObject:superSuperAnimator];
     // Set the super animator to SELF.
     animator.superAnimator = self;
-    _combinedAnimators = [NSSet setWithArray:animators].allObjects;
+    _combinedAnimators = [animators mutableCopy];
     return animator;
 }
 
+- (nullable instancetype)combineBasic {
+    return [self combineWith:[self _basicAnimator]];
+}
+
+- (nullable instancetype)combineSpring {
+    return [self combineWith:[self _springAnimator]];
+}
+
+- (nullable instancetype)combineKeyframe {
+    return [self combineWith:[self _keyframeAnimator]];
+}
+
+- (nullable instancetype)combineTransition {
+    return [self combineWith:[self _transitionAnimator]];
+}
 #pragma mark - Getters.
-- (AXBasicChainAnimator *)basic {
+- (AXBasicChainAnimator *)_basicAnimator {
     CABasicAnimation *animation = [CABasicAnimation animation];
     animation.removedOnCompletion = NO;
     animation.fillMode = kCAFillModeForwards;
@@ -106,7 +154,7 @@ NS_ASSUME_NONNULL_BEGIN
     return basic;
 }
 
-- (AXKeyframeChainAnimator *)keyframe {
+- (AXKeyframeChainAnimator *)_keyframeAnimator {
     CAKeyframeAnimation *animation = [CAKeyframeAnimation animation];
     animation.removedOnCompletion = NO;
     animation.fillMode = kCAFillModeForwards;
@@ -116,7 +164,7 @@ NS_ASSUME_NONNULL_BEGIN
     return keyframe;
 }
 
-- (AXSpringChainAnimator *)spring {
+- (AXSpringChainAnimator *)_springAnimator {
     CASpringAnimation *animation = [CASpringAnimation animation];
     animation.removedOnCompletion = NO;
     animation.fillMode = kCAFillModeForwards;
@@ -126,7 +174,7 @@ NS_ASSUME_NONNULL_BEGIN
     return spring;
 }
 
-- (AXTransitionChainAnimator *)transition {
+- (AXTransitionChainAnimator *)_transitionAnimator {
     CATransition *animation = [CATransition animation];
     animation.removedOnCompletion = NO;
     animation.fillMode = kCAFillModeForwards;
@@ -134,6 +182,22 @@ NS_ASSUME_NONNULL_BEGIN
     AXTransitionChainAnimator *transition = [AXTransitionChainAnimator animatorWithAnimation:animation];
     transition.animatedView = _animatedView;
     return transition;
+}
+
+- (AXBasicChainAnimator *)basic {
+    return [self _basicAnimator];
+}
+
+- (AXKeyframeChainAnimator *)keyframe {
+    return [self _keyframeAnimator];
+}
+
+- (AXSpringChainAnimator *)spring {
+    return [self _springAnimator];
+}
+
+- (AXTransitionChainAnimator *)transition {
+    return [self _transitionAnimator];
 }
 
 - (AXChainAnimator *)topAnimator {
@@ -179,7 +243,7 @@ NS_ASSUME_NONNULL_BEGIN
     
     [CATransaction setCompletionBlock:^() {
         _inTransaction = NO;
-        if (_childAnimator && [_animatedView.layer animationForKey:[NSString stringWithFormat:@"%p", _animation]]) {
+        if (_childAnimator && [_animatedView.layer animationForKey:[NSString stringWithFormat:@"%p", _animation]]/* && [UIApplication sharedApplication].applicationState == UIApplicationStateActive*/) {
             [_childAnimator _beginAnimating];
         }
     }];
@@ -200,7 +264,11 @@ NS_ASSUME_NONNULL_BEGIN
         [animator _addAnimationsToAnimatedLayer];
     }
 }
+#pragma mark - CAAnimationDelegate.
+- (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)finished {
+}
 
+#pragma mark - Property.
 - (nullable instancetype)beginTime:(NSTimeInterval)beginTime {
     _animation.beginTime = beginTime+CACurrentMediaTime();
     return self;

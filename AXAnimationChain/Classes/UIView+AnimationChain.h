@@ -28,4 +28,6 @@
 - (UIView * (^)(CGFloat toScaleX))scaleXTo;
 - (UIView * (^)(CGFloat toScaleY))scaleYTo;
 - (UIView * (^)(CGPoint toAnchor))anchorTo;
+
+- (dispatch_block_t)animate;
 @end

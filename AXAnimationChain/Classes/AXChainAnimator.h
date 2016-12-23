@@ -98,6 +98,11 @@ NS_ASSUME_NONNULL_BEGIN
 - (nullable instancetype)filter:(id)filter;
 @end
 
+@class AXBasicChainAnimator;
+@class AXSpringChainAnimator;
+@class AXKeyframeChainAnimator;
+@class AXTransitionChainAnimator;
+
 @interface AXChainAnimator : NSObject <AXChainAnimatorDelegate>
 /// Father animator.
 @property(weak,   nonatomic, nullable) AXChainAnimator *superAnimator;
@@ -113,6 +118,19 @@ NS_ASSUME_NONNULL_BEGIN
 - (nullable instancetype)beginWith:(nonnull AXChainAnimator *)animator;
 - (nullable instancetype)nextTo:(nonnull AXChainAnimator *)animator;
 - (nullable instancetype)combineWith:(nonnull AXChainAnimator *)animator;
+
+- (nullable instancetype)beginBasic;
+- (nullable instancetype)beginSpring;
+- (nullable instancetype)beginKeyframe;
+- (nullable instancetype)beginTransition;
+- (nullable AXBasicChainAnimator *)combineBasic;
+- (nullable AXSpringChainAnimator *)combineSpring;
+- (nullable AXKeyframeChainAnimator *)combineKeyframe;
+- (nullable AXTransitionChainAnimator *)combineTransition;
+- (nullable AXBasicChainAnimator *)nextToBasic;
+- (nullable AXSpringChainAnimator *)nextToSpring;
+- (nullable AXKeyframeChainAnimator *)nextToKeyframe;
+- (nullable AXTransitionChainAnimator *)nextToTransition;
 @end
 
 @interface AXBasicChainAnimator : AXChainAnimator <AXBasicChainAnimatorDelegate>
