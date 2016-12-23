@@ -248,7 +248,6 @@ NS_ASSUME_NONNULL_BEGIN
     
     [CATransaction setCompletionBlock:^() {
         _inTransaction = NO;
-        if (!_childAnimator) [self _clear];
         if (_childAnimator && [_animatedView.layer animationForKey:[NSString stringWithFormat:@"%p", _animation]]/* && [UIApplication sharedApplication].applicationState == UIApplicationStateActive*/) {
             [_childAnimator _beginAnimating];
         }
@@ -501,16 +500,6 @@ NS_ASSUME_NONNULL_BEGIN
         _duration = animationDuration/(animation.speed?:1)*(animation.autoreverses?2:1)+animation.beginTime;
     }
     return _duration;
-}
-
-- (void)_clear {
-    if (_childAnimator) [_childAnimator _clear]; else {
-        if (self.superAnimator) {
-            self.superAnimator.childAnimator = nil;
-        }
-    }
-    _combinedAnimators = nil;
-    [self _setAnimation:[self _defaultAnimation]];
 }
 @end
 
