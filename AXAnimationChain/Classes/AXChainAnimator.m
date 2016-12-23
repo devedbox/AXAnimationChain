@@ -232,6 +232,7 @@ NS_ASSUME_NONNULL_BEGIN
         [superSuperAnimator start];
     } else {
         [self _beginAnimating];
+        if (!_childAnimator) [self _clear];
     }
 }
 
@@ -239,15 +240,13 @@ NS_ASSUME_NONNULL_BEGIN
     if (_inTransaction) return;
     [CATransaction flush];
     [CATransaction begin];
-    _inTransaction = YES;
+    /* _inTransaction = YES; */
     [CATransaction setDisableActions:YES];
-    /*
-    CAAnimation *animation = [self _animationGroups];
-    [_animatedView.layer addAnimation:animation forKey:[NSString stringWithFormat:@"%p", self]];
-     */
+    /* CAAnimation *animation = [self _animationGroups];
+    [_animatedView.layer addAnimation:animation forKey:[NSString stringWithFormat:@"%p", self]]; */
     
     [CATransaction setCompletionBlock:^() {
-        _inTransaction = NO;
+        /* _inTransaction = NO; */
         if (_childAnimator && [_animatedView.layer animationForKey:[NSString stringWithFormat:@"%p", _animation]]/* && [UIApplication sharedApplication].applicationState == UIApplicationStateActive*/) {
             [_childAnimator _beginAnimating];
         }
@@ -500,6 +499,14 @@ NS_ASSUME_NONNULL_BEGIN
         _duration = animationDuration/(animation.speed?:1)*(animation.autoreverses?2:1)+animation.beginTime;
     }
     return _duration;
+}
+
+- (void)_clear {
+    if (self.superAnimator) [self.superAnimator _clear]; else {
+        self.childAnimator = nil;
+        _combinedAnimators = nil;
+        [self _setAnimation:[self _defaultAnimation]];
+    }
 }
 @end
 
