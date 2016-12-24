@@ -71,6 +71,6 @@
 - (IBAction)simpleHandler:(id)sender {
     [_transitionView.layer removeAllAnimations];
 //    _transitionView.centerTo(CGPointMake(100, self.view.center.y)).spring.easeOut.duration(0.5).animate();
-    _transitionView.spring.centerBy(CGPointMake(0, 100)).easeOut.spring.sizeBy(CGSizeMake(100, 100)).spring.cornerRadiusBy(4).spring.translateXTo(100).animate();
+    _transitionView.spring.centerBy(CGPointMake(0, 100)).easeOut.spring.sizeBy(CGSizeMake(100, 100)).spring.cornerRadiusBy(4).animate();
 }
 @end
