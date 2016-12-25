@@ -66,6 +66,9 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)nextTo:(id<AXAnimatorChainDelegate>)animator;
 - (instancetype)combineWith:(id<AXAnimatorChainDelegate>)animator;
 - (void)start;
+
+- (instancetype)target:(nullable NSObject *)target;
+- (instancetype)complete:(nullable SEL)completion;
 @end
 
 @protocol AXChainAnimatorDelegate <AXMediaTimingDelegate, AXAnimatorChainDelegate>

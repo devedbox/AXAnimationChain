@@ -31,6 +31,10 @@ NS_ASSUME_NONNULL_BEGIN
     @protected
     /// Is animations in traansaction.
     BOOL _inTransaction;
+    /// Complete sel action.
+    SEL _completionAction;
+    /// Complete target object.
+    NSObject *__weak _completionTarget;
 }
 /// Set animation object to the animator.
 - (void)_setAnimation:(CAAnimation *)animation;
@@ -285,8 +289,21 @@ NS_ASSUME_NONNULL_BEGIN
         [animator _addAnimationsToAnimatedLayer];
     }
 }
+
+- (instancetype)target:(nullable NSObject *)target {
+    _completionTarget = target;
+    return self;
+}
+
+- (instancetype)complete:(nullable SEL)completion {
+    _completionAction = completion;
+    return self;
+}
 #pragma mark - CAAnimationDelegate.
 - (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)finished {
+    if (finished && _completionTarget != nil && _completionAction != NULL) {
+        [_completionTarget performSelectorOnMainThread:_completionAction withObject:self waitUntilDone:NO modes:@[NSDefaultRunLoopMode]];
+    }
 }
 
 #pragma mark - Property.
@@ -411,6 +428,18 @@ NS_ASSUME_NONNULL_BEGIN
     };
 }
 
+- (AXChainAnimator *(^)(NSObject *))target {
+    return ^AXChainAnimator* (NSObject *target) {
+        return [self target:target];
+    };
+}
+
+- (AXChainAnimator *(^)(SEL))complete {
+    return ^AXChainAnimator* (SEL completion) {
+        return [self complete:completion];
+    };
+}
+
 - (dispatch_block_t)animate {
     return ^() {
         [self start];
@@ -420,6 +449,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)_setAnimation:(CAAnimation *)animation {
     if (_animation == animation) return;
     _animation = [animation copy];
+    // Set delegate to SELF.
+    if (_animation.delegate != self) _animation.delegate = self;
 }
 
 - (CAAnimation *)_defaultAnimation {
@@ -694,6 +725,19 @@ NS_ASSUME_NONNULL_BEGIN
         return [self byValue:byValue];
     };
 }
+
+
+- (AXBasicChainAnimator *(^)(NSObject *))target {
+    return ^AXBasicChainAnimator* (NSObject *target) {
+        return [self target:target];
+    };
+}
+
+- (AXBasicChainAnimator *(^)(SEL))complete {
+    return ^AXBasicChainAnimator* (SEL completion) {
+        return [self complete:completion];
+    };
+}
 @end
 
 @implementation AXKeyframeChainAnimator
@@ -929,6 +973,19 @@ NS_ASSUME_NONNULL_BEGIN
         return [self rotationMode:rotationMode];
     };
 }
+
+
+- (AXKeyframeChainAnimator *(^)(NSObject *))target {
+    return ^AXKeyframeChainAnimator* (NSObject *target) {
+        return [self target:target];
+    };
+}
+
+- (AXKeyframeChainAnimator *(^)(SEL))complete {
+    return ^AXKeyframeChainAnimator* (SEL completion) {
+        return [self complete:completion];
+    };
+}
 @end
 
 @implementation AXSpringChainAnimator
@@ -1117,6 +1174,19 @@ NS_ASSUME_NONNULL_BEGIN
         return [self initialVelocity:initialVelocity];
     };
 }
+
+
+- (AXSpringChainAnimator *(^)(NSObject *))target {
+    return ^AXSpringChainAnimator* (NSObject *target) {
+        return [self target:target];
+    };
+}
+
+- (AXSpringChainAnimator *(^)(SEL))complete {
+    return ^AXSpringChainAnimator* (SEL completion) {
+        return [self complete:completion];
+    };
+}
 @end
 
 @implementation AXTransitionChainAnimator
@@ -1286,6 +1356,18 @@ NS_ASSUME_NONNULL_BEGIN
 - (AXTransitionChainAnimator *(^)(id))filter {
     return ^AXTransitionChainAnimator* (id filter) {
         return [self filter:filter];
+    };
+}
+
+- (AXTransitionChainAnimator *(^)(NSObject *))target {
+    return ^AXTransitionChainAnimator* (NSObject *target) {
+        return [self target:target];
+    };
+}
+
+- (AXTransitionChainAnimator *(^)(SEL))complete {
+    return ^AXTransitionChainAnimator* (SEL completion) {
+        return [self complete:completion];
     };
 }
 @end

@@ -46,6 +46,10 @@
 - (AXChainAnimator * (^)(NSTimeInterval repeatDuration))repeatDuration;
 /// FillMode block reachable.
 - (AXChainAnimator * (^)(NSString *fillMode))fillMode;
+/// Target block reachable.
+- (AXChainAnimator * (^)(NSObject *target))target;
+/// Completion SEL reachale.
+- (AXChainAnimator * (^)(SEL completion))complete;
 /// Start block reachable. Same as call the method `-start`
 - (dispatch_block_t)animate;
 @end
@@ -79,6 +83,10 @@
 - (AXBasicChainAnimator * (^)(id toValue))toValue;
 /// ByValue block reachable.
 - (AXBasicChainAnimator * (^)(id byValue))byValue;
+/// Target block reachable.
+- (AXBasicChainAnimator * (^)(NSObject *target))target;
+/// Completion SEL reachale.
+- (AXBasicChainAnimator * (^)(SEL completion))complete;
 @end
 
 @interface AXKeyframeChainAnimator (Block)
@@ -122,6 +130,10 @@
 - (AXKeyframeChainAnimator * (^)(NSArray<NSNumber *> *biasValues))biasValues;
 /// RotationMode block reachable.
 - (AXKeyframeChainAnimator * (^)(NSString *rotationMode))rotationMode;
+/// Target block reachable.
+- (AXKeyframeChainAnimator * (^)(NSObject *target))target;
+/// Completion SEL reachale.
+- (AXKeyframeChainAnimator * (^)(SEL completion))complete;
 @end
 
 @interface AXSpringChainAnimator (Block)
@@ -161,6 +173,10 @@
 - (AXSpringChainAnimator * (^)(CGFloat damping))damping;
 /// InitialVelocity block reachable.
 - (AXSpringChainAnimator * (^)(CGFloat initialVelocity))initialVelocity;
+/// Target block reachable.
+- (AXSpringChainAnimator * (^)(NSObject *target))target;
+/// Completion SEL reachale.
+- (AXSpringChainAnimator * (^)(SEL completion))complete;
 @end
 
 @interface AXTransitionChainAnimator (Block)
@@ -194,4 +210,8 @@
 - (AXTransitionChainAnimator * (^)(CGFloat endProgress))endProgress;
 /// Filter block reachable.
 - (AXTransitionChainAnimator * (^)(id filter))filter;
+/// Target block reachable.
+- (AXTransitionChainAnimator * (^)(NSObject *target))target;
+/// Completion SEL reachale.
+- (AXTransitionChainAnimator * (^)(SEL completion))complete;
 @end
