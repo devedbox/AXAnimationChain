@@ -107,4 +107,8 @@
 /// Change the last animation of animator to the CABasicAnimation object.
 - (instancetype)basic;
 - (instancetype)spring;
+
+#pragma mark - Target-Action.
+- (UIView * (^)(NSObject *target))target;
+- (UIView * (^)(SEL completion))complete;
 @end

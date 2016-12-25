@@ -825,6 +825,21 @@ static NSString *const kAXAnimatorContextNone = @"normal";
     [self setAnimatorContext:kAXAnimatorContextSpring];
     return self;
 }
+
+#pragma mark - Target-Action.
+- (UIView *(^)(NSObject *))target {
+    return ^UIView* (NSObject *target) {
+        self.chainAnimator.topAnimator.combinedAnimators.lastObject.target(target);
+        return self;
+    };
+}
+
+- (UIView *(^)(SEL))complete {
+    return ^UIView* (SEL completion) {
+        self.chainAnimator.topAnimator.combinedAnimators.lastObject.complete(completion);
+        return self;
+    };
+}
 #pragma mark - Private.
 - (CGPoint)_positionFromOrigin:(CGPoint)origin {
     CGPoint anchor = self.layer.anchorPoint;
