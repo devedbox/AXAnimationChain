@@ -36,9 +36,9 @@
 @property(strong, nonatomic) NSString *animatorContext;
 @end
 
-static NSString *const kAXAnimatorContextBasic;
-static NSString *const kAXAnimatorContextSpring;
-static NSString *const kAXAnimatorContextNone;
+static NSString *const kAXAnimatorContextBasic = @"basic";
+static NSString *const kAXAnimatorContextSpring = @"spring";
+static NSString *const kAXAnimatorContextNone = @"normal";
 
 @implementation UIView (AnimationChain)
 #pragma mark - Getters.
@@ -107,6 +107,30 @@ static NSString *const kAXAnimatorContextNone;
             self.chainAnimator.topAnimator.combineSpring.property(@"position").beginTime([self.afterContext doubleValue]).toValue([NSValue valueWithCGPoint:toCenter]);
         } else {
             self.chainAnimator.topAnimator.combineBasic.property(@"position").beginTime([self.afterContext doubleValue]).toValue([NSValue valueWithCGPoint:toCenter]);
+        }
+        [self setAnimatorContext:kAXAnimatorContextNone];
+        return self;
+    };
+}
+
+- (UIView *(^)(CGFloat))centerXTo {
+    return ^UIView* (CGFloat toCenterX) {
+        if ([self.animatorContext isEqualToString:kAXAnimatorContextSpring]) {
+            self.chainAnimator.topAnimator.combineSpring.property(@"position").beginTime([self.afterContext doubleValue]).toValue([NSValue valueWithCGPoint:CGPointMake(toCenterX, self.layer.position.y)]);
+        } else {
+            self.chainAnimator.topAnimator.combineBasic.property(@"position").beginTime([self.afterContext doubleValue]).toValue([NSValue valueWithCGPoint:CGPointMake(toCenterX, self.layer.position.y)]);
+        }
+        [self setAnimatorContext:kAXAnimatorContextNone];
+        return self;
+    };
+}
+
+- (UIView *(^)(CGFloat))centerYTo {
+    return ^UIView* (CGFloat toCenterY) {
+        if ([self.animatorContext isEqualToString:kAXAnimatorContextSpring]) {
+            self.chainAnimator.topAnimator.combineSpring.property(@"position.y").beginTime([self.afterContext doubleValue]).toValue([NSValue valueWithCGPoint:CGPointMake(self.layer.position.x, toCenterY)]);
+        } else {
+            self.chainAnimator.topAnimator.combineBasic.property(@"position.y").beginTime([self.afterContext doubleValue]).toValue([NSValue valueWithCGPoint:CGPointMake(self.layer.position.x, toCenterY)]);
         }
         [self setAnimatorContext:kAXAnimatorContextNone];
         return self;
@@ -444,6 +468,30 @@ static NSString *const kAXAnimatorContextNone;
     };
 }
 
+- (UIView *(^)(CGFloat))centerXBy {
+    return ^UIView* (CGFloat byCenterX) {
+        if ([self.animatorContext isEqualToString:kAXAnimatorContextSpring]) {
+            self.chainAnimator.topAnimator.combineSpring.property(@"position").beginTime([self.afterContext doubleValue]).byValue([NSValue valueWithCGPoint:CGPointMake(byCenterX, 0)]);
+        } else {
+            self.chainAnimator.topAnimator.combineBasic.property(@"position").beginTime([self.afterContext doubleValue]).byValue([NSValue valueWithCGPoint:CGPointMake(byCenterX, 0)]);
+        }
+        [self setAnimatorContext:kAXAnimatorContextNone];
+        return self;
+    };
+}
+
+- (UIView *(^)(CGFloat))centerYBy {
+    return ^UIView* (CGFloat byCenterY) {
+        if ([self.animatorContext isEqualToString:kAXAnimatorContextSpring]) {
+            self.chainAnimator.topAnimator.combineSpring.property(@"position").beginTime([self.afterContext doubleValue]).byValue([NSValue valueWithCGPoint:CGPointMake(0, byCenterY)]);
+        } else {
+            self.chainAnimator.topAnimator.combineBasic.property(@"position").beginTime([self.afterContext doubleValue]).byValue([NSValue valueWithCGPoint:CGPointMake(0, byCenterY)]);
+        }
+        [self setAnimatorContext:kAXAnimatorContextNone];
+        return self;
+    };
+}
+
 - (UIView *(^)(CGRect))frameBy {
     return ^UIView* (CGRect byFrame) {
         if ([self.animatorContext isEqualToString:kAXAnimatorContextSpring]) {
@@ -769,12 +817,12 @@ static NSString *const kAXAnimatorContextNone;
 
 #pragma mark - Animation.
 - (instancetype)basic {
-    [self.chainAnimator.topAnimator.combinedAnimators.lastObject beginBasic];
+    [self setAnimatorContext:kAXAnimatorContextBasic];
     return self;
 }
 
 - (instancetype)spring {
-    [self.chainAnimator.topAnimator.combinedAnimators.lastObject beginSpring];
+    [self setAnimatorContext:kAXAnimatorContextSpring];
     return self;
 }
 #pragma mark - Private.

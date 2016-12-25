@@ -70,7 +70,22 @@
 
 - (IBAction)simpleHandler:(id)sender {
     [_transitionView.layer removeAllAnimations];
-//    _transitionView.centerTo(CGPointMake(100, self.view.center.y)).spring.easeOut.duration(0.5).animate();
-    _transitionView.spring.centerBy(CGPointMake(0, 100)).easeOut.spring.sizeBy(CGSizeMake(100, 100)).spring.cornerRadiusBy(4).animate();
+    _transitionView.spring.sizeTo(CGSizeMake(100, 100)).animate();
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Animation chains." message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    [alert addAction:[UIAlertAction actionWithTitle:@"centerBy.sizeBy.cornerRadiusBy" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [_transitionView.layer removeAllAnimations];
+        _transitionView.spring.centerBy(CGPointMake(0, 100)).easeOut.spring.sizeBy(CGSizeMake(100, 100)).spring.cornerRadiusBy(4).animate();
+    }]];
+    [alert addAction:[UIAlertAction actionWithTitle:@"centerYBy.rotateTo\n" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        _transitionView.centerYBy(100.0).duration(1.0).rotateTo(M_PI*4).duration(1.0).animate();
+    }]];
+    [alert addAction:[UIAlertAction actionWithTitle:@"centerYBy.rotateTo" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        _transitionView.centerYBy(100.0).duration(1.0).linear.rotateTo(M_PI*4).duration(1.0).linear.animate();
+    }]];
+    [alert addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        [_transitionView.layer removeAllAnimations];
+        _transitionView.spring.sizeBy(CGSizeMake(0, 0)).animate();
+    }]];
+    [self presentViewController:alert animated:YES completion:NULL];
 }
 @end

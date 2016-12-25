@@ -34,6 +34,8 @@
 - (UIView * (^)(CGFloat toOriginX))originXTo;
 - (UIView * (^)(CGFloat toOriginY))originYTo;
 - (UIView * (^)(CGPoint toCenter))centerTo;
+- (UIView * (^)(CGFloat toCenterX))centerXTo;
+- (UIView * (^)(CGFloat toCenterY))centerYTo;
 - (UIView * (^)(CGFloat toWidth))widthTo;
 - (UIView * (^)(CGFloat toHeight))heightTo;
 - (UIView * (^)(CGFloat toOpacity))opacityTo;
@@ -63,6 +65,8 @@
 - (UIView * (^)(CGFloat byOriginX))originXBy;
 - (UIView * (^)(CGFloat byOriginY))originYBy;
 - (UIView * (^)(CGPoint byCenter))centerBy;
+- (UIView * (^)(CGFloat byCenterX))centerXBy;
+- (UIView * (^)(CGFloat byCenterY))centerYBy;
 - (UIView * (^)(CGFloat byWidth))widthBy;
 - (UIView * (^)(CGFloat byHeight))heightBy;
 - (UIView * (^)(CGFloat byOpacity))opacityBy;
