@@ -301,7 +301,7 @@ NS_ASSUME_NONNULL_BEGIN
 }
 #pragma mark - CAAnimationDelegate.
 - (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)finished {
-    if (finished && _completionTarget != nil && _completionAction != NULL) {
+    if (/* finished && */_completionTarget != nil && _completionAction != NULL) {
         [_completionTarget performSelectorOnMainThread:_completionAction withObject:self waitUntilDone:NO modes:@[NSDefaultRunLoopMode]];
     }
 }
