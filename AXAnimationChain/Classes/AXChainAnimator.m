@@ -280,7 +280,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)_addAnimationsToAnimatedLayer {
     if ([_animation isKindOfClass:CASpringAnimation.class]) {
-        if (!_animation.duration) {
+        if (!_animation.duration && [_animation respondsToSelector:@selector(settlingDuration)]) {
             _animation.duration = [(CASpringAnimation *)_animation settlingDuration];
         }
     }
