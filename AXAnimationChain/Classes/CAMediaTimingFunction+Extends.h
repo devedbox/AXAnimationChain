@@ -9,8 +9,8 @@
 #import <QuartzCore/QuartzCore.h>
 /// Timing functions for easings: http://easings.net/zh-cn
 @interface CAMediaTimingFunction (Extends)
-+ (instancetype)easeInSince;
-+ (instancetype)easeOutSince;
++ (instancetype)easeInSine;
++ (instancetype)easeOutSine;
 + (instancetype)easeInOutSine;
 + (instancetype)easeInQuad;
 + (instancetype)easeOutQuad;

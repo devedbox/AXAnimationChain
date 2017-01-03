@@ -9,11 +9,11 @@
 #import "CAMediaTimingFunction+Extends.h"
 
 @implementation CAMediaTimingFunction (Extends)
-+ (instancetype)easeInSince {
++ (instancetype)easeInSine {
     return [self functionWithControlPoints:0.47 :0 :0.745 :0.715];
 }
 
-+ (instancetype)easeOutSince {
++ (instancetype)easeOutSine {
     return [self functionWithControlPoints:0.39 :0.575 :0.565 :1];
 }
 
