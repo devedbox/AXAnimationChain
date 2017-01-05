@@ -18,6 +18,8 @@
 		DC5E8AD71DFBED0000597663 /* UIView+ChainAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = DC5E8AD61DFBED0000597663 /* UIView+ChainAnimator.m */; };
 		DC5E8ADA1DFBED8B00597663 /* AXChainAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = DC5E8AD91DFBED8B00597663 /* AXChainAnimator.m */; };
 		DCAEB20F1E0C140D00E3AF99 /* UIView+AnimationChain.m in Sources */ = {isa = PBXBuildFile; fileRef = DCAEB20E1E0C140D00E3AF99 /* UIView+AnimationChain.m */; };
+		DCE7E7401E1B7D0500924BC2 /* CAMediaTimingFunction+Extends.m in Sources */ = {isa = PBXBuildFile; fileRef = DCE7E73F1E1B7D0500924BC2 /* CAMediaTimingFunction+Extends.m */; };
+		DCE7E7431E1B902500924BC2 /* CAAnimation+Convertable.m in Sources */ = {isa = PBXBuildFile; fileRef = DCE7E7421E1B902500924BC2 /* CAAnimation+Convertable.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +40,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		DC21DBBA1E1CCB9600E5C0E0 /* AXAnimationChain.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AXAnimationChain.h; sourceTree = "<group>"; };
 		DC5E8A9E1DFBEBC400597663 /* AXAnimationChain.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AXAnimationChain.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC5E8AA21DFBEBC400597663 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		DC5E8AA41DFBEBC400597663 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -61,6 +64,10 @@
 		DC5E8ADB1DFD006700597663 /* AXChainAnimator+Block.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AXChainAnimator+Block.h"; sourceTree = "<group>"; };
 		DCAEB20D1E0C140D00E3AF99 /* UIView+AnimationChain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+AnimationChain.h"; sourceTree = "<group>"; };
 		DCAEB20E1E0C140D00E3AF99 /* UIView+AnimationChain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+AnimationChain.m"; sourceTree = "<group>"; };
+		DCE7E73E1E1B7D0500924BC2 /* CAMediaTimingFunction+Extends.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CAMediaTimingFunction+Extends.h"; sourceTree = "<group>"; };
+		DCE7E73F1E1B7D0500924BC2 /* CAMediaTimingFunction+Extends.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CAMediaTimingFunction+Extends.m"; sourceTree = "<group>"; };
+		DCE7E7411E1B902500924BC2 /* CAAnimation+Convertable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CAAnimation+Convertable.h"; sourceTree = "<group>"; };
+		DCE7E7421E1B902500924BC2 /* CAAnimation+Convertable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CAAnimation+Convertable.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -154,6 +161,7 @@
 		DC5E8AD41DFBEC6A00597663 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				DC21DBBA1E1CCB9600E5C0E0 /* AXAnimationChain.h */,
 				DCAEB20D1E0C140D00E3AF99 /* UIView+AnimationChain.h */,
 				DCAEB20E1E0C140D00E3AF99 /* UIView+AnimationChain.m */,
 				DC5E8AD51DFBED0000597663 /* UIView+ChainAnimator.h */,
@@ -161,6 +169,10 @@
 				DC5E8ADB1DFD006700597663 /* AXChainAnimator+Block.h */,
 				DC5E8AD81DFBED8B00597663 /* AXChainAnimator.h */,
 				DC5E8AD91DFBED8B00597663 /* AXChainAnimator.m */,
+				DCE7E73E1E1B7D0500924BC2 /* CAMediaTimingFunction+Extends.h */,
+				DCE7E73F1E1B7D0500924BC2 /* CAMediaTimingFunction+Extends.m */,
+				DCE7E7411E1B902500924BC2 /* CAAnimation+Convertable.h */,
+				DCE7E7421E1B902500924BC2 /* CAAnimation+Convertable.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -301,8 +313,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DCE7E7431E1B902500924BC2 /* CAAnimation+Convertable.m in Sources */,
 				DC5E8AA91DFBEBC400597663 /* ViewController.m in Sources */,
 				DC5E8AD71DFBED0000597663 /* UIView+ChainAnimator.m in Sources */,
+				DCE7E7401E1B7D0500924BC2 /* CAMediaTimingFunction+Extends.m in Sources */,
 				DC5E8ADA1DFBED8B00597663 /* AXChainAnimator.m in Sources */,
 				DCAEB20F1E0C140D00E3AF99 /* UIView+AnimationChain.m in Sources */,
 				DC5E8AA61DFBEBC400597663 /* AppDelegate.m in Sources */,

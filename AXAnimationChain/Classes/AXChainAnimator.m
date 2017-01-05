@@ -25,6 +25,7 @@
 
 #import "AXChainAnimator.h"
 #import "AXChainAnimator+Block.h"
+#import "CAMediaTimingFunction+Extends.h"
 NS_ASSUME_NONNULL_BEGIN
 @interface AXChainAnimator () <CAAnimationDelegate>
 {
@@ -364,6 +365,126 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (instancetype)easeInOut {
     _animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+    return self;
+}
+
+- (instancetype)easeInSine {
+    _animation.timingFunction = [CAMediaTimingFunction easeInSine];
+    return self;
+}
+
+- (instancetype)easeOutSine {
+    _animation.timingFunction = [CAMediaTimingFunction easeOutSine];
+    return self;
+}
+
+- (instancetype)easeInOutSine {
+    _animation.timingFunction = [CAMediaTimingFunction easeInOutSine];
+    return self;
+}
+
+- (instancetype)easeInQuad {
+    _animation.timingFunction = [CAMediaTimingFunction easeInQuad];
+    return self;
+}
+
+- (instancetype)easeOutQuad {
+    _animation.timingFunction = [CAMediaTimingFunction easeOutQuad];
+    return self;
+}
+
+- (instancetype)easeInOutQuad {
+    _animation.timingFunction = [CAMediaTimingFunction easeInOutQuad];
+    return self;
+}
+
+- (instancetype)easeInCubic {
+    _animation.timingFunction = [CAMediaTimingFunction easeInCubic];
+    return self;
+}
+
+- (instancetype)easeOutCubic {
+    _animation.timingFunction = [CAMediaTimingFunction easeOutCubic];
+    return self;
+}
+
+- (instancetype)easeInOutCubic {
+    _animation.timingFunction = [CAMediaTimingFunction easeInOutCubic];
+    return self;
+}
+
+- (instancetype)easeInQuart {
+    _animation.timingFunction = [CAMediaTimingFunction easeInQuart];
+    return self;
+}
+
+- (instancetype)easeOutQuart {
+    _animation.timingFunction = [CAMediaTimingFunction easeOutQuart];
+    return self;
+}
+
+- (instancetype)easeInOutQuart {
+    _animation.timingFunction = [CAMediaTimingFunction easeInOutQuart];
+    return self;
+}
+
+- (instancetype)easeInQuint {
+    _animation.timingFunction = [CAMediaTimingFunction easeInQuint];
+    return self;
+}
+
+- (instancetype)easeOutQuint {
+    _animation.timingFunction = [CAMediaTimingFunction easeOutQuint];
+    return self;
+}
+
+- (instancetype)easeInOutQuint {
+    _animation.timingFunction = [CAMediaTimingFunction easeInOutQuint];
+    return self;
+}
+
+- (instancetype)easeInExpo {
+    _animation.timingFunction = [CAMediaTimingFunction easeInExpo];
+    return self;
+}
+
+- (instancetype)easeOutExpo {
+    _animation.timingFunction = [CAMediaTimingFunction easeOutExpo];
+    return self;
+}
+
+- (instancetype)easeInOutExpo {
+    _animation.timingFunction = [CAMediaTimingFunction easeInOutExpo];
+    return self;
+}
+
+- (instancetype)easeInCirc {
+    _animation.timingFunction = [CAMediaTimingFunction easeInCirc];
+    return self;
+}
+
+- (instancetype)easeOutCirc {
+    _animation.timingFunction = [CAMediaTimingFunction easeOutCirc];
+    return self;
+}
+
+- (instancetype)easeInOutCirc {
+    _animation.timingFunction = [CAMediaTimingFunction easeInOutCirc];
+    return self;
+}
+
+- (instancetype)easeInBack {
+    _animation.timingFunction = [CAMediaTimingFunction easeInBack];
+    return self;
+}
+
+- (instancetype)easeOutBack {
+    _animation.timingFunction = [CAMediaTimingFunction easeOutBack];
+    return self;
+}
+
+- (instancetype)easeInOutBack {
+    _animation.timingFunction = [CAMediaTimingFunction easeInOutBack];
     return self;
 }
 
