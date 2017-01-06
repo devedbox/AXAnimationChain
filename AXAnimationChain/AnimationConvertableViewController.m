@@ -8,6 +8,7 @@
 
 #import "AnimationConvertableViewController.h"
 #import "CAMediaTimingFunction+Extends.h"
+#import "CAAnimation+Convertable.h"
 
 @interface AnimationConvertableViewController ()
 /// Keyframe.
@@ -66,7 +67,7 @@
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
     animation.timingFunction = [[CAMediaTimingFunction new] performSelector:NSSelectorFromString([_timing titleForState:UIControlStateNormal])];
 #pragma clang diagnostic pop
-    [_transitionView.layer addAnimation:animation forKey:@"position"];
+    [_transitionView.layer addAnimation:_keyframe?[CAKeyframeAnimation animationWithBasic:animation]:animation forKey:@"position"];
 }
 
 - (IBAction)timing:(UIButton *)sender {
