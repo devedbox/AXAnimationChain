@@ -28,22 +28,6 @@
 @implementation CAAnimation (Convertable)
 
 @end
-
-@implementation CAKeyframeAnimation (Convertable)
-+ (instancetype)animationWithBasic:(CABasicAnimation *)basicAnimation {
-    CAKeyframeAnimation *keyframe = [CAKeyframeAnimation animation];
-    keyframe.beginTime = basicAnimation.beginTime;
-    keyframe.duration = basicAnimation.duration;
-    keyframe.speed = basicAnimation.speed;
-    keyframe.timeOffset = basicAnimation.timeOffset;
-    keyframe.repeatCount = basicAnimation.repeatCount;
-    keyframe.repeatDuration= basicAnimation.repeatDuration;
-    keyframe.autoreverses = basicAnimation.autoreverses;
-    keyframe.fillMode = basicAnimation.fillMode;
-    keyframe.keyPath = basicAnimation.keyPath;
-    return keyframe;
-}
-@end
 static NSArray * NSNumberValuesBetweenNumbersAndDuration(CGFloat beginNumber, CGFloat endNumber, NSTimeInterval duration, CAMediaTimingFunction *timing) {
     // 60 FPS per second.
     NSUInteger components = (NSUInteger)ceil(60 * duration) + 2;
@@ -175,7 +159,7 @@ static NSArray * CATransform3DValuesWithComponents(NSArray *m11, NSArray *m12, N
     return values;
 }
 
-static NSArray * animationValuesForCAKeyframeAnimationWithFrames(id fromValue, id byValue, id toValue, NSTimeInterval duration, CAMediaTimingFunction *timing) {
+static NSArray * AnimationValuesForCAKeyframeAnimationWithFrames(id fromValue, id toValue, NSTimeInterval duration, CAMediaTimingFunction *timing) {
     id beginValue;
     id endValue;
     beginValue = fromValue;
@@ -210,3 +194,84 @@ static NSArray * animationValuesForCAKeyframeAnimationWithFrames(id fromValue, i
     }
     return nil;
 }
+
+static id ToValueByValueWithValue(id value, id byValue, BOOL plus) {
+    if (!value) @throw @"From value can not be nil.";
+    if (!byValue) @throw @"By value can not be nil";
+    if ([value isKindOfClass:[NSNumber class]] && [byValue isKindOfClass:[NSNumber class]]) {
+        return @([value floatValue]+[byValue floatValue]*(plus?1:-1));
+    } else if ([value isKindOfClass:[UIColor class]] && [byValue isKindOfClass:[UIColor class]]) {
+        const CGFloat *components = CGColorGetComponents(((UIColor*)value).CGColor);
+        const CGFloat *byComponents = CGColorGetComponents(((UIColor*)byValue).CGColor);
+        return [[UIColor alloc] initWithRed:components[0]+byComponents[0]*(plus?1:-1) green:components[1]+byComponents[1]*(plus?1:-1) blue:components[2]+byComponents[2]*(plus?1:-1) alpha:components[3]+byComponents[3]*(plus?1:-1)];
+    } else if ([value isKindOfClass:[NSValue class]] && [byValue isKindOfClass:[NSValue class]]) {
+        NSString *valueType = [NSString stringWithCString:[value objCType] encoding:NSStringEncodingConversionAllowLossy];
+        if ([valueType rangeOfString:@"CGRect"].location == 1) {
+            CGRect rect = [value CGRectValue];
+            CGRect byRect = [byValue CGRectValue];
+            return [NSValue valueWithCGRect:CGRectMake(rect.origin.x+byRect.origin.x*(plus?1:-1), rect.origin.y+byRect.origin.y*(plus?1:-1), rect.size.width+byRect.size.width*(plus?1:-1), rect.size.height+byRect.size.height*(plus?1:-1))];
+            
+        } else if ([valueType rangeOfString:@"CGPoint"].location == 1) {
+            CGPoint point = [value CGPointValue];
+            CGPoint byPoint = [byValue CGPointValue];
+            return [NSValue valueWithCGPoint:CGPointMake(point.x+byPoint.x*(plus?1:-1), point.y+byPoint.y*(plus?1:-1))];
+            
+        } else if ([valueType rangeOfString:@"CATransform3D"].location == 1) {
+            CATransform3D transform = [value CATransform3DValue];
+            CATransform3D byTransform = [byValue CATransform3DValue];
+            
+            transform.m11+=byTransform.m11*(plus?1:-1);
+            transform.m12+=byTransform.m12*(plus?1:-1);
+            transform.m13+=byTransform.m13*(plus?1:-1);
+            transform.m14+=byTransform.m14*(plus?1:-1);
+            transform.m21+=byTransform.m21*(plus?1:-1);
+            transform.m22+=byTransform.m22*(plus?1:-1);
+            transform.m23+=byTransform.m23*(plus?1:-1);
+            transform.m24+=byTransform.m24*(plus?1:-1);
+            transform.m31+=byTransform.m31*(plus?1:-1);
+            transform.m32+=byTransform.m32*(plus?1:-1);
+            transform.m33+=byTransform.m33*(plus?1:-1);
+            transform.m34+=byTransform.m34*(plus?1:-1);
+            transform.m41+=byTransform.m41*(plus?1:-1);
+            transform.m42+=byTransform.m42*(plus?1:-1);
+            transform.m43+=byTransform.m43*(plus?1:-1);
+            transform.m44+=byTransform.m44*(plus?1:-1);
+            
+            return [NSValue valueWithCATransform3D:byTransform];
+        } else if ([valueType rangeOfString:@"CGSize"].location == 1) {
+            CGSize size = [value CGSizeValue];
+            CGSize bySize = [byValue CGSizeValue];
+            return [NSValue valueWithCGSize:CGSizeMake(size.width+bySize.width*(plus?1:-1), size.height+bySize.height*(plus?1:-1))];
+        }
+    }
+    return value;
+}
+
+@implementation CAKeyframeAnimation (Convertable)
++ (instancetype)animationWithBasic:(CABasicAnimation *)basicAnimation {
+    CAKeyframeAnimation *keyframe = [CAKeyframeAnimation animation];
+    keyframe.beginTime = basicAnimation.beginTime;
+    keyframe.duration = basicAnimation.duration;
+    keyframe.speed = basicAnimation.speed;
+    keyframe.timeOffset = basicAnimation.timeOffset;
+    keyframe.repeatCount = basicAnimation.repeatCount;
+    keyframe.repeatDuration= basicAnimation.repeatDuration;
+    keyframe.autoreverses = basicAnimation.autoreverses;
+    keyframe.fillMode = basicAnimation.fillMode;
+    keyframe.keyPath = basicAnimation.keyPath;
+    if (basicAnimation.fromValue && basicAnimation.toValue) {
+        keyframe.values = AnimationValuesForCAKeyframeAnimationWithFrames(basicAnimation.fromValue, basicAnimation.toValue, basicAnimation.duration, basicAnimation.timingFunction);
+    } else if (basicAnimation.fromValue && basicAnimation.byValue) {
+        keyframe.values = AnimationValuesForCAKeyframeAnimationWithFrames(basicAnimation.fromValue, ToValueByValueWithValue(basicAnimation.fromValue, basicAnimation.byValue, YES), basicAnimation.duration, basicAnimation.timingFunction);
+    } else if (basicAnimation.byValue && basicAnimation.toValue) {
+        keyframe.values = AnimationValuesForCAKeyframeAnimationWithFrames(ToValueByValueWithValue(basicAnimation.toValue, basicAnimation.byValue, NO), basicAnimation.toValue, basicAnimation.duration, basicAnimation.timingFunction);
+    } else if (basicAnimation.fromValue) {
+        keyframe.values = AnimationValuesForCAKeyframeAnimationWithFrames(basicAnimation.fromValue, basicAnimation.fromValue, basicAnimation.duration, basicAnimation.timingFunction);
+    } else if (basicAnimation.toValue) {
+        keyframe.values = AnimationValuesForCAKeyframeAnimationWithFrames(basicAnimation.toValue, basicAnimation.toValue, basicAnimation.duration, basicAnimation.timingFunction);
+    } else if (basicAnimation.byValue) {
+        keyframe.values = AnimationValuesForCAKeyframeAnimationWithFrames(basicAnimation.byValue, basicAnimation.byValue, basicAnimation.duration, basicAnimation.timingFunction);
+    }
+    return keyframe;
+}
+@end
