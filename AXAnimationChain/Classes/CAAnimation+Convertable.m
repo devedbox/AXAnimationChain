@@ -30,7 +30,7 @@
 @end
 static NSArray * NSNumberValuesBetweenNumbersAndDuration(CGFloat beginNumber, CGFloat endNumber, NSTimeInterval duration, CAMediaTimingFunction *timing) {
     // 60 FPS per second.
-    NSUInteger components = (NSUInteger)ceil(60 * duration) + 2;
+    NSUInteger components = (NSUInteger)ceil(60 * duration)+2;
     
     NSMutableArray *numbers = [NSMutableArray arrayWithCapacity:components];
     
@@ -260,6 +260,7 @@ static id ToValueByValueWithValue(id value, id byValue, BOOL plus) {
     keyframe.removedOnCompletion = basicAnimation.removedOnCompletion;
     keyframe.fillMode = basicAnimation.fillMode;
     keyframe.keyPath = basicAnimation.keyPath;
+    keyframe.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
     if (basicAnimation.fromValue && basicAnimation.toValue) {
         keyframe.values = AnimationValuesForCAKeyframeAnimationWithFrames(basicAnimation.fromValue, basicAnimation.toValue, basicAnimation.duration, basicAnimation.timingFunction);
     } else if (basicAnimation.fromValue && basicAnimation.byValue) {
