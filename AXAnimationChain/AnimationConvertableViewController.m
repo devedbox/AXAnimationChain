@@ -15,10 +15,17 @@
 @property(weak, nonatomic) IBOutlet UISwitch *keyframe;
 /// Transition view.
 @property(weak, nonatomic) IBOutlet UIView *transitionView;
+/// Transition view.
+@property(weak, nonatomic) IBOutlet UIView *keyframeTransitionView;
 /// Timing button.
 @property(weak, nonatomic) IBOutlet UIButton *timing;
 @end
 @interface CAMediaTimingFunction (ExtendsInstance)
+- (instancetype)defaultTimingFunction;
+- (instancetype)linear;
+- (instancetype)easeIn;
+- (instancetype)easeOut;
+- (instancetype)easeInOut;
 - (instancetype)easeInSine;
 - (instancetype)easeOutSine;
 - (instancetype)easeInOutSine;
@@ -58,21 +65,40 @@
 
 - (IBAction)animate:(UIButton *)sender {
     [_transitionView.layer removeAllAnimations];
+    [_keyframeTransitionView.layer removeAllAnimations];
     CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"position"];
     animation.removedOnCompletion = NO;
     animation.fillMode = kCAFillModeForwards;
-    animation.fromValue = [NSValue valueWithCGPoint:CGPointMake(self.view.center.x, CGRectGetHeight(_transitionView.frame)*.5+64)];
-    animation.toValue = [NSValue valueWithCGPoint:CGPointMake(self.view.center.x, CGRectGetHeight(self.view.frame)-64-CGRectGetHeight(_transitionView.frame)*.5)];
+    animation.fromValue = [NSValue valueWithCGPoint:CGPointMake(self.keyframeTransitionView.center.x, CGRectGetHeight(_keyframeTransitionView.frame)*.5+64)];
+    animation.toValue = [NSValue valueWithCGPoint:CGPointMake(self.keyframeTransitionView.center.x, CGRectGetHeight(self.view.frame)-64-CGRectGetHeight(_keyframeTransitionView.frame)*.5)];
     animation.duration = 2.0;
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
     animation.timingFunction = [[CAMediaTimingFunction new] performSelector:NSSelectorFromString([_timing titleForState:UIControlStateNormal])];
 #pragma clang diagnostic pop
-    [_transitionView.layer addAnimation:_keyframe.isOn?[CAKeyframeAnimation animationWithBasic:animation]:animation forKey:@"position"];
+    [_keyframeTransitionView.layer addAnimation:[CAKeyframeAnimation animationWithBasic:animation] forKey:@"position"];
+    animation.fromValue = [NSValue valueWithCGPoint:CGPointMake(self.transitionView.center.x, CGRectGetHeight(_transitionView.frame)*.5+64)];
+    animation.toValue = [NSValue valueWithCGPoint:CGPointMake(self.transitionView.center.x, CGRectGetHeight(self.view.frame)-64-CGRectGetHeight(_transitionView.frame)*.5)];
+    [_transitionView.layer addAnimation:animation forKey:@"position"];
 }
 
 - (IBAction)timing:(UIButton *)sender {
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Timing functions." message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    [alert addAction:[UIAlertAction actionWithTitle:@"defaultTimingFunction" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [sender setTitle:action.title forState:UIControlStateNormal];
+    }]];
+    [alert addAction:[UIAlertAction actionWithTitle:@"linear" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [sender setTitle:action.title forState:UIControlStateNormal];
+    }]];
+    [alert addAction:[UIAlertAction actionWithTitle:@"easeIn" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [sender setTitle:action.title forState:UIControlStateNormal];
+    }]];
+    [alert addAction:[UIAlertAction actionWithTitle:@"easeOut" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [sender setTitle:action.title forState:UIControlStateNormal];
+    }]];
+    [alert addAction:[UIAlertAction actionWithTitle:@"easeInOut" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [sender setTitle:action.title forState:UIControlStateNormal];
+    }]];
     [alert addAction:[UIAlertAction actionWithTitle:@"easeInSine" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [sender setTitle:action.title forState:UIControlStateNormal];
     }]];
@@ -154,6 +180,26 @@
 @end
 
 @implementation CAMediaTimingFunction (ExtendsInstance)
+- (instancetype)defaultTimingFunction {
+    return [self.class defaultTimingFunction];
+}
+
+- (instancetype)linear {
+    return [self.class linear];
+}
+
+- (instancetype)easeIn {
+    return [self.class easeIn];
+}
+
+- (instancetype)easeOut {
+    return [self.class easeOut];
+}
+
+- (instancetype)easeInOut {
+    return [self.class easeInOut];
+}
+
 - (instancetype)easeInSine {
     return [self.class easeInSine];
 }
