@@ -260,7 +260,8 @@ static CGPoint AXBezier3ValueWithControlPoints(CGPoint p0, CGPoint p1, CGPoint p
         };
     } else if ([flag isEqualToString:NSStringFromSelector(@selector(easeInOutQuad))]) {
         return ^double (double t, double b, double c, double d) {
-            return -c *(t/=d)*(t-2) + b;
+            if ((t/=d/2) < 1) return c/2*t*t + b;
+            return -c/2 * ((--t)*(t-2) - 1) + b;
         };
     } else if ([flag isEqualToString:NSStringFromSelector(@selector(easeInCubic))]) {
         return ^double (double t, double b, double c, double d) {
