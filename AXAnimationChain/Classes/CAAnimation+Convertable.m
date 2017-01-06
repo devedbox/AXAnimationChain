@@ -29,8 +29,8 @@
 
 @end
 static NSArray * NSNumberValuesBetweenNumbersAndDuration(CGFloat beginNumber, CGFloat endNumber, NSTimeInterval duration, CAMediaTimingFunction *timing) {
-    // 60 FPS per second.
-    NSUInteger components = (NSUInteger)ceil(60 * duration)+2;
+    // 69 FPS per second.
+    NSUInteger components = (NSUInteger)ceil(69 * duration)+2;
     
     NSMutableArray *numbers = [NSMutableArray arrayWithCapacity:components];
     
