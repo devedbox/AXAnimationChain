@@ -26,6 +26,13 @@
 #import <QuartzCore/QuartzCore.h>
 /// Timing functions for easings: http://easings.net/zh-cn
 @interface CAMediaTimingFunction (Extends)
+// System default:
++ (instancetype)defaultTimingFunction;
++ (instancetype)linear;
++ (instancetype)easeIn;
++ (instancetype)easeOut;
++ (instancetype)easeInOut;
+
 + (instancetype)easeInSine;
 + (instancetype)easeOutSine;
 + (instancetype)easeInOutSine;

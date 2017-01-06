@@ -42,6 +42,26 @@ static char * const kFlag="flag";
     return timing;
 }
 
++ (instancetype)defaultTimingFunction {
+    return [self functionWithName:kCAMediaTimingFunctionDefault];
+}
+
++ (instancetype)linear {
+    return [self functionWithName:kCAMediaTimingFunctionLinear];
+}
+
++ (instancetype)easeIn {
+    return [self functionWithName:kCAMediaTimingFunctionEaseIn];
+}
+
++ (instancetype)easeOut {
+    return [self functionWithName:kCAMediaTimingFunctionEaseOut];
+}
+
++ (instancetype)easeInOut {
+    return [self functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+}
+
 + (instancetype)easeInSine {
     id timing = [self functionWithControlPoints:0.47 :0 :0.745 :0.715];
     objc_setAssociatedObject(timing, kFlag, NSStringFromSelector(_cmd), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
