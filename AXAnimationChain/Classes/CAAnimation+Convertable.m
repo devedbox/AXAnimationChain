@@ -44,7 +44,7 @@
     return keyframe;
 }
 @end
-static NSArray * NSNumberValuesBetweenNumbersAndDuration(CGFloat beginNumber, CGFloat endNumber, NSTimeInterval duration) {
+static NSArray * NSNumberValuesBetweenNumbersAndDuration(CGFloat beginNumber, CGFloat endNumber, NSTimeInterval duration, CAMediaTimingFunction *timing) {
     // 60 FPS per second.
     NSUInteger components = (NSUInteger)ceil(60 * duration) + 2;
     
@@ -62,6 +62,7 @@ static NSArray * NSNumberValuesBetweenNumbersAndDuration(CGFloat beginNumber, CG
         /*
          v = self.functionBlock(duration * progress * 1000, 0, 1, duration * 1000);
          */
+        v = [timing valuesFuntion](duration * progress * 1000, 0, 1, duration * 1000);
         value = beginNumber + v * (beginNumber - endNumber);
         
         [numbers addObject:@(value)];
@@ -174,37 +175,37 @@ static NSArray * CATransform3DValuesWithComponents(NSArray *m11, NSArray *m12, N
     return values;
 }
 
-static NSArray * animationValuesForCAKeyframeAnimationWithFrames(id fromValue, id byValue, id toValue, NSTimeInterval duration) {
+static NSArray * animationValuesForCAKeyframeAnimationWithFrames(id fromValue, id byValue, id toValue, NSTimeInterval duration, CAMediaTimingFunction *timing) {
     id beginValue;
     id endValue;
     beginValue = fromValue;
     endValue = toValue;
-    if ([beginValue isKindOfClass:[NSNumber class]] && [beginValue isKindOfClass:[NSNumber class]]) {
-        return NSNumberValuesBetweenNumbersAndDuration([beginValue floatValue], [endValue floatValue], duration);
+    if ([beginValue isKindOfClass:[NSNumber class]] && [endValue isKindOfClass:[NSNumber class]]) {
+        return NSNumberValuesBetweenNumbersAndDuration([beginValue floatValue], [endValue floatValue], duration, timing);
     } else if ([beginValue isKindOfClass:[UIColor class]] && [endValue isKindOfClass:[UIColor class]]) {
         const CGFloat *fromComponents = CGColorGetComponents(((UIColor*)beginValue).CGColor);
         const CGFloat *toComponents = CGColorGetComponents(((UIColor*)endValue).CGColor);
-        return UIColorValuesWithComponents(NSNumberValuesBetweenNumbersAndDuration(fromComponents[0], toComponents[0], duration), NSNumberValuesBetweenNumbersAndDuration(fromComponents[1], toComponents[1], duration), NSNumberValuesBetweenNumbersAndDuration(fromComponents[2], toComponents[2], duration), NSNumberValuesBetweenNumbersAndDuration(fromComponents[3], toComponents[3], duration));
+        return UIColorValuesWithComponents(NSNumberValuesBetweenNumbersAndDuration(fromComponents[0], toComponents[0], duration, timing), NSNumberValuesBetweenNumbersAndDuration(fromComponents[1], toComponents[1], duration, timing), NSNumberValuesBetweenNumbersAndDuration(fromComponents[2], toComponents[2], duration, timing), NSNumberValuesBetweenNumbersAndDuration(fromComponents[3], toComponents[3], duration, timing));
     } else if ([beginValue isKindOfClass:[NSValue class]] && [endValue isKindOfClass:[NSValue class]]) {
         NSString *valueType = [NSString stringWithCString:[beginValue objCType] encoding:NSStringEncodingConversionAllowLossy];
         if ([valueType rangeOfString:@"CGRect"].location == 1) {
             CGRect fromRect = [beginValue CGRectValue];
             CGRect toRect = [endValue CGRectValue];
-            return CGRectValuesWithComponents(NSNumberValuesBetweenNumbersAndDuration(fromRect.origin.x, toRect.origin.x, duration), NSNumberValuesBetweenNumbersAndDuration(fromRect.origin.y, toRect.origin.y, duration), NSNumberValuesBetweenNumbersAndDuration(fromRect.size.width, toRect.size.width, duration), NSNumberValuesBetweenNumbersAndDuration(fromRect.size.height, toRect.size.height, duration));
+            return CGRectValuesWithComponents(NSNumberValuesBetweenNumbersAndDuration(fromRect.origin.x, toRect.origin.x, duration, timing), NSNumberValuesBetweenNumbersAndDuration(fromRect.origin.y, toRect.origin.y, duration, timing), NSNumberValuesBetweenNumbersAndDuration(fromRect.size.width, toRect.size.width, duration, timing), NSNumberValuesBetweenNumbersAndDuration(fromRect.size.height, toRect.size.height, duration, timing));
             
         } else if ([valueType rangeOfString:@"CGPoint"].location == 1) {
             CGPoint fromPoint = [beginValue CGPointValue];
             CGPoint toPoint = [endValue CGPointValue];
-            return CGPointValuesWithComponents(NSNumberValuesBetweenNumbersAndDuration(fromPoint.x, toPoint.x, duration), NSNumberValuesBetweenNumbersAndDuration(fromPoint.y, toPoint.y, duration));
+            return CGPointValuesWithComponents(NSNumberValuesBetweenNumbersAndDuration(fromPoint.x, toPoint.x, duration, timing), NSNumberValuesBetweenNumbersAndDuration(fromPoint.y, toPoint.y, duration, timing));
             
         } else if ([valueType rangeOfString:@"CATransform3D"].location == 1) {
             CATransform3D fromTransform = [beginValue CATransform3DValue];
             CATransform3D toTransform = [endValue CATransform3DValue];
-            return CATransform3DValuesWithComponents(NSNumberValuesBetweenNumbersAndDuration(fromTransform.m11, toTransform.m11, duration), NSNumberValuesBetweenNumbersAndDuration(fromTransform.m12, toTransform.m12, duration), NSNumberValuesBetweenNumbersAndDuration(fromTransform.m13, toTransform.m13, duration), NSNumberValuesBetweenNumbersAndDuration(fromTransform.m14, toTransform.m14, duration), NSNumberValuesBetweenNumbersAndDuration(fromTransform.m21, toTransform.m21, duration), NSNumberValuesBetweenNumbersAndDuration(fromTransform.m22, toTransform.m22, duration), NSNumberValuesBetweenNumbersAndDuration(fromTransform.m23, toTransform.m23, duration), NSNumberValuesBetweenNumbersAndDuration(fromTransform.m24, toTransform.m24, duration), NSNumberValuesBetweenNumbersAndDuration(fromTransform.m31, toTransform.m31, duration), NSNumberValuesBetweenNumbersAndDuration(fromTransform.m32, toTransform.m32, duration), NSNumberValuesBetweenNumbersAndDuration(fromTransform.m33, toTransform.m33, duration), NSNumberValuesBetweenNumbersAndDuration(fromTransform.m34, toTransform.m34, duration), NSNumberValuesBetweenNumbersAndDuration(fromTransform.m41, toTransform.m41, duration), NSNumberValuesBetweenNumbersAndDuration(fromTransform.m42, toTransform.m42, duration), NSNumberValuesBetweenNumbersAndDuration(fromTransform.m43, toTransform.m43, duration), NSNumberValuesBetweenNumbersAndDuration(fromTransform.m44, toTransform.m44, duration));
+            return CATransform3DValuesWithComponents(NSNumberValuesBetweenNumbersAndDuration(fromTransform.m11, toTransform.m11, duration, timing), NSNumberValuesBetweenNumbersAndDuration(fromTransform.m12, toTransform.m12, duration, timing), NSNumberValuesBetweenNumbersAndDuration(fromTransform.m13, toTransform.m13, duration, timing), NSNumberValuesBetweenNumbersAndDuration(fromTransform.m14, toTransform.m14, duration, timing), NSNumberValuesBetweenNumbersAndDuration(fromTransform.m21, toTransform.m21, duration, timing), NSNumberValuesBetweenNumbersAndDuration(fromTransform.m22, toTransform.m22, duration, timing), NSNumberValuesBetweenNumbersAndDuration(fromTransform.m23, toTransform.m23, duration, timing), NSNumberValuesBetweenNumbersAndDuration(fromTransform.m24, toTransform.m24, duration, timing), NSNumberValuesBetweenNumbersAndDuration(fromTransform.m31, toTransform.m31, duration, timing), NSNumberValuesBetweenNumbersAndDuration(fromTransform.m32, toTransform.m32, duration, timing), NSNumberValuesBetweenNumbersAndDuration(fromTransform.m33, toTransform.m33, duration, timing), NSNumberValuesBetweenNumbersAndDuration(fromTransform.m34, toTransform.m34, duration, timing), NSNumberValuesBetweenNumbersAndDuration(fromTransform.m41, toTransform.m41, duration, timing), NSNumberValuesBetweenNumbersAndDuration(fromTransform.m42, toTransform.m42, duration, timing), NSNumberValuesBetweenNumbersAndDuration(fromTransform.m43, toTransform.m43, duration, timing), NSNumberValuesBetweenNumbersAndDuration(fromTransform.m44, toTransform.m44, duration, timing));
         } else if ([valueType rangeOfString:@"CGSize"].location == 1) {
             CGSize fromSize = [beginValue CGSizeValue];
-            CGSize toSize = [beginValue CGSizeValue];
-            return CGSizeValuesWithComponents(NSNumberValuesBetweenNumbersAndDuration(fromSize.width, toSize.width, duration), NSNumberValuesBetweenNumbersAndDuration(fromSize.height, toSize.height, duration));
+            CGSize toSize = [endValue CGSizeValue];
+            return CGSizeValuesWithComponents(NSNumberValuesBetweenNumbersAndDuration(fromSize.width, toSize.width, duration, timing), NSNumberValuesBetweenNumbersAndDuration(fromSize.height, toSize.height, duration, timing));
         }
     }
     return nil;
