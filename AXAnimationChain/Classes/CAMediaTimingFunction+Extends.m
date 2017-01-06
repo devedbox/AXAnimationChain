@@ -220,7 +220,8 @@ static CGPoint AXBezier3ValueWithControlPoints(CGPoint p0, CGPoint p1, CGPoint p
         };
     } else if ([flag isEqualToString:NSStringFromSelector(@selector(easeInSine))]) {
         return ^double (double t, double b, double c, double d) {
-            return -c * cos(t/d * (M_PI_2)) + c + b;
+//            return -c * cos(t/d * (M_PI_2)) + c + b;
+            return AXBezier3ValueWithControlPoints(CGPointMake(.0, .0), CGPointMake(0.47, 0.0), CGPointMake(0.745, 0.715), CGPointMake(1.0, 1.0), t/d).y*(c-b)+b;
         };
     } else if ([flag isEqualToString:NSStringFromSelector(@selector(easeOutSine))]) {
         return ^double (double t, double b, double c, double d) {

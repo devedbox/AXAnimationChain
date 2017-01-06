@@ -61,13 +61,14 @@
     CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"position"];
     animation.removedOnCompletion = NO;
     animation.fillMode = kCAFillModeForwards;
+    animation.fromValue = [NSValue valueWithCGPoint:CGPointMake(self.view.center.x, CGRectGetHeight(_transitionView.frame)*.5+64)];
     animation.toValue = [NSValue valueWithCGPoint:CGPointMake(self.view.center.x, CGRectGetHeight(self.view.frame)-64-CGRectGetHeight(_transitionView.frame)*.5)];
     animation.duration = 2.0;
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
     animation.timingFunction = [[CAMediaTimingFunction new] performSelector:NSSelectorFromString([_timing titleForState:UIControlStateNormal])];
 #pragma clang diagnostic pop
-    [_transitionView.layer addAnimation:_keyframe?[CAKeyframeAnimation animationWithBasic:animation]:animation forKey:@"position"];
+    [_transitionView.layer addAnimation:_keyframe.isOn?[CAKeyframeAnimation animationWithBasic:animation]:animation forKey:@"position"];
 }
 
 - (IBAction)timing:(UIButton *)sender {

@@ -41,20 +41,20 @@ static NSArray * NSNumberValuesBetweenNumbersAndDuration(CGFloat beginNumber, CG
     value = 0.0;
     
     NSUInteger i;
-    for (i = 0; i < components; i++)
+    for (i = 1; i < components; i++)
     {
         /*
          v = self.functionBlock(duration * progress * 1000, 0, 1, duration * 1000);
          */
         v = [timing valuesFuntion](duration * progress * 1000, 0, 1, duration * 1000);
-        value = beginNumber + v * (beginNumber - endNumber);
+        value = beginNumber + v * (endNumber - beginNumber);
         
         [numbers addObject:@(value)];
         
         progress += increment;
     }
     
-    return numbers;
+    return [numbers copy];
 }
 
 static NSArray * UIColorValuesWithComponents(NSArray *redValues, NSArray *greenValues, NSArray *blueValues, NSArray *alphaValues) {
@@ -257,6 +257,7 @@ static id ToValueByValueWithValue(id value, id byValue, BOOL plus) {
     keyframe.repeatCount = basicAnimation.repeatCount;
     keyframe.repeatDuration= basicAnimation.repeatDuration;
     keyframe.autoreverses = basicAnimation.autoreverses;
+    keyframe.removedOnCompletion = basicAnimation.removedOnCompletion;
     keyframe.fillMode = basicAnimation.fillMode;
     keyframe.keyPath = basicAnimation.keyPath;
     if (basicAnimation.fromValue && basicAnimation.toValue) {
