@@ -41,18 +41,19 @@ static NSArray * NSNumberValuesBetweenNumbersAndDuration(CGFloat beginNumber, CG
     value = 0.0;
     
     NSUInteger i;
+    // Add the begin number to the numbers in case of losing first frame.
+    [numbers addObject:@(beginNumber)];
     for (i = 1; i < components; i++)
     {
-        /*
-         v = self.functionBlock(duration * progress * 1000, 0, 1, duration * 1000);
-         */
-        v = [timing valuesFuntion](duration * progress * 1000, 0, 1, duration * 1000);
+        v = timing.valuesFuntion(duration * progress * 1000, 0, 1, duration * 1000);
         value = beginNumber + v * (endNumber - beginNumber);
         
         [numbers addObject:@(value)];
         
         progress += increment;
     }
+    // Add the end number to the numbers in case of losing last frame.
+    [numbers addObject:@(endNumber)];
     
     return [numbers copy];
 }
