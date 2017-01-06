@@ -268,12 +268,14 @@ static id ToValueByValueWithValue(id value, id byValue, BOOL plus) {
         keyframe.values = AnimationValuesForCAKeyframeAnimationWithFrames(basicAnimation.fromValue, ToValueByValueWithValue(basicAnimation.fromValue, basicAnimation.byValue, YES), basicAnimation.duration, basicAnimation.timingFunction);
     } else if (basicAnimation.byValue && basicAnimation.toValue) {
         keyframe.values = AnimationValuesForCAKeyframeAnimationWithFrames(ToValueByValueWithValue(basicAnimation.toValue, basicAnimation.byValue, NO), basicAnimation.toValue, basicAnimation.duration, basicAnimation.timingFunction);
-    } else if (basicAnimation.fromValue) {
+    } /* else if (basicAnimation.fromValue) {
         keyframe.values = AnimationValuesForCAKeyframeAnimationWithFrames(basicAnimation.fromValue, basicAnimation.fromValue, basicAnimation.duration, basicAnimation.timingFunction);
     } else if (basicAnimation.toValue) {
         keyframe.values = AnimationValuesForCAKeyframeAnimationWithFrames(basicAnimation.toValue, basicAnimation.toValue, basicAnimation.duration, basicAnimation.timingFunction);
     } else if (basicAnimation.byValue) {
         keyframe.values = AnimationValuesForCAKeyframeAnimationWithFrames(basicAnimation.byValue, basicAnimation.byValue, basicAnimation.duration, basicAnimation.timingFunction);
+    } */ else {
+       @throw [NSException exceptionWithName:@"com.devedbox.animationchain_convertable" reason:@"Animation of CABasicAnimation to convert must contain at least two of the 'fromValue, byValue, toValue'." userInfo:nil];
     }
     return keyframe;
 }
