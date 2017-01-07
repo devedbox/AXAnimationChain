@@ -79,7 +79,30 @@
     [_keyframeTransitionView.layer addAnimation:[CAKeyframeAnimation animationWithBasic:animation] forKey:@"position"];
     animation.fromValue = [NSValue valueWithCGPoint:CGPointMake(self.transitionView.center.x, CGRectGetHeight(_transitionView.frame)*.5+64)];
     animation.toValue = [NSValue valueWithCGPoint:CGPointMake(self.transitionView.center.x, CGRectGetHeight(self.view.frame)-64-CGRectGetHeight(_transitionView.frame)*.5)];
-    [_transitionView.layer addAnimation:animation forKey:@"position"];
+//    [_transitionView.layer addAnimation:animation forKey:@"position"];
+    CASpringAnimation *spring = [CASpringAnimation animationWithKeyPath:@"position"];
+    spring.removedOnCompletion = NO;
+    spring.fillMode = kCAFillModeForwards;
+    spring.timingFunction = [CAMediaTimingFunction defaultTimingFunction];
+    spring.fromValue = [NSValue valueWithCGPoint:CGPointMake(self.transitionView.center.x, CGRectGetHeight(_transitionView.frame)*.5+64)];
+    spring.toValue = [NSValue valueWithCGPoint:CGPointMake(self.transitionView.center.x, CGRectGetHeight(self.view.frame)-64-CGRectGetHeight(_transitionView.frame)*.5)];
+    [_transitionView.layer addAnimation:spring forKey:@"position"];
+}
+
+- (IBAction)extends:(UIButton *)sender {
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Extensions." message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    [alert addAction:[UIAlertAction actionWithTitle:@"spring" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [_transitionView.layer removeAllAnimations];
+        CASpringAnimation *animation = [CASpringAnimation animationWithKeyPath:@"position"];
+        animation.removedOnCompletion = NO;
+        animation.fillMode = kCAFillModeForwards;
+        animation.timingFunction = [CAMediaTimingFunction defaultTimingFunction];
+        animation.fromValue = [NSValue valueWithCGPoint:CGPointMake(self.transitionView.center.x, CGRectGetHeight(_transitionView.frame)*.5+64)];
+        animation.toValue = [NSValue valueWithCGPoint:CGPointMake(self.transitionView.center.x, CGRectGetHeight(self.view.frame)-64-CGRectGetHeight(_transitionView.frame)*.5)];
+        [_transitionView.layer addAnimation:animation forKey:@"position"];
+    }]];
+    [alert addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:NULL]];
+    [self presentViewController:alert animated:YES completion:NULL];
 }
 
 - (IBAction)timing:(UIButton *)sender {

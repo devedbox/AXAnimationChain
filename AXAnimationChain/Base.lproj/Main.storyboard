@@ -189,7 +189,7 @@
                                 <rect key="frame" x="225" y="64" width="100" height="100"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="keyframe" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vfp-ej-Faf">
-                                        <rect key="frame" x="22" y="42.5" width="56.5" height="16"/>
+                                        <rect key="frame" x="22" y="42" width="57" height="16"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                         <color key="textColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
                                         <nil key="highlightedColor"/>
@@ -205,7 +205,7 @@
                                 <rect key="frame" x="50" y="64" width="100" height="100"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="basic" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hOW-NI-1q6">
-                                        <rect key="frame" x="34" y="42.5" width="32.5" height="16"/>
+                                        <rect key="frame" x="34" y="42" width="33" height="16"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                         <color key="textColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
                                         <nil key="highlightedColor"/>
@@ -220,13 +220,22 @@
                                     <constraint firstAttribute="width" constant="100" id="tm5-eB-HpW"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mvr-gt-4sV">
+                                <rect key="frame" x="154" y="620" width="66" height="30"/>
+                                <state key="normal" title="extension"/>
+                                <connections>
+                                    <action selector="extends:" destination="601-yr-ZXb" eventType="touchUpInside" id="uSN-X3-uKN"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="Mvr-gt-4sV" firstAttribute="centerY" secondItem="B64-nP-nDc" secondAttribute="centerY" id="2BU-nh-7yN"/>
                             <constraint firstAttribute="trailing" secondItem="OT3-7O-MR7" secondAttribute="trailing" id="3oH-oB-oKe"/>
                             <constraint firstItem="gd6-79-8l4" firstAttribute="height" secondItem="FyD-fo-cLa" secondAttribute="height" id="8Tr-8Q-wQu"/>
                             <constraint firstAttribute="trailing" secondItem="Njq-6Q-zea" secondAttribute="trailing" constant="15" id="Bl2-1N-NQb"/>
                             <constraint firstItem="Njq-6Q-zea" firstAttribute="centerY" secondItem="B64-nP-nDc" secondAttribute="centerY" id="Cyl-80-I5I"/>
+                            <constraint firstItem="Mvr-gt-4sV" firstAttribute="centerX" secondItem="fu6-mK-oyw" secondAttribute="centerX" id="FhE-mH-naU"/>
                             <constraint firstItem="FyD-fo-cLa" firstAttribute="top" secondItem="geb-LB-ZBl" secondAttribute="bottom" id="I2a-K5-m2P"/>
                             <constraint firstItem="9Wm-Na-h97" firstAttribute="top" secondItem="B64-nP-nDc" secondAttribute="bottom" constant="15" id="JSK-As-oea"/>
                             <constraint firstItem="OT3-7O-MR7" firstAttribute="leading" secondItem="fu6-mK-oyw" secondAttribute="leading" id="OfW-Xx-uCh"/>
