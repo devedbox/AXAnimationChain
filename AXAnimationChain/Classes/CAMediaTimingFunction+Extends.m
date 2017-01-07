@@ -210,6 +210,27 @@ static char * const kFlag="flag";
 static CGPoint AXBezier3ValueWithControlPoints(CGPoint p0, CGPoint p1, CGPoint p2, CGPoint p3, double t) {
     return CGPointMake(p0.x * pow(1-t, 3) + 3 * p1.x * t * pow(1-t, 2) + 3 * p2.x * pow(t, 2) * (1-t) + p3.x * pow(t, 3), p0.y * pow(1-t, 3) + 3 * p1.y * t * pow(1-t, 2) + 3 * p2.y * pow(t, 2) * (1-t) + p3.y * pow(t, 3));
 }
+
+static double AXRootsForXValueOnTimeLine(double x0, double x1, double x2, double x3, double x) {
+    double a = x3-3*x2+3*x1-x0, b = 3*x2 - 6*x1 - 3*x0, c = 3*x1 - 3*x0, d = x0 - x;
+    double A = pow(b, 2.0) - 3*a*c, B = b*c -9*a*d, C = pow(c, 2.0) - 3*b*d, delta = pow(B, 2.0) - 4*A*C;
+    
+    if (A == 0.0 && B == 0) {
+        return -3*d/c;
+    } else if (delta > 0.0) {
+        double Y1 = A*b + 3*a*(-B + pow(delta, .5))/2, Y2 = A*b + 3*a*(-B - pow(delta, .5))/2, Y1Flag = Y1>0?pow(Y1, 1.0/3.0):-pow(-Y1, 1.0/3.0), Y2Flag = Y2>0?pow(Y2, 1.0/3.0):-pow(-Y2, 1.0/3.0);
+        return (-b - Y1Flag - Y2Flag)/(3*a);
+    } else if (delta == .0 && A != 0) {
+        double K = B/A, R1 = -b/a + K, R2 = -K/2; R1 = R1 > 1 ? 0 : R1; R2 = R2 > 1 ? 0 : R2;
+        return MAX(R1, R2);
+    } else if (delta < 0 && A > 0) {
+        double T = (2*A*b - 3*a*B)/(2*pow(A, 3.0/2.0));
+        if (T > -1 && T < 1) {
+            double ø = acos(T), R1 = (-b - 2*pow(A, 1.0/2.0)*cos(ø/3))/(3*a), R2 = (-b + pow(A, 1.0/2.0)*(cos(ø/3) + pow(3, 1.0/2.0)*sin(ø/3)))/(3*a), R3 = (-b + pow(A, 1.0/2.0)*(cos(ø/3) - pow(3, 1.0/2.0)*sin(ø/3)))/(3*a); R1 = R1 > 1 ? 0 : R1; R2 = R2 > 1 ? 0 : R2; R3 = R3 > 1 ? 0 : R3;
+            return MAX(R1, MAX(R2, R3));
+        }
+    } return .0;
+}
 /// Params:
 /// t the current time.
 /// b the begin value.
@@ -217,10 +238,33 @@ static CGPoint AXBezier3ValueWithControlPoints(CGPoint p0, CGPoint p1, CGPoint p
 /// d the total time.
 - (double (^)(double, double, double, double))valuesFuntion {
     NSString *flag = objc_getAssociatedObject(self, kFlag);
+    CGPoint p0, p1, p2, p3;
+    float v0[2], v1[2], v2[2], v3[2];
+    
+    [self getControlPointAtIndex:0 values:v0];
+    [self getControlPointAtIndex:1 values:v1];
+    [self getControlPointAtIndex:2 values:v2];
+    [self getControlPointAtIndex:3 values:v3];
+    
+    p0.x = v0[0];
+    p0.y = v0[1];
+    p1.x = v1[0];
+    p1.y = v1[1];
+    p2.x = v2[0];
+    p2.y = v2[1];
+    p3.x = v3[0];
+    p3.y = v3[1];
+    
+    return ^double (double t, double b, double c, double d) {
+        double tt = AXRootsForXValueOnTimeLine(p0.x, p1.x, p2.x, p3.x, t/d);
+        return AXBezier3ValueWithControlPoints(p0, p1, p2, p3, tt).y*(c-b)+b;
+    };
+    
     if (!flag) return NULL;
     if ([flag isEqualToString:kCAMediaTimingFunctionDefault]) {
         return ^double (double t, double b, double c, double d) {
-            return AXBezier3ValueWithControlPoints(CGPointMake(.0, .0), CGPointMake(0.25, 0.1), CGPointMake(0.25, 1.0), CGPointMake(1.0, 1.0), t/d).y*(c-b)+b;
+            double tt = AXRootsForXValueOnTimeLine(0, 0.25, 0.25, 1, t/d);
+            return AXBezier3ValueWithControlPoints(CGPointMake(.0, .0), CGPointMake(0.25, 0.1), CGPointMake(0.25, 1.0), CGPointMake(1.0, 1.0), tt).y*(c-b)+b;
         };
     } else if ([flag isEqualToString:kCAMediaTimingFunctionLinear]) {
         return ^double (double t, double b, double c, double d) {
@@ -228,15 +272,18 @@ static CGPoint AXBezier3ValueWithControlPoints(CGPoint p0, CGPoint p1, CGPoint p
         };
     } else if ([flag isEqualToString:kCAMediaTimingFunctionEaseIn]) {
         return ^double (double t, double b, double c, double d) {
-            return AXBezier3ValueWithControlPoints(CGPointMake(.0, .0), CGPointMake(0.42, .0), CGPointMake(1.0, 1.0), CGPointMake(1.0, 1.0), t/d).y*(c-b)+b;
+            double tt = AXRootsForXValueOnTimeLine(0, 0.42, 1.0, 1.0, t/d);
+            return AXBezier3ValueWithControlPoints(CGPointMake(.0, .0), CGPointMake(0.42, .0), CGPointMake(1.0, 1.0), CGPointMake(1.0, 1.0), tt).y*(c-b)+b;
         };
     } else if ([flag isEqualToString:kCAMediaTimingFunctionEaseOut]) {
         return ^double (double t, double b, double c, double d) {
-            return AXBezier3ValueWithControlPoints(CGPointMake(.0, .0), CGPointMake(.0, .0), CGPointMake(.58, 1.0), CGPointMake(1.0, 1.0), t/d).y*(c-b)+b;
+            double tt = AXRootsForXValueOnTimeLine(0, 0.0, 0.58, 1.0, t/d);
+            return AXBezier3ValueWithControlPoints(CGPointMake(.0, .0), CGPointMake(.0, .0), CGPointMake(.58, 1.0), CGPointMake(1.0, 1.0), tt).y*(c-b)+b;
         };
     } else if ([flag isEqualToString:kCAMediaTimingFunctionEaseInEaseOut]) {
         return ^double (double t, double b, double c, double d) {
-            return AXBezier3ValueWithControlPoints(CGPointMake(.0, .0), CGPointMake(0.42, .0), CGPointMake(.58, 1.0), CGPointMake(1.0, 1.0), t/d).y*(c-b)+b;
+            double tt = AXRootsForXValueOnTimeLine(0, 0.42, 0.58, 1.0, t/d);
+            return AXBezier3ValueWithControlPoints(CGPointMake(.0, .0), CGPointMake(0.42, .0), CGPointMake(.58, 1.0), CGPointMake(1.0, 1.0), tt).y*(c-b)+b;
         };
     } else if ([flag isEqualToString:NSStringFromSelector(@selector(easeInSine))]) {
         return ^double (double t, double b, double c, double d) {
