@@ -24,9 +24,6 @@
 //  SOFTWARE.
 
 #import "CAMediaTimingFunction+Extends.h"
-#import <objc/runtime.h>
-
-static char * const kFlag="flag";
 
 @implementation CAMediaTimingFunction (Extends)
 + (instancetype)defaultTimingFunction {
