@@ -60,10 +60,10 @@
 
 - (double (^)(double t, double b, double c, double d))valuesFuntion;
 
-- (double (^)(double t, double b, double c, double d))easeInElasticValuesFuntion;
-- (double (^)(double t, double b, double c, double d))easeOutElasticValuesFuntion;
-- (double (^)(double t, double b, double c, double d))easeInOutElasticValuesFuntion;
-- (double (^)(double t, double b, double c, double d))easeInBounceValuesFuntion;
-- (double (^)(double t, double b, double c, double d))easeOutBounceValuesFuntion;
-- (double (^)(double t, double b, double c, double d))easeInOutBounceValuesFuntion;
++ (double (^)(double t, double b, double c, double d))easeInElasticValuesFuntion;
++ (double (^)(double t, double b, double c, double d))easeOutElasticValuesFuntion;
++ (double (^)(double t, double b, double c, double d))easeInOutElasticValuesFuntion;
++ (double (^)(double t, double b, double c, double d))easeInBounceValuesFuntion;
++ (double (^)(double t, double b, double c, double d))easeOutBounceValuesFuntion;
++ (double (^)(double t, double b, double c, double d))easeInOutBounceValuesFuntion;
 @end

@@ -332,7 +332,7 @@ static double AXRootsForXValueOnTimeLine(double x0, double x1, double x2, double
      */
 }
 
-- (double (^)(double, double, double, double))easeInElasticValuesFuntion {
++ (double (^)(double, double, double, double))easeInElasticValuesFuntion {
     return ^double (double t, double b, double c, double d) {
         double s = 1.70158; double p=0; double a=c;
         
@@ -343,7 +343,7 @@ static double AXRootsForXValueOnTimeLine(double x0, double x1, double x2, double
     };
 }
 
-- (double (^)(double, double, double, double))easeOutElasticValuesFuntion {
++ (double (^)(double, double, double, double))easeOutElasticValuesFuntion {
     return ^double (double t, double b, double c, double d) {
         double s=1.70158, p=0, a=c;
         if (t==0) return b;  if ((t/=d)==1) return b+c;  if (!p) p=d*.3;
@@ -353,7 +353,7 @@ static double AXRootsForXValueOnTimeLine(double x0, double x1, double x2, double
     };
 }
 
-- (double (^)(double, double, double, double))easeInOutElasticValuesFuntion {
++ (double (^)(double, double, double, double))easeInOutElasticValuesFuntion {
     return ^double (double t, double b, double c, double d) {
         double s=1.70158, p=0, a=c;
         if (t==0) return b;  if ((t/=d/2)==2) return b+c;  if (!p) p=d*(.3*1.5);
@@ -364,13 +364,13 @@ static double AXRootsForXValueOnTimeLine(double x0, double x1, double x2, double
     };
 }
 
-- (double (^)(double, double, double, double))easeInBounceValuesFuntion {
++ (double (^)(double, double, double, double))easeInBounceValuesFuntion {
     return ^double (double t, double b, double c, double d) {
         return c - [self easeOutBounceValuesFuntion](d-t, 0, c, d) + b;
     };
 }
 
-- (double (^)(double, double, double, double))easeOutBounceValuesFuntion {
++ (double (^)(double, double, double, double))easeOutBounceValuesFuntion {
     return ^double (double t, double b, double c, double d) {
         if ((t/=d) < (1/2.75)) {
             return c*(7.5625*t*t) + b;
@@ -384,7 +384,7 @@ static double AXRootsForXValueOnTimeLine(double x0, double x1, double x2, double
     };
 }
 
-- (double (^)(double, double, double, double))easeInOutBounceValuesFuntion {
++ (double (^)(double, double, double, double))easeInOutBounceValuesFuntion {
     return ^double (double t, double b, double c, double d) {
         if (t < d/2)
             return [self easeInBounceValuesFuntion](t*2, 0, c, d) * .5 + b;
