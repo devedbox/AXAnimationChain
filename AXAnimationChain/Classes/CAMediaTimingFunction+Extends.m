@@ -29,19 +29,6 @@
 static char * const kFlag="flag";
 
 @implementation CAMediaTimingFunction (Extends)
-+ (void)load {
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        method_exchangeImplementations(class_getClassMethod(self.class, @selector(functionWithName:)), class_getClassMethod(self.class, @selector(ax_functionWithName:)));
-    });
-}
-
-+ (instancetype)ax_functionWithName:(NSString *)name {
-    id timing = [self ax_functionWithName:name];
-    objc_setAssociatedObject(timing, kFlag, name, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    return timing;
-}
-
 + (instancetype)defaultTimingFunction {
     return [self functionWithName:kCAMediaTimingFunctionDefault];
 }
@@ -63,147 +50,99 @@ static char * const kFlag="flag";
 }
 
 + (instancetype)easeInSine {
-    id timing = [self functionWithControlPoints:0.47 :0 :0.745 :0.715];
-    objc_setAssociatedObject(timing, kFlag, NSStringFromSelector(_cmd), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    return timing;
+    return [self functionWithControlPoints:0.47 :0 :0.745 :0.715];
 }
 
 + (instancetype)easeOutSine {
-    id timing = [self functionWithControlPoints:0.39 :0.575 :0.565 :1];
-    objc_setAssociatedObject(timing, kFlag, NSStringFromSelector(_cmd), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    return timing;
+    return [self functionWithControlPoints:0.39 :0.575 :0.565 :1];
 }
 
 + (instancetype)easeInOutSine {
-    id timing = [self functionWithControlPoints:0.445 :0.05 :0.55 :0.95];
-    objc_setAssociatedObject(timing, kFlag, NSStringFromSelector(_cmd), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    return timing;
+    return [self functionWithControlPoints:0.445 :0.05 :0.55 :0.95];
 }
 
 + (instancetype)easeInQuad {
-    id timing = [self functionWithControlPoints:0.55 :0.085 :0.68 :0.53];
-    objc_setAssociatedObject(timing, kFlag, NSStringFromSelector(_cmd), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    return timing;
+    return [self functionWithControlPoints:0.55 :0.085 :0.68 :0.53];
 }
 
 + (instancetype)easeOutQuad {
-    id timing = [self functionWithControlPoints:0.25 :0.46 :0.45 :0.94];
-    objc_setAssociatedObject(timing, kFlag, NSStringFromSelector(_cmd), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    return timing;
+    return [self functionWithControlPoints:0.25 :0.46 :0.45 :0.94];
 }
 
 + (instancetype)easeInOutQuad {
-    id timing = [self functionWithControlPoints:0.455 :0.03 :0.515 :0.955];
-    objc_setAssociatedObject(timing, kFlag, NSStringFromSelector(_cmd), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    return timing;
+    return [self functionWithControlPoints:0.455 :0.03 :0.515 :0.955];
 }
 
 + (instancetype)easeInCubic {
-    id timing = [self functionWithControlPoints:0.55 :0.055 :0.675 :0.19];
-    objc_setAssociatedObject(timing, kFlag, NSStringFromSelector(_cmd), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    return timing;
+    return [self functionWithControlPoints:0.55 :0.055 :0.675 :0.19];
 }
 
 + (instancetype)easeOutCubic {
-    id timing = [self functionWithControlPoints:0.215 :0.61 :0.355 :1];
-    objc_setAssociatedObject(timing, kFlag, NSStringFromSelector(_cmd), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    return timing;
+    return [self functionWithControlPoints:0.215 :0.61 :0.355 :1];
 }
 
 + (instancetype)easeInOutCubic {
-    id timing = [self functionWithControlPoints:0.645 :0.045 :0.355 :1];
-    objc_setAssociatedObject(timing, kFlag, NSStringFromSelector(_cmd), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    return timing;
+    return [self functionWithControlPoints:0.645 :0.045 :0.355 :1];
 }
 
 + (instancetype)easeInQuart {
-    id timing = [self functionWithControlPoints:0.895 :0.03 :0.685 :0.22];
-    objc_setAssociatedObject(timing, kFlag, NSStringFromSelector(_cmd), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    return timing;
+    return [self functionWithControlPoints:0.895 :0.03 :0.685 :0.22];
 }
 
 + (instancetype)easeOutQuart {
-    id timing = [self functionWithControlPoints:0.165 :0.84 :0.44 :1];
-    objc_setAssociatedObject(timing, kFlag, NSStringFromSelector(_cmd), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    return timing;
+    return [self functionWithControlPoints:0.165 :0.84 :0.44 :1];
 }
 
 + (instancetype)easeInOutQuart {
-    id timing = [self functionWithControlPoints:0.77 :0 :0.175 :1];
-    objc_setAssociatedObject(timing, kFlag, NSStringFromSelector(_cmd), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    return timing;
+    return [self functionWithControlPoints:0.77 :0 :0.175 :1];
 }
 
 + (instancetype)easeInQuint {
-    id timing = [self functionWithControlPoints:0.755 :0.05 :0.855 :0.06];
-    objc_setAssociatedObject(timing, kFlag, NSStringFromSelector(_cmd), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    return timing;
+    return [self functionWithControlPoints:0.755 :0.05 :0.855 :0.06];
 }
 
 + (instancetype)easeOutQuint {
-    id timing = [self functionWithControlPoints:0.23 :1 :0.32 :1];
-    objc_setAssociatedObject(timing, kFlag, NSStringFromSelector(_cmd), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    return timing;
+    return [self functionWithControlPoints:0.23 :1 :0.32 :1];
 }
 
 + (instancetype)easeInOutQuint {
-    id timing = [self functionWithControlPoints:0.86 :0 :0.07 :1];
-    objc_setAssociatedObject(timing, kFlag, NSStringFromSelector(_cmd), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    return timing;
+    return [self functionWithControlPoints:0.86 :0 :0.07 :1];
 }
 
 + (instancetype)easeInExpo {
-    id timing = [self functionWithControlPoints:0.95 :0.05 :0.795 :0.035];
-    objc_setAssociatedObject(timing, kFlag, NSStringFromSelector(_cmd), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    return timing;
+    return [self functionWithControlPoints:0.95 :0.05 :0.795 :0.035];
 }
 
 + (instancetype)easeOutExpo {
-    id timing = [self functionWithControlPoints:0.19 :1 :0.22 :1];
-    objc_setAssociatedObject(timing, kFlag, NSStringFromSelector(_cmd), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    return timing;
+    return [self functionWithControlPoints:0.19 :1 :0.22 :1];
 }
 
 + (instancetype)easeInOutExpo {
-    id timing = [self functionWithControlPoints:1 :0 :0 :1];
-    objc_setAssociatedObject(timing, kFlag, NSStringFromSelector(_cmd), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    return timing;
+    return [self functionWithControlPoints:1 :0 :0 :1];
 }
 
 + (instancetype)easeInCirc {
-    id timing = [self functionWithControlPoints:0.6 :0.04 :0.98 :0.335];
-    objc_setAssociatedObject(timing, kFlag, NSStringFromSelector(_cmd), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    return timing;
+    return [self functionWithControlPoints:0.6 :0.04 :0.98 :0.335];
 }
 
 + (instancetype)easeOutCirc {
-    id timing = [self functionWithControlPoints:0.075 :0.82 :0.165 :1];
-    objc_setAssociatedObject(timing, kFlag, NSStringFromSelector(_cmd), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    return timing;
+    return [self functionWithControlPoints:0.075 :0.82 :0.165 :1];
 }
 
 + (instancetype)easeInOutCirc {
-    id timing = [self functionWithControlPoints:0.785 :0.135 :0.15 :0.86];
-    objc_setAssociatedObject(timing, kFlag, NSStringFromSelector(_cmd), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    return timing;
+    return [self functionWithControlPoints:0.785 :0.135 :0.15 :0.86];
 }
 
 + (instancetype)easeInBack {
-    id timing = [self functionWithControlPoints:0.6 :-0.28 :0.735 :0.045];
-    objc_setAssociatedObject(timing, kFlag, NSStringFromSelector(_cmd), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    return timing;
+    return [self functionWithControlPoints:0.6 :-0.28 :0.735 :0.045];
 }
 
 + (instancetype)easeOutBack {
-    id timing = [self functionWithControlPoints:0.175 :0.885 :0.32 :1.275];
-    objc_setAssociatedObject(timing, kFlag, NSStringFromSelector(_cmd), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    return timing;
+    return [self functionWithControlPoints:0.175 :0.885 :0.32 :1.275];
 }
 
 + (instancetype)easeInOutBack {
-    id timing = [self functionWithControlPoints:0.68 :-0.55 :0.265 :1.55];
-    objc_setAssociatedObject(timing, kFlag, NSStringFromSelector(_cmd), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    return timing;
+    return [self functionWithControlPoints:0.68 :-0.55 :0.265 :1.55];
 }
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wunsequenced"
@@ -237,7 +176,6 @@ static double AXRootsForXValueOnTimeLine(double x0, double x1, double x2, double
 /// c the delta value.
 /// d the total time.
 - (double (^)(double, double, double, double))valuesFuntion {
-    NSString *flag = objc_getAssociatedObject(self, kFlag);
     CGPoint p0, p1, p2, p3;
     float v0[2], v1[2], v2[2], v3[2];
     
@@ -259,8 +197,8 @@ static double AXRootsForXValueOnTimeLine(double x0, double x1, double x2, double
         double tt = AXRootsForXValueOnTimeLine(p0.x, p1.x, p2.x, p3.x, t/d);
         return AXBezier3ValueWithControlPoints(p0, p1, p2, p3, tt).y*(c-b)+b;
     };
-    
-    if (!flag) return NULL;
+    // Replaced:
+    /*
     if ([flag isEqualToString:kCAMediaTimingFunctionDefault]) {
         return ^double (double t, double b, double c, double d) {
             double tt = AXRootsForXValueOnTimeLine(0, 0.25, 0.25, 1, t/d);
@@ -394,6 +332,7 @@ static double AXRootsForXValueOnTimeLine(double x0, double x1, double x2, double
             return c/2*((t-=2)*t*(((s*=(1.525))+1)*t + s) + 2) + b;
         };
     } else return NULL;
+     */
 }
 
 - (double (^)(double, double, double, double))easeInElasticValuesFuntion {
