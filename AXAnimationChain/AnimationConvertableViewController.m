@@ -56,6 +56,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    [_transitionView.layer addObserver:self forKeyPath:@"position" options:NSKeyValueObservingOptionNew context:NULL];
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context {
+    if ([keyPath isEqualToString:@"position"]) {
+        NSLog(@"%@", NSStringFromCGPoint([change[NSKeyValueChangeNewKey] CGPointValue]));
+    }
+    [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -79,7 +88,8 @@
     [_keyframeTransitionView.layer addAnimation:[CAKeyframeAnimation animationWithBasic:animation] forKey:@"position"];
     animation.fromValue = [NSValue valueWithCGPoint:CGPointMake(self.transitionView.center.x, CGRectGetHeight(_transitionView.frame)*.5+64)];
     animation.toValue = [NSValue valueWithCGPoint:CGPointMake(self.transitionView.center.x, CGRectGetHeight(self.view.frame)-64-CGRectGetHeight(_transitionView.frame)*.5)];
-//    [_transitionView.layer addAnimation:animation forKey:@"position"];
+    [_transitionView.layer addAnimation:animation forKey:@"position"];
+    /*
     CASpringAnimation *spring = [CASpringAnimation animationWithKeyPath:@"position"];
     spring.removedOnCompletion = NO;
     spring.fillMode = kCAFillModeForwards;
@@ -87,16 +97,147 @@
     spring.fromValue = [NSValue valueWithCGPoint:CGPointMake(self.transitionView.center.x, CGRectGetHeight(_transitionView.frame)*.5+64)];
     spring.toValue = [NSValue valueWithCGPoint:CGPointMake(self.transitionView.center.x, CGRectGetHeight(self.view.frame)-64-CGRectGetHeight(_transitionView.frame)*.5)];
     [_transitionView.layer addAnimation:spring forKey:@"position"];
+     */
 }
 
 - (IBAction)extends:(UIButton *)sender {
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Extensions." message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     [alert addAction:[UIAlertAction actionWithTitle:@"spring" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        /*
         [_transitionView.layer removeAllAnimations];
         CASpringAnimation *animation = [CASpringAnimation animationWithKeyPath:@"position"];
         animation.removedOnCompletion = NO;
         animation.fillMode = kCAFillModeForwards;
         animation.timingFunction = [CAMediaTimingFunction defaultTimingFunction];
+        animation.fromValue = [NSValue valueWithCGPoint:CGPointMake(self.transitionView.center.x, CGRectGetHeight(_transitionView.frame)*.5+64)];
+        animation.toValue = [NSValue valueWithCGPoint:CGPointMake(self.transitionView.center.x, CGRectGetHeight(self.view.frame)-64-CGRectGetHeight(_transitionView.frame)*.5)];
+        [_transitionView.layer addAnimation:animation forKey:@"position"];
+        */
+        [_transitionView.layer removeAllAnimations];
+        [_keyframeTransitionView.layer removeAllAnimations];
+        CASpringAnimation *animation = [CASpringAnimation animationWithKeyPath:@"position"];
+        animation.removedOnCompletion = NO;
+        animation.fillMode = kCAFillModeForwards;
+        animation.fromValue = [NSValue valueWithCGPoint:CGPointMake(self.keyframeTransitionView.center.x, CGRectGetHeight(_keyframeTransitionView.frame)*.5+64)];
+        animation.toValue = [NSValue valueWithCGPoint:CGPointMake(self.keyframeTransitionView.center.x, CGRectGetHeight(self.view.frame)-64-CGRectGetHeight(_keyframeTransitionView.frame)*.5)];
+        animation.mass = 50;
+        animation.damping = 50;
+        animation.stiffness = 50;
+        NSLog(@"settling duratuion: %@", @(animation.settlingDuration));
+        animation.duration = animation.settlingDuration;
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+        animation.timingFunction = [[CAMediaTimingFunction new] performSelector:NSSelectorFromString([_timing titleForState:UIControlStateNormal])];
+#pragma clang diagnostic pop
+        [_keyframeTransitionView.layer addAnimation:[CAKeyframeAnimation animationWithBasic:animation] forKey:@"position"];
+        animation.fromValue = [NSValue valueWithCGPoint:CGPointMake(self.transitionView.center.x, CGRectGetHeight(_transitionView.frame)*.5+64)];
+        animation.toValue = [NSValue valueWithCGPoint:CGPointMake(self.transitionView.center.x, CGRectGetHeight(self.view.frame)-64-CGRectGetHeight(_transitionView.frame)*.5)];
+        [_transitionView.layer addAnimation:animation forKey:@"position"];
+    }]];
+    [alert addAction:[UIAlertAction actionWithTitle:@"easeInElastic" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [_transitionView.layer removeAllAnimations];
+        [_keyframeTransitionView.layer removeAllAnimations];
+        CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"position"];
+        animation.removedOnCompletion = NO;
+        animation.fillMode = kCAFillModeForwards;
+        animation.fromValue = [NSValue valueWithCGPoint:CGPointMake(self.keyframeTransitionView.center.x, CGRectGetHeight(_keyframeTransitionView.frame)*.5+64)];
+        animation.toValue = [NSValue valueWithCGPoint:CGPointMake(self.keyframeTransitionView.center.x, CGRectGetHeight(self.view.frame)-64-CGRectGetHeight(_keyframeTransitionView.frame)*.5)];
+        animation.duration = 2.0;
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+        animation.timingFunction = [[CAMediaTimingFunction new] performSelector:NSSelectorFromString([_timing titleForState:UIControlStateNormal])];
+#pragma clang diagnostic pop
+        [_keyframeTransitionView.layer addAnimation:[CAKeyframeAnimation animationWithBasic:animation usingValuesFunction:[CAMediaTimingFunction easeInElasticValuesFuntion]] forKey:@"position"];
+        animation.fromValue = [NSValue valueWithCGPoint:CGPointMake(self.transitionView.center.x, CGRectGetHeight(_transitionView.frame)*.5+64)];
+        animation.toValue = [NSValue valueWithCGPoint:CGPointMake(self.transitionView.center.x, CGRectGetHeight(self.view.frame)-64-CGRectGetHeight(_transitionView.frame)*.5)];
+        [_transitionView.layer addAnimation:animation forKey:@"position"];
+    }]];
+    [alert addAction:[UIAlertAction actionWithTitle:@"easeOutElastic" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [_transitionView.layer removeAllAnimations];
+        [_keyframeTransitionView.layer removeAllAnimations];
+        CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"position"];
+        animation.removedOnCompletion = NO;
+        animation.fillMode = kCAFillModeForwards;
+        animation.fromValue = [NSValue valueWithCGPoint:CGPointMake(self.keyframeTransitionView.center.x, CGRectGetHeight(_keyframeTransitionView.frame)*.5+64)];
+        animation.toValue = [NSValue valueWithCGPoint:CGPointMake(self.keyframeTransitionView.center.x, CGRectGetHeight(self.view.frame)-64-CGRectGetHeight(_keyframeTransitionView.frame)*.5)];
+        animation.duration = 2.0;
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+        animation.timingFunction = [[CAMediaTimingFunction new] performSelector:NSSelectorFromString([_timing titleForState:UIControlStateNormal])];
+#pragma clang diagnostic pop
+        [_keyframeTransitionView.layer addAnimation:[CAKeyframeAnimation animationWithBasic:animation usingValuesFunction:[CAMediaTimingFunction easeOutElasticValuesFuntion]] forKey:@"position"];
+        animation.fromValue = [NSValue valueWithCGPoint:CGPointMake(self.transitionView.center.x, CGRectGetHeight(_transitionView.frame)*.5+64)];
+        animation.toValue = [NSValue valueWithCGPoint:CGPointMake(self.transitionView.center.x, CGRectGetHeight(self.view.frame)-64-CGRectGetHeight(_transitionView.frame)*.5)];
+        [_transitionView.layer addAnimation:animation forKey:@"position"];
+    }]];
+    [alert addAction:[UIAlertAction actionWithTitle:@"easeInOutElastic" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [_transitionView.layer removeAllAnimations];
+        [_keyframeTransitionView.layer removeAllAnimations];
+        CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"position"];
+        animation.removedOnCompletion = NO;
+        animation.fillMode = kCAFillModeForwards;
+        animation.fromValue = [NSValue valueWithCGPoint:CGPointMake(self.keyframeTransitionView.center.x, CGRectGetHeight(_keyframeTransitionView.frame)*.5+64)];
+        animation.toValue = [NSValue valueWithCGPoint:CGPointMake(self.keyframeTransitionView.center.x, CGRectGetHeight(self.view.frame)-64-CGRectGetHeight(_keyframeTransitionView.frame)*.5)];
+        animation.duration = 2.0;
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+        animation.timingFunction = [[CAMediaTimingFunction new] performSelector:NSSelectorFromString([_timing titleForState:UIControlStateNormal])];
+#pragma clang diagnostic pop
+        [_keyframeTransitionView.layer addAnimation:[CAKeyframeAnimation animationWithBasic:animation usingValuesFunction:[CAMediaTimingFunction easeInOutElasticValuesFuntion]] forKey:@"position"];
+        animation.fromValue = [NSValue valueWithCGPoint:CGPointMake(self.transitionView.center.x, CGRectGetHeight(_transitionView.frame)*.5+64)];
+        animation.toValue = [NSValue valueWithCGPoint:CGPointMake(self.transitionView.center.x, CGRectGetHeight(self.view.frame)-64-CGRectGetHeight(_transitionView.frame)*.5)];
+        [_transitionView.layer addAnimation:animation forKey:@"position"];
+    }]];
+    [alert addAction:[UIAlertAction actionWithTitle:@"easeInBounce" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [_transitionView.layer removeAllAnimations];
+        [_keyframeTransitionView.layer removeAllAnimations];
+        CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"position"];
+        animation.removedOnCompletion = NO;
+        animation.fillMode = kCAFillModeForwards;
+        animation.fromValue = [NSValue valueWithCGPoint:CGPointMake(self.keyframeTransitionView.center.x, CGRectGetHeight(_keyframeTransitionView.frame)*.5+64)];
+        animation.toValue = [NSValue valueWithCGPoint:CGPointMake(self.keyframeTransitionView.center.x, CGRectGetHeight(self.view.frame)-64-CGRectGetHeight(_keyframeTransitionView.frame)*.5)];
+        animation.duration = 2.0;
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+        animation.timingFunction = [[CAMediaTimingFunction new] performSelector:NSSelectorFromString([_timing titleForState:UIControlStateNormal])];
+#pragma clang diagnostic pop
+        [_keyframeTransitionView.layer addAnimation:[CAKeyframeAnimation animationWithBasic:animation usingValuesFunction:[CAMediaTimingFunction easeInBounceValuesFuntion]] forKey:@"position"];
+        animation.fromValue = [NSValue valueWithCGPoint:CGPointMake(self.transitionView.center.x, CGRectGetHeight(_transitionView.frame)*.5+64)];
+        animation.toValue = [NSValue valueWithCGPoint:CGPointMake(self.transitionView.center.x, CGRectGetHeight(self.view.frame)-64-CGRectGetHeight(_transitionView.frame)*.5)];
+        [_transitionView.layer addAnimation:animation forKey:@"position"];
+    }]];
+    [alert addAction:[UIAlertAction actionWithTitle:@"easeOutBounce" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [_transitionView.layer removeAllAnimations];
+        [_keyframeTransitionView.layer removeAllAnimations];
+        CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"position"];
+        animation.removedOnCompletion = NO;
+        animation.fillMode = kCAFillModeForwards;
+        animation.fromValue = [NSValue valueWithCGPoint:CGPointMake(self.keyframeTransitionView.center.x, CGRectGetHeight(_keyframeTransitionView.frame)*.5+64)];
+        animation.toValue = [NSValue valueWithCGPoint:CGPointMake(self.keyframeTransitionView.center.x, CGRectGetHeight(self.view.frame)-64-CGRectGetHeight(_keyframeTransitionView.frame)*.5)];
+        animation.duration = 2.0;
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+        animation.timingFunction = [[CAMediaTimingFunction new] performSelector:NSSelectorFromString([_timing titleForState:UIControlStateNormal])];
+#pragma clang diagnostic pop
+        [_keyframeTransitionView.layer addAnimation:[CAKeyframeAnimation animationWithBasic:animation usingValuesFunction:[CAMediaTimingFunction easeOutBounceValuesFuntion]] forKey:@"position"];
+        animation.fromValue = [NSValue valueWithCGPoint:CGPointMake(self.transitionView.center.x, CGRectGetHeight(_transitionView.frame)*.5+64)];
+        animation.toValue = [NSValue valueWithCGPoint:CGPointMake(self.transitionView.center.x, CGRectGetHeight(self.view.frame)-64-CGRectGetHeight(_transitionView.frame)*.5)];
+        [_transitionView.layer addAnimation:animation forKey:@"position"];
+    }]];
+    [alert addAction:[UIAlertAction actionWithTitle:@"easeInOutBounce" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [_transitionView.layer removeAllAnimations];
+        [_keyframeTransitionView.layer removeAllAnimations];
+        CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"position"];
+        animation.removedOnCompletion = NO;
+        animation.fillMode = kCAFillModeForwards;
+        animation.fromValue = [NSValue valueWithCGPoint:CGPointMake(self.keyframeTransitionView.center.x, CGRectGetHeight(_keyframeTransitionView.frame)*.5+64)];
+        animation.toValue = [NSValue valueWithCGPoint:CGPointMake(self.keyframeTransitionView.center.x, CGRectGetHeight(self.view.frame)-64-CGRectGetHeight(_keyframeTransitionView.frame)*.5)];
+        animation.duration = 2.0;
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+        animation.timingFunction = [[CAMediaTimingFunction new] performSelector:NSSelectorFromString([_timing titleForState:UIControlStateNormal])];
+#pragma clang diagnostic pop
+        [_keyframeTransitionView.layer addAnimation:[CAKeyframeAnimation animationWithBasic:animation usingValuesFunction:[CAMediaTimingFunction easeInOutBounceValuesFuntion]] forKey:@"position"];
         animation.fromValue = [NSValue valueWithCGPoint:CGPointMake(self.transitionView.center.x, CGRectGetHeight(_transitionView.frame)*.5+64)];
         animation.toValue = [NSValue valueWithCGPoint:CGPointMake(self.transitionView.center.x, CGRectGetHeight(self.view.frame)-64-CGRectGetHeight(_transitionView.frame)*.5)];
         [_transitionView.layer addAnimation:animation forKey:@"position"];
