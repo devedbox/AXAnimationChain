@@ -32,4 +32,5 @@
 
 @interface CAKeyframeAnimation (Convertable)
 + (instancetype)animationWithBasic:(CABasicAnimation *)basicAnimation;
++ (instancetype)animationWithBasic:(CABasicAnimation *)basicAnimation usingValuesFunction:(double (^)(double t, double b, double c, double d))valuesFunction;
 @end
