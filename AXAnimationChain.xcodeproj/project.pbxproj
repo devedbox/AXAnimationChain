@@ -177,12 +177,12 @@
 				DC5E8ADB1DFD006700597663 /* AXChainAnimator+Block.h */,
 				DC5E8AD81DFBED8B00597663 /* AXChainAnimator.h */,
 				DC5E8AD91DFBED8B00597663 /* AXChainAnimator.m */,
+				DC60166F1E227855006E15E3 /* AXSpringAnimation.h */,
+				DC6016701E227855006E15E3 /* AXSpringAnimation.m */,
 				DCE7E73E1E1B7D0500924BC2 /* CAMediaTimingFunction+Extends.h */,
 				DCE7E73F1E1B7D0500924BC2 /* CAMediaTimingFunction+Extends.m */,
 				DCE7E7411E1B902500924BC2 /* CAAnimation+Convertable.h */,
 				DCE7E7421E1B902500924BC2 /* CAAnimation+Convertable.m */,
-				DC60166F1E227855006E15E3 /* AXSpringAnimation.h */,
-				DC6016701E227855006E15E3 /* AXSpringAnimation.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";

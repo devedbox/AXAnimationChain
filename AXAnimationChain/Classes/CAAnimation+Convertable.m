@@ -163,7 +163,7 @@ static NSArray * CATransform3DValuesWithComponents(NSArray *m11, NSArray *m12, N
     return values;
 }
 
-static NSArray * AnimationValuesForCAKeyframeAnimationWithFrames(id fromValue, id toValue, NSTimeInterval duration, CAMediaTimingFunction *timing, _ function) {
+NSArray * AnimationValuesForCAKeyframeAnimationWithFrames(id fromValue, id toValue, NSTimeInterval duration, CAMediaTimingFunction *timing, _ function) {
     id beginValue;
     id endValue;
     beginValue = fromValue;
@@ -199,7 +199,7 @@ static NSArray * AnimationValuesForCAKeyframeAnimationWithFrames(id fromValue, i
     return nil;
 }
 
-static id ToValueByValueWithValue(id value, id byValue, BOOL plus) {
+id ToValueByValueWithValue(id value, id byValue, BOOL plus) {
     if (!value) @throw @"From value can not be nil.";
     if (!byValue) @throw @"By value can not be nil";
     if ([value isKindOfClass:[NSNumber class]] && [byValue isKindOfClass:[NSNumber class]]) {
