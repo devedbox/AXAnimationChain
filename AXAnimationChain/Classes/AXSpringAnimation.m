@@ -25,6 +25,73 @@
 
 #import "AXSpringAnimation.h"
 
-@implementation AXSpringAnimation
+typedef double (^_)(double t, double b, double c, double d);
+extern NSArray * AnimationValuesForCAKeyframeAnimationWithFrames(id fromValue, id toValue, NSTimeInterval duration, CAMediaTimingFunction *timing, _ function);
+extern id ToValueByValueWithValue(id value, id byValue, BOOL plus);
 
+@implementation AXSpringAnimation
+- (instancetype)init {
+    if (self = [super init]) {
+        [self initializer];
+    }
+    return self;
+}
+
+- (void)initializer {
+    _mass = 1;
+    _stiffness = 100;
+    _damping = 10;
+}
+
+- (void)setMass:(CGFloat)mass {
+    _mass = mass;
+}
+
+- (void)setStiffness:(CGFloat)stiffness {
+    _stiffness = stiffness;
+}
+
+- (void)setDamping:(CGFloat)damping {
+    _damping = damping;
+}
+
+- (void)setInitialVelocity:(CGFloat)initialVelocity {
+    _initialVelocity = initialVelocity;
+}
+
+- (void)setFromValue:(id)fromValue {
+    _fromValue = fromValue;
+    [self _setValues];
+}
+
+- (void)setByValue:(id)byValue {
+    _byValue = byValue;
+    [self _setValues];
+}
+
+- (void)setToValue:(id)toValue {
+    _toValue = toValue;
+    [self _setValues];
+}
+
+- (CFTimeInterval)settlingDuration {
+    return (-(2.0*_mass*log(0.001))/_damping);
+}
+
+- (void)_setValues {
+    self.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
+    if (self.fromValue && self.toValue) {
+        super.values = AnimationValuesForCAKeyframeAnimationWithFrames(self.fromValue, self.toValue, self.settlingDuration, self.timingFunction, ^double (double t, double b, double c, double d) {
+            return (1-exp(-_damping/(2*_mass)*t)*cos(sqrt(fabs(_stiffness/_mass-pow(_damping/(2*_mass), 2.0)))*t/(d/self.settlingDuration)))*(c-b)+b;
+        });
+    } else if (self.fromValue && self.byValue) {
+        super.values = AnimationValuesForCAKeyframeAnimationWithFrames(self.fromValue, ToValueByValueWithValue(self.fromValue, self.byValue, YES), self.settlingDuration, self.timingFunction, ^double (double t, double b, double c, double d) {
+            return (1-exp(-_damping/(2*_mass)*t)*cos(sqrt(fabs(_stiffness/_mass-pow(_damping/(2*_mass), 2.0)))*t/(d/self.settlingDuration)))*(c-b)+b;
+        });
+    } else if (self.byValue && self.toValue) {
+        super.values = AnimationValuesForCAKeyframeAnimationWithFrames(ToValueByValueWithValue(self.toValue, self.byValue, NO), self.toValue, self.settlingDuration, self.timingFunction, ^double (double t, double b, double c, double d) {
+            return (1-exp(-_damping/(2*_mass)*t)*cos(sqrt(fabs(_stiffness/_mass-pow(_damping/(2*_mass), 2.0)))*t/(d/self.settlingDuration)))*(c-b)+b;
+        });
+    }
+}
 @end

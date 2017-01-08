@@ -9,6 +9,7 @@
 #import "AnimationConvertableViewController.h"
 #import "CAMediaTimingFunction+Extends.h"
 #import "CAAnimation+Convertable.h"
+#import "AXSpringAnimation.h"
 
 @interface AnimationConvertableViewController ()
 /// Keyframe.
@@ -118,21 +119,25 @@
         CASpringAnimation *animation = [CASpringAnimation animationWithKeyPath:@"position"];
         animation.removedOnCompletion = NO;
         animation.fillMode = kCAFillModeForwards;
-        animation.fromValue = [NSValue valueWithCGPoint:CGPointMake(self.keyframeTransitionView.center.x, CGRectGetHeight(_keyframeTransitionView.frame)*.5+64)];
-        animation.toValue = [NSValue valueWithCGPoint:CGPointMake(self.keyframeTransitionView.center.x, CGRectGetHeight(self.view.frame)-64-CGRectGetHeight(_keyframeTransitionView.frame)*.5)];
         animation.mass = 50;
         animation.damping = 50;
         animation.stiffness = 50;
         NSLog(@"settling duratuion: %@", @(animation.settlingDuration));
         animation.duration = animation.settlingDuration;
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
-        animation.timingFunction = [[CAMediaTimingFunction new] performSelector:NSSelectorFromString([_timing titleForState:UIControlStateNormal])];
-#pragma clang diagnostic pop
-        [_keyframeTransitionView.layer addAnimation:[CAKeyframeAnimation animationWithBasic:animation] forKey:@"position"];
         animation.fromValue = [NSValue valueWithCGPoint:CGPointMake(self.transitionView.center.x, CGRectGetHeight(_transitionView.frame)*.5+64)];
         animation.toValue = [NSValue valueWithCGPoint:CGPointMake(self.transitionView.center.x, CGRectGetHeight(self.view.frame)-64-CGRectGetHeight(_transitionView.frame)*.5)];
         [_transitionView.layer addAnimation:animation forKey:@"position"];
+        
+        AXSpringAnimation *spring = [AXSpringAnimation animationWithKeyPath:@"position"];
+        spring.removedOnCompletion = NO;
+        spring.fillMode = kCAFillModeForwards;
+        spring.fromValue = [NSValue valueWithCGPoint:CGPointMake(self.keyframeTransitionView.center.x, CGRectGetHeight(_keyframeTransitionView.frame)*.5+64)];
+        spring.toValue = [NSValue valueWithCGPoint:CGPointMake(self.keyframeTransitionView.center.x, CGRectGetHeight(self.view.frame)-64-CGRectGetHeight(_keyframeTransitionView.frame)*.5)];
+        spring.mass = 50;
+        spring.damping = 50;
+        spring.stiffness = 50;
+        spring.duration = spring.settlingDuration;
+        [_keyframeTransitionView.layer addAnimation:spring forKey:@"position"];
     }]];
     [alert addAction:[UIAlertAction actionWithTitle:@"easeInElastic" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [_transitionView.layer removeAllAnimations];
