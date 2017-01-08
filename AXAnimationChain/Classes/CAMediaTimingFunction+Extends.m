@@ -46,6 +46,10 @@
     return [self functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
 }
 
++ (instancetype)decay {
+    return [self functionWithControlPoints:0.07 :0.68 :0.23 :1.0];
+}
+
 + (instancetype)easeInSine {
     return [self functionWithControlPoints:0.47 :0 :0.745 :0.715];
 }

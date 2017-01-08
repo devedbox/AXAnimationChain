@@ -33,6 +33,8 @@
 + (instancetype)easeOut;
 + (instancetype)easeInOut;
 
++ (instancetype)decay;
+
 + (instancetype)easeInSine;
 + (instancetype)easeOutSine;
 + (instancetype)easeInOutSine;

@@ -27,6 +27,7 @@
 - (instancetype)easeIn;
 - (instancetype)easeOut;
 - (instancetype)easeInOut;
+- (instancetype)decay;
 - (instancetype)easeInSine;
 - (instancetype)easeOutSine;
 - (instancetype)easeInOutSine;
@@ -268,6 +269,9 @@
     [alert addAction:[UIAlertAction actionWithTitle:@"easeInOut" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [sender setTitle:action.title forState:UIControlStateNormal];
     }]];
+    [alert addAction:[UIAlertAction actionWithTitle:@"decay" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [sender setTitle:action.title forState:UIControlStateNormal];
+    }]];
     [alert addAction:[UIAlertAction actionWithTitle:@"easeInSine" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [sender setTitle:action.title forState:UIControlStateNormal];
     }]];
@@ -367,6 +371,10 @@
 
 - (instancetype)easeInOut {
     return [self.class easeInOut];
+}
+
+- (instancetype)decay {
+    return [self.class decay];
 }
 
 - (instancetype)easeInSine {
