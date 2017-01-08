@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		DC1326121E20AE5D00E85D02 /* CAKeyframeAnimation+Effects.m in Sources */ = {isa = PBXBuildFile; fileRef = DC1326111E20AE5D00E85D02 /* CAKeyframeAnimation+Effects.m */; };
 		DC5E8AA31DFBEBC400597663 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DC5E8AA21DFBEBC400597663 /* main.m */; };
 		DC5E8AA61DFBEBC400597663 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DC5E8AA51DFBEBC400597663 /* AppDelegate.m */; };
 		DC5E8AA91DFBEBC400597663 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC5E8AA81DFBEBC400597663 /* ViewController.m */; };
@@ -18,6 +17,7 @@
 		DC5E8AC71DFBEBC400597663 /* AXAnimationChainUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = DC5E8AC61DFBEBC400597663 /* AXAnimationChainUITests.m */; };
 		DC5E8AD71DFBED0000597663 /* UIView+ChainAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = DC5E8AD61DFBED0000597663 /* UIView+ChainAnimator.m */; };
 		DC5E8ADA1DFBED8B00597663 /* AXChainAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = DC5E8AD91DFBED8B00597663 /* AXChainAnimator.m */; };
+		DC6016711E227855006E15E3 /* AXSpringAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = DC6016701E227855006E15E3 /* AXSpringAnimation.m */; };
 		DC80A97B1E1F2ED200729EAA /* AnimationConvertableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC80A97A1E1F2ED200729EAA /* AnimationConvertableViewController.m */; };
 		DCAEB20F1E0C140D00E3AF99 /* UIView+AnimationChain.m in Sources */ = {isa = PBXBuildFile; fileRef = DCAEB20E1E0C140D00E3AF99 /* UIView+AnimationChain.m */; };
 		DCE7E7401E1B7D0500924BC2 /* CAMediaTimingFunction+Extends.m in Sources */ = {isa = PBXBuildFile; fileRef = DCE7E73F1E1B7D0500924BC2 /* CAMediaTimingFunction+Extends.m */; };
@@ -42,8 +42,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		DC1326101E20AE5D00E85D02 /* CAKeyframeAnimation+Effects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CAKeyframeAnimation+Effects.h"; sourceTree = "<group>"; };
-		DC1326111E20AE5D00E85D02 /* CAKeyframeAnimation+Effects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CAKeyframeAnimation+Effects.m"; sourceTree = "<group>"; };
 		DC21DBBA1E1CCB9600E5C0E0 /* AXAnimationChain.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AXAnimationChain.h; sourceTree = "<group>"; };
 		DC5E8A9E1DFBEBC400597663 /* AXAnimationChain.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AXAnimationChain.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC5E8AA21DFBEBC400597663 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -66,6 +64,8 @@
 		DC5E8AD81DFBED8B00597663 /* AXChainAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AXChainAnimator.h; sourceTree = "<group>"; };
 		DC5E8AD91DFBED8B00597663 /* AXChainAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AXChainAnimator.m; sourceTree = "<group>"; };
 		DC5E8ADB1DFD006700597663 /* AXChainAnimator+Block.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AXChainAnimator+Block.h"; sourceTree = "<group>"; };
+		DC60166F1E227855006E15E3 /* AXSpringAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AXSpringAnimation.h; sourceTree = "<group>"; };
+		DC6016701E227855006E15E3 /* AXSpringAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AXSpringAnimation.m; sourceTree = "<group>"; };
 		DC80A9791E1F2ED200729EAA /* AnimationConvertableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnimationConvertableViewController.h; sourceTree = "<group>"; };
 		DC80A97A1E1F2ED200729EAA /* AnimationConvertableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnimationConvertableViewController.m; sourceTree = "<group>"; };
 		DCAEB20D1E0C140D00E3AF99 /* UIView+AnimationChain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+AnimationChain.h"; sourceTree = "<group>"; };
@@ -181,8 +181,8 @@
 				DCE7E73F1E1B7D0500924BC2 /* CAMediaTimingFunction+Extends.m */,
 				DCE7E7411E1B902500924BC2 /* CAAnimation+Convertable.h */,
 				DCE7E7421E1B902500924BC2 /* CAAnimation+Convertable.m */,
-				DC1326101E20AE5D00E85D02 /* CAKeyframeAnimation+Effects.h */,
-				DC1326111E20AE5D00E85D02 /* CAKeyframeAnimation+Effects.m */,
+				DC60166F1E227855006E15E3 /* AXSpringAnimation.h */,
+				DC6016701E227855006E15E3 /* AXSpringAnimation.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -328,8 +328,8 @@
 				DC5E8AA91DFBEBC400597663 /* ViewController.m in Sources */,
 				DC5E8AD71DFBED0000597663 /* UIView+ChainAnimator.m in Sources */,
 				DCE7E7401E1B7D0500924BC2 /* CAMediaTimingFunction+Extends.m in Sources */,
-				DC1326121E20AE5D00E85D02 /* CAKeyframeAnimation+Effects.m in Sources */,
 				DC5E8ADA1DFBED8B00597663 /* AXChainAnimator.m in Sources */,
+				DC6016711E227855006E15E3 /* AXSpringAnimation.m in Sources */,
 				DCAEB20F1E0C140D00E3AF99 /* UIView+AnimationChain.m in Sources */,
 				DC5E8AA61DFBEBC400597663 /* AppDelegate.m in Sources */,
 				DC5E8AA31DFBEBC400597663 /* main.m in Sources */,
