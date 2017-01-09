@@ -574,6 +574,12 @@ NS_ASSUME_NONNULL_BEGIN
     };
 }
 
+- (AXChainAnimator *(^)(dispatch_block_t))completeWithBlock {
+    return ^AXChainAnimator* (dispatch_block_t completion) {
+        return [self completeWithBlock:completion];
+    };
+}
+
 - (dispatch_block_t)animate {
     return ^() {
         [self start];
@@ -872,6 +878,12 @@ NS_ASSUME_NONNULL_BEGIN
         return [self complete:completion];
     };
 }
+
+- (AXBasicChainAnimator *(^)(dispatch_block_t))completeWithBlock {
+    return ^AXBasicChainAnimator* (dispatch_block_t completion) {
+        return [self completeWithBlock:completion];
+    };
+}
 @end
 
 @implementation AXKeyframeChainAnimator
@@ -1120,6 +1132,12 @@ NS_ASSUME_NONNULL_BEGIN
         return [self complete:completion];
     };
 }
+
+- (AXKeyframeChainAnimator *(^)(dispatch_block_t))completeWithBlock {
+    return ^AXKeyframeChainAnimator* (dispatch_block_t completion) {
+        return [self completeWithBlock:completion];
+    };
+}
 @end
 
 @implementation AXSpringChainAnimator
@@ -1321,6 +1339,12 @@ NS_ASSUME_NONNULL_BEGIN
         return [self complete:completion];
     };
 }
+
+- (AXSpringChainAnimator *(^)(dispatch_block_t))completeWithBlock {
+    return ^AXSpringChainAnimator* (dispatch_block_t completion) {
+        return [self completeWithBlock:completion];
+    };
+}
 @end
 
 @implementation AXTransitionChainAnimator
@@ -1502,6 +1526,12 @@ NS_ASSUME_NONNULL_BEGIN
 - (AXTransitionChainAnimator *(^)(SEL))complete {
     return ^AXTransitionChainAnimator* (SEL completion) {
         return [self complete:completion];
+    };
+}
+
+- (AXTransitionChainAnimator *(^)(dispatch_block_t))completeWithBlock {
+    return ^AXTransitionChainAnimator* (dispatch_block_t completion) {
+        return [self completeWithBlock:completion];
     };
 }
 @end

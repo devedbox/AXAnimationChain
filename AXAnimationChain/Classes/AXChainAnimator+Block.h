@@ -50,6 +50,8 @@
 - (AXChainAnimator * (^)(NSObject *target))target;
 /// Completion SEL reachale.
 - (AXChainAnimator * (^)(SEL completion))complete;
+/// Completion block reachale.
+- (AXChainAnimator * (^)(dispatch_block_t completion))completeWithBlock;
 /// Start block reachable. Same as call the method `-start`
 - (dispatch_block_t)animate;
 @end
@@ -87,6 +89,8 @@
 - (AXBasicChainAnimator * (^)(NSObject *target))target;
 /// Completion SEL reachale.
 - (AXBasicChainAnimator * (^)(SEL completion))complete;
+/// Completion block reachale.
+- (AXBasicChainAnimator * (^)(dispatch_block_t completion))completeWithBlock;
 @end
 
 @interface AXKeyframeChainAnimator (Block)
@@ -134,6 +138,8 @@
 - (AXKeyframeChainAnimator * (^)(NSObject *target))target;
 /// Completion SEL reachale.
 - (AXKeyframeChainAnimator * (^)(SEL completion))complete;
+/// Completion block reachale.
+- (AXKeyframeChainAnimator * (^)(dispatch_block_t completion))completeWithBlock;
 @end
 
 @interface AXSpringChainAnimator (Block)
@@ -177,6 +183,8 @@
 - (AXSpringChainAnimator * (^)(NSObject *target))target;
 /// Completion SEL reachale.
 - (AXSpringChainAnimator * (^)(SEL completion))complete;
+/// Completion block reachale.
+- (AXSpringChainAnimator * (^)(dispatch_block_t completion))completeWithBlock;
 @end
 
 @interface AXTransitionChainAnimator (Block)
@@ -214,4 +222,6 @@
 - (AXTransitionChainAnimator * (^)(NSObject *target))target;
 /// Completion SEL reachale.
 - (AXTransitionChainAnimator * (^)(SEL completion))complete;
+/// Completion block reachale.
+- (AXTransitionChainAnimator * (^)(dispatch_block_t completion))completeWithBlock;
 @end
