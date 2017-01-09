@@ -34,6 +34,8 @@ NS_ASSUME_NONNULL_BEGIN
     BOOL _inTransaction;
     /// Complete sel action.
     SEL _completionAction;
+    /// Complete block handler.
+    dispatch_block_t _completionBlock;
     /// Complete target object.
     NSObject *__weak _completionTarget;
 }
@@ -300,10 +302,21 @@ NS_ASSUME_NONNULL_BEGIN
     _completionAction = completion;
     return self;
 }
+
+- (instancetype)completeWithBlock:(dispatch_block_t)completion {
+    _completionBlock = [completion copy];
+    return self;
+}
 #pragma mark - CAAnimationDelegate.
 - (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)finished {
     if (/* finished && */_completionTarget != nil && _completionAction != NULL) {
         [_completionTarget performSelectorOnMainThread:_completionAction withObject:self waitUntilDone:NO modes:@[NSDefaultRunLoopMode]];
+    }
+    // Trigger completion block.
+    if (_completionBlock) {
+        if ([NSThread isMainThread]) {
+            _completionBlock();
+        } else dispatch_async(dispatch_get_main_queue(), _completionBlock);
     }
 }
 

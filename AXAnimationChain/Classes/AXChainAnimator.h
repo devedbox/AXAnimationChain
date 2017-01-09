@@ -69,6 +69,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (instancetype)target:(nullable NSObject *)target;
 - (instancetype)complete:(nullable SEL)completion;
+/// Called when animator has finished using block on main thread.
+///
+/// @param completion completion block of the complete action.
+- (instancetype)completeWithBlock:(dispatch_block_t)completion;
 @end
 
 @protocol AXChainAnimatorDelegate <AXMediaTimingDelegate, AXAnimatorChainDelegate>
