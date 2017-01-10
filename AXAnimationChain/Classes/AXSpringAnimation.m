@@ -82,15 +82,18 @@ extern id ToValueByValueWithValue(id value, id byValue, BOOL plus);
     self.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
     if (self.fromValue && self.toValue) {
         super.values = AnimationValuesForCAKeyframeAnimationWithFrames(self.fromValue, self.toValue, self.settlingDuration, self.timingFunction, ^double (double t, double b, double c, double d) {
-            return (1-exp(-_damping/(2*_mass)*t)*cos(sqrt(fabs(_stiffness/_mass-pow(_damping/(2*_mass), 2.0)))*t/(d/self.settlingDuration)))*(c-b)+b;
+            t = t/d*self.settlingDuration;
+            return (1-exp(-_damping/(2*_mass)*t)*cos(sqrt(fabs(_stiffness/_mass-pow(_damping/(2*_mass), 2.0)))*t))*(c-b)+b;
         });
     } else if (self.fromValue && self.byValue) {
         super.values = AnimationValuesForCAKeyframeAnimationWithFrames(self.fromValue, ToValueByValueWithValue(self.fromValue, self.byValue, YES), self.settlingDuration, self.timingFunction, ^double (double t, double b, double c, double d) {
-            return (1-exp(-_damping/(2*_mass)*t)*cos(sqrt(fabs(_stiffness/_mass-pow(_damping/(2*_mass), 2.0)))*t/(d/self.settlingDuration)))*(c-b)+b;
+            t = t/d*self.settlingDuration;
+            return (1-exp(-_damping/(2*_mass)*t)*cos(sqrt(fabs(_stiffness/_mass-pow(_damping/(2*_mass), 2.0)))*t))*(c-b)+b;
         });
     } else if (self.byValue && self.toValue) {
         super.values = AnimationValuesForCAKeyframeAnimationWithFrames(ToValueByValueWithValue(self.toValue, self.byValue, NO), self.toValue, self.settlingDuration, self.timingFunction, ^double (double t, double b, double c, double d) {
-            return (1-exp(-_damping/(2*_mass)*t)*cos(sqrt(fabs(_stiffness/_mass-pow(_damping/(2*_mass), 2.0)))*t/(d/self.settlingDuration)))*(c-b)+b;
+            t = t/d*self.settlingDuration;
+            return (1-exp(-_damping/(2*_mass)*t)*cos(sqrt(fabs(_stiffness/_mass-pow(_damping/(2*_mass), 2.0)))*t))*(c-b)+b;
         });
     }
 }
