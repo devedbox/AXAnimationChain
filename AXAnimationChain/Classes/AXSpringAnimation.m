@@ -45,18 +45,22 @@ extern id ToValueByValueWithValue(id value, id byValue, BOOL plus);
 
 - (void)setMass:(CGFloat)mass {
     _mass = mass;
+    [self _setValues];
 }
 
 - (void)setStiffness:(CGFloat)stiffness {
     _stiffness = stiffness;
+    [self _setValues];
 }
 
 - (void)setDamping:(CGFloat)damping {
     _damping = damping;
+    [self _setValues];
 }
 
 - (void)setInitialVelocity:(CGFloat)initialVelocity {
     _initialVelocity = initialVelocity;
+    [self _setValues];
 }
 
 - (void)setFromValue:(id)fromValue {
@@ -75,7 +79,13 @@ extern id ToValueByValueWithValue(id value, id byValue, BOOL plus);
 }
 
 - (CFTimeInterval)settlingDuration {
-    return (-(2.0*_mass*log(0.001))/_damping);
+    double beta = _damping/(2*_mass);
+    double omega0 = sqrt(_stiffness/_mass);
+    
+    double flag = -(log(0.001))/MIN(beta, omega0);
+    double duration = -(log(0.0004))/MIN(beta, omega0);
+    
+    return (flag+duration)/2;
 }
 
 - (void)_setValues {
@@ -83,17 +93,41 @@ extern id ToValueByValueWithValue(id value, id byValue, BOOL plus);
     if (self.fromValue && self.toValue) {
         super.values = AnimationValuesForCAKeyframeAnimationWithFrames(self.fromValue, self.toValue, self.settlingDuration, self.timingFunction, ^double (double t, double b, double c, double d) {
             t = t/d*self.settlingDuration;
-            return (1-exp(-_damping/(2*_mass)*t)*cos(sqrt(fabs(_stiffness/_mass-pow(_damping/(2*_mass), 2.0)))*t))*(c-b)+b;
+            double beta = _damping/(2*_mass);
+            double omega0 = sqrt(_stiffness/_mass);
+            double omega  = sqrt(fabs(pow(omega0, 2.0)-pow(beta, 2.0)));
+            if (beta >= omega0) {
+                beta = beta > omega0 ? omega0 : beta;
+                return (1-exp(-beta*t)*(1-(_initialVelocity-beta)*t))*(c-b)+b;
+            } else {
+                return (1-exp(-beta*t)*(cos(omega*t)-sin(omega*t)*((_initialVelocity-beta)/omega)))*(c-b)+b;
+            }
         });
     } else if (self.fromValue && self.byValue) {
         super.values = AnimationValuesForCAKeyframeAnimationWithFrames(self.fromValue, ToValueByValueWithValue(self.fromValue, self.byValue, YES), self.settlingDuration, self.timingFunction, ^double (double t, double b, double c, double d) {
             t = t/d*self.settlingDuration;
-            return (1-exp(-_damping/(2*_mass)*t)*cos(sqrt(fabs(_stiffness/_mass-pow(_damping/(2*_mass), 2.0)))*t))*(c-b)+b;
+            double beta = _damping/(2*_mass);
+            double omega0 = sqrt(_stiffness/_mass);
+            double omega  = sqrt(fabs(pow(omega0, 2.0)-pow(beta, 2.0)));
+            if (beta >= omega0) {
+                beta = beta > omega0 ? omega0 : beta;
+                return (1-exp(-beta*t)*(1-(_initialVelocity-beta)*t))*(c-b)+b;
+            } else {
+                return (1-exp(-beta*t)*(cos(omega*t)-sin(omega*t)*((_initialVelocity-beta)/omega)))*(c-b)+b;
+            }
         });
     } else if (self.byValue && self.toValue) {
         super.values = AnimationValuesForCAKeyframeAnimationWithFrames(ToValueByValueWithValue(self.toValue, self.byValue, NO), self.toValue, self.settlingDuration, self.timingFunction, ^double (double t, double b, double c, double d) {
             t = t/d*self.settlingDuration;
-            return (1-exp(-_damping/(2*_mass)*t)*cos(sqrt(fabs(_stiffness/_mass-pow(_damping/(2*_mass), 2.0)))*t))*(c-b)+b;
+            double beta = _damping/(2*_mass);
+            double omega0 = sqrt(_stiffness/_mass);
+            double omega  = sqrt(fabs(pow(omega0, 2.0)-pow(beta, 2.0)));
+            if (beta >= omega0) {
+                beta = beta > omega0 ? omega0 : beta;
+                return (1-exp(-beta*t)*(1-(_initialVelocity-beta)*t))*(c-b)+b;
+            } else {
+                return (1-exp(-beta*t)*(cos(omega*t)-sin(omega*t)*((_initialVelocity-beta)/omega)))*(c-b)+b;
+            }
         });
     }
 }

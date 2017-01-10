@@ -120,8 +120,9 @@
         CASpringAnimation *animation = [CASpringAnimation animationWithKeyPath:@"position"];
         animation.removedOnCompletion = NO;
         animation.fillMode = kCAFillModeForwards;
-//        animation.mass = 50;
-//        animation.damping = 50;
+//        animation.initialVelocity = -10;
+//        animation.mass = 500;
+//        animation.damping = 100;
 //        animation.stiffness = 50;
         NSLog(@"settling duratuion: %@", @(animation.settlingDuration));
         animation.duration = animation.settlingDuration;
@@ -134,10 +135,12 @@
         spring.fillMode = kCAFillModeForwards;
         spring.fromValue = [NSValue valueWithCGPoint:CGPointMake(self.keyframeTransitionView.center.x, CGRectGetHeight(_keyframeTransitionView.frame)*.5+64)];
         spring.toValue = [NSValue valueWithCGPoint:CGPointMake(self.keyframeTransitionView.center.x, CGRectGetHeight(self.view.frame)-64-CGRectGetHeight(_keyframeTransitionView.frame)*.5)];
-//        spring.mass = 50;
-//        spring.damping = 50;
+//        spring.initialVelocity = -10;
+//        spring.mass = 500;
+//        spring.damping = 100;
 //        spring.stiffness = 50;
         spring.duration = spring.settlingDuration;
+        NSLog(@"settling duratuion: %@", @(spring.settlingDuration));
         [_keyframeTransitionView.layer addAnimation:spring forKey:@"position"];
     }]];
     [alert addAction:[UIAlertAction actionWithTitle:@"easeInElastic" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
