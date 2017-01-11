@@ -1,4 +1,6 @@
-# AXAnimationChain[![Version](https://img.shields.io/cocoapods/v/AXAnimationChain.svg?style=flat)](http://cocoapods.org/pods/AXAnimationChain)[![License](https://img.shields.io/cocoapods/l/AXWebViewController.svg?style=flat)](http://cocoapods.org/pods/AXWebViewController)[![Platform](https://img.shields.io/cocoapods/p/AXWebViewController.svg?style=flat)](http://cocoapods.org/pods/AXWebViewController)
+<img src="./src/img/logo.png" ></img>
+
+![Version](https://img.shields.io/cocoapods/v/AXAnimationChain.svg?style=flat)![License](https://img.shields.io/cocoapods/l/AXAnimationChain.svg?style=flat)![Platform](https://img.shields.io/cocoapods/p/AXAnimationChain.svg?style=flat)![language](https://img.shields.io/badge/Language-Objective--C-8E44AD.svg)
 
 ## Summary
 
