@@ -4,6 +4,16 @@
 
 [AXAnimationChain]([https://github.com/devedbox/AXAnimationChain](https://github.com/devedbox/AXAnimationChain))是一个**`链式动画库`**，可以用来轻松的创建基于`CAAnimation`的链式动画。**链**的组合方式有两种，一种是**组合**，另一种则是**链接**，通过以上两种方式创建的动画，既可以同时进行，也可以按时间先后进行，可以使用较少的代码创建出丰富复杂的动画效果：
 
+简单使用:
+
+```objective-c
+_transitionView.spring.centerBy(CGPointMake(0, 100)).easeOut.spring.sizeBy(CGSizeMake(100, 100)).spring.cornerRadiusBy(4).animate();
+```
+
+![http://ww4.sinaimg.cn/large/d2297bd2gw1fbmsv0wh0lg20aa0i8422.gif](http://ww4.sinaimg.cn/large/d2297bd2gw1fbmsv0wh0lg20aa0i8422.gif)
+
+高级使用(比较冗余):
+
 ```objective-c
 _transitionView.chainAnimator.basic.target(self).complete(@selector(complete:)).property(@"position").toValue([NSValue valueWithCGPoint:CGPointMake(100, self.view.center.y)]).easeInBack.duration(0.5).combineSpring.target(self).complete(@selector(complete:)).property(@"bounds").toValue([NSValue valueWithCGRect:CGRectMake(0, 0, 100, 100)]).duration(0.5).repeatCount(5).autoreverses.combineSpring.target(self).complete(@selector(complete:)).property(@"transform.rotation").toValue(@(M_PI_4)).duration(0.5).repeatCount(3).beginTime(1.0).autoreverses.nextToBasic.property(@"position").toValue([NSValue valueWithCGPoint:self.view.center]).duration(0.5).combineSpring.property(@"bounds").toValue([NSValue valueWithCGRect:CGRectMake(0, 0, 100, 100)]).duration(0.8).nextToBasic.property(@"transform.rotation").toValue(@(M_PI_4)).duration(1.0).completeWithBlock(nil).animate();
     self.view.spring.backgroundColorTo([UIColor colorWithRed:1.000 green:0.988 blue:0.922 alpha:1.00]).animate();
