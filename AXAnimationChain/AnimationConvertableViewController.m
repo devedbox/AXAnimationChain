@@ -60,7 +60,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    [_transitionView.layer addObserver:self forKeyPath:@"position" options:NSKeyValueObservingOptionNew context:NULL];
+//    [_transitionView.layer addObserver:self forKeyPath:@"position" options:NSKeyValueObservingOptionNew context:NULL];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context {
