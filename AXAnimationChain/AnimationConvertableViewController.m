@@ -375,10 +375,10 @@
 - (instancetype)easeInOut {
     return [self.class easeInOut];
 }
-
+/*
 - (instancetype)decay {
     return [self.class decay];
-}
+} */
 
 - (instancetype)easeInSine {
     return [self.class easeInSine];
