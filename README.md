@@ -2,7 +2,7 @@
 
 ## Summary
 
-`AXAnimationChain`是一个**`链式动画库`**，可以用来轻松的创建基于`CAAnimation`的链式动画。**链**的组合方式有两种，一种是**组合**，另一种则是**链接**，通过以上两种方式创建的动画，既可以同时进行，也可以按时间先后进行，可以使用较少的代码创建出丰富复杂的动画效果：
+[AXAnimationChain]([https://github.com/devedbox/AXAnimationChain](https://github.com/devedbox/AXAnimationChain))是一个**`链式动画库`**，可以用来轻松的创建基于`CAAnimation`的链式动画。**链**的组合方式有两种，一种是**组合**，另一种则是**链接**，通过以上两种方式创建的动画，既可以同时进行，也可以按时间先后进行，可以使用较少的代码创建出丰富复杂的动画效果：
 
 ```objective-c
 _transitionView.chainAnimator.basic.target(self).complete(@selector(complete:)).property(@"position").toValue([NSValue valueWithCGPoint:CGPointMake(100, self.view.center.y)]).easeInBack.duration(0.5).combineSpring.target(self).complete(@selector(complete:)).property(@"bounds").toValue([NSValue valueWithCGRect:CGRectMake(0, 0, 100, 100)]).duration(0.5).repeatCount(5).autoreverses.combineSpring.target(self).complete(@selector(complete:)).property(@"transform.rotation").toValue(@(M_PI_4)).duration(0.5).repeatCount(3).beginTime(1.0).autoreverses.nextToBasic.property(@"position").toValue([NSValue valueWithCGPoint:self.view.center]).duration(0.5).combineSpring.property(@"bounds").toValue([NSValue valueWithCGRect:CGRectMake(0, 0, 100, 100)]).duration(0.8).nextToBasic.property(@"transform.rotation").toValue(@(M_PI_4)).duration(1.0).completeWithBlock(nil).animate();
@@ -117,7 +117,111 @@ AXChainAnimator
 >
 > 基于CoreAnimation的封装，安全、高效！
 >
-> 一行代码搞定复杂的动画管理，提高代码维护效率
+> 一行代码搞定复杂的动画管理，提高代码维护效
+
+#### TimingControl
+
+时间曲线，时间曲线用于描述动画随时间进行的速度，`AXAnimationChain`除了包含系统默认的时间曲线之外，还提供了如下的曲线以呈现更漂亮的动画：
+
+![http://ww1.sinaimg.cn/large/d2297bd2gw1fbmrilba19j21c610047c.jpg](http://ww1.sinaimg.cn/large/d2297bd2gw1fbmrilba19j21c610047c.jpg)
+
+#### AXSpringAnimation
+
+`CoreAnimation`自`iOS2.0`就为iOS平台提供了核心动画的支持，但是在iOS9.0之前，一直没有`Spring`动画，要使用`Spring`动画要么使用第三方动画库，要么使用系统提供的方法:
+
+```objective-c
++ (void)animateWithDuration:(NSTimeInterval)duration delay:(NSTimeInterval)delay usingSpringWithDamping:(CGFloat)dampingRatio initialSpringVelocity:(CGFloat)velocity options:(UIViewAnimationOptions)options animations:(void (^)(void))animations completion:(void (^ __nullable)(BOOL finished))completion NS_AVAILABLE_IOS(7_0);
+```
+
+但是系统提供的这个方法也是`iOS7.0`以后才能使用了，并且在控制上并非那么容易.
+
+ `AXSpringAnimation`是基于**阻尼震动**运动模型的`Spring`动画类，能够完美与`CASpringAnimation`相通用：
+
+![http://ww2.sinaimg.cn/large/d2297bd2gw1fbmrt5bnvsg20aa0i8go7.gif](http://ww2.sinaimg.cn/large/d2297bd2gw1fbmrt5bnvsg20aa0i8go7.gif)
+
+动画中，左边正方形使用的是`CASpringAnimation`类，右边的则使用的是`AXSpringAnimation`，两者的动画曲线是一致的.
+
+`AXSpringAnimation`的API和`CASpringAnimation`是一致的：
+
+```objective-c
+@interface AXSpringAnimation : CAKeyframeAnimation
+/* The mass of the object attached to the end of the spring. Must be greater
+ than 0. Defaults to one. */
+
+@property(assign, nonatomic) CGFloat mass;
+
+/* The spring stiffness coefficient. Must be greater than 0.
+ * Defaults to 100. */
+
+@property(assign, nonatomic) CGFloat stiffness;
+
+/* The damping coefficient. Must be greater than or equal to 0.
+ * Defaults to 10. */
+
+@property(assign, nonatomic) CGFloat damping;
+
+/* The initial velocity of the object attached to the spring. Defaults
+ * to zero, which represents an unmoving object. Negative values
+ * represent the object moving away from the spring attachment point,
+ * positive values represent the object moving towards the spring
+ * attachment point. */
+
+@property(assign, nonatomic) CGFloat initialVelocity;
+
+/* Returns the estimated duration required for the spring system to be
+ * considered at rest. The duration is evaluated for the current animation
+ * parameters. */
+
+@property(readonly, nonatomic) CFTimeInterval settlingDuration;
+
+/* The objects defining the property values being interpolated between.
+ * All are optional, and no more than two should be non-nil. The object
+ * type should match the type of the property being animated (using the
+ * standard rules described in CALayer.h). The supported modes of
+ * animation are:
+ *
+ * - both `fromValue' and `toValue' non-nil. Interpolates between
+ * `fromValue' and `toValue'.
+ *
+ * - `fromValue' and `byValue' non-nil. Interpolates between
+ * `fromValue' and `fromValue' plus `byValue'.
+ *
+ * - `byValue' and `toValue' non-nil. Interpolates between `toValue'
+ * minus `byValue' and `toValue'. */
+
+@property(nullable, strong, nonatomic) id fromValue;
+@property(nullable, strong, nonatomic) id toValue;
+@property(nullable, strong, nonatomic) id byValue;
+@end
+```
+
+
+
+#### Convertable
+
+`AXAnimationChain`框架还提供了将`CABasicAnimation`无缝转换为`CAKeyframeAnimation`的功能：
+
+![http://ww3.sinaimg.cn/large/d2297bd2gw1fbmryhpe3qg20aa0i84ai.gif](http://ww3.sinaimg.cn/large/d2297bd2gw1fbmryhpe3qg20aa0i84ai.gif)
+
+动画中，左边是`CABasicAnimation`，右边是`CAKeyframeAnimation`，两者对应的动画曲线是一致的.
+
+要使用动画转换，请参考：
+
+```objective-c
+#import <QuartzCore/QuartzCore.h>
+#import <UIKit/UIKit.h>
+#import "CAMediaTimingFunction+Extends.h"
+
+@interface CAAnimation (Convertable)
+@end
+
+@interface CAKeyframeAnimation (Convertable)
++ (instancetype)animationWithBasic:(CABasicAnimation *)basicAnimation;
++ (instancetype)animationWithBasic:(CABasicAnimation *)basicAnimation usingValuesFunction:(double (^)(double t, double b, double c, double d))valuesFunction;
+@end
+```
+
+
 
 ## Requirements
 
@@ -136,9 +240,10 @@ AXChainAnimator
 
 [CocoaPods]([http://cocoapods.org](http://cocoapods.org)) is the recommended way to add AXWebViewController to your project.
 
-1. Add a pod entry for AXPopoverView to your Podfile `pod 'AXAimationChain', '~> 0.1.10'`
+1. Add a pod entry for AXPopoverView to your Podfile `pod 'AXAimationChain', '~> 0.1.0'`
 2. Install the pod(s) by running `pod install`.
 3. Include AXPopoverView wherever you need it with `#import "AXAimationChain.h"`.
+4. 若需要单独使用`AXSpringAnimation`或者`Convertable`以及`TimingControl`等特性的话，只需要将podfile里边`AXAnimationChain`替换为`AXAnimationChain/CoreAnimation`即可，即：`pod 'AXAimationChain/CoreAnimation', '~> 0.1.0'`.
 
 ### Source files
 
@@ -151,3 +256,11 @@ Alternatively you can directly add all the source files to your project.
 ## License
 
 This code is distributed under the terms and conditions of the [MIT license](LICENSE). 
+
+## 使用
+
+请参考示例工程代码以及API.
+
+## 不足
+
+此项目在开展的时候比较庞大，基础的核心类已经构建好了，基本目标已经达成，但是还有很多需要完善的地方，后边会逐步完善并发布Release版本.
