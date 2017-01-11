@@ -62,16 +62,44 @@ NS_ASSUME_NONNULL_BEGIN
 /// Transition animator. Begin with transition animation.
 @property(readonly, nonatomic) id<AXTransitionChainAnimatorDelegate> transition;
 // Chain releationship manager.
+/// Begin with a new animator with a specific animation.
+///
+/// @param animator animator to begin with.
+/// @return a new animator.
+///
 - (instancetype)beginWith:(id<AXAnimatorChainDelegate>)animator;
+/// Next to a animator as the node of the chain.
+///
+/// @param animator aimator to be nexted to.
+/// @return the next-to animator.
+///
 - (instancetype)nextTo:(id<AXAnimatorChainDelegate>)animator;
+/// Combine with a animator to the node of the receiver.
+///
+/// @param animator animator to be combined with.
+/// @return the combined animator.
+///
 - (instancetype)combineWith:(id<AXAnimatorChainDelegate>)animator;
+/// Start animating the animation chain.
+///
 - (void)start;
-
+/// Add target to the specific animator.
+///
+/// @param target the target will trigger the completion SEL.
+/// @return SELF.
+///
 - (instancetype)target:(nullable NSObject *)target;
+/// Add completion selector to the animator.
+///
+/// @param completion completion selector of the target.
+/// @return SELF.
+///
 - (instancetype)complete:(nullable SEL)completion;
 /// Called when animator has finished using block on main thread.
 ///
 /// @param completion completion block of the complete action.
+/// @return SELF.
+///
 - (instancetype)completeWithBlock:(dispatch_block_t)completion;
 @end
 
@@ -132,6 +160,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)rotationMode:(nullable NSString *)rotationMode;
 
 // Effects.
+//FIXME: Not implemented.
 - (instancetype)easeInElastic;
 - (instancetype)easeOutElastic;
 - (instancetype)easeInOutElastic;
