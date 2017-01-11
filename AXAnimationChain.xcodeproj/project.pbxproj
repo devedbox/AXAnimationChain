@@ -17,11 +17,11 @@
 		DC5E8AC71DFBEBC400597663 /* AXAnimationChainUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = DC5E8AC61DFBEBC400597663 /* AXAnimationChainUITests.m */; };
 		DC5E8AD71DFBED0000597663 /* UIView+ChainAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = DC5E8AD61DFBED0000597663 /* UIView+ChainAnimator.m */; };
 		DC5E8ADA1DFBED8B00597663 /* AXChainAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = DC5E8AD91DFBED8B00597663 /* AXChainAnimator.m */; };
-		DC6016711E227855006E15E3 /* AXSpringAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = DC6016701E227855006E15E3 /* AXSpringAnimation.m */; };
+		DC788CF71E25CE5F001AF0B4 /* AXSpringAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = DC788CF21E25CE5F001AF0B4 /* AXSpringAnimation.m */; };
+		DC788CF81E25CE5F001AF0B4 /* CAAnimation+Convertable.m in Sources */ = {isa = PBXBuildFile; fileRef = DC788CF41E25CE5F001AF0B4 /* CAAnimation+Convertable.m */; };
+		DC788CF91E25CE5F001AF0B4 /* CAMediaTimingFunction+Extends.m in Sources */ = {isa = PBXBuildFile; fileRef = DC788CF61E25CE5F001AF0B4 /* CAMediaTimingFunction+Extends.m */; };
 		DC80A97B1E1F2ED200729EAA /* AnimationConvertableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC80A97A1E1F2ED200729EAA /* AnimationConvertableViewController.m */; };
 		DCAEB20F1E0C140D00E3AF99 /* UIView+AnimationChain.m in Sources */ = {isa = PBXBuildFile; fileRef = DCAEB20E1E0C140D00E3AF99 /* UIView+AnimationChain.m */; };
-		DCE7E7401E1B7D0500924BC2 /* CAMediaTimingFunction+Extends.m in Sources */ = {isa = PBXBuildFile; fileRef = DCE7E73F1E1B7D0500924BC2 /* CAMediaTimingFunction+Extends.m */; };
-		DCE7E7431E1B902500924BC2 /* CAAnimation+Convertable.m in Sources */ = {isa = PBXBuildFile; fileRef = DCE7E7421E1B902500924BC2 /* CAAnimation+Convertable.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,16 +64,16 @@
 		DC5E8AD81DFBED8B00597663 /* AXChainAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AXChainAnimator.h; sourceTree = "<group>"; };
 		DC5E8AD91DFBED8B00597663 /* AXChainAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AXChainAnimator.m; sourceTree = "<group>"; };
 		DC5E8ADB1DFD006700597663 /* AXChainAnimator+Block.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AXChainAnimator+Block.h"; sourceTree = "<group>"; };
-		DC60166F1E227855006E15E3 /* AXSpringAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AXSpringAnimation.h; sourceTree = "<group>"; };
-		DC6016701E227855006E15E3 /* AXSpringAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AXSpringAnimation.m; sourceTree = "<group>"; };
+		DC788CF11E25CE5F001AF0B4 /* AXSpringAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AXSpringAnimation.h; sourceTree = "<group>"; };
+		DC788CF21E25CE5F001AF0B4 /* AXSpringAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AXSpringAnimation.m; sourceTree = "<group>"; };
+		DC788CF31E25CE5F001AF0B4 /* CAAnimation+Convertable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CAAnimation+Convertable.h"; sourceTree = "<group>"; };
+		DC788CF41E25CE5F001AF0B4 /* CAAnimation+Convertable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CAAnimation+Convertable.m"; sourceTree = "<group>"; };
+		DC788CF51E25CE5F001AF0B4 /* CAMediaTimingFunction+Extends.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CAMediaTimingFunction+Extends.h"; sourceTree = "<group>"; };
+		DC788CF61E25CE5F001AF0B4 /* CAMediaTimingFunction+Extends.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CAMediaTimingFunction+Extends.m"; sourceTree = "<group>"; };
 		DC80A9791E1F2ED200729EAA /* AnimationConvertableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnimationConvertableViewController.h; sourceTree = "<group>"; };
 		DC80A97A1E1F2ED200729EAA /* AnimationConvertableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnimationConvertableViewController.m; sourceTree = "<group>"; };
 		DCAEB20D1E0C140D00E3AF99 /* UIView+AnimationChain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+AnimationChain.h"; sourceTree = "<group>"; };
 		DCAEB20E1E0C140D00E3AF99 /* UIView+AnimationChain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+AnimationChain.m"; sourceTree = "<group>"; };
-		DCE7E73E1E1B7D0500924BC2 /* CAMediaTimingFunction+Extends.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CAMediaTimingFunction+Extends.h"; sourceTree = "<group>"; };
-		DCE7E73F1E1B7D0500924BC2 /* CAMediaTimingFunction+Extends.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CAMediaTimingFunction+Extends.m"; sourceTree = "<group>"; };
-		DCE7E7411E1B902500924BC2 /* CAAnimation+Convertable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CAAnimation+Convertable.h"; sourceTree = "<group>"; };
-		DCE7E7421E1B902500924BC2 /* CAAnimation+Convertable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CAAnimation+Convertable.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -177,14 +177,22 @@
 				DC5E8ADB1DFD006700597663 /* AXChainAnimator+Block.h */,
 				DC5E8AD81DFBED8B00597663 /* AXChainAnimator.h */,
 				DC5E8AD91DFBED8B00597663 /* AXChainAnimator.m */,
-				DC60166F1E227855006E15E3 /* AXSpringAnimation.h */,
-				DC6016701E227855006E15E3 /* AXSpringAnimation.m */,
-				DCE7E73E1E1B7D0500924BC2 /* CAMediaTimingFunction+Extends.h */,
-				DCE7E73F1E1B7D0500924BC2 /* CAMediaTimingFunction+Extends.m */,
-				DCE7E7411E1B902500924BC2 /* CAAnimation+Convertable.h */,
-				DCE7E7421E1B902500924BC2 /* CAAnimation+Convertable.m */,
+				DC788CF01E25CE5F001AF0B4 /* CoreAnimation */,
 			);
 			path = Classes;
+			sourceTree = "<group>";
+		};
+		DC788CF01E25CE5F001AF0B4 /* CoreAnimation */ = {
+			isa = PBXGroup;
+			children = (
+				DC788CF11E25CE5F001AF0B4 /* AXSpringAnimation.h */,
+				DC788CF21E25CE5F001AF0B4 /* AXSpringAnimation.m */,
+				DC788CF31E25CE5F001AF0B4 /* CAAnimation+Convertable.h */,
+				DC788CF41E25CE5F001AF0B4 /* CAAnimation+Convertable.m */,
+				DC788CF51E25CE5F001AF0B4 /* CAMediaTimingFunction+Extends.h */,
+				DC788CF61E25CE5F001AF0B4 /* CAMediaTimingFunction+Extends.m */,
+			);
+			path = CoreAnimation;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -323,16 +331,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DC788CF81E25CE5F001AF0B4 /* CAAnimation+Convertable.m in Sources */,
+				DC788CF91E25CE5F001AF0B4 /* CAMediaTimingFunction+Extends.m in Sources */,
 				DC80A97B1E1F2ED200729EAA /* AnimationConvertableViewController.m in Sources */,
-				DCE7E7431E1B902500924BC2 /* CAAnimation+Convertable.m in Sources */,
 				DC5E8AA91DFBEBC400597663 /* ViewController.m in Sources */,
 				DC5E8AD71DFBED0000597663 /* UIView+ChainAnimator.m in Sources */,
-				DCE7E7401E1B7D0500924BC2 /* CAMediaTimingFunction+Extends.m in Sources */,
 				DC5E8ADA1DFBED8B00597663 /* AXChainAnimator.m in Sources */,
-				DC6016711E227855006E15E3 /* AXSpringAnimation.m in Sources */,
 				DCAEB20F1E0C140D00E3AF99 /* UIView+AnimationChain.m in Sources */,
 				DC5E8AA61DFBEBC400597663 /* AppDelegate.m in Sources */,
 				DC5E8AA31DFBEBC400597663 /* main.m in Sources */,
+				DC788CF71E25CE5F001AF0B4 /* AXSpringAnimation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

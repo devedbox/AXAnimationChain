@@ -13,8 +13,12 @@ s.license      = { :type => "MIT", :file => "LICENSE" }
 s.author             = { "devedbox" => "devedbox@qq.com" }
 s.platform     = :ios, "8.0"
 s.source       = { :git => "https://github.com/devedbox/AXAnimationChain.git", :tag => "0.0.7" }
-s.source_files  = "AXAnimationChain/Classes/*.{h,m}"
+s.source_files  = 'AXAnimationChain/Classes/*.{h,m}'
 s.frameworks = "UIKit", "Foundation", "QuartzCore"
 s.requires_arc = true
+
+s.subspec 'CoreAnimation' do |coreAnimation|
+coreAnimation.source_files = 'AXAnimationChain/Classes/*.{h,m}'
+end
 
 end
