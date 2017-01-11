@@ -70,6 +70,7 @@
 		DC788CF41E25CE5F001AF0B4 /* CAAnimation+Convertable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CAAnimation+Convertable.m"; sourceTree = "<group>"; };
 		DC788CF51E25CE5F001AF0B4 /* CAMediaTimingFunction+Extends.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CAMediaTimingFunction+Extends.h"; sourceTree = "<group>"; };
 		DC788CF61E25CE5F001AF0B4 /* CAMediaTimingFunction+Extends.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CAMediaTimingFunction+Extends.m"; sourceTree = "<group>"; };
+		DC788D391E25D139001AF0B4 /* AXCoreAnimation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AXCoreAnimation.h; sourceTree = "<group>"; };
 		DC80A9791E1F2ED200729EAA /* AnimationConvertableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnimationConvertableViewController.h; sourceTree = "<group>"; };
 		DC80A97A1E1F2ED200729EAA /* AnimationConvertableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnimationConvertableViewController.m; sourceTree = "<group>"; };
 		DCAEB20D1E0C140D00E3AF99 /* UIView+AnimationChain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+AnimationChain.h"; sourceTree = "<group>"; };
@@ -185,6 +186,7 @@
 		DC788CF01E25CE5F001AF0B4 /* CoreAnimation */ = {
 			isa = PBXGroup;
 			children = (
+				DC788D391E25D139001AF0B4 /* AXCoreAnimation.h */,
 				DC788CF11E25CE5F001AF0B4 /* AXSpringAnimation.h */,
 				DC788CF21E25CE5F001AF0B4 /* AXSpringAnimation.m */,
 				DC788CF31E25CE5F001AF0B4 /* CAAnimation+Convertable.h */,

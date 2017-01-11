@@ -1,8 +1,8 @@
 //
-//  AXAnimationChain.h
+//  AXCoreAnimation.h
 //  AXAnimationChain
 //
-//  Created by devedbox on 2017/1/4.
+//  Created by devedbox on 2017/1/11.
 //  Copyright © 2017年 devedbox. All rights reserved.
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -23,13 +23,11 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //  SOFTWARE.
 
-#ifndef AXAnimationChain_h
-#define AXAnimationChain_h
+#ifndef AXCoreAnimation_h
+#define AXCoreAnimation_h
 
-#import "AXChainAnimator.h"
-#import "AXChainAnimator+Block.h"
-#import "UIView+ChainAnimator.h"
-#import "UIView+AnimationChain.h"
-#import "AXCoreAnimation.h"
+#import "AXSpringAnimation.h"
+#import "CAAnimation+Convertable.h"
+#import "CAMediaTimingFunction+Extends.h"
 
-#endif /* AXAnimationChain_h */
+#endif /* AXCoreAnimation_h */
