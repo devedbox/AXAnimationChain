@@ -27,7 +27,8 @@
 - (instancetype)easeIn;
 - (instancetype)easeOut;
 - (instancetype)easeInOut;
-- (instancetype)decay;
+/*
+- (instancetype)decay; */
 - (instancetype)easeInSine;
 - (instancetype)easeOutSine;
 - (instancetype)easeInOutSine;
