@@ -274,3 +274,7 @@ This code is distributed under the terms and conditions of the [MIT license](LIC
 ## 不足
 
 此项目在开展的时候比较庞大，基础的核心类已经构建好了，基本目标已经达成，但是还有很多需要完善的地方，后边会逐步完善并发布Release版本.
+
+## 声明
+
+转载需注明出处：http://devedbox.com/AXAnimationChain/
