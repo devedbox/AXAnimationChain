@@ -1,4 +1,4 @@
-<img src="./src/img/logo.png" ></img>
+![Logo](http://ww1.sinaimg.cn/large/d2297bd2gw1fbnl029rgzj21kw09hq6f.jpg)
 
 ![Version](https://img.shields.io/cocoapods/v/AXAnimationChain.svg?style=flat)![License](https://img.shields.io/cocoapods/l/AXAnimationChain.svg?style=flat)![Platform](https://img.shields.io/cocoapods/p/AXAnimationChain.svg?style=flat)![language](https://img.shields.io/badge/Language-Objective--C-8E44AD.svg)
 
