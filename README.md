@@ -1,29 +1,28 @@
 ![Logo](http://ww1.sinaimg.cn/large/d2297bd2gw1fbnl029rgzj21kw09hq6f.jpg)
 
-![Version](https://img.shields.io/cocoapods/v/AXAnimationChain.svg?style=flat)![License](https://img.shields.io/cocoapods/l/AXAnimationChain.svg?style=flat)![Platform](https://img.shields.io/cocoapods/p/AXAnimationChain.svg?style=flat)![language](https://img.shields.io/badge/Language-Objective--C-8E44AD.svg)
+![Build](https://img.shields.io/teamcity/http/teamcity.jetbrains.com/s/bt345.svg)![Version](https://img.shields.io/cocoapods/v/AXAnimationChain.svg?style=flat)![License](https://img.shields.io/dub/l/vibe-d.svg)![Platform](https://img.shields.io/cocoapods/p/AXAnimationChain.svg?style=flat)![language](https://img.shields.io/badge/language-Objective--C-orange.svg)![weibo](https://img.shields.io/badge/weibo-@devedbox-blue.svg)
 
 ## Summary
 
 [AXAnimationChain]([https://github.com/devedbox/AXAnimationChain](https://github.com/devedbox/AXAnimationChain))是一个**`链式动画库`**，可以用来轻松的创建基于`CAAnimation`的链式动画。**链**的组合方式有两种，一种是**组合**，另一种则是**链接**，通过以上两种方式创建的动画，既可以同时进行，也可以按时间先后进行，可以使用较少的代码创建出丰富复杂的动画效果：
 
-简单使用:
+**简单使用**:
 
 ```objective-c
 _transitionView.spring.centerBy(CGPointMake(0, 100)).easeOut.spring.sizeBy(CGSizeMake(100, 100)).spring.cornerRadiusBy(4).animate();
 ```
 
-![http://ww4.sinaimg.cn/large/d2297bd2gw1fbmsv0wh0lg20aa0i8422.gif](http://ww4.sinaimg.cn/large/d2297bd2gw1fbmsv0wh0lg20aa0i8422.gif)
+![SimpleSample](http://ww1.sinaimg.cn/large/d2297bd2gw1fbnm3goqqbg20uk0h0n0j.gif)
 
-高级使用(比较冗余):
+**高级使用**:
 
 ```objective-c
 _transitionView.chainAnimator.basic.target(self).complete(@selector(complete:)).property(@"position").toValue([NSValue valueWithCGPoint:CGPointMake(100, self.view.center.y)]).easeInBack.duration(0.5).combineSpring.target(self).complete(@selector(complete:)).property(@"bounds").toValue([NSValue valueWithCGRect:CGRectMake(0, 0, 100, 100)]).duration(0.5).repeatCount(5).autoreverses.combineSpring.target(self).complete(@selector(complete:)).property(@"transform.rotation").toValue(@(M_PI_4)).duration(0.5).repeatCount(3).beginTime(1.0).autoreverses.nextToBasic.property(@"position").toValue([NSValue valueWithCGPoint:self.view.center]).duration(0.5).combineSpring.property(@"bounds").toValue([NSValue valueWithCGRect:CGRectMake(0, 0, 100, 100)]).duration(0.8).nextToBasic.property(@"transform.rotation").toValue(@(M_PI_4)).duration(1.0).completeWithBlock(nil).animate();
-    self.view.spring.backgroundColorTo([UIColor colorWithRed:1.000 green:0.988 blue:0.922 alpha:1.00]).animate();
 ```
 
 看起来比较冗余，但是细读会发现，其实就只有**一行代码**.
 
-![sample](http://ww1.sinaimg.cn/large/d2297bd2gw1fbmo8dxlw1g20aa0i8te0.gif)
+![sample](http://ww2.sinaimg.cn/large/d2297bd2jw1fbnm5kyythg20uk0h0dhx.gif)
 
 **链接**和**组合**在协议`AXAnimatorChainDelegate`中进行定义，分别是：`nextTo:`和`combineWith:`，在使用的过程中应当予以区分. 
 
@@ -125,11 +124,9 @@ AXChainAnimator
 
 ## Features
 
-> 轻量级解决方案
->
-> 基于CoreAnimation的封装，安全、高效！
->
-> 一行代码搞定复杂的动画管理，提高代码维护效
+* 轻量级解决方案
+* 基于CoreAnimation的封装，安全、高效！
+* 一行代码搞定复杂的动画管理，提高代码维护效
 
 #### TimingControl
 
@@ -149,11 +146,11 @@ AXChainAnimator
 
  `AXSpringAnimation`是基于**阻尼震动**运动模型的`Spring`动画类，能够完美与`CASpringAnimation`相通用：
 
-![http://ww2.sinaimg.cn/large/d2297bd2gw1fbmrt5bnvsg20aa0i8go7.gif](http://ww2.sinaimg.cn/large/d2297bd2gw1fbmrt5bnvsg20aa0i8go7.gif)
+![SpringSample](http://ww2.sinaimg.cn/large/d2297bd2jw1fbnm7hgqesg20uk0h0wle.gif)
 
 动画中，左边正方形使用的是`CASpringAnimation`类，右边的则使用的是`AXSpringAnimation`，两者的动画曲线是一致的.
 
-`AXSpringAnimation`的API和`CASpringAnimation`是一致的：
+同样地，`AXSpringAnimation`的API和`CASpringAnimation`也是一致的：
 
 ```objective-c
 @interface AXSpringAnimation : CAKeyframeAnimation
@@ -213,7 +210,7 @@ AXChainAnimator
 
 `AXAnimationChain`框架还提供了将`CABasicAnimation`无缝转换为`CAKeyframeAnimation`的功能：
 
-![http://ww3.sinaimg.cn/large/d2297bd2gw1fbmryhpe3qg20aa0i84ai.gif](http://ww3.sinaimg.cn/large/d2297bd2gw1fbmryhpe3qg20aa0i84ai.gif)
+![ConvertSample](http://ww1.sinaimg.cn/large/d2297bd2gw1fbnm9807j7g20uk0h01e0.gif)
 
 动画中，左边是`CABasicAnimation`，右边是`CAKeyframeAnimation`，两者对应的动画曲线是一致的.
 
@@ -250,11 +247,11 @@ AXChainAnimator
 
 ### CocoaPods
 
-[CocoaPods]([http://cocoapods.org](http://cocoapods.org)) is the recommended way to add AXWebViewController to your project.
+[CocoaPods]([http://cocoapods.org](http://cocoapods.org)) is the recommended way to add AXAimationChain to your project.
 
-1. Add a pod entry for AXPopoverView to your Podfile `pod 'AXAimationChain', '~> 0.1.0'`
+1. Add a pod entry for AXAimationChain to your Podfile `pod 'AXAimationChain', '~> 0.1.0'`
 2. Install the pod(s) by running `pod install`.
-3. Include AXPopoverView wherever you need it with `#import "AXAimationChain.h"`.
+3. Include AXAimationChain wherever you need it with `#import "AXAimationChain.h"`.
 4. 若需要单独使用`AXSpringAnimation`或者`Convertable`以及`TimingControl`等特性的话，只需要将podfile里边`AXAnimationChain`替换为`AXAnimationChain/CoreAnimation`即可，即：`pod 'AXAimationChain/CoreAnimation', '~> 0.1.0'`.
 
 ### Source files
@@ -263,7 +260,8 @@ Alternatively you can directly add all the source files to your project.
 
 1. Download the [latest code version]([https://github.com/devedbox/AXAimationChain/archive/master.zip](https://github.com/devedbox/AXAimationChain/archive/master.zip)) or add the repository as a git submodule to your git-tracked project. 
 2. Open your project in Xcode, then drag and drop the source group onto your project (use the "Product Navigator view"). Make sure to select Copy items when asked if you extracted the code archive outside of your project. 
-3. Include AXPopoverView wherever you need it with `#import "AXAimationChain.h"`.
+3. Include AXAnimationChain wherever you need it with `#import "AXAimationChain.h"`.
+4. 如单独使用`AXSpringAnimation`或者`Convertable`以及`TimingControl`等特性，只需要导入`#import "AXCoreAnimation.h"`即可.
 
 ## License
 
@@ -279,4 +277,4 @@ This code is distributed under the terms and conditions of the [MIT license](LIC
 
 ## 声明
 
-转载需注明出处：http://devedbox.com/AXAnimationChain/
+转载需注明出处：`http://devedbox.com/AXAnimationChain/`
