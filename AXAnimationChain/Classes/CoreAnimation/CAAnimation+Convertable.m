@@ -292,6 +292,15 @@ id ToValueByValueWithValue(id value, id byValue, BOOL plus) {
 + (instancetype)animationWithSpring:(CASpringAnimation *)animation {
     if (!animation || ![animation isKindOfClass:CASpringAnimation.class]) return nil;
     AXSpringAnimation *spring = [AXSpringAnimation animationWithKeyPath:animation.keyPath];
+    spring.beginTime = animation.beginTime;
+    spring.speed = animation.speed;
+    spring.timeOffset = animation.timeOffset;
+    spring.repeatCount = animation.repeatCount;
+    spring.repeatDuration= animation.repeatDuration;
+    spring.autoreverses = animation.autoreverses;
+    spring.removedOnCompletion = animation.removedOnCompletion;
+    spring.fillMode = animation.fillMode;
+    spring.timingFunction = animation.timingFunction;
     spring.fromValue = animation.fromValue;
     spring.byValue = animation.byValue;
     spring.toValue = animation.toValue;
