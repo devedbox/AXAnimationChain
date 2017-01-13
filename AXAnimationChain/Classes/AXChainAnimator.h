@@ -205,10 +205,11 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)nextTo:(nonnull AXChainAnimator *)animator;
 - (instancetype)combineWith:(nonnull AXChainAnimator *)animator;
 
-- (instancetype)beginBasic;
-- (instancetype)beginSpring;
-- (instancetype)beginKeyframe;
-- (instancetype)beginTransition;
+- (AXBasicChainAnimator *)beginBasic;
+- (AXSpringChainAnimator *)beginSpring;
+- (AXKeyframeChainAnimator *)beginKeyframe;
+/*
+- (instancetype)beginTransition; */
 - (AXBasicChainAnimator *)combineBasic;
 - (AXSpringChainAnimator *)combineSpring;
 - (AXKeyframeChainAnimator *)combineKeyframe;

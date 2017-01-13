@@ -26,6 +26,7 @@
 #import "AXChainAnimator.h"
 #import "AXChainAnimator+Block.h"
 #import "CAMediaTimingFunction+Extends.h"
+#import "CAAnimation+Convertable.h"
 NS_ASSUME_NONNULL_BEGIN
 @interface AXChainAnimator () <CAAnimationDelegate>
 {
@@ -61,25 +62,50 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - ChainHandler.
 - (instancetype)beginWith:(nonnull AXChainAnimator *)animator {
-    [self _setAnimation:animator.animation];
-    return self;
+    if ([animator isKindOfClass:[AXTransitionChainAnimator class]] || [self isKindOfClass:[AXTransitionChainAnimator class]]) return animator;
+    if ([animator isKindOfClass:[AXKeyframeChainAnimator class]]) {
+        if ([self isKindOfClass:[AXKeyframeChainAnimator class]]) return self;
+        
+        if ([self isKindOfClass:[AXBasicChainAnimator class]]) {
+            [animator _setAnimation:[CAKeyframeAnimation animationWithBasic:(CABasicAnimation *)self.animation]];
+        } else if ([self isKindOfClass:[AXSpringChainAnimator class]]) {
+            [animator _setAnimation:[CAKeyframeAnimation animationWithSpring:(CASpringAnimation *)self.animation]];
+        }
+    } else if ([animator isKindOfClass:[AXBasicChainAnimator class]]) {
+        if ([self isKindOfClass:[AXBasicChainAnimator class]]) return self;
+        
+        if ([self isKindOfClass:[AXKeyframeChainAnimator class]]) {
+            [animator _setAnimation:[CABasicAnimation animationWithKeyframe:(CAKeyframeAnimation *)self.animation]];
+        } else if ([self isKindOfClass:[AXSpringChainAnimator class]]) {
+            [animator _setAnimation:[CABasicAnimation animationWithSpring:(CASpringAnimation *)self.animation]];
+        }
+    } else if ([animator isKindOfClass:[AXSpringChainAnimator class]]) {
+        if ([self isKindOfClass:[AXSpringChainAnimator class]]) return self;
+        
+        if ([self isKindOfClass:[AXKeyframeChainAnimator class]]) {
+            [animator _setAnimation:[CASpringAnimation animationWithKeyframe:(CAKeyframeAnimation *)self.animation]];
+        } else if ([self isKindOfClass:[AXBasicChainAnimator class]]) {
+            [animator _setAnimation:[CASpringAnimation animationWithBasic:(CABasicAnimation *)self.animation]];
+        }
+    }
+    return animator;
 }
 
-- (instancetype)beginBasic {
-   return [self beginWith:[self _basicAnimator]];
+- (AXBasicChainAnimator *)beginBasic {
+   return (AXBasicChainAnimator *)[self beginWith:[self _basicAnimator]];
 }
 
-- (instancetype)beginSpring {
-    return [self beginWith:[self _springAnimator]];
+- (AXSpringChainAnimator *)beginSpring {
+    return (AXSpringChainAnimator *)[self beginWith:[self _springAnimator]];
 }
 
-- (instancetype)beginKeyframe {
-    return [self beginWith:[self _keyframeAnimator]];
+- (AXKeyframeChainAnimator *)beginKeyframe {
+    return (AXKeyframeChainAnimator *)[self beginWith:[self _keyframeAnimator]];
 }
-
+/*
 - (instancetype)beginTransition {
     return [self beginWith:[self _transitionAnimator]];
-}
+} */
 
 - (instancetype)nextTo:(nonnull AXChainAnimator *)animator {
     // Get supper animator.
