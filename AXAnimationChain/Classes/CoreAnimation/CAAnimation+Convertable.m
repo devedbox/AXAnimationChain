@@ -24,6 +24,7 @@
 //  SOFTWARE.
 
 #import "CAAnimation+Convertable.h"
+#import "AXSpringAnimation.h"
 
 @implementation CAAnimation (Convertable)
 
@@ -253,6 +254,7 @@ id ToValueByValueWithValue(id value, id byValue, BOOL plus) {
 
 @implementation CAKeyframeAnimation (Convertable)
 + (instancetype)animationWithBasic:(CABasicAnimation *)basicAnimation usingValuesFunction:(double (^)(double, double, double, double))valuesFunction {
+    if (!basicAnimation) return nil;
     CAKeyframeAnimation *keyframe = [CAKeyframeAnimation animation];
     keyframe.beginTime = basicAnimation.beginTime;
     keyframe.duration = basicAnimation.duration;
@@ -285,5 +287,19 @@ id ToValueByValueWithValue(id value, id byValue, BOOL plus) {
 
 + (instancetype)animationWithBasic:(CABasicAnimation *)basicAnimation {
     return [self animationWithBasic:basicAnimation usingValuesFunction:NULL];
+}
+
++ (instancetype)animationWithSpring:(CASpringAnimation *)animation {
+    if (!animation || ![animation isKindOfClass:CASpringAnimation.class]) return nil;
+    AXSpringAnimation *spring = [AXSpringAnimation animationWithKeyPath:animation.keyPath];
+    spring.fromValue = animation.fromValue;
+    spring.byValue = animation.byValue;
+    spring.toValue = animation.toValue;
+    spring.mass = animation.mass;
+    spring.stiffness = animation.stiffness;
+    spring.damping = animation.damping;
+    spring.initialVelocity = animation.initialVelocity;
+    spring.duration = spring.settlingDuration;
+    return spring;
 }
 @end

@@ -26,11 +26,25 @@
 #import <QuartzCore/QuartzCore.h>
 #import <UIKit/UIKit.h>
 #import "CAMediaTimingFunction+Extends.h"
-
+NS_ASSUME_NONNULL_BEGIN
 @interface CAAnimation (Convertable)
 @end
 
 @interface CAKeyframeAnimation (Convertable)
-+ (instancetype)animationWithBasic:(CABasicAnimation *)basicAnimation;
-+ (instancetype)animationWithBasic:(CABasicAnimation *)basicAnimation usingValuesFunction:(double (^)(double t, double b, double c, double d))valuesFunction;
+/// Convert animation from CABasicAnimation.
+/// @discusstion Converting keyframe animation from basic animation will use the values function of the timing functions automatically.
+///
+/// @param basicAnimation basic animation to convert.
+/// @return Converted keyframe animation.
+///
++ (nullable instancetype)animationWithBasic:(nullable CABasicAnimation *)basicAnimation;
+/// Convert animation from CABasicAnimation using custom values function.
+///
++ (nullable instancetype)animationWithBasic:(nullable CABasicAnimation *)basicAnimation usingValuesFunction:(nullable double (^)(double t, double b, double c, double d))valuesFunction;
+/// Convert animation from CASpringAnimation.
+///
+/// @param animation spring animation to convert.
+/// @return Converted keyframe animation.
++ (nullable instancetype)animationWithSpring:(nullable CASpringAnimation *)animation;
 @end
+NS_ASSUME_NONNULL_END
