@@ -56,8 +56,14 @@ NS_ASSUME_NONNULL_BEGIN
 /// Convert animation from CAKeyframeAnimation using custom timing function.
 ///
 + (nullable instancetype)animationWithKeyframe:(nullable CAKeyframeAnimation *)animation usingTimingFunction:(nullable CAMediaTimingFunction *)timingFunction;
+/// Convert animation from CASpringAnimation.
+///
++ (nullable instancetype)animationWithSpring:(nullable CASpringAnimation *)animation;
 @end
 
 @interface CASpringAnimation (Convertable)
+/// Convert animation from CABasicAnimation.
+///
++ (nullable instancetype)animationWithBasic:(nullable CABasicAnimation *)animation;
 @end
 NS_ASSUME_NONNULL_END

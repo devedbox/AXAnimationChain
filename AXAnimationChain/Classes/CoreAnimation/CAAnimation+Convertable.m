@@ -348,6 +348,25 @@ id ToValueByValueWithValue(id value, id byValue, BOOL plus) {
     return [self animationWithKeyframe:animation usingTimingFunction:nil];
 }
 
++ (instancetype)animationWithSpring:(CASpringAnimation *)animation {
+    if (!animation || ![animation isKindOfClass:CABasicAnimation.class]) return nil;
+    CABasicAnimation *basic = [CABasicAnimation new];
+    basic.beginTime = animation.beginTime;
+    basic.duration = animation.duration;
+    basic.speed = animation.speed;
+    basic.timeOffset = animation.timeOffset;
+    basic.repeatCount = animation.repeatCount;
+    basic.repeatDuration= animation.repeatDuration;
+    basic.autoreverses = animation.autoreverses;
+    basic.removedOnCompletion = animation.removedOnCompletion;
+    basic.fillMode = animation.fillMode;
+    basic.keyPath = animation.keyPath;
+    basic.timingFunction = animation.timingFunction;
+    basic.fromValue = animation.fromValue;
+    basic.byValue = animation.byValue;
+    basic.toValue = animation.toValue;
+    return basic;
+}
 @end
 
 @implementation CASpringAnimation (Convertable)
@@ -375,6 +394,29 @@ id ToValueByValueWithValue(id value, id byValue, BOOL plus) {
         spring.initialVelocity = _spring.initialVelocity;
         spring.duration = spring.settlingDuration;
     }
+    return spring;
+}
+
++ (instancetype)animationWithSpring:(CASpringAnimation *)animation {
+    return animation;
+}
+
++ (instancetype)animationWithBasic:(CABasicAnimation *)animation {
+    CASpringAnimation *spring = [CASpringAnimation new];
+    spring.beginTime = animation.beginTime;
+    spring.duration = animation.duration;
+    spring.speed = animation.speed;
+    spring.timeOffset = animation.timeOffset;
+    spring.repeatCount = animation.repeatCount;
+    spring.repeatDuration= animation.repeatDuration;
+    spring.autoreverses = animation.autoreverses;
+    spring.removedOnCompletion = animation.removedOnCompletion;
+    spring.fillMode = animation.fillMode;
+    spring.keyPath = animation.keyPath;
+    spring.timingFunction = animation.timingFunction;
+    spring.fromValue = animation.fromValue;
+    spring.byValue = animation.byValue;
+    spring.toValue = animation.toValue;
     return spring;
 }
 @end
