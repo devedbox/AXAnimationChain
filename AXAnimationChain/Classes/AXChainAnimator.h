@@ -142,10 +142,20 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)property:(NSString *)property;
 @end
 
+@class AXKeyframeChainAnimator;
+
 @protocol AXBasicChainAnimatorDelegate <AXPropertyChainAnimatorDelegate>
 - (instancetype)fromValue:(id)fromValue;
 - (instancetype)toValue:(id)toValue;
 - (instancetype)byValue:(id)byValue;
+
+// Effects converting to Keyframe animation.
+- (AXKeyframeChainAnimator *)easeInElastic;
+- (AXKeyframeChainAnimator *)easeOutElastic;
+- (AXKeyframeChainAnimator *)easeInOutElastic;
+- (AXKeyframeChainAnimator *)easeInBounce;
+- (AXKeyframeChainAnimator *)easeOutBounce;
+- (AXKeyframeChainAnimator *)easeInOutBounce;
 @end
 
 @protocol AXKeyframeChainAnimatorDelegate <AXPropertyChainAnimatorDelegate>
@@ -158,15 +168,6 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)continuityValues:(nullable NSArray<NSNumber *> *)continuityValues;
 - (instancetype)biasValues:(nullable NSArray<NSNumber *> *)biasValues;
 - (instancetype)rotationMode:(nullable NSString *)rotationMode;
-
-// Effects.
-//FIXME: Not implemented.
-- (instancetype)easeInElastic;
-- (instancetype)easeOutElastic;
-- (instancetype)easeInOutElastic;
-- (instancetype)easeInBounce;
-- (instancetype)easeOutBounce;
-- (instancetype)easeInOutBounce;
 @end
 
 @protocol AXSpringChainAnimatorDelegate <AXBasicChainAnimatorDelegate>
@@ -186,7 +187,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class AXBasicChainAnimator;
 @class AXSpringChainAnimator;
-@class AXKeyframeChainAnimator;
 @class AXTransitionChainAnimator;
 
 @interface AXChainAnimator : NSObject <AXChainAnimatorDelegate>

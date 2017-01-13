@@ -807,6 +807,42 @@ NS_ASSUME_NONNULL_BEGIN
     return self;
 }
 
+- (AXKeyframeChainAnimator *)easeInElastic {
+    AXKeyframeChainAnimator *keyframe = self._keyframeAnimator;
+    [keyframe _setAnimation:[CAKeyframeAnimation animationWithBasic:(CABasicAnimation *)self.animation usingValuesFunction:[CAMediaTimingFunction easeInElasticValuesFuntion]]];
+    return keyframe;
+}
+
+- (AXKeyframeChainAnimator *)easeOutElastic {
+    AXKeyframeChainAnimator *keyframe = self._keyframeAnimator;
+    [keyframe _setAnimation:[CAKeyframeAnimation animationWithBasic:(CABasicAnimation *)self.animation usingValuesFunction:[CAMediaTimingFunction easeOutElasticValuesFuntion]]];
+    return keyframe;
+}
+
+- (AXKeyframeChainAnimator *)easeInOutElastic {
+    AXKeyframeChainAnimator *keyframe = self._keyframeAnimator;
+    [keyframe _setAnimation:[CAKeyframeAnimation animationWithBasic:(CABasicAnimation *)self.animation usingValuesFunction:[CAMediaTimingFunction easeInOutElasticValuesFuntion]]];
+    return keyframe;
+}
+
+- (AXKeyframeChainAnimator *)easeInBounce {
+    AXKeyframeChainAnimator *keyframe = self._keyframeAnimator;
+    [keyframe _setAnimation:[CAKeyframeAnimation animationWithBasic:(CABasicAnimation *)self.animation usingValuesFunction:[CAMediaTimingFunction easeInBounceValuesFuntion]]];
+    return keyframe;
+}
+
+- (AXKeyframeChainAnimator *)easeOutBounce {
+    AXKeyframeChainAnimator *keyframe = self._keyframeAnimator;
+    [keyframe _setAnimation:[CAKeyframeAnimation animationWithBasic:(CABasicAnimation *)self.animation usingValuesFunction:[CAMediaTimingFunction easeOutBounceValuesFuntion]]];
+    return keyframe;
+}
+
+- (AXKeyframeChainAnimator *)easeInOutBounce {
+    AXKeyframeChainAnimator *keyframe = self._keyframeAnimator;
+    [keyframe _setAnimation:[CAKeyframeAnimation animationWithBasic:(CABasicAnimation *)self.animation usingValuesFunction:[CAMediaTimingFunction easeInOutElasticValuesFuntion]]];
+    return keyframe;
+}
+
 #pragma mark - BlockReachable.
 - (AXBasicChainAnimator *(^)(AXBasicChainAnimator *))beginWith {
     return ^AXBasicChainAnimator* (AXBasicChainAnimator *animator) {
