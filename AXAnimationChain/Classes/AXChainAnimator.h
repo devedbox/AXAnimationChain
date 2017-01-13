@@ -27,11 +27,35 @@
 #import <UIKit/UIKit.h>
 #import <QuartzCore/QuartzCore.h>
 NS_ASSUME_NONNULL_BEGIN
+/// CAMediaTiming protocol reachable.
 @protocol AXMediaTimingDelegate <NSObject>
-// CAMediaTiming protocol reachable.
+/// Set the begin time of the animation object with a time interval.
+///
+/// @param beginTime a time interval since the super object.
+/// @return Original instance object.
+///
+/// @see <QuartzCore/CAMediaTiming.h>
 - (instancetype)beginTime:(NSTimeInterval)beginTime;
+/// Set the duration of the animation object with a time interval.
+///
+/// @param duration time duration.
+/// @return Original instance object.
+///
+/// @see <QuartzCore/CAMediaTiming.h>
 - (instancetype)duration:(NSTimeInterval)duration;
+/// Set the speed of the animation object of a speed value.
+///
+/// @param speed a float value of the speed.
+/// @return Original instance object.
+///
+/// @see <QuartzCore/CAMediaTiming.h>
 - (instancetype)speed:(CGFloat)speed;
+/// Set the time offset of animation object with a time interval.
+///
+/// @param timeOffset a double value of timg offset.
+/// @return Original instance object.
+///
+/// @see <QuartzCore/CAMediaTiming.h>
 - (instancetype)timeOffset:(NSTimeInterval)timeOffset;
 - (instancetype)repeatCount:(CGFloat)repeatCount;
 - (instancetype)repeatDuration:(NSTimeInterval)repeatDuration;
