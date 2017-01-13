@@ -27,8 +27,6 @@
 #import <UIKit/UIKit.h>
 #import "CAMediaTimingFunction+Extends.h"
 NS_ASSUME_NONNULL_BEGIN
-@interface CAAnimation (Convertable)
-@end
 
 @interface CAKeyframeAnimation (Convertable)
 /// Convert animation from CABasicAnimation.
@@ -46,5 +44,20 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param animation spring animation to convert.
 /// @return Converted keyframe animation.
 + (nullable instancetype)animationWithSpring:(nullable CASpringAnimation *)animation;
+@end
+
+@interface CABasicAnimation (Convertable)
+/// Convert animation from CAKeyframeAnimation.
+/// @discusstion Using default timing function. If the keyfram is converted from a basic animation, the timing dunction will be the one of the basic animation.
+///
+/// @param animation keyframe animation to convert.
+/// @return Converted basic animation.
++ (nullable instancetype)animationWithKeyframe:(nullable CAKeyframeAnimation *)animation;
+/// Convert animation from CAKeyframeAnimation using custom timing function.
+///
++ (nullable instancetype)animationWithKeyframe:(nullable CAKeyframeAnimation *)animation usingTimingFunction:(nullable CAMediaTimingFunction *)timingFunction;
+@end
+
+@interface CASpringAnimation (Convertable)
 @end
 NS_ASSUME_NONNULL_END

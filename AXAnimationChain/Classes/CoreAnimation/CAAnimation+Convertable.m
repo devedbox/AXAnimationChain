@@ -25,9 +25,11 @@
 
 #import "CAAnimation+Convertable.h"
 #import "AXSpringAnimation.h"
+#import <objc/runtime.h>
 
-@implementation CAAnimation (Convertable)
-
+@interface CAKeyframeAnimation (Convertable_Private)
+/// Converted timing function.
+@property(strong, nonatomic, nullable) CAMediaTimingFunction *convertedTimingFunction;
 @end
 
 typedef double (^_)(double t, double b, double c, double d);
@@ -266,6 +268,7 @@ id ToValueByValueWithValue(id value, id byValue, BOOL plus) {
     keyframe.removedOnCompletion = basicAnimation.removedOnCompletion;
     keyframe.fillMode = basicAnimation.fillMode;
     keyframe.keyPath = basicAnimation.keyPath;
+    keyframe.convertedTimingFunction = basicAnimation.timingFunction;
     keyframe.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
     if (basicAnimation.fromValue && basicAnimation.toValue) {
         keyframe.values = AnimationValuesForCAKeyframeAnimationWithFrames(basicAnimation.fromValue, basicAnimation.toValue, basicAnimation.duration, basicAnimation.timingFunction, valuesFunction);
@@ -309,6 +312,69 @@ id ToValueByValueWithValue(id value, id byValue, BOOL plus) {
     spring.damping = animation.damping;
     spring.initialVelocity = animation.initialVelocity;
     spring.duration = spring.settlingDuration;
+    return spring;
+}
+
+- (CAMediaTimingFunction *)convertedTimingFunction {
+    return objc_getAssociatedObject(self, _cmd);
+}
+
+- (void)setConvertedTimingFunction:(CAMediaTimingFunction *)convertedTimingFunction {
+    objc_setAssociatedObject(self, @selector(setConvertedTimingFunction:), convertedTimingFunction, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+@end
+
+@implementation CABasicAnimation (Convertable)
++ (instancetype)animationWithKeyframe:(CAKeyframeAnimation *)animation usingTimingFunction:(CAMediaTimingFunction *)timingFunction {
+    if (!animation || ![animation isKindOfClass:CABasicAnimation.class]) return nil;
+    CABasicAnimation *basic = [CABasicAnimation new];
+    basic.beginTime = animation.beginTime;
+    basic.duration = animation.duration;
+    basic.speed = animation.speed;
+    basic.timeOffset = animation.timeOffset;
+    basic.repeatCount = animation.repeatCount;
+    basic.repeatDuration= animation.repeatDuration;
+    basic.autoreverses = animation.autoreverses;
+    basic.removedOnCompletion = animation.removedOnCompletion;
+    basic.fillMode = animation.fillMode;
+    basic.keyPath = animation.keyPath;
+    basic.timingFunction = timingFunction?:(animation.convertedTimingFunction?:CAMediaTimingFunction.defaultTimingFunction);
+    basic.fromValue = [animation.values firstObject];
+    basic.toValue = [animation.values lastObject];
+    return basic;
+}
+
++ (instancetype)animationWithKeyframe:(CAKeyframeAnimation *)animation {
+    return [self animationWithKeyframe:animation usingTimingFunction:nil];
+}
+
+@end
+
+@implementation CASpringAnimation (Convertable)
++ (instancetype)animationWithKeyframe:(CAKeyframeAnimation *)animation usingTimingFunction:(CAMediaTimingFunction *)timingFunction {
+    if (!animation || ![animation isKindOfClass:CABasicAnimation.class]) return nil;
+    CASpringAnimation *spring = [CASpringAnimation new];
+    spring.beginTime = animation.beginTime;
+    spring.duration = animation.duration;
+    spring.speed = animation.speed;
+    spring.timeOffset = animation.timeOffset;
+    spring.repeatCount = animation.repeatCount;
+    spring.repeatDuration= animation.repeatDuration;
+    spring.autoreverses = animation.autoreverses;
+    spring.removedOnCompletion = animation.removedOnCompletion;
+    spring.fillMode = animation.fillMode;
+    spring.keyPath = animation.keyPath;
+    spring.timingFunction = timingFunction?:(animation.convertedTimingFunction?:CAMediaTimingFunction.defaultTimingFunction);
+    spring.fromValue = [animation.values firstObject];
+    spring.toValue = [animation.values lastObject];
+    if ([animation isKindOfClass:AXSpringAnimation.class]) {
+        AXSpringAnimation *_spring = (AXSpringAnimation *)animation;
+        spring.mass = _spring.mass;
+        spring.stiffness = _spring.stiffness;
+        spring.damping = _spring.damping;
+        spring.initialVelocity = _spring.initialVelocity;
+        spring.duration = spring.settlingDuration;
+    }
     return spring;
 }
 @end
