@@ -4,7 +4,7 @@
 
 ## Summary
 
-[AXAnimationChain]([https://github.com/devedbox/AXAnimationChain](https://github.com/devedbox/AXAnimationChain))是一个**`链式动画库`**，可以用来轻松的创建基于`CAAnimation`的链式动画。**链**的组合方式有两种，一种是**组合**，另一种则是**链接**，通过以上两种方式创建的动画，既可以同时进行，也可以按时间先后进行，可以使用较少的代码创建出丰富复杂的动画效果：
+[AXAnimationChain](https://github.com/devedbox/AXAnimationChain)是一个**`链式动画库`**，可以用来轻松的创建基于`CAAnimation`的链式动画。**链**的组合方式有两种，一种是**组合**，另一种则是**链接**，通过以上两种方式创建的动画，既可以同时进行，也可以按时间先后进行，可以使用较少的代码创建出丰富复杂的动画效果：
 
 **简单使用**:
 
