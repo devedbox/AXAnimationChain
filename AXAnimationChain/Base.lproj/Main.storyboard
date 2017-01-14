@@ -13,6 +13,46 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Image animate-->
+        <scene sceneID="Qy2-WA-vsa">
+            <objects>
+                <viewController id="X6J-w7-agW" customClass="ImageAnimationViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="xlq-dD-PdN"/>
+                        <viewControllerLayoutGuide type="bottom" id="lVB-Wg-WLI"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="0JF-GE-NQo">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image1" translatesAutoresizingMaskIntoConstraints="NO" id="LP1-qF-idH">
+                                <rect key="frame" x="77" y="64" width="220" height="391"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DsE-rN-Lvo">
+                                <rect key="frame" x="158.5" y="617" width="57" height="30"/>
+                                <state key="normal" title="Animate"/>
+                                <connections>
+                                    <action selector="animate:" destination="X6J-w7-agW" eventType="touchUpInside" id="gbZ-2b-5Bg"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="DsE-rN-Lvo" firstAttribute="centerX" secondItem="0JF-GE-NQo" secondAttribute="centerX" id="XLe-tb-WHP"/>
+                            <constraint firstItem="lVB-Wg-WLI" firstAttribute="top" secondItem="DsE-rN-Lvo" secondAttribute="bottom" constant="20" id="bnf-ih-HS0"/>
+                            <constraint firstItem="LP1-qF-idH" firstAttribute="top" secondItem="xlq-dD-PdN" secondAttribute="bottom" id="l6U-k6-yU0"/>
+                            <constraint firstItem="LP1-qF-idH" firstAttribute="centerX" secondItem="0JF-GE-NQo" secondAttribute="centerX" id="sUz-TH-elX"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Image animate" id="gPT-ZG-wR8"/>
+                    <connections>
+                        <outlet property="imageView" destination="LP1-qF-idH" id="mj8-Ob-jPQ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Da9-oR-gK0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="687" y="-645"/>
+        </scene>
         <!--Samples-->
         <scene sceneID="tne-QT-ifu">
             <objects>
@@ -131,6 +171,33 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <segue destination="601-yr-ZXb" kind="show" id="hcx-N5-Yfs"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="ezr-hk-gsw" detailTextLabel="h1j-Iv-dyv" style="IBUITableViewCellStyleSubtitle" id="NX1-57-3wu">
+                                        <rect key="frame" x="0.0" y="88" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="NX1-57-3wu" id="BpE-lH-Obe">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Image animate" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ezr-hk-gsw">
+                                                    <rect key="frame" x="15" y="4" width="112" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Animate to change the contents of UIImageView." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="h1j-Iv-dyv">
+                                                    <rect key="frame" x="15" y="25" width="275" height="15"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="X6J-w7-agW" kind="show" id="3eF-gi-7yF"/>
                                         </connections>
                                     </tableViewCell>
                                 </cells>
@@ -287,4 +354,7 @@
             <point key="canvasLocation" x="-558" y="9"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="image1" width="220" height="391"/>
+    </resources>
 </document>

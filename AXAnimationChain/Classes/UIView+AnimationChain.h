@@ -57,6 +57,9 @@
 - (UIView * (^)(CGFloat toTranslateZ))translateZTo;
 
 - (UIView * (^)(CGPoint toAnchor))anchorTo;
+#pragma mark - UIImageView.
+/// Animate to change the image content of UIImage object for UIImageView.
+- (UIView * (^)(UIImage *toImage))imageTo;
 #pragma mark - By values.
 - (UIView * (^)(CGRect byFrame))frameBy;
 - (UIView * (^)(CGRect byBounds))boundsBy;
@@ -94,7 +97,7 @@
 /// Duration with a time duration. This will effect the last animation chain object.
 - (UIView * (^)(NSTimeInterval duration))duration;
 /// After time interval of the next animator to begin at. Must not less than 0.
-- (UIView * (^)(NSTimeInterval duration))after;
+- (__kindof UIView * (^)(NSTimeInterval duration))after;
 /// Wait until former animators have finished.
 /* - (instancetype)wait; */
 #pragma mark - Effects.

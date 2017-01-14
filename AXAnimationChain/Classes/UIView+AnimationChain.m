@@ -419,6 +419,18 @@ static NSString *const kAXAnimatorContextNone = @"normal";
         return self;
     };
 }
+
+- (UIView *(^)(UIImage *))imageTo {
+    return ^UIView* (UIImage *toImage) {
+        if ([self.animatorContext isEqualToString:kAXAnimatorContextSpring]) {
+            self.chainAnimator.topAnimator.combineSpring.property(@"contents").beginTime([self.afterContext doubleValue]).toValue((id)toImage.CGImage);
+        } else {
+            self.chainAnimator.topAnimator.combineBasic.property(@"contents").beginTime([self.afterContext doubleValue]).toValue((id)toImage.CGImage);
+        }
+        [self setAnimatorContext:kAXAnimatorContextNone];
+        return self;
+    };
+}
 #pragma mark - By values.
 - (UIView *(^)(CGPoint))originBy {
     return ^UIView* (CGPoint byOrigin) {

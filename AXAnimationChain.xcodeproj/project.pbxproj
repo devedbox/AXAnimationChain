@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DC47861A1E29C4A500DC3055 /* ImageAnimationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC4786191E29C4A500DC3055 /* ImageAnimationViewController.m */; };
 		DC5E8AA31DFBEBC400597663 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DC5E8AA21DFBEBC400597663 /* main.m */; };
 		DC5E8AA61DFBEBC400597663 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DC5E8AA51DFBEBC400597663 /* AppDelegate.m */; };
 		DC5E8AA91DFBEBC400597663 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC5E8AA81DFBEBC400597663 /* ViewController.m */; };
@@ -43,6 +44,8 @@
 
 /* Begin PBXFileReference section */
 		DC21DBBA1E1CCB9600E5C0E0 /* AXAnimationChain.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AXAnimationChain.h; sourceTree = "<group>"; };
+		DC4786181E29C4A500DC3055 /* ImageAnimationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageAnimationViewController.h; sourceTree = "<group>"; };
+		DC4786191E29C4A500DC3055 /* ImageAnimationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageAnimationViewController.m; sourceTree = "<group>"; };
 		DC5E8A9E1DFBEBC400597663 /* AXAnimationChain.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AXAnimationChain.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC5E8AA21DFBEBC400597663 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		DC5E8AA41DFBEBC400597663 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -131,6 +134,8 @@
 				DC5E8AA81DFBEBC400597663 /* ViewController.m */,
 				DC80A9791E1F2ED200729EAA /* AnimationConvertableViewController.h */,
 				DC80A97A1E1F2ED200729EAA /* AnimationConvertableViewController.m */,
+				DC4786181E29C4A500DC3055 /* ImageAnimationViewController.h */,
+				DC4786191E29C4A500DC3055 /* ImageAnimationViewController.m */,
 				DC5E8AD41DFBEC6A00597663 /* Classes */,
 				DC5E8AAA1DFBEBC400597663 /* Main.storyboard */,
 				DC5E8AAD1DFBEBC400597663 /* Assets.xcassets */,
@@ -342,6 +347,7 @@
 				DCAEB20F1E0C140D00E3AF99 /* UIView+AnimationChain.m in Sources */,
 				DC5E8AA61DFBEBC400597663 /* AppDelegate.m in Sources */,
 				DC5E8AA31DFBEBC400597663 /* main.m in Sources */,
+				DC47861A1E29C4A500DC3055 /* ImageAnimationViewController.m in Sources */,
 				DC788CF71E25CE5F001AF0B4 /* AXSpringAnimation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
