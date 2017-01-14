@@ -31,5 +31,6 @@
 #import "UIView+ChainAnimator.h"
 #import "UIView+AnimationChain.h"
 #import "AXCoreAnimation.h"
+#import "UIView+Effects.h"
 
 #endif /* AXAnimationChain_h */
