@@ -31,9 +31,8 @@ class StageAnimationsViewController: UIViewController {
     }
     
     @IBAction func animate(_ sender: UIButton) {
-        stageView.chainAnimator.basic.property("transform.scale").fromValue(1.0).toValue(1.1).duration(0.15).combineBasic().property("transform.rotation").byValue(M_PI/21.0).duration(0.1).autoreverses().repeatCount(2).combineBasic().beginTime(0.1).property("transform.rotation").byValue(-M_PI/18.0).duration(0.1).autoreverses().repeatCount(2).nextToBasic().property("transform.scale").toValue(1.0).duration(0.15).start()
-        
-        stageLabel.chainAnimator.basic.property("transform.scale").fromValue(1.0).toValue(1.1).duration(0.15).combineBasic().property("transform.rotation").byValue(M_PI/21.0).duration(0.1).autoreverses().repeatCount(2).combineBasic().beginTime(0.1).property("transform.rotation").byValue(-M_PI/18.0).duration(0.1).autoreverses().repeatCount(2).nextToBasic().property("transform.scale").toValue(1.0).duration(0.15).start()
+        stageView.ef_tada()
+        stageLabel.ef_tada()
     }
     
     /*
