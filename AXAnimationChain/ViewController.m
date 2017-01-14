@@ -84,8 +84,9 @@
     [alert addAction:[UIAlertAction actionWithTitle:@"centerYBy.rotateTo\n" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         _transitionView.centerYBy(100.0).duration(1.0).rotateTo(M_PI*4).duration(1.0).animate();
     }]];
-    [alert addAction:[UIAlertAction actionWithTitle:@"centerYBy.rotateTo" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        _transitionView.centerYBy(100.0).duration(1.0).linear.rotateTo(M_PI*4).duration(1.0).linear.animate();
+    [alert addAction:[UIAlertAction actionWithTitle:@"opacityTo.after.opacityTo" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        _transitionView.opacityTo(.0).after(0.1).opacityTo(1.0).duration(1.0).animate();
+        _transitionView.chainAnimator.basic.property(@"opacity").fromValue(@0).toValue(@1).duration(1.0).animate();
     }]];
     [alert addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
         [CATransaction begin];

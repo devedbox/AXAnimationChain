@@ -111,4 +111,6 @@
 #pragma mark - Target-Action.
 - (UIView * (^)(NSObject *target))target;
 - (UIView * (^)(SEL completion))complete;
+
+- (UIView * (^)(dispatch_block_t completion))completeBlock;
 @end

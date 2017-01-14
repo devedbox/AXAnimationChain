@@ -840,6 +840,13 @@ static NSString *const kAXAnimatorContextNone = @"normal";
         return self;
     };
 }
+
+- (UIView *(^)(dispatch_block_t))completeBlock {
+    return ^UIView* (dispatch_block_t completion) {
+        self.chainAnimator.topAnimator.combinedAnimators.lastObject.completeWithBlock(completion);
+        return self;
+    };
+}
 #pragma mark - Private.
 - (CGPoint)_positionFromOrigin:(CGPoint)origin {
     CGPoint anchor = self.layer.anchorPoint;
