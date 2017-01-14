@@ -31,8 +31,17 @@ class StageAnimationsViewController: UIViewController {
     }
     
     @IBAction func animate(_ sender: UIButton) {
-        stageView.ef_tada()
-        stageLabel.ef_tada()
+        let alert = UIAlertController(title: "Effects", message: nil, preferredStyle: .actionSheet);
+        alert.addAction(UIAlertAction(title: "Tada", style: .default, handler: { (action :UIAlertAction) in
+            self.stageView.ef_tada()
+            self.stageLabel.ef_tada()
+        }))
+        alert.addAction(UIAlertAction(title: "Bonuce", style: .default, handler: { (action :UIAlertAction) in
+            self.stageView.ef_bonuce()
+            self.stageLabel.ef_bonuce()
+        }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        present(alert, animated: true, completion: nil)
     }
     
     /*
