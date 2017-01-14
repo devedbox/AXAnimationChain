@@ -40,6 +40,10 @@ class StageAnimationsViewController: UIViewController {
             self.stageView.ef_bonuce()
             self.stageLabel.ef_bonuce()
         }))
+        alert.addAction(UIAlertAction(title: "Pulse", style: .default, handler: { (action :UIAlertAction) in
+            self.stageView.ef_pulse()
+            self.stageLabel.ef_pulse()
+        }))
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         present(alert, animated: true, completion: nil)
     }

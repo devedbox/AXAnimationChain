@@ -35,4 +35,8 @@
 - (void)ef_bonuce {
     self.chainAnimator.basic.property(@"position.y").byValue(@50).toValue(@(self.layer.position.y)).duration(0.5).easeOutBounce.animate();
 }
+
+- (void)ef_pulse {
+    self.chainAnimator.basic.property(@"transform.scale").byValue(@0.1).duration(0.5).linear.autoreverses.animate();
+}
 @end

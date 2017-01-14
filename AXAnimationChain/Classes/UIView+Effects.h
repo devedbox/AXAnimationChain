@@ -28,4 +28,5 @@
 @interface UIView (Effects)
 - (void)ef_tada;
 - (void)ef_bonuce;
+- (void)ef_pulse;
 @end
