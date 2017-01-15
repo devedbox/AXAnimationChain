@@ -97,7 +97,7 @@
 /// Duration with a time duration. This will effect the last animation chain object.
 - (UIView * (^)(NSTimeInterval duration))duration;
 /// After time interval of the next animator to begin at. Must not less than 0.
-- (__kindof UIView * (^)(NSTimeInterval duration))after;
+- (UIView * (^)(NSTimeInterval duration))after;
 /// Wait until former animators have finished.
 /* - (instancetype)wait; */
 #pragma mark - Effects.
