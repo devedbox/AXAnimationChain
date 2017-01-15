@@ -23,10 +23,11 @@
 		DC788CF91E25CE5F001AF0B4 /* CAMediaTimingFunction+Extends.m in Sources */ = {isa = PBXBuildFile; fileRef = DC788CF61E25CE5F001AF0B4 /* CAMediaTimingFunction+Extends.m */; };
 		DC80A97B1E1F2ED200729EAA /* AnimationConvertableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC80A97A1E1F2ED200729EAA /* AnimationConvertableViewController.m */; };
 		DCAEB20F1E0C140D00E3AF99 /* UIView+AnimationChain.m in Sources */ = {isa = PBXBuildFile; fileRef = DCAEB20E1E0C140D00E3AF99 /* UIView+AnimationChain.m */; };
-		DCC749841E2A292200237548 /* StageAnimationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC749831E2A292200237548 /* StageAnimationsViewController.swift */; };
 		DCC749871E2A506C00237548 /* UIView+Effects.m in Sources */ = {isa = PBXBuildFile; fileRef = DCC749861E2A506C00237548 /* UIView+Effects.m */; };
 		DCC749891E2B436C00237548 /* AXChainAnimator+Block.m in Sources */ = {isa = PBXBuildFile; fileRef = DCC749881E2B436C00237548 /* AXChainAnimator+Block.m */; };
-		DCC7498B1E2B4A3C00237548 /* UIView+Effects.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC7498A1E2B4A3C00237548 /* UIView+Effects.swift */; };
+		DCC749A41E2B88D900237548 /* AXAnimationChain.h in Headers */ = {isa = PBXBuildFile; fileRef = DCC749A21E2B879D00237548 /* AXAnimationChain.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCC749A61E2B899400237548 /* StageAnimationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC749A51E2B899400237548 /* StageAnimationsViewController.swift */; };
+		DCD8D61D1E2B8D370017B993 /* UIView+Effects.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCD8D61C1E2B8D370017B993 /* UIView+Effects.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,7 +48,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		DC21DBBA1E1CCB9600E5C0E0 /* AXAnimationChain.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AXAnimationChain.h; sourceTree = "<group>"; };
 		DC4786181E29C4A500DC3055 /* ImageAnimationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageAnimationViewController.h; sourceTree = "<group>"; };
 		DC4786191E29C4A500DC3055 /* ImageAnimationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageAnimationViewController.m; sourceTree = "<group>"; };
 		DC5E8A9E1DFBEBC400597663 /* AXAnimationChain.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AXAnimationChain.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -82,13 +82,13 @@
 		DC80A97A1E1F2ED200729EAA /* AnimationConvertableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnimationConvertableViewController.m; sourceTree = "<group>"; };
 		DCAEB20D1E0C140D00E3AF99 /* UIView+AnimationChain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+AnimationChain.h"; sourceTree = "<group>"; };
 		DCAEB20E1E0C140D00E3AF99 /* UIView+AnimationChain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+AnimationChain.m"; sourceTree = "<group>"; };
-		DCC749821E2A292100237548 /* AXAnimationChain-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AXAnimationChain-Bridging-Header.h"; sourceTree = "<group>"; };
-		DCC749831E2A292200237548 /* StageAnimationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StageAnimationsViewController.swift; sourceTree = "<group>"; };
 		DCC749851E2A506C00237548 /* UIView+Effects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Effects.h"; sourceTree = "<group>"; };
 		DCC749861E2A506C00237548 /* UIView+Effects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Effects.m"; sourceTree = "<group>"; };
 		DCC749881E2B436C00237548 /* AXChainAnimator+Block.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AXChainAnimator+Block.m"; sourceTree = "<group>"; };
-		DCC7498A1E2B4A3C00237548 /* UIView+Effects.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Effects.swift"; sourceTree = "<group>"; };
-		DCC7498C1E2B729B00237548 /* AXAnimationChain.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = AXAnimationChain.modulemap; sourceTree = "<group>"; };
+		DCC749951E2B834800237548 /* module.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
+		DCC749A21E2B879D00237548 /* AXAnimationChain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AXAnimationChain.h; sourceTree = "<group>"; };
+		DCC749A51E2B899400237548 /* StageAnimationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StageAnimationsViewController.swift; sourceTree = "<group>"; };
+		DCD8D61C1E2B8D370017B993 /* UIView+Effects.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Effects.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,14 +147,13 @@
 				DC80A97A1E1F2ED200729EAA /* AnimationConvertableViewController.m */,
 				DC4786181E29C4A500DC3055 /* ImageAnimationViewController.h */,
 				DC4786191E29C4A500DC3055 /* ImageAnimationViewController.m */,
-				DCC749831E2A292200237548 /* StageAnimationsViewController.swift */,
+				DCC749A51E2B899400237548 /* StageAnimationsViewController.swift */,
 				DC5E8AD41DFBEC6A00597663 /* Classes */,
 				DC5E8AAA1DFBEBC400597663 /* Main.storyboard */,
 				DC5E8AAD1DFBEBC400597663 /* Assets.xcassets */,
 				DC5E8AAF1DFBEBC400597663 /* LaunchScreen.storyboard */,
 				DC5E8AB21DFBEBC400597663 /* Info.plist */,
 				DC5E8AA11DFBEBC400597663 /* Supporting Files */,
-				DCC749821E2A292100237548 /* AXAnimationChain-Bridging-Header.h */,
 			);
 			path = AXAnimationChain;
 			sourceTree = "<group>";
@@ -188,11 +187,11 @@
 		DC5E8AD41DFBEC6A00597663 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				DC21DBBA1E1CCB9600E5C0E0 /* AXAnimationChain.h */,
-				DCC7498C1E2B729B00237548 /* AXAnimationChain.modulemap */,
+				DCC749A21E2B879D00237548 /* AXAnimationChain.h */,
+				DCC749951E2B834800237548 /* module.modulemap */,
 				DCC749851E2A506C00237548 /* UIView+Effects.h */,
 				DCC749861E2A506C00237548 /* UIView+Effects.m */,
-				DCC7498A1E2B4A3C00237548 /* UIView+Effects.swift */,
+				DCD8D61C1E2B8D370017B993 /* UIView+Effects.swift */,
 				DCAEB20D1E0C140D00E3AF99 /* UIView+AnimationChain.h */,
 				DCAEB20E1E0C140D00E3AF99 /* UIView+AnimationChain.m */,
 				DC5E8AD51DFBED0000597663 /* UIView+ChainAnimator.h */,
@@ -222,6 +221,17 @@
 		};
 /* End PBXGroup section */
 
+/* Begin PBXHeadersBuildPhase section */
+		DCC749961E2B853300237548 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DCC749A41E2B88D900237548 /* AXAnimationChain.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
 /* Begin PBXNativeTarget section */
 		DC5E8A9D1DFBEBC400597663 /* AXAnimationChain */ = {
 			isa = PBXNativeTarget;
@@ -230,6 +240,7 @@
 				DC5E8A9A1DFBEBC400597663 /* Sources */,
 				DC5E8A9B1DFBEBC400597663 /* Frameworks */,
 				DC5E8A9C1DFBEBC400597663 /* Resources */,
+				DCC749961E2B853300237548 /* Headers */,
 			);
 			buildRules = (
 			);
@@ -357,8 +368,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DCC7498B1E2B4A3C00237548 /* UIView+Effects.swift in Sources */,
-				DCC749841E2A292200237548 /* StageAnimationsViewController.swift in Sources */,
+				DCD8D61D1E2B8D370017B993 /* UIView+Effects.swift in Sources */,
 				DC788CF81E25CE5F001AF0B4 /* CAAnimation+Convertable.m in Sources */,
 				DC788CF91E25CE5F001AF0B4 /* CAMediaTimingFunction+Extends.m in Sources */,
 				DC80A97B1E1F2ED200729EAA /* AnimationConvertableViewController.m in Sources */,
@@ -369,6 +379,7 @@
 				DC5E8ADA1DFBED8B00597663 /* AXChainAnimator.m in Sources */,
 				DCAEB20F1E0C140D00E3AF99 /* UIView+AnimationChain.m in Sources */,
 				DC5E8AA61DFBEBC400597663 /* AppDelegate.m in Sources */,
+				DCC749A61E2B899400237548 /* StageAnimationsViewController.swift in Sources */,
 				DC5E8AA31DFBEBC400597663 /* main.m in Sources */,
 				DC47861A1E29C4A500DC3055 /* ImageAnimationViewController.m in Sources */,
 				DC788CF71E25CE5F001AF0B4 /* AXSpringAnimation.m in Sources */,
@@ -519,15 +530,21 @@
 		DC5E8ACC1DFBEBC400597663 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = TKA48YVS5T;
+				GENERATE_MASTER_OBJECT_FILE = NO;
 				INFOPLIST_FILE = AXAnimationChain/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MACH_O_TYPE = mh_execute;
+				MODULEMAP_FILE = "$(SRCROOT)/Classes/module.modulemap";
 				PRODUCT_BUNDLE_IDENTIFIER = devedbox.AXAnimationChain;
+				PRODUCT_MODULE_NAME = "_$(PRODUCT_NAME:c99extidentifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "AXAnimationChain/AXAnimationChain-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
@@ -536,15 +553,22 @@
 		DC5E8ACD1DFBEBC400597663 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = TKA48YVS5T;
+				GENERATE_MASTER_OBJECT_FILE = NO;
 				INFOPLIST_FILE = AXAnimationChain/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MACH_O_TYPE = mh_execute;
+				MODULEMAP_FILE = "$(SRCROOT)/Classes/module.modulemap";
 				PRODUCT_BUNDLE_IDENTIFIER = devedbox.AXAnimationChain;
+				PRODUCT_MODULE_NAME = "_$(PRODUCT_NAME:c99extidentifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "AXAnimationChain/AXAnimationChain-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;

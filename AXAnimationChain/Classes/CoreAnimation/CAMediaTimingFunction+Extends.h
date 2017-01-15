@@ -24,6 +24,7 @@
 //  SOFTWARE.
 
 #import <QuartzCore/QuartzCore.h>
+NS_ASSUME_NONNULL_BEGIN
 /// Timing functions for easings: http://easings.net/zh-cn
 @interface CAMediaTimingFunction (Extends)
 // System default:
@@ -71,3 +72,4 @@
 + (double (^)(double t, double b, double c, double d))easeOutBounceValuesFuntion;
 + (double (^)(double t, double b, double c, double d))easeInOutBounceValuesFuntion;
 @end
+NS_ASSUME_NONNULL_END

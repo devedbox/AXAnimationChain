@@ -24,7 +24,7 @@
 //  SOFTWARE.
 
 #import <UIKit/UIKit.h>
-
+NS_ASSUME_NONNULL_BEGIN
 @interface UIView (AnimationChain)
 #pragma mark - To values.
 - (UIView * (^)(CGRect toFrame))frameTo;
@@ -117,3 +117,4 @@
 
 - (UIView * (^)(dispatch_block_t completion))completeBlock;
 @end
+NS_ASSUME_NONNULL_END
