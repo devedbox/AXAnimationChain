@@ -17,6 +17,8 @@ s.source_files  = 'AXAnimationChain/Classes/*.{h,m}', 'AXAnimationChain/Classes/
 s.frameworks = "UIKit", "Foundation", "QuartzCore"
 s.requires_arc = true
 
+s.module_map              = 'AXAnimationChain/Classes/module.modulemap'
+
 s.subspec 'CoreAnimation' do |ss|
     ss.source_files = 'AXAnimationChain/Classes/CoreAnimation/*.{h,m}'
 end

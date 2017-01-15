@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AXAnimationChain
 
 class StageAnimationsViewController: UIViewController {
 
@@ -33,16 +34,16 @@ class StageAnimationsViewController: UIViewController {
     @IBAction func animate(_ sender: UIButton) {
         let alert = UIAlertController(title: "Effects", message: nil, preferredStyle: .actionSheet);
         alert.addAction(UIAlertAction(title: "Tada", style: .default, handler: { (action :UIAlertAction) in
-            self.stageView.ef_tada()
-            self.stageLabel.ef_tada()
+            self.stageView.tada()
+            self.stageLabel.tada()
         }))
         alert.addAction(UIAlertAction(title: "Bonuce", style: .default, handler: { (action :UIAlertAction) in
-            self.stageView.ef_bonuce()
-            self.stageLabel.ef_bonuce()
+            self.stageView.bonuce()
+            self.stageLabel.bonuce()
         }))
         alert.addAction(UIAlertAction(title: "Pulse", style: .default, handler: { (action :UIAlertAction) in
-            self.stageView.ef_pulse()
-            self.stageLabel.ef_pulse()
+            self.stageView.pulse()
+            self.stageLabel.pulse()
         }))
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         present(alert, animated: true, completion: nil)
