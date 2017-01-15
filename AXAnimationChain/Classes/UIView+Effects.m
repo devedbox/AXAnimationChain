@@ -25,6 +25,7 @@
 
 #import "UIView+Effects.h"
 #import "UIView+ChainAnimator.h"
+#import "AXChainAnimator+Block.h"
 
 @implementation UIView (Effects)
 

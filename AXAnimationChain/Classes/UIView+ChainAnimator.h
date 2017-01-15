@@ -25,7 +25,6 @@
 
 #import <UIKit/UIKit.h>
 #import "AXChainAnimator.h"
-#import "AXChainAnimator+Block.h"
 NS_ASSUME_NONNULL_BEGIN
 @protocol AXAnimationChainViewDelegate <NSObject>
 /// Animation chain object.

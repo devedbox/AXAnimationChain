@@ -9,6 +9,7 @@
 #import "ViewController.h"
 #import "UIView+ChainAnimator.h"
 #import "UIView+AnimationChain.h"
+#import "AXChainAnimator+Block.h"
 
 @interface ViewController ()
 /// Transition view.

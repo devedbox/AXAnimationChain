@@ -25,6 +25,7 @@
 
 #import "UIView+AnimationChain.h"
 #import "UIView+ChainAnimator.h"
+#import "AXChainAnimator+Block.h"
 #import <objc/runtime.h>
 
 @interface UIView (AnimationChain_Private)
