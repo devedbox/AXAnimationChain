@@ -1,6 +1,6 @@
 ![Logo](http://ww1.sinaimg.cn/large/d2297bd2gw1fbnl029rgzj21kw09hq6f.jpg)
 
-![Build](https://img.shields.io/teamcity/http/teamcity.jetbrains.com/s/bt345.svg)![Version](https://img.shields.io/cocoapods/v/AXAnimationChain.svg?style=flat)![License](https://img.shields.io/dub/l/vibe-d.svg)![Platform](https://img.shields.io/cocoapods/p/AXAnimationChain.svg?style=flat)![language](https://img.shields.io/badge/language-Objective--C-orange.svg)![weibo](https://img.shields.io/badge/weibo-@devedbox-blue.svg)
+![Build](https://img.shields.io/badge/build-passing-6bbc41.svg)![Version](https://img.shields.io/cocoapods/v/AXAnimationChain.svg?style=flat)![License](https://img.shields.io/dub/l/vibe-d.svg)![Platform](https://img.shields.io/cocoapods/p/AXAnimationChain.svg?style=flat)![language](https://img.shields.io/badge/language-Objective--C-orange.svg)![weibo](https://img.shields.io/badge/weibo-@devedbox-blue.svg)
 
 ## Summary
 
