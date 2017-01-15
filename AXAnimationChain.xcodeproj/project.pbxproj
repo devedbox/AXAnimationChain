@@ -25,6 +25,7 @@
 		DCAEB20F1E0C140D00E3AF99 /* UIView+AnimationChain.m in Sources */ = {isa = PBXBuildFile; fileRef = DCAEB20E1E0C140D00E3AF99 /* UIView+AnimationChain.m */; };
 		DCC749841E2A292200237548 /* StageAnimationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC749831E2A292200237548 /* StageAnimationsViewController.swift */; };
 		DCC749871E2A506C00237548 /* UIView+Effects.m in Sources */ = {isa = PBXBuildFile; fileRef = DCC749861E2A506C00237548 /* UIView+Effects.m */; };
+		DCC749891E2B436C00237548 /* AXChainAnimator+Block.m in Sources */ = {isa = PBXBuildFile; fileRef = DCC749881E2B436C00237548 /* AXChainAnimator+Block.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -84,6 +85,7 @@
 		DCC749831E2A292200237548 /* StageAnimationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StageAnimationsViewController.swift; sourceTree = "<group>"; };
 		DCC749851E2A506C00237548 /* UIView+Effects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Effects.h"; sourceTree = "<group>"; };
 		DCC749861E2A506C00237548 /* UIView+Effects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Effects.m"; sourceTree = "<group>"; };
+		DCC749881E2B436C00237548 /* AXChainAnimator+Block.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AXChainAnimator+Block.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -191,6 +193,7 @@
 				DC5E8AD51DFBED0000597663 /* UIView+ChainAnimator.h */,
 				DC5E8AD61DFBED0000597663 /* UIView+ChainAnimator.m */,
 				DC5E8ADB1DFD006700597663 /* AXChainAnimator+Block.h */,
+				DCC749881E2B436C00237548 /* AXChainAnimator+Block.m */,
 				DC5E8AD81DFBED8B00597663 /* AXChainAnimator.h */,
 				DC5E8AD91DFBED8B00597663 /* AXChainAnimator.m */,
 				DC788CF01E25CE5F001AF0B4 /* CoreAnimation */,
@@ -356,6 +359,7 @@
 				DC5E8AA91DFBEBC400597663 /* ViewController.m in Sources */,
 				DC5E8AD71DFBED0000597663 /* UIView+ChainAnimator.m in Sources */,
 				DCC749871E2A506C00237548 /* UIView+Effects.m in Sources */,
+				DCC749891E2B436C00237548 /* AXChainAnimator+Block.m in Sources */,
 				DC5E8ADA1DFBED8B00597663 /* AXChainAnimator.m in Sources */,
 				DCAEB20F1E0C140D00E3AF99 /* UIView+AnimationChain.m in Sources */,
 				DC5E8AA61DFBEBC400597663 /* AppDelegate.m in Sources */,
