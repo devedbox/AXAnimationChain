@@ -24,7 +24,7 @@
 //  SOFTWARE.
 
 #import "AXChainAnimator.h"
-
+NS_ASSUME_NONNULL_BEGIN
 @interface AXChainAnimator (Block)
 /// Begin with block reachable.
 ///
@@ -318,3 +318,4 @@
 ///
 - (AXTransitionChainAnimator * (^)(dispatch_block_t completion))completeWithBlock;
 @end
+NS_ASSUME_NONNULL_END
