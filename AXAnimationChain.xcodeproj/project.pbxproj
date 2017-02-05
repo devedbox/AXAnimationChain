@@ -28,6 +28,16 @@
 		DCC749A41E2B88D900237548 /* AXAnimationChain.h in Headers */ = {isa = PBXBuildFile; fileRef = DCC749A21E2B879D00237548 /* AXAnimationChain.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DCC749A61E2B899400237548 /* StageAnimationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC749A51E2B899400237548 /* StageAnimationsViewController.swift */; };
 		DCD8D6231E2B91E90017B993 /* UIView+Effects.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCD8D6221E2B91E90017B993 /* UIView+Effects.swift */; };
+		DCF43E3F1E46F0C000FD79FB /* AXAnimationChain.h in Sources */ = {isa = PBXBuildFile; fileRef = DCC749A21E2B879D00237548 /* AXAnimationChain.h */; };
+		DCF43E401E46F35D00FD79FB /* UIView+Effects.h in Headers */ = {isa = PBXBuildFile; fileRef = DCC749851E2A506C00237548 /* UIView+Effects.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCF43E411E46F35F00FD79FB /* UIView+AnimationChain.h in Headers */ = {isa = PBXBuildFile; fileRef = DCAEB20D1E0C140D00E3AF99 /* UIView+AnimationChain.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCF43E421E46F36200FD79FB /* UIView+ChainAnimator.h in Headers */ = {isa = PBXBuildFile; fileRef = DC5E8AD51DFBED0000597663 /* UIView+ChainAnimator.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCF43E431E46F36500FD79FB /* AXChainAnimator+Block.h in Headers */ = {isa = PBXBuildFile; fileRef = DC5E8ADB1DFD006700597663 /* AXChainAnimator+Block.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCF43E441E46F36600FD79FB /* AXChainAnimator.h in Headers */ = {isa = PBXBuildFile; fileRef = DC5E8AD81DFBED8B00597663 /* AXChainAnimator.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCF43E451E46F36A00FD79FB /* AXCoreAnimation.h in Headers */ = {isa = PBXBuildFile; fileRef = DC788D391E25D139001AF0B4 /* AXCoreAnimation.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCF43E461E46F36D00FD79FB /* AXSpringAnimation.h in Headers */ = {isa = PBXBuildFile; fileRef = DC788CF11E25CE5F001AF0B4 /* AXSpringAnimation.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCF43E471E46F36F00FD79FB /* CAAnimation+Convertable.h in Headers */ = {isa = PBXBuildFile; fileRef = DC788CF31E25CE5F001AF0B4 /* CAAnimation+Convertable.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCF43E481E46F37100FD79FB /* CAMediaTimingFunction+Extends.h in Headers */ = {isa = PBXBuildFile; fileRef = DC788CF51E25CE5F001AF0B4 /* CAMediaTimingFunction+Extends.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -235,6 +245,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				DCC749A41E2B88D900237548 /* AXAnimationChain.h in Headers */,
+				DCF43E401E46F35D00FD79FB /* UIView+Effects.h in Headers */,
+				DCF43E411E46F35F00FD79FB /* UIView+AnimationChain.h in Headers */,
+				DCF43E421E46F36200FD79FB /* UIView+ChainAnimator.h in Headers */,
+				DCF43E481E46F37100FD79FB /* CAMediaTimingFunction+Extends.h in Headers */,
+				DCF43E441E46F36600FD79FB /* AXChainAnimator.h in Headers */,
+				DCF43E451E46F36A00FD79FB /* AXCoreAnimation.h in Headers */,
+				DCF43E431E46F36500FD79FB /* AXChainAnimator+Block.h in Headers */,
+				DCF43E471E46F36F00FD79FB /* CAAnimation+Convertable.h in Headers */,
+				DCF43E461E46F36D00FD79FB /* AXSpringAnimation.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -376,6 +395,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DCF43E3F1E46F0C000FD79FB /* AXAnimationChain.h in Sources */,
 				DCD8D6231E2B91E90017B993 /* UIView+Effects.swift in Sources */,
 				DC788CF81E25CE5F001AF0B4 /* CAAnimation+Convertable.m in Sources */,
 				DC788CF91E25CE5F001AF0B4 /* CAMediaTimingFunction+Extends.m in Sources */,
@@ -548,10 +568,11 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MACH_O_TYPE = mh_execute;
-				MODULEMAP_FILE = "$(SRCROOT)/Classes/module.modulemap";
+				MODULEMAP_FILE = "$(SRCROOT)/AXAnimationChain/Classes/module.modulemap";
 				PRODUCT_BUNDLE_IDENTIFIER = devedbox.AXAnimationChain;
-				PRODUCT_MODULE_NAME = "_$(PRODUCT_NAME:c99extidentifier)";
+				PRODUCT_MODULE_NAME = "$(PRODUCT_NAME:c99extidentifier)_App";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_INCLUDE_PATHS = "$(SRCROOT)/AXAnimationChain/Classes $(SRCROOT)/AXAnimationChain/Classes/CoreAnimation";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
@@ -571,10 +592,11 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MACH_O_TYPE = mh_execute;
-				MODULEMAP_FILE = "$(SRCROOT)/Classes/module.modulemap";
+				MODULEMAP_FILE = "$(SRCROOT)/AXAnimationChain/Classes/module.modulemap";
 				PRODUCT_BUNDLE_IDENTIFIER = devedbox.AXAnimationChain;
-				PRODUCT_MODULE_NAME = "_$(PRODUCT_NAME:c99extidentifier)";
+				PRODUCT_MODULE_NAME = "$(PRODUCT_NAME:c99extidentifier)_App";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_INCLUDE_PATHS = "$(SRCROOT)/AXAnimationChain/Classes $(SRCROOT)/AXAnimationChain/Classes/CoreAnimation";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 3.0;

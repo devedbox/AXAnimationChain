@@ -1,13 +1,5 @@
-framework module AXAnimationChain {
-    umbrella header "AXAnimationChain.h"
+module AXAnimationChain {
+    header "AXAnimationChain.h"
     
     export *
-    module * { export * }
-    
-    explicit module AXCoreAnimation {
-        umbrella header "AXCoreAnimation.h"
-        
-        export *
-        module * { export * }
-    }
-}
+} 
