@@ -14,6 +14,8 @@ s.author             = { "devedbox" => "devedbox@qq.com" }
 s.platform     = :ios, "8.0"
 s.source       = { :git => "https://github.com/devedbox/AXAnimationChain.git", :tag => "0.2.1" }
 s.source_files  = 'AXAnimationChain/Classes/UIView+ChainAnimator.{h,m}', 'AXAnimationChain/Classes/AXChainAnimator.{h,m}', 'AXAnimationChain/Classes/CoreAnimation/*.{h,m}', 'AXAnimationChain/Classes/Swifty/*.swift'
+s.pod_target_xcconfig = {'SWIFT_INCLUDE_PATHS' => '$(SRCROOT)/AXAnimationChain/Classes/**'}
+s.preserve_paths = '$(SRCROOT)/AXAnimationChain/Classes/module.modulemap'
 s.frameworks = "UIKit", "Foundation", "QuartzCore"
 s.requires_arc = true
 
