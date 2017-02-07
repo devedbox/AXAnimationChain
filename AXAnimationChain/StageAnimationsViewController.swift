@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import AXAnimationChainSwift
 
 class StageAnimationsViewController: UIViewController {
 
@@ -44,6 +43,10 @@ class StageAnimationsViewController: UIViewController {
         alert.addAction(UIAlertAction(title: "Pulse", style: .default, handler: { (action :UIAlertAction) in
             self.stageView.pulse()
             self.stageLabel.pulse()
+        }))
+        alert.addAction(UIAlertAction(title: "Shake", style: .default, handler: { (action :UIAlertAction) in
+            self.stageView.shake()
+            self.stageLabel.shake()
         }))
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         present(alert, animated: true, completion: nil)

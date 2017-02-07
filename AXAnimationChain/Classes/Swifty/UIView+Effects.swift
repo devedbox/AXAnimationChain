@@ -36,4 +36,8 @@ extension UIView {
     public func pulse() {
         self.chainAnimator.basic.property("transform.scale").byValue(0.1).duration(0.5).linear().autoreverses().start()
     }
+    public func shake() {
+        let position = self.layer.position
+        self.chainAnimator.basic.property("position.x").fromValue(position.x-20).toValue(position.x+20).duration(0.1).linear().autoreverses().repeatCount(1.5).nextToBasic().property("position.x").toValue(position.x).duration(0.1).start()
+    }
 }
