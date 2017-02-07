@@ -124,10 +124,10 @@ NS_ASSUME_NONNULL_BEGIN
     // Find the super super animator of SELF.
     AXChainAnimator *ssuper = self;
     while (ssuper) {
-        ssuper = ssuper.superAnimator;
         if (!ssuper.superAnimator) {
             break;
         }
+        ssuper = ssuper.superAnimator;
     }
     AXChainAnimator *child = ssuper;
     // Find the last child animator.
