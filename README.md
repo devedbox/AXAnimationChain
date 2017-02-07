@@ -1,6 +1,6 @@
 ![Logo](http://ww1.sinaimg.cn/large/d2297bd2gw1fbnl029rgzj21kw09hq6f.jpg)
 
-![Build](https://img.shields.io/badge/build-passing-6bbc41.svg)![Version](https://img.shields.io/cocoapods/v/AXAnimationChain.svg?style=flat)![License](https://img.shields.io/dub/l/vibe-d.svg)![Platform](https://img.shields.io/cocoapods/p/AXAnimationChain.svg?style=flat)![language](https://img.shields.io/badge/language-Objective--C-orange.svg)![weibo](https://img.shields.io/badge/weibo-@devedbox-blue.svg)
+![Build](https://img.shields.io/badge/build-passing-52c435.svg)![Version](https://img.shields.io/cocoapods/v/AXAnimationChain.svg?style=flat)![License](https://img.shields.io/dub/l/vibe-d.svg)![Platform](https://img.shields.io/cocoapods/p/AXAnimationChain.svg?style=flat)![language](https://img.shields.io/badge/language-Objective--C/Swift-orange.svg)![language](https://img.shields.io/badge/swift3.0-available-orange.svg)![weibo](https://img.shields.io/badge/weibo-@devedbox-blue.svg)
 
 ## Summary
 
@@ -249,10 +249,11 @@ AXChainAnimator
 
 [CocoaPods]([http://cocoapods.org](http://cocoapods.org)) is the recommended way to add AXAimationChain to your project.
 
-1. Add a pod entry for AXAimationChain to your Podfile `pod 'AXAimationChain', '~> 0.1.0'`
+1. Add a pod entry for AXAimationChain to your Podfile `pod 'AXAimationChain', '~> 0.2.3'`
 2. Install the pod(s) by running `pod install`.
 3. Include AXAimationChain wherever you need it with `#import "AXAimationChain.h"`.
-4. 若需要单独使用`AXSpringAnimation`或者`Convertable`以及`TimingControl`等特性的话，只需要将podfile里边`AXAnimationChain`替换为`AXAnimationChain/CoreAnimation`即可，即：`pod 'AXAimationChain/CoreAnimation', '~> 0.1.0'`.
+4. 若需要单独使用`AXSpringAnimation`或者`Convertable`以及`TimingControl`等特性的话，只需要将podfile里边`AXAnimationChain`替换为`AXAnimationChain/CoreAnimation`即可，即：`pod 'AXAimationChain/CoreAnimation', '~> 0.2.3'`.
+5. 若要使用`Swift`作为变成语言，请使用Swift版的依赖包：`pod 'AXAimationChain-Swift', '~> 0.2.3'`
 
 ### Source files
 
