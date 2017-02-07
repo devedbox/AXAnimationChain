@@ -40,4 +40,9 @@
 - (void)ef_pulse {
     self.chainAnimator.basic.property(@"transform.scale").byValue(@0.1).duration(0.5).linear.autoreverses.animate();
 }
+    
+- (void)ef_shake {
+    CGPoint position = self.layer.position;
+    self.chainAnimator.basic.property(@"position.x").fromValue(@(position.x-20)).toValue(@(position.x+20)).duration(0.1).linear.autoreverses.repeatCount(1.5).nextToBasic.property(@"position.x").toValue(@(position.x)).duration(0.1).linear.animate();
+}
 @end

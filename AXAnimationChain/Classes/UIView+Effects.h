@@ -29,4 +29,5 @@
 - (void)ef_tada;
 - (void)ef_bonuce;
 - (void)ef_pulse;
+- (void)ef_shake;
 @end
