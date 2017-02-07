@@ -3,5 +3,7 @@ module AXAnimationChainSwift {
     header "UIView+ChainAnimator.h"
     header "CoreAnimation/AXCoreAnimation.h"
     
+    header "UIView+Effects.h"
+    
     export *
 } 
