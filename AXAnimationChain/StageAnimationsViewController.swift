@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import AXAnimationChain
+import AXAnimationChainSwift
 
 class StageAnimationsViewController: UIViewController {
 

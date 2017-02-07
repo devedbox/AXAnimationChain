@@ -24,7 +24,7 @@
 //  SOFTWARE.
 
 import UIKit
-import AXAnimationChain
+import AXAnimationChainSwift
 
 extension UIView {
     public func tada() {

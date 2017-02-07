@@ -1,5 +1,7 @@
-module AXAnimationChain {
-    header "AXAnimationChain.h"
+module AXAnimationChainSwift {
+    header "AXChainAnimator.h"
+    header "UIView+ChainAnimator.h"
+    header "CoreAnimation/AXCoreAnimation.h"
     
     export *
 } 
