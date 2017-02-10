@@ -67,4 +67,8 @@ extension UIView {
     public func snap(from direction: AXAnimationEffectsDirection = .left) {
         chainAnimator.spring.property("position.x").byValue(150).toValue(self.layer.position.x).mass(1).stiffness(100).damping(13).combineKeyframe().property("transform.rotation").values([-M_PI_4/2, -M_PI_4/3, M_PI/18, M_PI/6, M_PI/18, 0]).keyTimes([0.0, 0.9, 0.92, 0.94, 0.96, 0.98, 1.00]).duration(settlingDurationForSpring(mass: 1, stiffness: 100, damping: 13)*0.8).start()
     }
+    
+    public func expand(completion:@escaping () -> Void = {}) {
+        chainAnimator.spring.property("transform.scale").fromValue(0.0).toValue(1.0).duration(0.5).complete(completion).start()
+    }
 }

@@ -52,6 +52,12 @@ class StageAnimationsViewController: UIViewController {
             self.stageView.snap()
             self.stageLabel.snap(from: .top)
         }))
+        alert.addAction(UIAlertAction(title: "Expand", style: .default, handler: { [unowned self](action) in
+            self.stageLabel.expand {
+                print("Finished expand animation effect on stage label.")
+            }
+            self.stageView.expand()
+        }))
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         present(alert, animated: true, completion: nil)
     }
