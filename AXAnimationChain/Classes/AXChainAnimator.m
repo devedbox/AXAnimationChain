@@ -45,7 +45,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)_setCombinedAnimators:(NSArray<AXChainAnimator *> *)combinedAnimators;
 @end
 
-@interface AXKeyframeChainAnimator (Private)
+@interface AXKeyframeChainAnimator ()
 /// Timing function flags.
 @property(copy, nonatomic, nullable) NSString *timingFunctionFlags;
 @end
