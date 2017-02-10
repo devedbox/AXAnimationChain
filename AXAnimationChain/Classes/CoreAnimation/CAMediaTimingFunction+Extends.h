@@ -71,5 +71,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (double (^)(double t, double b, double c, double d))easeInBounceValuesFuntion;
 + (double (^)(double t, double b, double c, double d))easeOutBounceValuesFuntion;
 + (double (^)(double t, double b, double c, double d))easeInOutBounceValuesFuntion;
+
++ (double (^)(double t, double b, double c, double d))gravity;
 @end
 NS_ASSUME_NONNULL_END

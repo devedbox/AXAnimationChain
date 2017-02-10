@@ -402,5 +402,11 @@ static double AXRootsForXValueOnTimeLine(double x0, double x1, double x2, double
             return [self easeOutBounceValuesFuntion](t*2-d, 0, c, d) * .5 + c*.5 + b;
     };
 }
+
++ (double (^)(double, double, double, double))gravity {
+    return ^double (double t, double b, double c, double d) {
+        return 0.998*pow(t/=d, 2.0)/2.0;
+    };
+}
 #pragma clang diagnostic pop
 @end
