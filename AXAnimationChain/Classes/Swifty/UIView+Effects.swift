@@ -65,7 +65,7 @@ extension UIView {
     }
     
     public func snap(from direction: AXAnimationEffectsDirection = .left) {
-        chainAnimator.spring.property("position.x").byValue(150).toValue(self.layer.position.x).mass(1).stiffness(100).damping(13).combineKeyframe().property("transform.rotation").values([-M_PI_4/2, -M_PI_4/3, M_PI/18, M_PI/6, M_PI/18, 0]).keyTimes([0.0, 0.9, 0.92, 0.94, 0.96, 0.98, 1.00]).duration(settlingDurationForSpring(mass: 1, stiffness: 100, damping: 13)*0.8).start()
+        chainAnimator.spring.property("position.x").byValue(150).toValue(self.layer.position.x).mass(1).stiffness(100).damping(13).combineKeyframe().property("transform.rotation").values([-M_PI_4/2, -M_PI_4/3, M_PI/18, M_PI/6, M_PI/18, 0]).duration(settlingDurationForSpring(mass: 1, stiffness: 100, damping: 13)*0.6).start()
     }
     
     public func expand(completion:@escaping () -> Void = {}) {
@@ -78,6 +78,6 @@ extension UIView {
     
     public func hinge(completion: @escaping () -> Void = {}) {
         layer.anchorToLeftTop()
-    chainAnimator.spring.property("transform.rotation").fromValue(0).toValue(M_PI_2/9*8).mass(2).stiffness(100).damping(10).combineBasic().beginTime(1.0).property("position.y").fromValue(layer.position.y).toValue(UIScreen.main.bounds.height+layer.position.y).duration(0.5).easeInCubic().start()
+        chainAnimator.spring.property("transform.rotation").fromValue(0).toValue(acos(Double(bounds.height)/Double(pow(pow(bounds.width, 2.0)+pow(bounds.height, 2.0), 0.5)))).mass(2).stiffness(100).damping(10).combineBasic().beginTime(1.0).property("position.y").fromValue(layer.position.y).toValue(UIScreen.main.bounds.height+layer.position.y).duration(0.5).easeInCubic().start()
     }
 }
