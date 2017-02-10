@@ -45,6 +45,13 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)_setCombinedAnimators:(NSArray<AXChainAnimator *> *)combinedAnimators;
 @end
 
+@interface AXKeyframeChainAnimator (Private)
+/// Timing function flags.
+@property(copy, nonatomic, nullable) NSString *timingFunctionFlags;
+@end
+
+static NSString *const kAXKeyframeTimgingFunctionFlagGravity = @"gravity";
+
 @implementation AXChainAnimator
 @synthesize animation = _animation;
 + (instancetype)animatorWithAnimation:(CAAnimation *)animation {
@@ -313,7 +320,14 @@ NS_ASSUME_NONNULL_BEGIN
         if (!_animation.duration && [_animation respondsToSelector:@selector(settlingDuration)]) {
             _animation.duration = [(CASpringAnimation *)_animation settlingDuration];
         }
-    }
+    }/* else if ([self isKindOfClass:AXKeyframeChainAnimator.class]) { // Handle the custom timing functions.
+        AXKeyframeChainAnimator *animator = (AXKeyframeChainAnimator *)self;
+        if ([animator.timingFunctionFlags isEqualToString:kAXKeyframeTimgingFunctionFlagGravity]) {
+            if (!_animation.duration) {
+                
+            }
+        }
+    } */
     [_animatedView.layer addAnimation:_animation forKey:[NSString stringWithFormat:@"%p", _animation]];
     for (AXChainAnimator *animator in _combinedAnimators) {
         [animator _addAnimationsToAnimatedLayer];
@@ -737,6 +751,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (AXKeyframeChainAnimator *)gravity {
     AXKeyframeChainAnimator *keyframe = self._keyframeAnimator;
     [keyframe _setAnimation:[CAKeyframeAnimation animationWithBasic:(CABasicAnimation *)self.animation usingValuesFunction:[CAMediaTimingFunction gravity]]];
+    [keyframe setTimingFunctionFlags:kAXKeyframeTimgingFunctionFlagGravity];
     [self _relinkAnimatorsWithAnimatorToReplace:keyframe];
     return keyframe;
 }
