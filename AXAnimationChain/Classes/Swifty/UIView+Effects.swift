@@ -69,6 +69,8 @@ extension UIView {
     }
     
     public func expand(completion:@escaping () -> Void = {}) {
-        chainAnimator.spring.property("transform.scale").fromValue(0.0).toValue(1.0).duration(0.5).complete(completion).start()
+        chainAnimator.basic.property("transform.scale").fromValue(0.0).toValue(1.0).duration(0.5).complete(completion).start()
     }
+    
+    
 }
