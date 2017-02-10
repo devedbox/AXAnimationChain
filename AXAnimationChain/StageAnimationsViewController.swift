@@ -58,6 +58,12 @@ class StageAnimationsViewController: UIViewController {
             }
             self.stageView.expand()
         }))
+        alert.addAction(UIAlertAction(title: "Compress", style: .default, handler: { [unowned self](action) in
+            self.stageLabel.compress {
+                print("Finished compress animation effect on stage label.")
+            }
+            self.stageView.compress()
+        }))
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         present(alert, animated: true, completion: nil)
     }

@@ -72,5 +72,7 @@ extension UIView {
         chainAnimator.basic.property("transform.scale").fromValue(0.0).toValue(1.0).duration(0.5).complete(completion).start()
     }
     
-    
+    public func compress(completion: @escaping () -> Void = {}) {
+        chainAnimator.basic.property("transform.scale").fromValue(1.0).toValue(0.0).duration(0.5).complete(completion).start()
+    }
 }
