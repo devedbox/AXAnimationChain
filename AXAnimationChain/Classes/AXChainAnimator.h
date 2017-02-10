@@ -61,6 +61,11 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)repeatDuration:(NSTimeInterval)repeatDuration;
 - (instancetype)autoreverses;
 - (instancetype)fillMode:(NSString *)fillMode;
+/// Remove the animation when the animator has finished the animating. Defaults to NO.
+/// @discusstion This way is not recommended to chain the animations because that
+///              if the begining animation is finished and removed, the result will
+///              effect the next animators.=
+- (instancetype)removedOnCompletion;
 @end
 
 @protocol AXBasicChainAnimatorDelegate;

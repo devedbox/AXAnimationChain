@@ -386,6 +386,11 @@ NS_ASSUME_NONNULL_BEGIN
     return self;
 }
 
+- (instancetype)removedOnCompletion {
+    if (!_animation.removedOnCompletion) _animation.removedOnCompletion = YES;
+    return self;
+}
+
 - (instancetype)linear {
     _animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
     return self;
