@@ -26,5 +26,64 @@
 #import "CALayer+AnchorPoint.h"
 
 @implementation CALayer (AnchorPoint)
+- (instancetype)moveAnchorToPoint:(CGPoint)point {
+    // If the new point is equal to the old anchor point, return immediately。
+    if (CGPointEqualToPoint(point, self.anchorPoint)) return self;
+    
+    CGPoint newPoint = CGPointMake(self.bounds.size.width * point.x, self.bounds.size.height * point.y);
+    CGPoint oldPoint = CGPointMake(self.bounds.size.width * self.anchorPoint.x, self.bounds.size.height * self.anchorPoint.y);
+    
+    newPoint = CGPointApplyAffineTransform(newPoint, self.affineTransform);
+    oldPoint = CGPointApplyAffineTransform(oldPoint, self.affineTransform);
+    
+    CGPoint position = self.position;
+    
+    position.x += newPoint.x - oldPoint.x;
+    position.y += newPoint.y - oldPoint.y;
+    
+    self.position = position;
+    self.anchorPoint = point;
+    
+    return self;
+}
 
+- (instancetype)anchorToDefault {
+    return [self anchorToCenter];
+}
+
+- (instancetype)anchorToCenter {
+    return [self moveAnchorToPoint:CGPointMake(.5, .5)];
+}
+
+- (instancetype)anchorToTop {
+    return [self moveAnchorToPoint:CGPointMake(.5, .0)];
+}
+
+- (instancetype)anchorToLeft {
+    return [self moveAnchorToPoint:CGPointMake(.0, .5)];
+}
+
+- (instancetype)anchorToBottom {
+    return [self moveAnchorToPoint:CGPointMake(.5, 1.0)];
+}
+
+- (instancetype)anchorToRight {
+    return [self moveAnchorToPoint:CGPointMake(1.0, .5)];
+}
+
+- (instancetype)anchorToLeftTop {
+    return [self moveAnchorToPoint:CGPointMake(.0, .0)];
+}
+
+- (instancetype)anchorToLeftBottom {
+    return [self moveAnchorToPoint:CGPointMake(.0, 1.0)];
+}
+
+- (instancetype)anchorToRightTop {
+    return [self moveAnchorToPoint:CGPointMake(1.0, .0)];
+}
+
+- (instancetype)anchorToRightBottom {
+    return [self moveAnchorToPoint:CGPointMake(1.0, 1.0)];
+}
 @end
