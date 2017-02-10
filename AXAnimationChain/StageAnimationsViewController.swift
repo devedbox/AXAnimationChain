@@ -31,6 +31,11 @@ class StageAnimationsViewController: UIViewController {
     }
     
     @IBAction func animate(_ sender: UIButton) {
+        stageLabel.layer.removeAllAnimations()
+        stageView.layer.removeAllAnimations()
+        stageLabel.layer.anchorToDefault()
+        stageView.layer.anchorToDefault()
+        
         let alert = UIAlertController(title: "Effects", message: nil, preferredStyle: .actionSheet);
         alert.addAction(UIAlertAction(title: "Tada", style: .default, handler: { (action :UIAlertAction) in
             self.stageView.tada()
@@ -63,6 +68,10 @@ class StageAnimationsViewController: UIViewController {
                 print("Finished compress animation effect on stage label.")
             }
             self.stageView.compress()
+        }))
+        alert.addAction(UIAlertAction(title: "Hinge", style: .default, handler: { [unowned self](alert) in
+            self.stageLabel.hinge()
+            self.stageView.hinge()
         }))
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         present(alert, animated: true, completion: nil)

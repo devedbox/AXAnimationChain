@@ -75,4 +75,9 @@ extension UIView {
     public func compress(completion: @escaping () -> Void = {}) {
         chainAnimator.basic.property("transform.scale").fromValue(1.0).toValue(0.0).duration(0.5).complete(completion).start()
     }
+    
+    public func hinge(completion: @escaping () -> Void = {}) {
+        layer.anchorToLeftTop()
+    chainAnimator.spring.property("transform.rotation").fromValue(0).toValue(M_PI_2/9*8).mass(2).stiffness(100).damping(10).combineBasic().beginTime(1.0).property("position.y").fromValue(layer.position.y).toValue(UIScreen.main.bounds.height+layer.position.y).duration(0.5).easeInCubic().start()
+    }
 }
