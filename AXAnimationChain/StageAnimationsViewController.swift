@@ -48,6 +48,10 @@ class StageAnimationsViewController: UIViewController {
             self.stageView.shake()
             self.stageLabel.shake()
         }))
+        alert.addAction(UIAlertAction(title: "Snap", style: .default, handler: { (action: UIAlertAction) in
+            self.stageView.snap()
+            self.stageLabel.snap(from: .top)
+        }))
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         present(alert, animated: true, completion: nil)
     }
