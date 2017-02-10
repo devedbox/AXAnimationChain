@@ -44,8 +44,17 @@ extension UIView {
     public func tada() {
         chainAnimator.basic.property("transform.scale").fromValue(1.0).toValue(1.1).duration(0.15).combineBasic().property("transform.rotation").byValue(M_PI/21.0).duration(0.1).autoreverses().repeatCount(2).combineBasic().beginTime(0.1).property("transform.rotation").byValue(-M_PI/18.0).duration(0.1).autoreverses().repeatCount(2).nextToBasic().property("transform.scale").toValue(1.0).duration(0.15).start()
     }
-    public func bonuce() {
-        chainAnimator.basic.property("position.y").byValue(50).toValue(self.layer.position.y).duration(0.5).easeOutBounce().start()
+    public func bonuce(from direction: AXAnimationEffectsDirection = .top) {
+        switch direction {
+        case .top:
+            chainAnimator.basic.property("position.y").byValue(50).toValue(self.layer.position.y).duration(0.5).easeOutBounce().start()
+        case .left:
+            chainAnimator.basic.property("position.x").byValue(50).toValue(self.layer.position.x).duration(0.5).easeOutBounce().start()
+        case .bottom:
+            chainAnimator.basic.property("position.y").fromValue(self.layer.position.y+50).toValue(self.layer.position.y).duration(0.5).easeOutBounce().start()
+        default:
+            chainAnimator.basic.property("position.x").fromValue(self.layer.position.x+50).toValue(self.layer.position.x).duration(0.5).easeOutBounce().start()
+        }
     }
     public func pulse() {
         chainAnimator.basic.property("transform.scale").byValue(0.1).duration(0.5).linear().autoreverses().start()
