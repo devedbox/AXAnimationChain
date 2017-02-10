@@ -5,5 +5,7 @@ module AXAnimationChainSwift {
     
     header "UIView+Effects.h"
     
+    header "CALayer+AnchorPoint.h"
+    
     export *
 } 

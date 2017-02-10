@@ -30,36 +30,35 @@
 ///
 /// @param point a new anchor point. Between [0, 1].
 ///
-/// @return a new layer after moved anchor.
-- (instancetype)moveAnchorToPoint:(CGPoint)point;
+- (void)moveAnchorToPoint:(CGPoint)point;
 /// Move anchor point to default anchor value.
 ///
-- (instancetype)anchorToDefault;
+- (void)anchorToDefault;
 /// Move anchor point to center point.
 ///
-- (instancetype)anchorToCenter;
+- (void)anchorToCenter;
 /// Move anchor point to top.
 ///
-- (instancetype)anchorToTop;
+- (void)anchorToTop;
 /// Move anchor point to left.
 ///
-- (instancetype)anchorToLeft;
+- (void)anchorToLeft;
 /// Move anchor point to bottom.
 ///
-- (instancetype)anchorToBottom;
+- (void)anchorToBottom;
 /// Move anchor point to right.
 ///
-- (instancetype)anchorToRight;
+- (void)anchorToRight;
 /// Move anchor point to left-top.
 ///
-- (instancetype)anchorToLeftTop;
+- (void)anchorToLeftTop;
 /// Move anchor point to left-bottom.
 ///
-- (instancetype)anchorToLeftBottom;
+- (void)anchorToLeftBottom;
 /// Move anchor point to right-top.
 ///
-- (instancetype)anchorToRightTop;
+- (void)anchorToRightTop;
 /// Move anchor point to right-bottom.
 ///
-- (instancetype)anchorToRightBottom;
+- (void)anchorToRightBottom;
 @end
