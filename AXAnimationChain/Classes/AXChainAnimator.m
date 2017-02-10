@@ -41,6 +41,8 @@ NS_ASSUME_NONNULL_BEGIN
 }
 /// Set animation object to the animator.
 - (void)_setAnimation:(CAAnimation *)animation;
+/// Set combined animators to the combined animators.
+- (void)_setCombinedAnimators:(NSArray<AXChainAnimator *> *)combinedAnimators;
 @end
 
 @implementation AXChainAnimator
@@ -532,6 +534,10 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 #pragma mark - Private.
+- (void)_setCombinedAnimators:(NSArray<AXChainAnimator *> *)combinedAnimators {
+    _combinedAnimators = [combinedAnimators copy];
+}
+
 - (void)_setAnimation:(CAAnimation *)animation {
     if (_animation == animation) return;
     _animation = [animation copy];
@@ -689,39 +695,68 @@ NS_ASSUME_NONNULL_BEGIN
 - (AXKeyframeChainAnimator *)easeInElastic {
     AXKeyframeChainAnimator *keyframe = self._keyframeAnimator;
     [keyframe _setAnimation:[CAKeyframeAnimation animationWithBasic:(CABasicAnimation *)self.animation usingValuesFunction:[CAMediaTimingFunction easeInElasticValuesFuntion]]];
+    [self _relinkAnimatorsWithAnimatorToReplace:keyframe];
     return keyframe;
 }
 
 - (AXKeyframeChainAnimator *)easeOutElastic {
     AXKeyframeChainAnimator *keyframe = self._keyframeAnimator;
     [keyframe _setAnimation:[CAKeyframeAnimation animationWithBasic:(CABasicAnimation *)self.animation usingValuesFunction:[CAMediaTimingFunction easeOutElasticValuesFuntion]]];
+    [self _relinkAnimatorsWithAnimatorToReplace:keyframe];
     return keyframe;
 }
 
 - (AXKeyframeChainAnimator *)easeInOutElastic {
     AXKeyframeChainAnimator *keyframe = self._keyframeAnimator;
     [keyframe _setAnimation:[CAKeyframeAnimation animationWithBasic:(CABasicAnimation *)self.animation usingValuesFunction:[CAMediaTimingFunction easeInOutElasticValuesFuntion]]];
+    [self _relinkAnimatorsWithAnimatorToReplace:keyframe];
     return keyframe;
 }
 
 - (AXKeyframeChainAnimator *)easeInBounce {
     AXKeyframeChainAnimator *keyframe = self._keyframeAnimator;
     [keyframe _setAnimation:[CAKeyframeAnimation animationWithBasic:(CABasicAnimation *)self.animation usingValuesFunction:[CAMediaTimingFunction easeInBounceValuesFuntion]]];
+    [self _relinkAnimatorsWithAnimatorToReplace:keyframe];
     return keyframe;
 }
 
 - (AXKeyframeChainAnimator *)easeOutBounce {
     AXKeyframeChainAnimator *keyframe = self._keyframeAnimator;
     [keyframe _setAnimation:[CAKeyframeAnimation animationWithBasic:(CABasicAnimation *)self.animation usingValuesFunction:[CAMediaTimingFunction easeOutBounceValuesFuntion]]];
+    [self _relinkAnimatorsWithAnimatorToReplace:keyframe];
     return keyframe;
 }
 
 - (AXKeyframeChainAnimator *)easeInOutBounce {
     AXKeyframeChainAnimator *keyframe = self._keyframeAnimator;
     [keyframe _setAnimation:[CAKeyframeAnimation animationWithBasic:(CABasicAnimation *)self.animation usingValuesFunction:[CAMediaTimingFunction easeInOutElasticValuesFuntion]]];
+    [self _relinkAnimatorsWithAnimatorToReplace:keyframe];
     return keyframe;
 }
 
+- (AXKeyframeChainAnimator *)gravity {
+    AXKeyframeChainAnimator *keyframe = self._keyframeAnimator;
+    [keyframe _setAnimation:[CAKeyframeAnimation animationWithBasic:(CABasicAnimation *)self.animation usingValuesFunction:[CAMediaTimingFunction gravity]]];
+    [self _relinkAnimatorsWithAnimatorToReplace:keyframe];
+    return keyframe;
+}
+
+#pragma mark - Private.
+- (void)_relinkAnimatorsWithAnimatorToReplace:(id<AXChainAnimatorDelegate>)animator {
+    // Replace SELF in the super animator.
+    if (self.superAnimator.childAnimator == self) {
+        self.superAnimator.childAnimator = nil;
+        [self.superAnimator nextTo:animator];
+    } else if ([self.superAnimator.combinedAnimators containsObject:self]) {
+        // Remove SELF from the super animator.
+        NSMutableArray *combinedAnimators = [self.superAnimator.combinedAnimators mutableCopy];
+        [combinedAnimators removeObject:self];
+        [(AXChainAnimator *)self.superAnimator _setCombinedAnimators:[combinedAnimators copy]];
+        
+        // Combine new animator to the super animator.
+        [self.superAnimator combineWith:animator];
+    }
+}
 @end
 
 @implementation AXKeyframeChainAnimator

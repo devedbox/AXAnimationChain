@@ -185,6 +185,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (id<AXKeyframeChainAnimatorDelegate>)easeInBounce;
 - (id<AXKeyframeChainAnimatorDelegate>)easeOutBounce;
 - (id<AXKeyframeChainAnimatorDelegate>)easeInOutBounce;
+- (id<AXKeyframeChainAnimatorDelegate>)gravity;
 @end
 
 @protocol AXKeyframeChainAnimatorDelegate <AXPropertyChainAnimatorDelegate>
@@ -260,6 +261,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (AXKeyframeChainAnimator *)easeInBounce;
 - (AXKeyframeChainAnimator *)easeOutBounce;
 - (AXKeyframeChainAnimator *)easeInOutBounce;
+
+- (AXKeyframeChainAnimator *)gravity;
 @end
 
 @interface AXKeyframeChainAnimator : AXChainAnimator <AXKeyframeChainAnimatorDelegate>
