@@ -24,6 +24,7 @@
 		DC80A97B1E1F2ED200729EAA /* AnimationConvertableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC80A97A1E1F2ED200729EAA /* AnimationConvertableViewController.m */; };
 		DC92E30D1E4D9D1E009AE2A5 /* CALayer+AnchorPoint.h in Headers */ = {isa = PBXBuildFile; fileRef = DC92E30B1E4D9D1E009AE2A5 /* CALayer+AnchorPoint.h */; };
 		DC92E30E1E4D9D1E009AE2A5 /* CALayer+AnchorPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = DC92E30C1E4D9D1E009AE2A5 /* CALayer+AnchorPoint.m */; };
+		DC92E3101E4EA43B009AE2A5 /* AXChainAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC92E30F1E4EA43A009AE2A5 /* AXChainAnimator.swift */; };
 		DCAEB20F1E0C140D00E3AF99 /* UIView+AnimationChain.m in Sources */ = {isa = PBXBuildFile; fileRef = DCAEB20E1E0C140D00E3AF99 /* UIView+AnimationChain.m */; };
 		DCC749871E2A506C00237548 /* UIView+Effects.m in Sources */ = {isa = PBXBuildFile; fileRef = DCC749861E2A506C00237548 /* UIView+Effects.m */; };
 		DCC749891E2B436C00237548 /* AXChainAnimator+Block.m in Sources */ = {isa = PBXBuildFile; fileRef = DCC749881E2B436C00237548 /* AXChainAnimator+Block.m */; };
@@ -94,6 +95,7 @@
 		DC80A97A1E1F2ED200729EAA /* AnimationConvertableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnimationConvertableViewController.m; sourceTree = "<group>"; };
 		DC92E30B1E4D9D1E009AE2A5 /* CALayer+AnchorPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CALayer+AnchorPoint.h"; sourceTree = "<group>"; };
 		DC92E30C1E4D9D1E009AE2A5 /* CALayer+AnchorPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CALayer+AnchorPoint.m"; sourceTree = "<group>"; };
+		DC92E30F1E4EA43A009AE2A5 /* AXChainAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AXChainAnimator.swift; sourceTree = "<group>"; };
 		DCAEB20D1E0C140D00E3AF99 /* UIView+AnimationChain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+AnimationChain.h"; sourceTree = "<group>"; };
 		DCAEB20E1E0C140D00E3AF99 /* UIView+AnimationChain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+AnimationChain.m"; sourceTree = "<group>"; };
 		DCC749851E2A506C00237548 /* UIView+Effects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Effects.h"; sourceTree = "<group>"; };
@@ -239,6 +241,7 @@
 			isa = PBXGroup;
 			children = (
 				DCD8D6221E2B91E90017B993 /* UIView+Effects.swift */,
+				DC92E30F1E4EA43A009AE2A5 /* AXChainAnimator.swift */,
 			);
 			path = Swifty;
 			sourceTree = "<group>";
@@ -407,6 +410,7 @@
 				DC788CF81E25CE5F001AF0B4 /* CAAnimation+Convertable.m in Sources */,
 				DC788CF91E25CE5F001AF0B4 /* CAMediaTimingFunction+Extends.m in Sources */,
 				DC92E30E1E4D9D1E009AE2A5 /* CALayer+AnchorPoint.m in Sources */,
+				DC92E3101E4EA43B009AE2A5 /* AXChainAnimator.swift in Sources */,
 				DC80A97B1E1F2ED200729EAA /* AnimationConvertableViewController.m in Sources */,
 				DC5E8AA91DFBEBC400597663 /* ViewController.m in Sources */,
 				DC5E8AD71DFBED0000597663 /* UIView+ChainAnimator.m in Sources */,
