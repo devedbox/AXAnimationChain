@@ -41,31 +41,36 @@ private func settlingDurationForSpring(mass: Double, stiffness: Double, damping:
 }
 
 extension UIView {
-    public func tada() {
-        chainAnimator.basic.property("transform.scale").fromValue(1.0).toValue(1.1).duration(0.15).combineBasic().property("transform.rotation").byValue(M_PI/21.0).duration(0.1).autoreverses().repeatCount(2).combineBasic().beginTime(0.1).property("transform.rotation").byValue(-M_PI/18.0).duration(0.1).autoreverses().repeatCount(2).nextToBasic().property("transform.scale").toValue(1.0).duration(0.15).start()
+    public func tada(completion: @escaping () -> Void = {}) {
+        chainAnimator.basic.property("transform.scale").fromValue(1.0).toValue(1.1).duration(0.15).combineBasic().property("transform.rotation").byValue(M_PI/21.0).duration(0.1).autoreverses().repeatCount(2).combineBasic().beginTime(0.1).property("transform.rotation").byValue(-M_PI/18.0).duration(0.1).autoreverses().repeatCount(2).nextToBasic().property("transform.scale").toValue(1.0).duration(0.15).complete(completion).start()
     }
-    public func bonuce(from direction: AXAnimationEffectsDirection = .top) {
+    public func bonuce(from direction: AXAnimationEffectsDirection = .top, completion: @escaping () -> Void = {}) {
         switch direction {
         case .top:
-            chainAnimator.basic.property("position.y").byValue(50).toValue(self.layer.position.y).duration(0.5).easeOutBounce().start()
+            chainAnimator.basic.property("position.y").byValue(50).toValue(self.layer.position.y).duration(0.5).easeOutBounce().complete(completion).start()
         case .left:
-            chainAnimator.basic.property("position.x").byValue(50).toValue(self.layer.position.x).duration(0.5).easeOutBounce().start()
+            chainAnimator.basic.property("position.x").byValue(50).toValue(self.layer.position.x).duration(0.5).easeOutBounce().complete(completion).start()
         case .bottom:
-            chainAnimator.basic.property("position.y").fromValue(self.layer.position.y+50).toValue(self.layer.position.y).duration(0.5).easeOutBounce().start()
+            chainAnimator.basic.property("position.y").fromValue(self.layer.position.y+50).toValue(self.layer.position.y).duration(0.5).easeOutBounce().complete(completion).start()
         default:
-            chainAnimator.basic.property("position.x").fromValue(self.layer.position.x+50).toValue(self.layer.position.x).duration(0.5).easeOutBounce().start()
+            chainAnimator.basic.property("position.x").fromValue(self.layer.position.x+50).toValue(self.layer.position.x).duration(0.5).easeOutBounce().complete(completion).start()
         }
     }
-    public func pulse() {
-        chainAnimator.basic.property("transform.scale").byValue(0.1).duration(0.5).linear().autoreverses().start()
+    public func pulse(completion: @escaping () -> Void = {}) {
+        chainAnimator.basic.property("transform.scale").byValue(0.1).duration(0.5).linear().autoreverses().complete(completion).start()
     }
-    public func shake() {
+    public func shake(completion: @escaping () -> Void = {}) {
         let position = layer.position
-        chainAnimator.basic.property("position.x").fromValue(position.x-20).toValue(position.x+20).duration(0.1).linear().autoreverses().repeatCount(1.5).nextToBasic().property("position.x").toValue(position.x).duration(0.1).start()
+        chainAnimator.basic.property("position.x").fromValue(position.x-20).toValue(position.x+20).duration(0.1).linear().autoreverses().repeatCount(1.5).nextToBasic().property("position.x").toValue(position.x).duration(0.1).complete(completion).start()
+    }
+    
+    public func swing(completion: @escaping () -> Void = {}) {
+        chainAnimator.basic.property("transform.rotation").byValue(M_PI/21.0).duration(0.1).autoreverses().repeatCount(2).combineBasic().beginTime(0.1).property("transform.rotation").byValue(-M_PI/18.0).duration(0.1).autoreverses().repeatCount(2).nextToBasic().property("transform.scale").toValue(1.0).duration(0.15).complete(completion).start()
     }
     
     public func snap(from direction: AXAnimationEffectsDirection = .left) {
-        chainAnimator.spring.property("position.x").byValue(150).toValue(self.layer.position.x).mass(1).stiffness(100).damping(13).combineKeyframe().property("transform.rotation").values([-M_PI_4/2, -M_PI_4/3, M_PI/18, M_PI/6, M_PI/18, 0]).duration(settlingDurationForSpring(mass: 1, stiffness: 100, damping: 13)*0.6).start()
+        layer.anchorToRight()
+        chainAnimator.spring.property("position.x").byValue(150).toValue(self.layer.position.x)/*.mass(1).stiffness(100).damping(13)*/.combineSpring().property("transform.scale.x").byValue(-0.5).combineSpring().beginTime(0.5).property("transform.scale.x").byValue(0.5).mass(1).stiffness(100).damping(13).start()
     }
     
     public func expand(completion:@escaping () -> Void = {}) {

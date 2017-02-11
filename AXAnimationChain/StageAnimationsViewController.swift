@@ -53,6 +53,10 @@ class StageAnimationsViewController: UIViewController {
             self.stageView.shake()
             self.stageLabel.shake()
         }))
+        alert.addAction(UIAlertAction(title: "Swing", style: .default, handler: { [unowned self](action) in
+            self.stageLabel.swing()
+            self.stageView.swing()
+        }))
         alert.addAction(UIAlertAction(title: "Snap", style: .default, handler: { (action: UIAlertAction) in
             self.stageView.snap()
             self.stageLabel.snap(from: .top)
