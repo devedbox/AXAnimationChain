@@ -52,8 +52,7 @@ private func settlingDurationForSpring(mass: Double, stiffness: Double, damping:
 public extension UIView {
     /// Run a \`tada\` animation effect on the receiver.
     ///
-    /// - Parameters:
-    ///   - completion: a completion clousure to execute when the animation finished.
+    /// - parameter completion: a completion clousure to execute when the animation finished.
     ///
     public func tada(completion: @escaping () -> Void = {}) {
         chainAnimator.basic.property("transform.scale").fromValue(1.0).toValue(1.1).duration(0.15).combineBasic().property("transform.rotation").byValue(M_PI/21.0).duration(0.1).autoreverses().repeatCount(2).combineBasic().beginTime(0.1).property("transform.rotation").byValue(-M_PI/18.0).duration(0.1).autoreverses().repeatCount(2).nextToBasic().property("transform.scale").toValue(1.0).duration(0.15).start(completion: completion)
@@ -78,16 +77,14 @@ public extension UIView {
     }
     /// Run a \`pulse\` animation effect on the receiver.
     ///
-    /// - Parameters:
-    ///   - completion: a completion clousure to execute when the animation finished.
+    /// - Parameter completion: a completion clousure to execute when the animation finished.
     ///
     public func pulse(completion: @escaping () -> Void = {}) {
         chainAnimator.basic.property("transform.scale").byValue(0.1).duration(0.5).linear().autoreverses().start(completion: completion)
     }
     /// Run a \`shake\` animation effect on the receiver.
     ///
-    /// - Parameters:
-    ///   - completion: a completion clousure to execute when the animation finished.
+    /// - Parameter completion: a completion clousure to execute when the animation finished.
     ///
     public func shake(completion: @escaping () -> Void = {}) {
         let position = layer.position
@@ -95,16 +92,14 @@ public extension UIView {
     }
     /// Run a \`swing\` animation effect on the receiver.
     ///
-    /// - Parameters:
-    ///   - completion: a completion clousure to execute when the animation finished.
+    /// - Parameter completion: a completion clousure to execute when the animation finished.
     ///
     public func swing(completion: @escaping () -> Void = {}) {
         chainAnimator.basic.property("transform.rotation").byValue(M_PI/21.0).duration(0.1).autoreverses().repeatCount(2).combineBasic().beginTime(0.1).property("transform.rotation").byValue(-M_PI/18.0).duration(0.1).autoreverses().repeatCount(2).nextToBasic().property("transform.scale").toValue(1.0).duration(0.15).start(completion: completion)
     }
     /// Run a \`snap\` animation effect on the receiver.
     ///
-    /// - Parameters:
-    ///   - from: the from direction of the bonuce animation showing up.
+    /// - Parameter from: the from direction of the bonuce animation showing up.
     ///
     public func snap(from direction: AXAnimationEffectsDirection = .left) {
         layer.anchorToRight()
@@ -112,24 +107,21 @@ public extension UIView {
     }
     /// Run a \`expand\` animation effect on the receiver.
     ///
-    /// - Parameters:
-    ///   - completion: a completion clousure to execute when the animation finished.
+    /// - Parameter completion: a completion clousure to execute when the animation finished.
     ///
     public func expand(completion:@escaping () -> Void = {}) {
         chainAnimator.basic.property("transform.scale").fromValue(0.0).toValue(1.0).duration(0.5).start(completion: completion)
     }
     /// Run a \`compress\` animation effect on the receiver.
     ///
-    /// - Parameters:
-    ///   - completion: a completion clousure to execute when the animation finished.
+    /// - Parameter completion: a completion clousure to execute when the animation finished.
     ///
     public func compress(completion: @escaping () -> Void = {}) {
         chainAnimator.basic.property("transform.scale").fromValue(1.0).toValue(0.0).duration(0.5).start(completion: completion)
     }
     /// Run a \`hinge\` animation effect on the receiver.
     ///
-    /// - Parameters:
-    ///   - completion: a completion clousure to execute when the animation finished.
+    /// - Parameter completion: a completion clousure to execute when the animation finished.
     ///
     public func hinge(completion: @escaping () -> Void = {}) {
         layer.anchorToLeftTop()

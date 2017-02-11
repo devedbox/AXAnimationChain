@@ -29,8 +29,7 @@ import AXAnimationChainSwift
 public extension AXChainAnimator {
     /// A convenient method to combine the complete function and start function.
     ///
-    /// - Parameters:
-    ///   - completion: completion handler of the animator.
+    /// - parameter completion: completion handler of the animator.
     ///
     public func start(completion: @escaping () -> Void = {}) {
         // Call the complete function and start function.
