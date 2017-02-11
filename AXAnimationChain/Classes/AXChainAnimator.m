@@ -275,6 +275,83 @@ static NSString *const kAXKeyframeTimgingFunctionFlagGravity = @"gravity";
     }
     return child;
 }
+
+- (instancetype)moveAnchorToPoint:(CGPoint)point {
+    if (self.animatedView) {
+        [self.animatedView.layer moveAnchorToPoint:point];
+    }
+    return self;
+}
+
+- (instancetype)anchorToDefault {
+    if (self.animatedView) {
+        [self.animatedView.layer anchorToDefault];
+    }
+    return self;
+}
+
+- (instancetype)anchorToCenter {
+    if (self.animatedView) {
+        [self.animatedView.layer anchorToCenter];
+    }
+    return self;
+}
+
+- (instancetype)anchorToTop {
+    if (self.animatedView) {
+        [self.animatedView.layer anchorToTop];
+    }
+    return self;
+}
+
+- (instancetype)anchorToLeft {
+    if (self.animatedView) {
+        [self.animatedView.layer anchorToLeft];
+    }
+    return self;
+}
+
+- (instancetype)anchorToBottom {
+    if (self.animatedView) {
+        [self.animatedView.layer anchorToBottom];
+    }
+    return self;
+}
+
+- (instancetype)anchorToRight {
+    if (self.animatedView) {
+        [self.animatedView.layer anchorToRight];
+    }
+    return self;
+}
+
+- (instancetype)anchorToLeftTop {
+    if (self.animatedView) {
+        [self.animatedView.layer anchorToLeftTop];
+    }
+    return self;
+}
+
+- (instancetype)anchorToLeftBottom {
+    if (self.animatedView) {
+        [self.animatedView.layer anchorToLeftBottom];
+    }
+    return self;
+}
+
+- (instancetype)anchorToRightTop {
+    if (self.animatedView) {
+        [self.animatedView.layer anchorToRightTop];
+    }
+    return self;
+}
+
+- (instancetype)anchorToRightBottom {
+    if (self.animatedView) {
+        [self.animatedView.layer anchorToRightBottom];
+    }
+    return self;
+}
 #pragma mark - AXAnimatorChainDelegate.
 - (void)start {
     NSAssert(_animatedView, @"Animation chain cannot be created because animated view is null.");

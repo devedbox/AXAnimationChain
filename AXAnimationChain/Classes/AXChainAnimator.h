@@ -476,4 +476,31 @@ NS_ASSUME_NONNULL_BEGIN
 /// Top animator. Might be SELF if there is not any child animator.
 @property(readonly, nonatomic, nonnull) __kindof AXChainAnimator *topAnimator;
 @end
+
+@interface AXChainAnimator (AnchorPoint)
+/// Move anchor to a new anchor point. This will change the position of the layer.
+///
+/// @param point a new anchor point. Between [0, 1].
+- (instancetype)moveAnchorToPoint:(CGPoint)point;
+/// Move anchor point to default anchor value.
+- (instancetype)anchorToDefault;
+/// Move anchor point to center point.
+- (instancetype)anchorToCenter;
+/// Move anchor point to top.
+- (instancetype)anchorToTop;
+/// Move anchor point to left.
+- (instancetype)anchorToLeft;
+/// Move anchor point to bottom.
+- (instancetype)anchorToBottom;
+/// Move anchor point to right.
+- (instancetype)anchorToRight;
+/// Move anchor point to left-top.
+- (instancetype)anchorToLeftTop;
+/// Move anchor point to left-bottom.
+- (instancetype)anchorToLeftBottom;
+/// Move anchor point to right-top.
+- (instancetype)anchorToRightTop;
+/// Move anchor point to right-bottom.
+- (instancetype)anchorToRightBottom;
+@end
 NS_ASSUME_NONNULL_END
