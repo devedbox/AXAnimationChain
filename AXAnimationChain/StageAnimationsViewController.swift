@@ -77,6 +77,10 @@ class StageAnimationsViewController: UIViewController {
             self.stageLabel.hinge()
             self.stageView.hinge()
         }))
+        alert.addAction(UIAlertAction(title: "Drop", style: .default, handler: { [unowned self](action) in
+            self.stageLabel.drop()
+            self.stageView.drop()
+        }))
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         present(alert, animated: true, completion: nil)
     }
