@@ -398,6 +398,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(weak, nonatomic) UIView *animatedView;
 /// Create a animator with a specific core animation object.
 + (instancetype)animatorWithAnimation:(CAAnimation *)animation;
+/// Required initial method.
+- (instancetype)initWithAnimator:(__kindof AXChainAnimator *)animator;
 /// Begin with a new animator and replace the receiver animator.
 - (instancetype)beginWith:(nonnull AXChainAnimator *)animator;
 /// Link a new animator to the child animator of the receiver animator.
@@ -475,6 +477,12 @@ NS_ASSUME_NONNULL_BEGIN
 @interface AXChainAnimator (TopAnimator)
 /// Top animator. Might be SELF if there is not any child animator.
 @property(readonly, nonatomic, nonnull) __kindof AXChainAnimator *topAnimator;
+/// Replace the top animator in combined animators with a new animator.
+///
+/// @param animator animator to replace.
+/// @warning Not implementated.
+///
+- (void)replaceTopAnimatorWithAnimator:(__kindof AXChainAnimator *)animator;
 @end
 
 @interface AXChainAnimator (AnchorPoint)

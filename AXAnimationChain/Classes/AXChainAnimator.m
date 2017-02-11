@@ -68,6 +68,17 @@ static NSString *const kAXKeyframeTimgingFunctionFlagGravity = @"gravity";
     return self;
 }
 
+- (instancetype)initWithAnimator:(__kindof AXChainAnimator *)animator {
+    if (self = [super init]) {
+        [self _setAnimation:animator.animation];
+        self.superAnimator = animator.superAnimator;
+        self.childAnimator = animator.childAnimator;
+        self.combinedAnimators = animator.combinedAnimators;
+        self.animatedView = animator.animatedView;
+    }
+    return self;
+}
+
 #pragma mark - ChainHandler.
 - (instancetype)beginWith:(nonnull AXChainAnimator *)animator {
     if ([animator isKindOfClass:[AXTransitionChainAnimator class]] || [self isKindOfClass:[AXTransitionChainAnimator class]]) return animator;
