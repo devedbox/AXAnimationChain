@@ -24,7 +24,8 @@
 //  SOFTWARE.
 
 #import <QuartzCore/QuartzCore.h>
-
+/// Category to handler the anchor point.
+///
 @interface CALayer (AnchorPoint)
 /// Move anchor to a new anchor point. This will change the position of the layer.
 ///
