@@ -57,14 +57,37 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @see <QuartzCore/CAMediaTiming.h>
 - (instancetype)timeOffset:(NSTimeInterval)timeOffset;
+/// Set the repeat count of the core animation. Work like `reeapDuration:`.
+///
+/// @param repeatCount repeat count of the core animation.
+/// @return the receiver.
+///
+/// @see <QuartzCore/CAMediaTiming.h>
 - (instancetype)repeatCount:(CGFloat)repeatCount;
+/// Set the repeat duration of the core animation. Work like `reeapCount:`.
+///
+/// @param repeatDuration repeat duration of the core animation.
+/// @return the receiver.
+///
+/// @see <QuartzCore/CAMediaTiming.h>
 - (instancetype)repeatDuration:(NSTimeInterval)repeatDuration;
+/// Set the autoreverses of the core animation.
+///
+/// @return the receiver.
+///
+/// @see <QuartzCore/CAMediaTiming.h>
 - (instancetype)autoreverses;
+/// Set the fill mode of the core animation.
+///
+/// @param fillMode fill mode of the core animation.
+/// @return the receiver.
+///
+/// @see <QuartzCore/CAMediaTiming.h>
 - (instancetype)fillMode:(NSString *)fillMode;
 /// Remove the animation when the animator has finished the animating. Defaults to NO.
 /// @discusstion This way is not recommended to chain the animations because that
 ///              if the begining animation is finished and removed, the result will
-///              effect the next animators.=
+///              effect the next animators.
 - (instancetype)removedOnCompletion;
 @end
 
@@ -73,6 +96,7 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol AXSpringChainAnimatorDelegate;
 @protocol AXTransitionChainAnimatorDelegate;
 
+/// Animator chain defines.
 @protocol AXAnimatorChainDelegate <NSObject>
 /// Father animator object.
 @property(weak,   nonatomic, nullable) id<AXAnimatorChainDelegate> superAnimator;
@@ -131,87 +155,230 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 - (instancetype)completeWithBlock:(dispatch_block_t)completion;
 @end
-
+/// Chain animator defines.
 @protocol AXChainAnimatorDelegate <AXMediaTimingDelegate, AXAnimatorChainDelegate>
-
-// CAMediaTimingFunction reachable. Default using default function.
+// CAMediaTimingFunction reachable. Default using default function:
+/// Using linear timing function.
 - (instancetype)linear;
+/// Using ease in timing function.
 - (instancetype)easeIn;
+/// Using ease out timing function.
 - (instancetype)easeOut;
+/// Using ease in out timing function.
 - (instancetype)easeInOut;
-
+// Custom tming functions like CSS3:
+/// Using ease in sine timing function.
 - (instancetype)easeInSine;
+/// Using ease out sine timing function.
 - (instancetype)easeOutSine;
+/// Using ease in out sine timing function.
 - (instancetype)easeInOutSine;
+/// Using ease in quad timing function.
 - (instancetype)easeInQuad;
+/// Using ease out quad timing function.
 - (instancetype)easeOutQuad;
+/// Using ease in out quad timing function.
 - (instancetype)easeInOutQuad;
+/// Using ease in cubic timing function.
 - (instancetype)easeInCubic;
+/// Using ease out cubic timing function.
 - (instancetype)easeOutCubic;
+/// Using ease in out cubic timing function.
 - (instancetype)easeInOutCubic;
+/// Using ease in quart timing function.
 - (instancetype)easeInQuart;
+/// Using ease out quart timing function.
 - (instancetype)easeOutQuart;
+/// Using ease in out quart timing function.
 - (instancetype)easeInOutQuart;
+/// Using ease in quint timing function.
 - (instancetype)easeInQuint;
+/// Using ease out quint timing function.
 - (instancetype)easeOutQuint;
+/// Using ease in out quint timing function.
 - (instancetype)easeInOutQuint;
+/// Using ease in expo timing function.
 - (instancetype)easeInExpo;
+/// Using ease out expo timing function.
 - (instancetype)easeOutExpo;
+/// Using ease in out expo timing function.
 - (instancetype)easeInOutExpo;
+/// Using ease in circ timing function.
 - (instancetype)easeInCirc;
+/// Using ease out circ timing function.
 - (instancetype)easeOutCirc;
+/// Using ease in out circ timing function.
 - (instancetype)easeInOutCirc;
+/// Using ease in back timing function.
 - (instancetype)easeInBack;
+/// Using ease out back timing function.
 - (instancetype)easeOutBack;
+/// Using ease in out back timing function.
 - (instancetype)easeInOutBack;
 @end
-
+/// CAPropertyAnimation reachable.
 @protocol AXPropertyChainAnimatorDelegate <AXChainAnimatorDelegate>
-// Animated property.
+/// Set animated property key path value.
+///
+/// @param property a key path of animatable properties.
+/// @return the receiver.
+///
 - (instancetype)property:(NSString *)property;
 @end
 
 @protocol AXKeyframeChainAnimatorDelegate;
-
+/// CABasicAnimation reachable.
 @protocol AXBasicChainAnimatorDelegate <AXPropertyChainAnimatorDelegate>
+/// Set fromValue of the basic animation.
+///
+/// @param fromValue animation from value.
+/// @return the receiver.
+///
 - (instancetype)fromValue:(id)fromValue;
+/// Set toValue of the basic animation.
+///
+/// @param toValue animation to value.
+/// @return the receiver.
+///
 - (instancetype)toValue:(id)toValue;
+/// Set byValue of the basic animation.
+///
+/// @param byValue animation by value.
+/// @return the receiver.
+///
 - (instancetype)byValue:(id)byValue;
 
 // Effects converting to Keyframe animation.
+/// Using ease in elastic timing function.
 - (id<AXKeyframeChainAnimatorDelegate>)easeInElastic;
+/// Using ease out elastic timing function.
 - (id<AXKeyframeChainAnimatorDelegate>)easeOutElastic;
+/// Using ease in out elastic timing function.
 - (id<AXKeyframeChainAnimatorDelegate>)easeInOutElastic;
+/// Using ease in bounce timing function.
 - (id<AXKeyframeChainAnimatorDelegate>)easeInBounce;
+/// Using ease out bounce timing function.
 - (id<AXKeyframeChainAnimatorDelegate>)easeOutBounce;
+/// Using ease in out bounce timing function.
 - (id<AXKeyframeChainAnimatorDelegate>)easeInOutBounce;
+/// Using gravity timing function.
 - (id<AXKeyframeChainAnimatorDelegate>)gravity;
 @end
-
+/// CAKeyframeAnimation reachable.
 @protocol AXKeyframeChainAnimatorDelegate <AXPropertyChainAnimatorDelegate>
+/// Set values of the core keyframe animation.
+///
+/// @param values values of the keyframe animation.
+/// @return the receiver.
+///
 - (instancetype)values:(nullable NSArray<id> *)values;
+/// Set the path of the core keyframe animation.
+///
+/// @param path path setted to the keyframe animation.
+/// @return the receiver.
+///
 - (instancetype)path:(nullable UIBezierPath *)path;
+/// Set the key times to the core keyframe animation.
+///
+/// @param keyTimes key times setted to the keyframe animation.
+/// @return the receiver.
+///
 - (instancetype)keyTimes:(nullable NSArray<NSNumber *> *)keyTimes;
+/// Set timing functions to the core keyframe animation.
+///
+/// @param timingFunctions timing functions setted to the keyframe animation.
+/// @return the receiver.
+///
 - (instancetype)timingFunctions:(nullable NSArray<CAMediaTimingFunction *> *)timingFunctions;
+/// Set calculation mode to the core keyframe animation.
+///
+/// @param calculationMode calculation mode setted to keyframe animation.
+/// @return the receiver.
+///
 - (instancetype)calculationMode:(NSString *)calculationMode;
+/// Set tension values to the core keyframe animation.
+///
+/// @param tensionValues tension values setted to the keyframe animation.
+/// @return the receiver.
+///
 - (instancetype)tensionValues:(nullable NSArray<NSNumber *> *)tensionValues;
+/// Set the continuity valyes to the core keyframe animation.
+///
+/// @param continuityValues continuity values setted to the keyframe animation.
+/// @return the receiver.
+///
 - (instancetype)continuityValues:(nullable NSArray<NSNumber *> *)continuityValues;
+/// Set bias values to the core keyframe animation.
+///
+/// @param biasValues bias values setted to the keyframe animation.
+/// @return the receiver.
+///
 - (instancetype)biasValues:(nullable NSArray<NSNumber *> *)biasValues;
+/// Set the rotation mode to the core keyframe animation.
+///
+/// @param rotationMode rotation mode setted to the keyframe animation.
+/// @return the receiver.
+///
 - (instancetype)rotationMode:(nullable NSString *)rotationMode;
 @end
-
+/// CASpringAnimation/AXSpringAnimation reachable.
 @protocol AXSpringChainAnimatorDelegate <AXBasicChainAnimatorDelegate>
+/// Set the mass to the core spring animation.
+///
+/// @param mass mass setted to the spring animation.
+/// @return the receiver.
+///
 - (instancetype)mass:(CGFloat)mass;
+/// Set the stiffness to the core spring animation.
+///
+/// @param stiffness seiffness setted to the spring animation.
+/// @return the receiver.
+///
 - (instancetype)stiffness:(CGFloat)stiffness;
+/// Set the damping to the core spring animation.
+///
+/// @param damping damping setted to the spring animation.
+/// @return the receiver.
+///
 - (instancetype)damping:(CGFloat)damping;
+/// Set the initial velocity to the core spring animation.
+///
+/// @param initialVelocity initial velocity setted to the spring animation.
+/// @return the receiver.
+///
 - (instancetype)initialVelocity:(CGFloat)initialVelocity;
 @end
-
+/// CATransitionAnimation reachable.
 @protocol AXTransitionChainAnimatorDelegate <AXChainAnimatorDelegate>
+/// Set type to the core transition animation.
+///
+/// @param type tpye setted to the transtion animation.
+/// @return the receiver.
+///
 - (instancetype)type:(NSString *)type;
+/// Set subtype to the core transition animation.
+///
+/// @param subtype subtype setted to the transition animation.
+/// @return the receiver.
+///
 - (instancetype)subtype:(NSString *)subtype;
+/// Set the start progress to the core transition animation.
+///
+/// @param startProgress start progress setted to the transition animation.
+/// @return the receiver.
+///
 - (instancetype)startProgress:(CGFloat)startProgress;
+/// Set the end progress to the core transition animation.
+///
+/// @param endProgress end progress setted to the transition animaton.
+/// @return the receiver.
+///
 - (instancetype)endProgress:(CGFloat)endProgress;
+/// Set the filter to the core transition animation.
+///
+/// @param filter filter setted to the transition animation.
+/// @return the receiver.
+///
 - (instancetype)filter:(id)filter;
 @end
 
@@ -231,23 +398,37 @@ NS_ASSUME_NONNULL_BEGIN
 @property(weak, nonatomic) UIView *animatedView;
 /// Create a animator with a specific core animation object.
 + (instancetype)animatorWithAnimation:(CAAnimation *)animation;
-
+/// Begin with a new animator and replace the receiver animator.
 - (instancetype)beginWith:(nonnull AXChainAnimator *)animator;
+/// Link a new animator to the child animator of the receiver animator.
 - (instancetype)nextTo:(nonnull AXChainAnimator *)animator;
+/// Link a new animator to the combined animators of the receiver animator.
 - (instancetype)combineWith:(nonnull AXChainAnimator *)animator;
-
+/// Begin with a basic animator.
 - (AXBasicChainAnimator *)beginBasic;
+/// Begin with a spring animator.
 - (AXSpringChainAnimator *)beginSpring;
+/// Begin with a keyframe animator.
+///
+/// @return a new keyframe animator.
 - (AXKeyframeChainAnimator *)beginKeyframe;
 /*
 - (instancetype)beginTransition; */
+/// Combine with a basic animator and return the animator.
 - (AXBasicChainAnimator *)combineBasic;
+/// Combine with a spring animator and return the animator.
 - (AXSpringChainAnimator *)combineSpring;
+/// Combine with a keyframe animator.
 - (AXKeyframeChainAnimator *)combineKeyframe;
+/// Combine with a transition animator.
 - (AXTransitionChainAnimator *)combineTransition;
+/// Next to a basic animator.
 - (AXBasicChainAnimator *)nextToBasic;
+/// Next to a spring animator.
 - (AXSpringChainAnimator *)nextToSpring;
+/// Next to a keyframe animator.
 - (AXKeyframeChainAnimator *)nextToKeyframe;
+/// Next to a transition animator.
 - (AXTransitionChainAnimator *)nextToTransition;
 @end
 
