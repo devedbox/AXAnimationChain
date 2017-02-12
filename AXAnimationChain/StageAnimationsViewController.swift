@@ -30,6 +30,11 @@ class StageAnimationsViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func change(_ sender: UIButton) {
+        stageView.layer.removeAllAnimations()
+        stageView.originX(to: 100.0).size(to: CGSize(width: 100, height: 100)).animate(as: .basic(.default()))
+    }
+    
     @IBAction func animate(_ sender: UIButton) {
         stageLabel.layer.removeAllAnimations()
         stageView.layer.removeAllAnimations()
