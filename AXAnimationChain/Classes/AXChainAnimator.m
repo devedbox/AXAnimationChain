@@ -495,6 +495,11 @@ static NSString *const kAXKeyframeTimgingFunctionFlagGravity = @"gravity";
     return self;
 }
 
+- (instancetype)timingFunction:(CAMediaTimingFunction *)timingFunction {
+    _animation.timingFunction = timingFunction;
+    return self;
+}
+
 - (instancetype)linear {
     _animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
     return self;

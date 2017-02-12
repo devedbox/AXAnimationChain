@@ -158,6 +158,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// Chain animator defines.
 @protocol AXChainAnimatorDelegate <AXMediaTimingDelegate, AXAnimatorChainDelegate>
 // CAMediaTimingFunction reachable. Default using default function:
+- (instancetype)timingFunction:(CAMediaTimingFunction *)timingFunction;
 /// Using linear timing function.
 - (instancetype)linear;
 /// Using ease in timing function.
