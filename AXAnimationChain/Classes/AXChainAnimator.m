@@ -90,8 +90,8 @@ static NSString *const kAXKeyframeTimgingFunctionFlagGravity = @"gravity";
         } else if ([self isKindOfClass:[AXSpringChainAnimator class]]) {
             [animator _setAnimation:[CAKeyframeAnimation animationWithSpring:(CASpringAnimation *)self.animation]];
         }
-    } else if ([animator isKindOfClass:[AXBasicChainAnimator class]]) {
-        if ([self isKindOfClass:[AXBasicChainAnimator class]]) return self;
+    } else if ([animator isKindOfClass:[AXBasicChainAnimator class]] && ![animator isKindOfClass:[AXSpringChainAnimator class]]) {
+        if ([self isKindOfClass:[AXBasicChainAnimator class]] && ![animator isKindOfClass:[AXSpringChainAnimator class]]) return self;
         
         if ([self isKindOfClass:[AXKeyframeChainAnimator class]]) {
             [animator _setAnimation:[CABasicAnimation animationWithKeyframe:(CAKeyframeAnimation *)self.animation]];
@@ -756,7 +756,7 @@ static NSString *const kAXKeyframeTimgingFunctionFlagGravity = @"gravity";
 @dynamic animation;
 #pragma mark - Override.
 - (instancetype)beginWith:(AXChainAnimator *)animator {
-    if ([animator isKindOfClass:self.class]) return self;
+    if ([animator isKindOfClass:self.class] && ![animator isKindOfClass:AXSpringChainAnimator.class]) return self;
     return [super beginWith:animator];
 }
 #pragma mark - Getters.
