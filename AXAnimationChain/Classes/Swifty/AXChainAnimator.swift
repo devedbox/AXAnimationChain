@@ -25,7 +25,7 @@
 
 import Foundation
 import AXAnimationChainSwift
-/// Extension of `AXChainAnimator`.
+
 public extension AXChainAnimator {
     /// A convenient method to combine the complete function and start function.
     ///
@@ -34,5 +34,37 @@ public extension AXChainAnimator {
     public func start(completion: @escaping () -> Void = {}) {
         // Call the complete function and start function.
         self.complete(completion).start()
+    }
+}
+
+public extension AXChainAnimator {
+    /// Replace self of super animator's combined animators with a new animator.
+    ///
+    /// - Parameter with: animator to be replaced.
+    /// - Returns: The animator if repalce succeed, or self.
+    ///
+    public func replace(with animator: AXChainAnimator?) -> Self {
+        guard let _ = animator else {
+            return self
+        }
+        // If super animator does not exits, return self.
+        guard let _ = superAnimator else {
+            return self
+        }
+        
+        var _combinedAnimators = superAnimator!.combinedAnimators
+        // If combined animators of super does not has any elements, return self.
+        guard let _ = _combinedAnimators else {
+            return self
+        }
+        // If combined animators of super does not contain self, return self.
+        guard _combinedAnimators!.contains(self) else {
+            return self
+        }
+        
+        _combinedAnimators![_combinedAnimators!.index(of: self)!] = animator!
+        superAnimator!.combinedAnimators = _combinedAnimators
+        
+        return type(of: self).init(animator:animator!)
     }
 }
