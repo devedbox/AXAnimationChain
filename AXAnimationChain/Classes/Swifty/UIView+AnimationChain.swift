@@ -32,13 +32,15 @@ public extension UIView {
         static var waitContext = "waitContext"
     }
     
+    public typealias SpringValue = (mass: CGFloat, stiffness: CGFloat, damping: CGFloat)
+    
     public enum AnimationType {
         /*
         public enum EffectType: String {
             case `default`, linear, easeIn, easeOut, easeInOut, easeInSine, easeOutSine, easeInOutSine, easeInQuad, easeOutQuad, easeInOutQuad, easeInCubic, easeOutCubic, easeInOutCubic, easeInQuart, easeOutQuart, easeInOutQuart, easeInQuint, easeOutQuint, easeInOutQuint, easeInExpo, easeOutExpo, easeInOutExpo, easeInCirc, easeOutCirc, easeInOutCirc, easeInBack, easeOutBack, easeInOutBack
         } */
         
-        case setted, basic(CAMediaTimingFunction), spring
+        case setted, basic(CAMediaTimingFunction?), spring(SpringValue?)
     }
     
     private var afterContext: Double? {
@@ -52,15 +54,13 @@ public extension UIView {
     }
     
     // MARK: - Animation type.
-    public func basic() -> Self {
-        /* animatorContext = kAXAnimatorContextBasic */
-        let _ = chainAnimator.top.combinedAnimators?.last?.replace(with: chainAnimator.top.combinedAnimators?.last?.beginBasic())
+    public func basic(_ timingFunction: CAMediaTimingFunction = .default()) -> Self {
+        let _ = chainAnimator.top.combinedAnimators?.last?.replace(with: chainAnimator.top.combinedAnimators?.last?.beginBasic().timingFunction(timingFunction))
         return self
     }
     
-    public func spring() -> Self {
-        /* animatorContext = kAXAnimatorContextSpring */
-        let _ = chainAnimator.top.combinedAnimators?.last?.replace(with: chainAnimator.top.combinedAnimators?.last?.beginSpring())
+    public func spring(mass: CGFloat = 1, stiffness: CGFloat = 100, damping: CGFloat = 10) -> Self {
+        let _ = chainAnimator.top.combinedAnimators?.last?.replace(with: chainAnimator.top.combinedAnimators?.last?.beginSpring().mass(mass).stiffness(stiffness).damping(damping))
         return self
     }
     
@@ -70,13 +70,20 @@ public extension UIView {
         case .basic(let timingFunction):
             if let animators = chainAnimator.top.combinedAnimators {
                 for animator in animators {
-                    let _ = animator.replace(with: animator.beginBasic().timingFunction(timingFunction))
+                    let replaced = animator.replace(with: animator.beginBasic())
+                    if let timing = timingFunction {
+                        replaced.timingFunction(timing)
+                    }
                 }
             }
-        case .spring:
+        case .spring(let value):
             if let animators = chainAnimator.top.combinedAnimators {
                 for animator in animators {
-                    let _ = animator.replace(with: animator.beginSpring())
+                    if let springValue = value {
+                        let _ = animator.replace(with: animator.beginSpring().mass(springValue.mass).stiffness(springValue.stiffness).damping(springValue.damping))
+                    } else {
+                        let _ = animator.replace(with: animator.beginSpring())
+                    }
                 }
             }
         default: break
