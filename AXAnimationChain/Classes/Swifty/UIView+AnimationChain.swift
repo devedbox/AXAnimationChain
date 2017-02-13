@@ -65,7 +65,7 @@ public extension UIView {
     }
     
     // MARK: - Animate.
-    public func animate(as animationType: AnimationType = .setted, completion: @autoclosure @escaping () -> Void = {}()) {
+    public func animate(as animationType: AnimationType = .setted, completion: @escaping () -> Void = {}) {
         switch animationType {
         case .basic(let timingFunction):
             if let animators = chainAnimator.top.combinedAnimators {
