@@ -78,7 +78,36 @@ public extension UIView {
         let _ = chainAnimator.top.combinedAnimators?.last?.replace(with: chainAnimator.top.combinedAnimators?.last?.beginSpring().mass(mass).stiffness(stiffness).damping(damping))
         return self
     }
-    
+    /// Run as bonuce animation effect with an animation easing curve.
+    ///
+    /// - Parameter easing: Animation easing curve.
+    ///
+    public func bonuce(easing: AnimationEasingCurve) -> Self {
+        switch easing {
+        case .in:
+            let _ = chainAnimator.top.combinedAnimators?.last?.replace(with: chainAnimator.top.combinedAnimators?.last?.beginBasic().easeInBounce())
+        case .out:
+            let _ = chainAnimator.top.combinedAnimators?.last?.replace(with: chainAnimator.top.combinedAnimators?.last?.beginBasic().easeOutBounce())
+        default:
+            let _ = chainAnimator.top.combinedAnimators?.last?.replace(with: chainAnimator.top.combinedAnimators?.last?.beginBasic().easeInOutBounce())
+        }
+        return self
+    }
+    /// Run as elastic animation effect with an animation easing curve.
+    ///
+    /// - Parameter easing: Animation easing curve.
+    ///
+    public func elastic(easing: AnimationEasingCurve) -> Self {
+        switch easing {
+        case .in:
+            let _ = chainAnimator.top.combinedAnimators?.last?.replace(with: chainAnimator.top.combinedAnimators?.last?.beginBasic().easeInElastic())
+        case .out:
+            let _ = chainAnimator.top.combinedAnimators?.last?.replace(with: chainAnimator.top.combinedAnimators?.last?.beginBasic().easeOutElastic())
+        default:
+            let _ = chainAnimator.top.combinedAnimators?.last?.replace(with: chainAnimator.top.combinedAnimators?.last?.beginBasic().easeInOutElastic())
+        }
+        return self
+    }
     // MARK: - Animate.
     /// Perform the animation as a animation type allpying to all the animations. A completion closure will be executed when all animation finished.
     ///
