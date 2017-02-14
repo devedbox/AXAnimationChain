@@ -32,7 +32,7 @@ class StageAnimationsViewController: UIViewController {
     
     @IBAction func change(_ sender: UIButton) {
         stageView.layer.removeAllAnimations()
-        stageView.originY(to: 100.0).duration(1.0).size(to: CGSize(width: 100, height: 100)).duration(1.0).spring().animate(as: .bounce(.out)) {
+        stageView.originY(to: 400).duration(1.0).size(to: CGSize(width: 100, height: 100)).duration(1.0).spring().animate(as: .bounce(.out)) {
             print("Finished chain animation.")
         }
     }
