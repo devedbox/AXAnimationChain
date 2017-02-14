@@ -81,7 +81,10 @@ static NSString *const kAXKeyframeTimgingFunctionFlagGravity = @"gravity";
 
 #pragma mark - ChainHandler.
 - (instancetype)beginWith:(nonnull AXChainAnimator *)animator {
-    if ([animator isKindOfClass:[AXTransitionChainAnimator class]] || [self isKindOfClass:[AXTransitionChainAnimator class]]) return animator;
+    if ([animator isKindOfClass:[AXTransitionChainAnimator class]] || [self isKindOfClass:[AXTransitionChainAnimator class]]) {
+        [self _relinkAnimatorsWithAnimatorToReplace:animator];
+        return animator;
+    }
     if ([animator isKindOfClass:[AXKeyframeChainAnimator class]]) {
         if ([self isKindOfClass:[AXKeyframeChainAnimator class]]) return self;
         
@@ -107,6 +110,7 @@ static NSString *const kAXKeyframeTimgingFunctionFlagGravity = @"gravity";
             [animator _setAnimation:[CASpringAnimation animationWithBasic:(CABasicAnimation *)self.animation]];
         }
     }
+    [self _relinkAnimatorsWithAnimatorToReplace:animator];
     return animator;
 }
 
@@ -755,6 +759,22 @@ static NSString *const kAXKeyframeTimgingFunctionFlagGravity = @"gravity";
         [self _setAnimation:[self _defaultAnimation]];
     }
 }
+
+- (void)_relinkAnimatorsWithAnimatorToReplace:(AXChainAnimator *)animator {
+    // Replace SELF in the super animator.
+    if (self.superAnimator.childAnimator == self) {
+        self.superAnimator.childAnimator = nil;
+        [self.superAnimator nextTo:animator];
+    } else if ([self.superAnimator.combinedAnimators containsObject:self]) {
+        // Remove SELF from the super animator.
+        NSMutableArray *combinedAnimators = [self.superAnimator.combinedAnimators mutableCopy];
+        [combinedAnimators removeObject:self];
+        [(AXChainAnimator *)self.superAnimator _setCombinedAnimators:[combinedAnimators copy]];
+        
+        // Combine new animator to the super animator.
+        [self.superAnimator combineWith:animator];
+    }
+}
 @end
 
 @implementation AXBasicChainAnimator
@@ -847,23 +867,6 @@ static NSString *const kAXKeyframeTimgingFunctionFlagGravity = @"gravity";
     [keyframe setTimingFunctionFlags:kAXKeyframeTimgingFunctionFlagGravity];
     [self _relinkAnimatorsWithAnimatorToReplace:keyframe];
     return keyframe;
-}
-
-#pragma mark - Private.
-- (void)_relinkAnimatorsWithAnimatorToReplace:(id<AXChainAnimatorDelegate>)animator {
-    // Replace SELF in the super animator.
-    if (self.superAnimator.childAnimator == self) {
-        self.superAnimator.childAnimator = nil;
-        [self.superAnimator nextTo:animator];
-    } else if ([self.superAnimator.combinedAnimators containsObject:self]) {
-        // Remove SELF from the super animator.
-        NSMutableArray *combinedAnimators = [self.superAnimator.combinedAnimators mutableCopy];
-        [combinedAnimators removeObject:self];
-        [(AXChainAnimator *)self.superAnimator _setCombinedAnimators:[combinedAnimators copy]];
-        
-        // Combine new animator to the super animator.
-        [self.superAnimator combineWith:animator];
-    }
 }
 @end
 
