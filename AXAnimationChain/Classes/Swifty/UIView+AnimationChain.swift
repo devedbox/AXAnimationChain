@@ -261,7 +261,7 @@ public extension UIView {
     /// - Parameter to: The value to move to.
     ///
     public func originY(to originY: CGFloat) -> Self {
-        chainAnimator.top.combineBasic().property("position.x").beginTime(afterContext ?? 0.0).toValue(position(from: CGPoint(x: layer.position.x, y: originY)).y)
+        chainAnimator.top.combineBasic().property("position.y").beginTime(afterContext ?? 0.0).toValue(position(from: CGPoint(x: layer.position.x, y: originY)).y)
         return self
     }
     /// Animate moving `center` to a destined point.
