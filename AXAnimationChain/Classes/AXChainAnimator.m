@@ -291,6 +291,20 @@ static NSString *const kAXKeyframeTimgingFunctionFlagGravity = @"gravity";
     return child;
 }
 
+- (instancetype)replaceCombinedAnimatorWithAnimator:(__kindof AXChainAnimator *)animator {
+    if (!animator || !self.superAnimator || !self.superAnimator.combinedAnimators) return self;
+    
+    // Return self if combined animators of super animator not contains self.
+    if (![self.superAnimator.combinedAnimators containsObject:self]) return self;
+    NSMutableArray *combinedAnimators = [self.superAnimator.combinedAnimators mutableCopy];
+    // Replace self with new animator.
+    [combinedAnimators replaceObjectAtIndex:[combinedAnimators indexOfObject:self] withObject:animator];
+    // Set new combined animators to super animator.
+    self.superAnimator.combinedAnimators = [combinedAnimators copy];
+    
+    return animator;
+}
+
 - (instancetype)moveAnchorToPoint:(CGPoint)point {
     if (self.animatedView) {
         [self.animatedView.layer moveAnchorToPoint:point];

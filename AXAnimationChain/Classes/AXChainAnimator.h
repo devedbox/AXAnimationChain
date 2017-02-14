@@ -478,12 +478,12 @@ NS_ASSUME_NONNULL_BEGIN
 @interface AXChainAnimator (TopAnimator)
 /// Top animator. Might be SELF if there is not any child animator.
 @property(readonly, nonatomic, nonnull) __kindof AXChainAnimator *topAnimator;
-/// Replace the top animator in combined animators with a new animator.
+/// Replace the top animator in combined animators of super animator with a new animator.
 ///
 /// @param animator animator to replace.
 /// @warning Not implementated.
 ///
-- (void)replaceTopAnimatorWithAnimator:(__kindof AXChainAnimator *)animator;
+- (instancetype)replaceCombinedAnimatorWithAnimator:(__kindof AXChainAnimator *)animator;
 @end
 
 @interface AXChainAnimator (AnchorPoint)
