@@ -326,7 +326,7 @@ id ToValueByValueWithValue(id value, id byValue, BOOL plus) {
 
 @implementation CABasicAnimation (Convertable)
 + (instancetype)animationWithKeyframe:(CAKeyframeAnimation *)animation usingTimingFunction:(CAMediaTimingFunction *)timingFunction {
-    if (!animation || ![animation isKindOfClass:CABasicAnimation.class]) return nil;
+    if (!animation || ![animation isKindOfClass:CAKeyframeAnimation.class]) return nil;
     CABasicAnimation *basic = [CABasicAnimation new];
     basic.beginTime = animation.beginTime;
     basic.duration = animation.duration;
@@ -371,7 +371,7 @@ id ToValueByValueWithValue(id value, id byValue, BOOL plus) {
 
 @implementation CASpringAnimation (Convertable)
 + (instancetype)animationWithKeyframe:(CAKeyframeAnimation *)animation usingTimingFunction:(CAMediaTimingFunction *)timingFunction {
-    if (!animation || ![animation isKindOfClass:CABasicAnimation.class]) return nil;
+    if (!animation || ![animation isKindOfClass:CAKeyframeAnimation.class]) return nil;
     CASpringAnimation *spring = [CASpringAnimation new];
     spring.beginTime = animation.beginTime;
     spring.duration = animation.duration;
