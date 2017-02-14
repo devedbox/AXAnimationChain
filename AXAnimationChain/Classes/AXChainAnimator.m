@@ -91,7 +91,7 @@ static NSString *const kAXKeyframeTimgingFunctionFlagGravity = @"gravity";
             [animator _setAnimation:[CAKeyframeAnimation animationWithSpring:(CASpringAnimation *)self.animation]];
         }
     } else if ([animator isKindOfClass:[AXBasicChainAnimator class]] && ![animator isKindOfClass:[AXSpringChainAnimator class]]) {
-        if ([self isKindOfClass:[AXBasicChainAnimator class]] && ![animator isKindOfClass:[AXSpringChainAnimator class]]) return self;
+        if ([self isKindOfClass:[AXBasicChainAnimator class]] && ![self isKindOfClass:[AXSpringChainAnimator class]]) return self;
         
         if ([self isKindOfClass:[AXKeyframeChainAnimator class]]) {
             [animator _setAnimation:[CABasicAnimation animationWithKeyframe:(CAKeyframeAnimation *)self.animation]];
