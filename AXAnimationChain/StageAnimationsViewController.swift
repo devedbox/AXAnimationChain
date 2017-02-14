@@ -32,9 +32,10 @@ class StageAnimationsViewController: UIViewController {
     
     @IBAction func change(_ sender: UIButton) {
         stageView.layer.removeAllAnimations()
-        stageView.originX(to: 100.0).size(to: CGSize(width: 100, height: 100)).animate(as: .bounce(.inOut)) {
+        stageView.originX(to: 100.0).duration(1.0).size(to: CGSize(width: 100, height: 100)).duration(1.0).bonuce(easing: .out).animate() {
             print("sss")
         }
+        print("\(self.view.layer.value(forKeyPath: "transform.rotation.x"))")
     }
     
     @IBAction func animate(_ sender: UIButton) {

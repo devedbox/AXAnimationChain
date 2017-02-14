@@ -83,13 +83,27 @@ public extension UIView {
     /// - Parameter easing: Animation easing curve.
     ///
     public func bonuce(easing: AnimationEasingCurve) -> Self {
-        switch easing {
-        case .in:
-            let _ = chainAnimator.top.combinedAnimators?.last?.replace(with: chainAnimator.top.combinedAnimators?.last?.beginBasic().easeInBounce())
-        case .out:
-            let _ = chainAnimator.top.combinedAnimators?.last?.replace(with: chainAnimator.top.combinedAnimators?.last?.beginBasic().easeOutBounce())
-        default:
-            let _ = chainAnimator.top.combinedAnimators?.last?.replace(with: chainAnimator.top.combinedAnimators?.last?.beginBasic().easeInOutBounce())
+        if let last = chainAnimator.top.combinedAnimators?.last {
+            switch easing {
+            case .in:
+                if let fromValue = layer.initial((last.animation as! CAPropertyAnimation).keyPath!) {
+                    let _ = last.replace(with: last.beginBasic().fromValue(fromValue).easeInBounce())
+                } else {
+                    let _ = last.replace(with: last.beginBasic().easeInBounce())
+                }
+            case .out:
+                if let fromValue = layer.initial((last.animation as! CAPropertyAnimation).keyPath!) {
+                    let _ = last.replace(with: last.beginBasic().fromValue(fromValue).easeOutBounce())
+                } else {
+                    let _ = last.replace(with: last.beginBasic().easeOutBounce())
+                }
+            default:
+                if let fromValue = layer.initial((last.animation as! CAPropertyAnimation).keyPath!) {
+                    let _ = last.replace(with: last.beginBasic().fromValue(fromValue).easeInOutBounce())
+                } else {
+                    let _ = last.replace(with: last.beginBasic().easeInOutBounce())
+                }
+            }
         }
         return self
     }
@@ -98,13 +112,27 @@ public extension UIView {
     /// - Parameter easing: Animation easing curve.
     ///
     public func elastic(easing: AnimationEasingCurve) -> Self {
-        switch easing {
-        case .in:
-            let _ = chainAnimator.top.combinedAnimators?.last?.replace(with: chainAnimator.top.combinedAnimators?.last?.beginBasic().easeInElastic())
-        case .out:
-            let _ = chainAnimator.top.combinedAnimators?.last?.replace(with: chainAnimator.top.combinedAnimators?.last?.beginBasic().easeOutElastic())
-        default:
-            let _ = chainAnimator.top.combinedAnimators?.last?.replace(with: chainAnimator.top.combinedAnimators?.last?.beginBasic().easeInOutElastic())
+        if let last = chainAnimator.top.combinedAnimators?.last {
+            switch easing {
+            case .in:
+                if let fromValue = layer.initial((last.animation as! CAPropertyAnimation).keyPath!) {
+                    let _ = last.replace(with: last.beginBasic().fromValue(fromValue).easeInElastic())
+                } else {
+                    let _ = last.replace(with: last.beginBasic().easeInElastic())
+                }
+            case .out:
+                if let fromValue = layer.initial((last.animation as! CAPropertyAnimation).keyPath!) {
+                    let _ = last.replace(with: last.beginBasic().fromValue(fromValue).easeOutElastic())
+                } else {
+                    let _ = last.replace(with: last.beginBasic().easeOutElastic())
+                }
+            default:
+                if let fromValue = layer.initial((last.animation as! CAPropertyAnimation).keyPath!) {
+                    let _ = last.replace(with: last.beginBasic().fromValue(fromValue).easeInOutElastic())
+                } else {
+                    let _ = last.replace(with: last.beginBasic().easeInOutElastic())
+                }
+            }
         }
         return self
     }
@@ -140,11 +168,23 @@ public extension UIView {
                 for animator in animators {
                     switch easing {
                     case .in:
-                        let _ = animator.replace(with: animator.beginBasic().easeInBounce())
+                        if let fromValue = layer.initial((animator.animation as! CAPropertyAnimation).keyPath!) {
+                            let _ = animator.replace(with: animator.beginBasic().fromValue(fromValue).easeInBounce())
+                        } else {
+                            let _ = animator.replace(with: animator.beginBasic().easeInBounce())
+                        }
                     case .out:
-                        let _ = animator.replace(with: animator.beginBasic().easeOutBounce())
+                        if let fromValue = layer.initial((animator.animation as! CAPropertyAnimation).keyPath!) {
+                            let _ = animator.replace(with: animator.beginBasic().fromValue(fromValue).easeOutBounce())
+                        } else {
+                            let _ = animator.replace(with: animator.beginBasic().easeOutBounce())
+                        }
                     default:
-                        let _ = animator.replace(with: animator.beginBasic().easeInOutBounce())
+                        if let fromValue = layer.initial((animator.animation as! CAPropertyAnimation).keyPath!) {
+                            let _ = animator.replace(with: animator.beginBasic().fromValue(fromValue).easeInOutBounce())
+                        } else {
+                            let _ = animator.replace(with: animator.beginBasic().easeInOutBounce())
+                        }
                     }
                 }
             }
@@ -153,11 +193,23 @@ public extension UIView {
                 for animator in animators {
                     switch easing {
                     case .in:
-                        let _ = animator.replace(with: animator.beginBasic().easeInElastic())
+                        if let fromValue = layer.initial((animator.animation as! CAPropertyAnimation).keyPath!) {
+                            let _ = animator.replace(with: animator.beginBasic().fromValue(fromValue).easeInElastic())
+                        } else {
+                            let _ = animator.replace(with: animator.beginBasic().easeInElastic())
+                        }
                     case .out:
-                        let _ = animator.replace(with: animator.beginBasic().easeOutElastic())
+                        if let fromValue = layer.initial((animator.animation as! CAPropertyAnimation).keyPath!) {
+                            let _ = animator.replace(with: animator.beginBasic().fromValue(fromValue).easeOutElastic())
+                        } else {
+                            let _ = animator.replace(with: animator.beginBasic().easeOutElastic())
+                        }
                     default:
-                        let _ = animator.replace(with: animator.beginBasic().easeInOutElastic())
+                        if let fromValue = layer.initial((animator.animation as! CAPropertyAnimation).keyPath!) {
+                            let _ = animator.replace(with: animator.beginBasic().fromValue(fromValue).easeInOutElastic())
+                        } else {
+                            let _ = animator.replace(with: animator.beginBasic().easeInOutElastic())
+                        }
                     }
                 }
             }
@@ -653,4 +705,75 @@ public extension UIView {
         return CGPoint(x: origin.x + layer.anchorPoint.x*bounds.width, y: origin.y + layer.anchorPoint.y*bounds.height)
     }
 
+}
+
+fileprivate extension CALayer {
+    /// Get the initial value of the keypath to animate.
+    ///
+    /// - Parameter keyPath: The key path to animate on layer.
+    /// - Returns: Initial value of the layer for the key path.
+    ///
+    fileprivate func initial(_ keyPath: String) -> Any? {
+        switch keyPath {
+        case "position":
+            return position
+        case "position.x":
+            return position.x
+        case "position.y":
+            return position.y
+        case "bounds.size":
+            return bounds.size
+        case "opacity":
+            return opacity
+        case "backgroundColor":
+            return backgroundColor ?? UIColor.clear.cgColor
+        case "borderColor":
+            return borderColor ?? UIColor.clear.cgColor
+        case "borderWidth":
+            return borderWidth
+        case "cornerRadius":
+            return cornerRadius
+        case "transform.scale":
+            /*
+            return (transform.m11+transform.m22+transform.m33)/3 */
+            return value(forKeyPath: keyPath)
+        case "transform.scale.x":
+            /*
+            return transform.m11 */
+            return value(forKeyPath: keyPath)
+        case "transform.scale.y":
+            /*
+            return transform.m22 */
+            return value(forKeyPath: keyPath)
+        case "transform.scale.z":
+            /*
+            return transform.m33 */
+            return value(forKeyPath: keyPath)
+        case "transform.rotation":
+            return value(forKeyPath: keyPath)
+        case "transform.rotation.x":
+            return value(forKeyPath: keyPath)
+        case "transform.rotation.y":
+            return value(forKeyPath: keyPath)
+        case "transform.rotation.z":
+            return value(forKeyPath: keyPath)
+        case "transform.translation":
+            /*
+            return (transform.m41+transform.m42+transform.m43)/3 */
+            return value(forKeyPath: keyPath)
+        case "transform.translation.x":
+            /*
+            return transform.m41 */
+            return value(forKeyPath: keyPath)
+        case "transform.translation.y":
+            /*
+            return transform.m42 */
+            return value(forKeyPath: keyPath)
+        case "transform.translation.z":
+            /*
+            return transform.m43 */
+            return value(forKeyPath: keyPath)
+        default: return value(forKeyPath: keyPath)
+        }
+    }
 }
