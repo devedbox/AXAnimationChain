@@ -32,7 +32,7 @@ class StageAnimationsViewController: UIViewController {
     
     @IBAction func change(_ sender: UIButton) {
         stageView.layer.removeAllAnimations()
-        stageView.originX(to: 100.0).size(to: CGSize(width: 100, height: 100)).animate(as: .spring(nil)) {
+        stageView.originX(to: 100.0).size(to: CGSize(width: 100, height: 100)).animate(as: .bounce(.inOut)) {
             print("sss")
         }
     }

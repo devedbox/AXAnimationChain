@@ -34,6 +34,10 @@ public extension UIView {
     }
     /// Spring animation parameters.
     public typealias SpringValue = (mass: CGFloat, stiffness: CGFloat, damping: CGFloat)
+    /// Animation curve.
+    public enum AnimationEasingCurve {
+        case `in`, out, inOut
+    }
     /// Animation type run as basic, spring and so on.
     public enum AnimationType {
         /*
@@ -41,7 +45,7 @@ public extension UIView {
             case `default`, linear, easeIn, easeOut, easeInOut, easeInSine, easeOutSine, easeInOutSine, easeInQuad, easeOutQuad, easeInOutQuad, easeInCubic, easeOutCubic, easeInOutCubic, easeInQuart, easeOutQuart, easeInOutQuart, easeInQuint, easeOutQuint, easeInOutQuint, easeInExpo, easeOutExpo, easeInOutExpo, easeInCirc, easeOutCirc, easeInOutCirc, easeInBack, easeOutBack, easeInOutBack
         } */
         
-        case setted, basic(CAMediaTimingFunction?), spring(SpringValue?)
+        case setted, basic(CAMediaTimingFunction?), spring(SpringValue?), bounce(AnimationEasingCurve), elastic(AnimationEasingCurve)
     }
     /// After total time duration.
     private var afterContext: Double? {
@@ -99,6 +103,32 @@ public extension UIView {
                         let _ = animator.replace(with: animator.beginSpring().mass(springValue.mass).stiffness(springValue.stiffness).damping(springValue.damping))
                     } else {
                         let _ = animator.replace(with: animator.beginSpring())
+                    }
+                }
+            }
+        case .bounce(let easing):
+            if let animators = chainAnimator.top.combinedAnimators {
+                for animator in animators {
+                    switch easing {
+                    case .in:
+                        let _ = animator.replace(with: animator.beginBasic().easeInBounce())
+                    case .out:
+                        let _ = animator.replace(with: animator.beginBasic().easeOutBounce())
+                    default:
+                        let _ = animator.replace(with: animator.beginBasic().easeInOutBounce())
+                    }
+                }
+            }
+        case .elastic(let easing):
+            if let animators = chainAnimator.top.combinedAnimators {
+                for animator in animators {
+                    switch easing {
+                    case .in:
+                        let _ = animator.replace(with: animator.beginBasic().easeInElastic())
+                    case .out:
+                        let _ = animator.replace(with: animator.beginBasic().easeOutElastic())
+                    default:
+                        let _ = animator.replace(with: animator.beginBasic().easeInOutElastic())
                     }
                 }
             }
