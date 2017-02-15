@@ -533,12 +533,14 @@ static NSString *const kAXAnimatorContextNone = @"normal";
 
 #pragma mark - Animation.
 - (instancetype)basic {
-    [self setAnimatorContext:kAXAnimatorContextBasic];
+    AXChainAnimator *lastAnimator = self.chainAnimator.topAnimator.combinedAnimators.lastObject;
+    [lastAnimator replaceCombinedAnimatorWithAnimator:[lastAnimator beginBasic]];
     return self;
 }
 
 - (instancetype)spring {
-    [self setAnimatorContext:kAXAnimatorContextSpring];
+    AXChainAnimator *lastAnimator = self.chainAnimator.topAnimator.combinedAnimators.lastObject;
+    [lastAnimator replaceCombinedAnimatorWithAnimator:[lastAnimator beginSpring]];
     return self;
 }
 
