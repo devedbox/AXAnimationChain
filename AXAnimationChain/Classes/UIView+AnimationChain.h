@@ -55,8 +55,6 @@ NS_ASSUME_NONNULL_BEGIN
 - (UIView * (^)(CGFloat toTranslateX))translateXTo;
 - (UIView * (^)(CGFloat toTranslateY))translateYTo;
 - (UIView * (^)(CGFloat toTranslateZ))translateZTo;
-
-- (UIView * (^)(CGPoint toAnchor))anchorTo;
 #pragma mark - UIImageView.
 /// Animate to change the image content of UIImage object for UIImageView.
 - (UIView * (^)(UIImage *toImage))imageTo;
@@ -89,7 +87,6 @@ NS_ASSUME_NONNULL_BEGIN
 - (UIView * (^)(CGFloat byTranslateX))translateXBy;
 - (UIView * (^)(CGFloat byTranslateY))translateYBy;
 - (UIView * (^)(CGFloat byTranslateZ))translateZBy;
-- (UIView * (^)(CGPoint byAnchor))anchorBy;
 
 - (dispatch_block_t)animate;
 
