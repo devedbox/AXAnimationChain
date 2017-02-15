@@ -646,6 +646,36 @@ static NSString *const kAXAnimatorContextNone = @"normal";
     return self;
 }
 
+- (instancetype)easeInElastic {
+    [self.chainAnimator.topAnimator.combinedAnimators.lastObject.beginBasic easeInElastic];
+    return self;
+}
+
+- (instancetype)easeOutElastic {
+    [self.chainAnimator.topAnimator.combinedAnimators.lastObject.beginBasic easeOutElastic];
+    return self;
+}
+
+- (instancetype)easeInOutElastic {
+    [self.chainAnimator.topAnimator.combinedAnimators.lastObject.beginBasic easeInOutElastic];
+    return self;
+}
+
+- (instancetype)easeInBounce {
+    [self.chainAnimator.topAnimator.combinedAnimators.lastObject.beginBasic easeInBounce];
+    return self;
+}
+
+- (instancetype)easeOutBounce {
+    [self.chainAnimator.topAnimator.combinedAnimators.lastObject.beginBasic easeOutBounce];
+    return self;
+}
+
+- (instancetype)easeInOutBounce {
+    [self.chainAnimator.topAnimator.combinedAnimators.lastObject.beginBasic easeInOutBounce];
+    return self;
+}
+
 #pragma mark - Animation.
 - (instancetype)basic {
     AXChainAnimator *lastAnimator = self.chainAnimator.topAnimator.combinedAnimators.lastObject;

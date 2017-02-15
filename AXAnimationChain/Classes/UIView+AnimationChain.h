@@ -128,6 +128,13 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)easeOutBack;
 - (instancetype)easeInOutBack;
 
+- (instancetype)easeInElastic;
+- (instancetype)easeOutElastic;
+- (instancetype)easeInOutElastic;
+- (instancetype)easeInBounce;
+- (instancetype)easeOutBounce;
+- (instancetype)easeInOutBounce;
+
 #pragma mark - Animation.
 /// Change the last animation of animator to the CABasicAnimation object.
 - (instancetype)basic;
