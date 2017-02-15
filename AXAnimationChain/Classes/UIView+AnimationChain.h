@@ -103,6 +103,31 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)easeOut;
 - (instancetype)easeInOut;
 
+- (instancetype)easeInSine;
+- (instancetype)easeOutSine;
+- (instancetype)easeInOutSine;
+- (instancetype)easeInQuad;
+- (instancetype)easeOutQuad;
+- (instancetype)easeInOutQuad;
+- (instancetype)easeInCubic;
+- (instancetype)easeOutCubic;
+- (instancetype)easeInOutCubic;
+- (instancetype)easeInQuart;
+- (instancetype)easeOutQuart;
+- (instancetype)easeInOutQuart;
+- (instancetype)easeInQuint;
+- (instancetype)easeOutQuint;
+- (instancetype)easeInOutQuint;
+- (instancetype)easeInExpo;
+- (instancetype)easeOutExpo;
+- (instancetype)easeInOutExpo;
+- (instancetype)easeInCirc;
+- (instancetype)easeOutCirc;
+- (instancetype)easeInOutCirc;
+- (instancetype)easeInBack;
+- (instancetype)easeOutBack;
+- (instancetype)easeInOutBack;
+
 #pragma mark - Animation.
 /// Change the last animation of animator to the CABasicAnimation object.
 - (instancetype)basic;

@@ -512,22 +512,137 @@ static NSString *const kAXAnimatorContextNone = @"normal";
 
 #pragma mark - Effects.
 - (instancetype)linear {
-    [self.chainAnimator.topAnimator.combinedAnimators.lastObject linear];
+    [self.chainAnimator.topAnimator.combinedAnimators.lastObject.beginBasic linear];
     return self;
 }
 
 - (instancetype)easeIn {
-    [self.chainAnimator.topAnimator.combinedAnimators.lastObject easeIn];
+    [self.chainAnimator.topAnimator.combinedAnimators.lastObject.beginBasic easeIn];
     return self;
 }
 
 - (instancetype)easeOut {
-    [self.chainAnimator.topAnimator.combinedAnimators.lastObject easeOut];
+    [self.chainAnimator.topAnimator.combinedAnimators.lastObject.beginBasic easeOut];
     return self;
 }
 
 - (instancetype)easeInOut {
-    [self.chainAnimator.topAnimator.combinedAnimators.lastObject easeInOut];
+    [self.chainAnimator.topAnimator.combinedAnimators.lastObject.beginBasic easeInOut];
+    return self;
+}
+
+- (instancetype)easeInSine {
+    [self.chainAnimator.topAnimator.combinedAnimators.lastObject.beginBasic easeInSine];
+    return self;
+}
+
+- (instancetype)easeOutSine {
+    [self.chainAnimator.topAnimator.combinedAnimators.lastObject.beginBasic easeOutSine];
+    return self;
+}
+
+- (instancetype)easeInOutSine {
+    [self.chainAnimator.topAnimator.combinedAnimators.lastObject.beginBasic easeInOutSine];
+    return self;
+}
+
+- (instancetype)easeInQuad {
+    [self.chainAnimator.topAnimator.combinedAnimators.lastObject.beginBasic easeInQuad];
+    return self;
+}
+
+- (instancetype)easeOutQuad {
+    [self.chainAnimator.topAnimator.combinedAnimators.lastObject.beginBasic easeOutQuad];
+    return self;
+}
+
+- (instancetype)easeInOutQuad {
+    [self.chainAnimator.topAnimator.combinedAnimators.lastObject.beginBasic easeInOutQuad];
+    return self;
+}
+
+- (instancetype)easeInCubic {
+    [self.chainAnimator.topAnimator.combinedAnimators.lastObject.beginBasic easeInCubic];
+    return self;
+}
+
+- (instancetype)easeOutCubic {
+    [self.chainAnimator.topAnimator.combinedAnimators.lastObject.beginBasic easeOutCubic];
+    return self;
+}
+
+- (instancetype)easeInOutCubic {
+    [self.chainAnimator.topAnimator.combinedAnimators.lastObject.beginBasic easeInOutCubic];
+    return self;
+}
+
+- (instancetype)easeInQuart {
+    [self.chainAnimator.topAnimator.combinedAnimators.lastObject.beginBasic easeInQuart];
+    return self;
+}
+
+- (instancetype)easeOutQuart {
+    [self.chainAnimator.topAnimator.combinedAnimators.lastObject.beginBasic easeOutQuart];
+    return self;
+}
+
+- (instancetype)easeInOutQuart {
+    [self.chainAnimator.topAnimator.combinedAnimators.lastObject.beginBasic easeInOutQuart];
+    return self;
+}
+
+- (instancetype)easeInQuint {
+    [self.chainAnimator.topAnimator.combinedAnimators.lastObject.beginBasic easeInQuint];
+    return self;
+}
+
+- (instancetype)easeOutQuint {
+    [self.chainAnimator.topAnimator.combinedAnimators.lastObject.beginBasic easeOutQuint];
+    return self;
+}
+
+- (instancetype)easeInOutQuint {
+    [self.chainAnimator.topAnimator.combinedAnimators.lastObject.beginBasic easeInOutQuint];
+    return self;
+}
+
+- (instancetype)easeOutExpo {
+    [self.chainAnimator.topAnimator.combinedAnimators.lastObject.beginBasic easeOutExpo];
+    return self;
+}
+
+- (instancetype)easeInOutExpo {
+    [self.chainAnimator.topAnimator.combinedAnimators.lastObject.beginBasic easeInOutExpo];
+    return self;
+}
+
+- (instancetype)easeInCirc {
+    [self.chainAnimator.topAnimator.combinedAnimators.lastObject.beginBasic easeInCirc];
+    return self;
+}
+
+- (instancetype)easeOutCirc {
+    [self.chainAnimator.topAnimator.combinedAnimators.lastObject.beginBasic easeOutCirc];
+    return self;
+}
+
+- (instancetype)easeInOutCirc {
+    [self.chainAnimator.topAnimator.combinedAnimators.lastObject.beginBasic easeInOutCirc];
+    return self;
+}
+
+- (instancetype)easeInBack {
+    [self.chainAnimator.topAnimator.combinedAnimators.lastObject.beginBasic easeInBack];
+    return self;
+}
+
+- (instancetype)easeOutBack {
+    [self.chainAnimator.topAnimator.combinedAnimators.lastObject.beginBasic easeOutBack];
+    return self;
+}
+
+- (instancetype)easeInOutBack {
+    [self.chainAnimator.topAnimator.combinedAnimators.lastObject.beginBasic easeInOutBack];
     return self;
 }
 
