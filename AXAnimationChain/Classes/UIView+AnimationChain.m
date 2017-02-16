@@ -647,32 +647,38 @@ static NSString *const kAXAnimatorContextNone = @"normal";
 }
 
 - (instancetype)easeInElastic {
-    [self.chainAnimator.topAnimator.combinedAnimators.lastObject.beginBasic easeInElastic];
+    AXChainAnimator *lastAnimator = self.chainAnimator.topAnimator.combinedAnimators.lastObject;
+    [lastAnimator.beginBasic.fromValue([self.layer valueForKey:((CAPropertyAnimation *)lastAnimator.animation).keyPath]) easeInElastic];
     return self;
 }
 
 - (instancetype)easeOutElastic {
-    [self.chainAnimator.topAnimator.combinedAnimators.lastObject.beginBasic easeOutElastic];
+    AXChainAnimator *lastAnimator = self.chainAnimator.topAnimator.combinedAnimators.lastObject;
+    [lastAnimator.beginBasic.fromValue([self.layer valueForKey:((CAPropertyAnimation *)lastAnimator.animation).keyPath]) easeOutElastic];
     return self;
 }
 
 - (instancetype)easeInOutElastic {
-    [self.chainAnimator.topAnimator.combinedAnimators.lastObject.beginBasic easeInOutElastic];
+    AXChainAnimator *lastAnimator = self.chainAnimator.topAnimator.combinedAnimators.lastObject;
+    [lastAnimator.beginBasic.fromValue([self.layer valueForKey:((CAPropertyAnimation *)lastAnimator.animation).keyPath]) easeInOutElastic];
     return self;
 }
 
 - (instancetype)easeInBounce {
-    [self.chainAnimator.topAnimator.combinedAnimators.lastObject.beginBasic easeInBounce];
+    AXChainAnimator *lastAnimator = self.chainAnimator.topAnimator.combinedAnimators.lastObject;
+    [lastAnimator.beginBasic.fromValue([self.layer valueForKey:((CAPropertyAnimation *)lastAnimator.animation).keyPath]) easeInBounce];
     return self;
 }
 
 - (instancetype)easeOutBounce {
-    [self.chainAnimator.topAnimator.combinedAnimators.lastObject.beginBasic easeOutBounce];
+    AXChainAnimator *lastAnimator = self.chainAnimator.topAnimator.combinedAnimators.lastObject;
+    [lastAnimator.beginBasic.fromValue([self.layer valueForKey:((CAPropertyAnimation *)lastAnimator.animation).keyPath]) easeOutBounce];
     return self;
 }
 
 - (instancetype)easeInOutBounce {
-    [self.chainAnimator.topAnimator.combinedAnimators.lastObject.beginBasic easeInOutBounce];
+    AXChainAnimator *lastAnimator = self.chainAnimator.topAnimator.combinedAnimators.lastObject;
+    [lastAnimator.beginBasic.fromValue([self.layer valueForKey:((CAPropertyAnimation *)lastAnimator.animation).keyPath]) easeInOutBounce];
     return self;
 }
 
