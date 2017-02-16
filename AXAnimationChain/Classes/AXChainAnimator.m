@@ -26,6 +26,7 @@
 #import "AXChainAnimator.h"
 #import "CAMediaTimingFunction+Extends.h"
 #import "CAAnimation+Convertable.h"
+#import "CALayer+AnchorPoint.h"
 NS_ASSUME_NONNULL_BEGIN
 @interface AXChainAnimator () <CAAnimationDelegate>
 {

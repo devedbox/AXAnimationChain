@@ -32,5 +32,6 @@
 #import "UIView+AnimationChain.h"
 #import "AXCoreAnimation.h"
 #import "UIView+Effects.h"
+#import "CALayer+AnchorPoint.h"
 
 #endif /* AXAnimationChain_h */
