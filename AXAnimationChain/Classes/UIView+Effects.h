@@ -32,4 +32,5 @@
 - (void)ef_shake;
 
 - (void)ef_swing;
+- (void)ef_expand;
 @end
