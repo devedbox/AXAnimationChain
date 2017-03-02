@@ -34,4 +34,5 @@
 - (void)ef_swing;
 - (void)ef_expand;
 - (void)ef_compress;
+- (void)ef_hinge;
 @end

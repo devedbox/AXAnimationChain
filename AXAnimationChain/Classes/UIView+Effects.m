@@ -57,4 +57,9 @@
 - (void)ef_compress {
     self.chainAnimator.basic.property(@"transform.scale").fromValue(@1).toValue(@.0).duration(0.5).animate();
 }
+
+- (void)ef_hinge {
+    [self.layer anchorToLeftTop];
+    self.chainAnimator.spring.property(@"transform.rotation").fromValue(@0).toValue(@(acos(self.bounds.size.height/pow(pow(CGRectGetWidth(self.bounds), 2.0) + pow(CGRectGetHeight(self.bounds), 2.0), 0.5)))).mass(2.0).stiffness(100).damping(10).combineBasic.beginTime(1.0).property(@"position.y").fromValue(@(self.layer.position.y)).toValue(@(self.layer.position.y + [UIScreen mainScreen].bounds.size.height)).duration(0.5).easeInCubic.animate();
+}
 @end
