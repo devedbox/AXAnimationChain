@@ -53,4 +53,8 @@
 - (void)ef_expand {
     self.chainAnimator.basic.property(@"transform.scale").fromValue(@.0).toValue(@1).duration(0.5).animate();
 }
+
+- (void)ef_compress {
+    self.chainAnimator.basic.property(@"transform.scale").fromValue(@1).toValue(@.0).duration(0.5).animate();
+}
 @end
