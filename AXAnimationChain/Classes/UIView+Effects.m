@@ -45,4 +45,8 @@
     CGPoint position = self.layer.position;
     self.chainAnimator.basic.property(@"position.x").fromValue(@(position.x-20)).toValue(@(position.x+20)).duration(0.1).linear.autoreverses.repeatCount(1.5).nextToBasic.property(@"position.x").toValue(@(position.x)).duration(0.1).linear.animate();
 }
+
+- (void)ef_swing {
+    self.chainAnimator.basic.property(@"transform.rotation").byValue(@(M_PI/21.0)).duration(0.1).autoreverses.repeatCount(2).combineBasic.beginTime(0.1).property(@"transform.rotation").byValue(@(-M_PI/18.0)).duration(0.1).autoreverses.repeatCount(2).nextToBasic.property(@"transform.scale").toValue(@1.0).duration(0.15).animate();
+}
 @end

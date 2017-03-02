@@ -30,4 +30,6 @@
 - (void)ef_bonuce;
 - (void)ef_pulse;
 - (void)ef_shake;
+
+- (void)ef_swing;
 @end
