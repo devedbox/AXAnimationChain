@@ -35,4 +35,5 @@
 - (void)ef_expand;
 - (void)ef_compress;
 - (void)ef_hinge;
+- (void)ef_drop;
 @end
