@@ -134,4 +134,11 @@ public extension UIView {
     public func drop(completion: @escaping () -> Void = {}) {
         chainAnimator.basic.anchorToRightTop().property("transform.rotation").toValue(-M_PI/18*2).duration(1.0).combineBasic().property("position.y").fromValue(layer.position.y).toValue(UIScreen.main.bounds.height+layer.position.y).duration(0.5).easeInCubic().start(completion: completion)
     }
+    /// Run a morph animation effect on the receiver.
+    ///
+    /// - Parameter completion: a completion closure to execute when the animation finished.
+    ///
+    public func morph(completion: @escaping () -> Void = {}) {
+        chainAnimator.basic.property("transform.scale.y").duration(0.5).toValue(0.5).linear().combineBasic().property("transform.scale.x").duration(0.5).toValue(1.5).linear().nextToBasic().property("transform.scale.y").duration(0.5).toValue(1.5).linear().combineBasic().property("transform.scale.x").duration(0.5).toValue(0.5).linear().nextToBasic().property("transform.scale.y").duration(0.5).toValue(0.5).linear().combineBasic().property("transform.scale.x").duration(0.5).toValue(1.5).linear().nextToBasic().property("transform.scale.y").duration(0.5).toValue(1.0).linear().combineBasic().property("transform.scale.x").duration(0.5).toValue(1.0).linear().start(completion: completion)
+    }
 }
