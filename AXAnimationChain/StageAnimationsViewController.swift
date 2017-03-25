@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AXAnimationChainSwift
 
 class StageAnimationsViewController: UIViewController {
 
@@ -35,6 +36,16 @@ class StageAnimationsViewController: UIViewController {
         stageView.originY(to: 400).duration(1.0).size(to: CGSize(width: 100, height: 100)).duration(1.0).spring().animate(as: .bounce(.out)) {
             print("Finished chain animation.")
         }
+    }
+    
+    @IBAction func chain(_ sender: UIButton) {
+        let animator1 = AXChainAnimator.basic().property("position.x").byValue(50).duration(0.5)
+        let animator2 = AXChainAnimator.spring().property("position.y").byValue(50)
+        
+        stageView.add(animator1)
+        stageView.add(animator2)
+        
+        stageView.animateChain()
     }
     
     @IBAction func animate(_ sender: UIButton) {
