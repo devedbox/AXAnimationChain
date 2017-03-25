@@ -606,6 +606,11 @@ static NSString *const kAXAnimatorContextNone = @"normal";
     return self;
 }
 
+- (instancetype)easeInExpo {
+    [self.chainAnimator.topAnimator.combinedAnimators.lastObject.beginBasic easeInExpo];
+    return self;
+}
+
 - (instancetype)easeOutExpo {
     [self.chainAnimator.topAnimator.combinedAnimators.lastObject.beginBasic easeOutExpo];
     return self;
