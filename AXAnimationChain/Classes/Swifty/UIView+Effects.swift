@@ -125,7 +125,7 @@ public extension UIView {
     ///
     public func hinge(completion: @escaping () -> Void = {}) {
         layer.anchorToLeftTop()
-        chainAnimator.spring.property("transform.rotation").fromValue(0).toValue(acos(Double(bounds.height)/Double(pow(pow(bounds.width, 2.0)+pow(bounds.height, 2.0), 0.5)))).mass(2).stiffness(100).damping(10).combineBasic().beginTime(1.0).property("position.y").fromValue(layer.position.y).toValue(UIScreen.main.bounds.height+layer.position.y).duration(0.5).easeInCubic().start(completion: completion)
+        chainAnimator.spring.property("transform.rotation").fromValue(0).toValue(acos(Double(bounds.height)/Double(pow(pow(bounds.width, 2.0)+pow(bounds.height, 2.0), 0.5)))).mass(2).stiffness(100).damping(10).combineBasic().beginTime(1.0).property("position.y").byValue(UIScreen.main.bounds.height).duration(0.5).easeInCubic().start(completion: completion)
     }
     /// Run a \`drop\` animation effect on the receiver.
     ///
