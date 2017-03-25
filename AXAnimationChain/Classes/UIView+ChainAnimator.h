@@ -41,4 +41,11 @@ NS_ASSUME_NONNULL_BEGIN
 /// Animate all the managed chain animators.
 - (void)animateChain;
 @end
+
+@interface AXChainAnimator (UIViewChainAnimator)
++ (AXBasicChainAnimator *)basic;
++ (AXSpringChainAnimator *)spring;
++ (AXKeyframeChainAnimator *)keyframe;
++ (AXTransitionChainAnimator *)transition;
+@end
 NS_ASSUME_NONNULL_END

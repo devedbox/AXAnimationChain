@@ -58,3 +58,21 @@ static char *kAXManagedChainAnimators = "__managed";
     }
 }
 @end
+
+@implementation AXChainAnimator (UIViewChainAnimator)
++ (AXBasicChainAnimator *)basic {
+    return AXChainAnimator.new.basic;
+}
+
++ (AXSpringChainAnimator *)spring {
+    return AXChainAnimator.new.spring;
+}
+
++ (AXKeyframeChainAnimator *)keyframe {
+    return AXChainAnimator.new.keyframe;
+}
+
++ (AXTransitionChainAnimator *)transition {
+    return AXChainAnimator.new.transition;
+}
+@end
