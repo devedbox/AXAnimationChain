@@ -48,4 +48,11 @@ NS_ASSUME_NONNULL_BEGIN
 + (AXKeyframeChainAnimator *)keyframe;
 + (AXTransitionChainAnimator *)transition;
 @end
+
+@interface AXChainAnimator (ManagedAnimators)
+/// Remove the animator from the animated view.
+/// @discusstion If the animator is managed by the animated view, then remove the animator and return YES or NO.
+///
+- (BOOL)removeFromAnimatedView;
+@end
 NS_ASSUME_NONNULL_END

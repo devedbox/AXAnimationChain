@@ -46,6 +46,10 @@ class StageAnimationsViewController: UIViewController {
         stageView.add(animator2)
         
         stageView.animateChain()
+        
+        let _ = stageView.managedChainAnimators.map { (animator) -> Void in
+            animator.removeFromAnimatedView()
+        }
     }
     
     @IBAction func animate(_ sender: UIButton) {

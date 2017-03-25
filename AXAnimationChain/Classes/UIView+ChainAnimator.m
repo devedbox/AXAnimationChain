@@ -76,3 +76,14 @@ static char *kAXManagedChainAnimators = "__managed";
     return AXChainAnimator.new.transition;
 }
 @end
+
+@implementation AXChainAnimator (ManagedAnimators)
+- (BOOL)removeFromAnimatedView {
+    NSMutableArray *managed = [self.animatedView.managedChainAnimators mutableCopy];
+    if ([managed containsObject:self]) {
+        [managed removeObject:self]; return YES;
+    } else {
+        return NO;
+    }
+}
+@end
