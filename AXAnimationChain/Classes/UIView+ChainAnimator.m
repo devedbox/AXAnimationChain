@@ -26,6 +26,8 @@
 #import "UIView+ChainAnimator.h"
 #import <objc/runtime.h>
 
+static char *kAXManagedChainAnimators = "__managed";
+
 @implementation UIView (ChainAnimator)
 - (AXChainAnimator *)chainAnimator {
     AXChainAnimator *chain = objc_getAssociatedObject(self, _cmd);
@@ -35,5 +37,24 @@
         objc_setAssociatedObject(self, _cmd, chain, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     }
     return chain;
+}
+
+- (NSArray<AXChainAnimator *> *)managedChainAnimators {
+    return objc_getAssociatedObject(self, kAXManagedChainAnimators) ?: @[];
+}
+
+- (void)addChainAnimator:(AXChainAnimator *)animator {
+    animator.animatedView = self;
+    
+    NSMutableArray *managed = [objc_getAssociatedObject(self, kAXManagedChainAnimators) mutableCopy] ?: [NSMutableArray array];
+    [managed addObject:animator];
+    
+    objc_setAssociatedObject(self, kAXManagedChainAnimators, [managed copy], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+- (void)animateChain {
+    for (AXChainAnimator *animator in self.managedChainAnimators) {
+        [animator start];
+    }
 }
 @end
