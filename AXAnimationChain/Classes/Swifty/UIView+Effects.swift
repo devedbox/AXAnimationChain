@@ -139,6 +139,9 @@ public extension UIView {
     /// - Parameter completion: a completion closure to execute when the animation finished.
     ///
     public func morph(completion: @escaping () -> Void = {}) {
-        chainAnimator.basic.property("transform.scale.y").duration(0.5).toValue(0.5).linear().combineBasic().property("transform.scale.x").duration(0.5).toValue(1.5).linear().nextToBasic().property("transform.scale.y").duration(0.5).toValue(1.5).linear().combineBasic().property("transform.scale.x").duration(0.5).toValue(0.5).linear().nextToBasic().property("transform.scale.y").duration(0.5).toValue(0.5).linear().combineBasic().property("transform.scale.x").duration(0.5).toValue(1.5).linear().nextToBasic().property("transform.scale.y").duration(0.5).toValue(1.0).linear().combineBasic().property("transform.scale.x").duration(0.5).toValue(1.0).linear().start(completion: completion)
+        let duration = 0.25;
+        let minscale = 0.8;
+        let maxscale = 1.2;
+        chainAnimator.basic.property("transform.scale.y").duration(duration).toValue(minscale).linear().combineBasic().property("transform.scale.x").duration(duration).toValue(maxscale).linear().nextToBasic().property("transform.scale.y").duration(duration).toValue(maxscale).linear().combineBasic().property("transform.scale.x").duration(duration).toValue(minscale).linear().nextToBasic().property("transform.scale.y").duration(duration).toValue(minscale).linear().combineBasic().property("transform.scale.x").duration(duration).toValue(maxscale).linear().nextToBasic().property("transform.scale.y").duration(duration).toValue(1.0).linear().combineBasic().property("transform.scale.x").duration(duration).toValue(1.0).linear().start(completion: completion)
     }
 }
