@@ -32,7 +32,13 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 @interface UIView (ChainAnimator) <AXAnimationChainViewDelegate>
-/// Animation chain object.
+/// Default Animation chain object.
 @property(readonly, nonatomic, nonnull) AXChainAnimator *chainAnimator;
+/// Managed chain animators.
+@property(readonly, nonatomic, nonnull) NSArray<AXChainAnimator *> *managedChainAnimators;
+/// Add chain animator.
+- (void)addChainAnimator:(nonnull AXChainAnimator *)animator;
+/// Animate all the managed chain animators.
+- (void)animateChain;
 @end
 NS_ASSUME_NONNULL_END
