@@ -24,7 +24,6 @@
 //  SOFTWARE.
 
 #import "CAAnimation+Convertable.h"
-#import "AXSpringAnimation.h"
 #import <objc/runtime.h>
 
 @interface CAKeyframeAnimation (Convertable_Private)
@@ -292,7 +291,8 @@ id ToValueByValueWithValue(id value, id byValue, BOOL plus) {
     return [self animationWithBasic:basicAnimation usingValuesFunction:NULL];
 }
 
-+ (instancetype)animationWithSpring:(CASpringAnimation *)animation {
++ (instancetype)animationWithSpring:(AXCASpringAnimation *)animation {
+    if ([animation isKindOfClass:AXSpringAnimation.class]) return (AXSpringAnimation *)animation;
     if (!animation || ![animation isKindOfClass:CASpringAnimation.class]) return nil;
     AXSpringAnimation *spring = [AXSpringAnimation animationWithKeyPath:animation.keyPath];
     spring.beginTime = animation.beginTime;
@@ -348,7 +348,7 @@ id ToValueByValueWithValue(id value, id byValue, BOOL plus) {
     return [self animationWithKeyframe:animation usingTimingFunction:nil];
 }
 
-+ (instancetype)animationWithSpring:(CASpringAnimation *)animation {
++ (instancetype)animationWithSpring:(AXCASpringAnimation *)animation {
     if (!animation || ![animation isKindOfClass:CABasicAnimation.class]) return nil;
     CABasicAnimation *basic = [CABasicAnimation new];
     basic.beginTime = animation.beginTime;
@@ -369,10 +369,10 @@ id ToValueByValueWithValue(id value, id byValue, BOOL plus) {
 }
 @end
 
-@implementation CASpringAnimation (Convertable)
+@implementation AXCASpringAnimation (Convertable)
 + (instancetype)animationWithKeyframe:(CAKeyframeAnimation *)animation usingTimingFunction:(CAMediaTimingFunction *)timingFunction {
     if (!animation || ![animation isKindOfClass:CAKeyframeAnimation.class]) return nil;
-    CASpringAnimation *spring = [CASpringAnimation new];
+    AXCASpringAnimation *spring = [AXCASpringAnimation new];
     spring.beginTime = animation.beginTime;
     spring.duration = animation.duration;
     spring.speed = animation.speed;
@@ -397,12 +397,12 @@ id ToValueByValueWithValue(id value, id byValue, BOOL plus) {
     return spring;
 }
 
-+ (instancetype)animationWithSpring:(CASpringAnimation *)animation {
++ (instancetype)animationWithSpring:(AXCASpringAnimation *)animation {
     return animation;
 }
 
 + (instancetype)animationWithBasic:(CABasicAnimation *)animation {
-    CASpringAnimation *spring = [CASpringAnimation new];
+    AXCASpringAnimation *spring = [AXCASpringAnimation new];
     spring.beginTime = animation.beginTime;
     spring.duration = animation.duration;
     spring.speed = animation.speed;

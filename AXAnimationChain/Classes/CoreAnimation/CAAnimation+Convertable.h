@@ -26,6 +26,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import <UIKit/UIKit.h>
 #import "CAMediaTimingFunction+Extends.h"
+#import "AXSpringAnimation.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface CAKeyframeAnimation (Convertable)
@@ -43,7 +44,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @param animation spring animation to convert.
 /// @return Converted keyframe animation.
-+ (nullable instancetype)animationWithSpring:(nullable CASpringAnimation *)animation;
++ (nullable instancetype)animationWithSpring:(nullable AXCASpringAnimation *)animation;
 @end
 
 @interface CABasicAnimation (Convertable)
@@ -58,10 +59,10 @@ NS_ASSUME_NONNULL_BEGIN
 + (nullable instancetype)animationWithKeyframe:(nullable CAKeyframeAnimation *)animation usingTimingFunction:(nullable CAMediaTimingFunction *)timingFunction;
 /// Convert animation from CASpringAnimation.
 ///
-+ (nullable instancetype)animationWithSpring:(nullable CASpringAnimation *)animation;
++ (nullable instancetype)animationWithSpring:(nullable AXCASpringAnimation *)animation;
 @end
 
-@interface CASpringAnimation (Convertable)
+@interface AXCASpringAnimation (Convertable)
 /// Convert animation from CABasicAnimation.
 ///
 + (nullable instancetype)animationWithBasic:(nullable CABasicAnimation *)animation;
