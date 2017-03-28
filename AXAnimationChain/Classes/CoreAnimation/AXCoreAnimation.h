@@ -26,6 +26,14 @@
 #ifndef AXCoreAnimation_h
 #define AXCoreAnimation_h
 
+#ifndef AXCASpringAnimation
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_9_0
+#define AXCASpringAnimation CASpringAnimation
+#else
+#define AXCASpringAnimation AXSpringAnimation
+#endif
+#endif
+
 #import "AXSpringAnimation.h"
 #import "CAAnimation+Convertable.h"
 #import "CAMediaTimingFunction+Extends.h"
