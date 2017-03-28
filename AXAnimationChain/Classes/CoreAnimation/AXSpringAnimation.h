@@ -24,6 +24,15 @@
 //  SOFTWARE.
 
 #import <QuartzCore/QuartzCore.h>
+
+#ifndef AXCASpringAnimation
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_9_0
+#define AXCASpringAnimation CASpringAnimation
+#else
+#define AXCASpringAnimation AXSpringAnimation
+#endif
+#endif
+
 NS_ASSUME_NONNULL_BEGIN
 @interface AXSpringAnimation : CAKeyframeAnimation
 /* The mass of the object attached to the end of the spring. Must be greater
