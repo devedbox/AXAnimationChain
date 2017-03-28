@@ -26,6 +26,8 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 #import <QuartzCore/QuartzCore.h>
+#import "AXCoreAnimation.h"
+
 NS_ASSUME_NONNULL_BEGIN
 /// CAMediaTiming protocol reachable.
 @protocol AXMediaTimingDelegate <NSObject>
@@ -456,7 +458,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface AXSpringChainAnimator : AXBasicChainAnimator <AXSpringChainAnimatorDelegate>
 /// Core animation.
-@property(readonly, nonatomic) CASpringAnimation *animation;
+@property(readonly, nonatomic) AXCASpringAnimation *animation;
 @end
 
 @interface AXTransitionChainAnimator : AXChainAnimator <AXTransitionChainAnimatorDelegate>

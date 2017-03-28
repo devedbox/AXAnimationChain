@@ -92,23 +92,23 @@ static NSString *const kAXKeyframeTimgingFunctionFlagGravity = @"gravity";
         if ([self isKindOfClass:[AXBasicChainAnimator class]]) {
             [animator _setAnimation:[CAKeyframeAnimation animationWithBasic:(CABasicAnimation *)self.animation]];
         } else if ([self isKindOfClass:[AXSpringChainAnimator class]]) {
-            [animator _setAnimation:[CAKeyframeAnimation animationWithSpring:(CASpringAnimation *)self.animation]];
+            [animator _setAnimation:[CAKeyframeAnimation animationWithSpring:(AXCASpringAnimation *)self.animation]];
         }
-    } else if ([animator isKindOfClass:[AXBasicChainAnimator class]] && ![animator isKindOfClass:[AXSpringChainAnimator class]]) {
-        if ([self isKindOfClass:[AXBasicChainAnimator class]] && ![self isKindOfClass:[AXSpringChainAnimator class]]) return self;
+    } else if ([animator isKindOfClass:[AXBasicChainAnimator class]] && ![animator isKindOfClass:[AXCASpringAnimation class]]) {
+        if ([self isKindOfClass:[AXBasicChainAnimator class]] && ![self isKindOfClass:[AXCASpringAnimation class]]) return self;
         
         if ([self isKindOfClass:[AXKeyframeChainAnimator class]]) {
             [animator _setAnimation:[CABasicAnimation animationWithKeyframe:(CAKeyframeAnimation *)self.animation]];
-        } else if ([self isKindOfClass:[AXSpringChainAnimator class]]) {
-            [animator _setAnimation:[CABasicAnimation animationWithSpring:(CASpringAnimation *)self.animation]];
+        } else if ([self isKindOfClass:[AXCASpringAnimation class]]) {
+            [animator _setAnimation:[CABasicAnimation animationWithSpring:(AXCASpringAnimation *)self.animation]];
         }
-    } else if ([animator isKindOfClass:[AXSpringChainAnimator class]]) {
-        if ([self isKindOfClass:[AXSpringChainAnimator class]]) return self;
+    } else if ([animator isKindOfClass:[AXCASpringAnimation class]]) {
+        if ([self isKindOfClass:[AXCASpringAnimation class]]) return self;
         
         if ([self isKindOfClass:[AXKeyframeChainAnimator class]]) {
-            [animator _setAnimation:[CASpringAnimation animationWithKeyframe:(CAKeyframeAnimation *)self.animation]];
+            [animator _setAnimation:[AXCASpringAnimation animationWithKeyframe:(CAKeyframeAnimation *)self.animation]];
         } else if ([self isKindOfClass:[AXBasicChainAnimator class]]) {
-            [animator _setAnimation:[CASpringAnimation animationWithBasic:(CABasicAnimation *)self.animation]];
+            [animator _setAnimation:[AXCASpringAnimation animationWithBasic:(CABasicAnimation *)self.animation]];
         }
     }
     [self _relinkAnimatorsWithAnimatorToReplace:animator];
@@ -244,7 +244,7 @@ static NSString *const kAXKeyframeTimgingFunctionFlagGravity = @"gravity";
 }
 
 - (AXSpringChainAnimator *)_springAnimator {
-    CASpringAnimation *animation = [CASpringAnimation animation];
+    AXCASpringAnimation *animation = [AXCASpringAnimation animation];
     animation.removedOnCompletion = NO;
     animation.fillMode = kCAFillModeForwards;
     animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionDefault];
@@ -423,9 +423,9 @@ static NSString *const kAXKeyframeTimgingFunctionFlagGravity = @"gravity";
 }
 
 - (void)_addAnimationsToAnimatedLayer {
-    if ([_animation isKindOfClass:CASpringAnimation.class]) {
+    if ([_animation isKindOfClass:AXCASpringAnimation.class]) {
         if (!_animation.duration && [_animation respondsToSelector:@selector(settlingDuration)]) {
-            _animation.duration = [(CASpringAnimation *)_animation settlingDuration];
+            _animation.duration = [(AXCASpringAnimation *)_animation settlingDuration];
         }
     }/* else if ([self isKindOfClass:AXKeyframeChainAnimator.class]) { // Handle the custom timing functions.
         AXKeyframeChainAnimator *animator = (AXKeyframeChainAnimator *)self;
@@ -700,8 +700,8 @@ static NSString *const kAXKeyframeTimgingFunctionFlagGravity = @"gravity";
         CAAnimation *animation = [animator animation];
         [animations addObject:animation];
         // Fixs the spring animation of duration.
-        if ([animation isMemberOfClass:CASpringAnimation.class]) {
-            CASpringAnimation *springAnimation = (CASpringAnimation *)animation;
+        if ([animation isMemberOfClass:AXCASpringAnimation.class]) {
+            AXCASpringAnimation *springAnimation = (AXCASpringAnimation *)animation;
             if (springAnimation.duration) {
                 springAnimation.duration = MIN(springAnimation.duration, springAnimation.settlingDuration);
             } else {
@@ -735,8 +735,8 @@ static NSString *const kAXKeyframeTimgingFunctionFlagGravity = @"gravity";
     while (animator) {
         CAAnimation *nextAnimation = [animator animation];
         // Fixs the spring animation of duration.
-        if ([nextAnimation isMemberOfClass:CASpringAnimation.class]) {
-            CASpringAnimation *springAnimation = (CASpringAnimation *)nextAnimation;
+        if ([nextAnimation isMemberOfClass:AXCASpringAnimation.class]) {
+            AXCASpringAnimation *springAnimation = (AXCASpringAnimation *)nextAnimation;
             if (springAnimation.duration) {
                 springAnimation.duration = MIN(springAnimation.duration, springAnimation.settlingDuration);
             } else {
@@ -969,8 +969,8 @@ static NSString *const kAXKeyframeTimgingFunctionFlagGravity = @"gravity";
     return [super beginWith:animator];
 }
 #pragma mark - Getters.
-- (CASpringAnimation *)animation {
-    return (CASpringAnimation *)[super animation];
+- (AXCASpringAnimation *)animation {
+    return (AXCASpringAnimation *)[super animation];
 }
 
 #pragma mark - PropertiesHandler.
