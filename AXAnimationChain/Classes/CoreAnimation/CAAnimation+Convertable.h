@@ -40,7 +40,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// Convert animation from CABasicAnimation using custom values function.
 ///
 + (nullable instancetype)animationWithBasic:(nullable CABasicAnimation *)basicAnimation usingValuesFunction:(nullable double (^)(double t, double b, double c, double d))valuesFunction;
-/// Convert animation from CASpringAnimation.
+/// Convert animation from SpringAnimation.
 ///
 /// @param animation spring animation to convert.
 /// @return Converted keyframe animation.
@@ -57,7 +57,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// Convert animation from CAKeyframeAnimation using custom timing function.
 ///
 + (nullable instancetype)animationWithKeyframe:(nullable CAKeyframeAnimation *)animation usingTimingFunction:(nullable CAMediaTimingFunction *)timingFunction;
-/// Convert animation from CASpringAnimation.
+/// Convert animation from SpringAnimation.
 ///
 + (nullable instancetype)animationWithSpring:(nullable AXCASpringAnimation *)animation;
 @end
