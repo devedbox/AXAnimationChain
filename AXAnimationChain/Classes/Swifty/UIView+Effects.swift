@@ -55,7 +55,7 @@ public extension UIView {
     /// - parameter completion: a completion closure to execute when the animation finished.
     ///
     public func tada(completion: @escaping () -> Void = {}) {
-        chainAnimator.basic.property("transform.scale").fromValue(1.0).toValue(1.1).duration(0.15).combineBasic().property("transform.rotation").byValue(M_PI/21.0).duration(0.1).autoreverses().repeatCount(2).combineBasic().beginTime(0.1).property("transform.rotation").byValue(-M_PI/18.0).duration(0.1).autoreverses().repeatCount(2).nextToBasic().property("transform.scale").toValue(1.0).duration(0.15).start(completion: completion)
+        chainAnimator.basic.property("transform.scale").fromValue(1.0).toValue(1.1).duration(0.15).combineBasic().property("transform.rotation").byValue(.pi/21.0).duration(0.1).autoreverses().repeatCount(2).combineBasic().beginTime(0.1).property("transform.rotation").byValue(-.pi/18.0).duration(0.1).autoreverses().repeatCount(2).nextToBasic().property("transform.scale").toValue(1.0).duration(0.15).start(completion: completion)
     }
     /// Run a \`bonuce\` animation effect on the receiver.
     ///
@@ -95,7 +95,7 @@ public extension UIView {
     /// - Parameter completion: a completion closure to execute when the animation finished.
     ///
     public func swing(completion: @escaping () -> Void = {}) {
-        chainAnimator.basic.property("transform.rotation").byValue(M_PI/21.0).duration(0.1).autoreverses().repeatCount(2).combineBasic().beginTime(0.1).property("transform.rotation").byValue(-M_PI/18.0).duration(0.1).autoreverses().repeatCount(2).nextToBasic().property("transform.scale").toValue(1.0).duration(0.15).start(completion: completion)
+        chainAnimator.basic.property("transform.rotation").byValue(.pi/21.0).duration(0.1).autoreverses().repeatCount(2).combineBasic().beginTime(0.1).property("transform.rotation").byValue(-.pi/18.0).duration(0.1).autoreverses().repeatCount(2).nextToBasic().property("transform.scale").toValue(1.0).duration(0.15).start(completion: completion)
     }
     /// Run a \`snap\` animation effect on the receiver.
     ///
@@ -132,7 +132,7 @@ public extension UIView {
     /// - Parameter completion: a completion closure to execute when the animation finished.
     ///
     public func drop(completion: @escaping () -> Void = {}) {
-        chainAnimator.basic.anchorToRightTop().property("transform.rotation").toValue(-M_PI/18*2).duration(1.0).combineBasic().property("position.y").fromValue(layer.position.y).toValue(UIScreen.main.bounds.height+layer.position.y).duration(0.5).easeInCubic().start(completion: completion)
+        chainAnimator.basic.anchorToRightTop().property("transform.rotation").toValue(-Double.pi/18*2).duration(1.0).combineBasic().property("position.y").fromValue(layer.position.y).toValue(UIScreen.main.bounds.height+layer.position.y).duration(0.5).easeInCubic().start(completion: completion)
     }
     /// Run a morph animation effect on the receiver.
     ///
