@@ -270,6 +270,24 @@
         animation.toValue = [NSValue valueWithCGPoint:CGPointMake(self.transitionView.center.x, CGRectGetHeight(self.view.frame)-64-CGRectGetHeight(_transitionView.frame)*.5)];
         [_transitionView.layer addAnimation:animation forKey:@"position"];
     }]];
+    [alert addAction:[UIAlertAction actionWithTitle:@"decay" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [_transitionView.layer removeAllAnimations];
+        [_keyframeTransitionView.layer removeAllAnimations];
+        CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"position"];
+        animation.removedOnCompletion = NO;
+        animation.fillMode = kCAFillModeForwards;
+        animation.fromValue = [NSValue valueWithCGPoint:CGPointMake(self.keyframeTransitionView.center.x, CGRectGetHeight(_keyframeTransitionView.frame)*.5+64)];
+        animation.toValue = [NSValue valueWithCGPoint:CGPointMake(self.keyframeTransitionView.center.x, CGRectGetHeight(self.view.frame)-64-CGRectGetHeight(_keyframeTransitionView.frame)*.5)];
+        animation.duration = 2.0;
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+        animation.timingFunction = [[CAMediaTimingFunction new] performSelector:NSSelectorFromString([_timing titleForState:UIControlStateNormal])];
+#pragma clang diagnostic pop
+        [_keyframeTransitionView.layer addAnimation:[CAKeyframeAnimation animationWithBasic:animation usingValuesFunction:[CAMediaTimingFunction decayValuesFunction]] forKey:@"position"];
+        animation.fromValue = [NSValue valueWithCGPoint:CGPointMake(self.transitionView.center.x, CGRectGetHeight(_transitionView.frame)*.5+64)];
+        animation.toValue = [NSValue valueWithCGPoint:CGPointMake(self.transitionView.center.x, CGRectGetHeight(self.view.frame)-64-CGRectGetHeight(_transitionView.frame)*.5)];
+        [_transitionView.layer addAnimation:animation forKey:@"position"];
+    }]];
     [alert addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:NULL]];
     [self presentViewController:alert animated:YES completion:NULL];
 }
@@ -289,9 +307,6 @@
         [sender setTitle:action.title forState:UIControlStateNormal];
     }]];
     [alert addAction:[UIAlertAction actionWithTitle:@"easeInOut" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        [sender setTitle:action.title forState:UIControlStateNormal];
-    }]];
-    [alert addAction:[UIAlertAction actionWithTitle:@"decay" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [sender setTitle:action.title forState:UIControlStateNormal];
     }]];
     [alert addAction:[UIAlertAction actionWithTitle:@"easeInSine" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
