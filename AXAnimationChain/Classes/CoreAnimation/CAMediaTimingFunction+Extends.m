@@ -403,7 +403,7 @@ static double AXRootsForXValueOnTimeLine(double x0, double x1, double x2, double
     };
 }
 
-+ (double (^)(double, double, double, double))gravity {
++ (double (^)(double, double, double, double))gravityValuesFunction {
     return ^double (double t, double b, double c, double d) {
         return 9.98*pow(t/=d, 2.0)/2.0;
     };

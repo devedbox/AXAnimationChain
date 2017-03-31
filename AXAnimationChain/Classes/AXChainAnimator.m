@@ -878,7 +878,7 @@ static NSString *const kAXKeyframeTimgingFunctionFlagGravity = @"gravity";
 
 - (AXKeyframeChainAnimator *)gravity {
     AXKeyframeChainAnimator *keyframe = self._keyframeAnimator;
-    [keyframe _setAnimation:[CAKeyframeAnimation animationWithBasic:(CABasicAnimation *)self.animation usingValuesFunction:[CAMediaTimingFunction gravity]]];
+    [keyframe _setAnimation:[CAKeyframeAnimation animationWithBasic:(CABasicAnimation *)self.animation usingValuesFunction:[CAMediaTimingFunction gravityValuesFunction]]];
     [keyframe setTimingFunctionFlags:kAXKeyframeTimgingFunctionFlagGravity];
     [self _relinkAnimatorsWithAnimatorToReplace:keyframe];
     return keyframe;
