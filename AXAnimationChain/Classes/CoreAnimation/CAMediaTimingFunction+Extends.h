@@ -71,7 +71,10 @@ NS_ASSUME_NONNULL_BEGIN
 + (double (^)(double t, double b, double c, double d))easeInBounceValuesFuntion;
 + (double (^)(double t, double b, double c, double d))easeOutBounceValuesFuntion;
 + (double (^)(double t, double b, double c, double d))easeInOutBounceValuesFuntion;
-
+//
+// Not affected by time.
+//
 + (double (^)(double t, double b, double c, double d))gravityValuesFunction;
++ (double (^)(double t, double b, double c, double d))decayValuesFunction;
 @end
 NS_ASSUME_NONNULL_END

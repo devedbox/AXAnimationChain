@@ -405,7 +405,19 @@ static double AXRootsForXValueOnTimeLine(double x0, double x1, double x2, double
 
 + (double (^)(double, double, double, double))gravityValuesFunction {
     return ^double (double t, double b, double c, double d) {
-        return MIN(9.98*pow(t/=d, 2.0)/2.0, 1.0);
+        return MIN(9.98*pow(t/=d, 2.0)/2.0, 1.0)*c+b;
+    };
+}
+
++ (double (^)(double, double, double, double))decayValuesFunction {
+    return ^double (double t, double b, double c, double d) {
+        // v0 = v / 1000
+        // v = v0 * powf(deceleration, dt);
+        // v = v * 1000;
+        
+        // x0 = x;
+        // x = x0 + v0 * deceleration * (1 - powf(deceleration, dt)) / (1 - deceleration)
+        return (0+0.1*0.998*(1-powf(0.998, t/=d))/(1-0.998))*c+b;
     };
 }
 #pragma clang diagnostic pop
