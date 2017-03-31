@@ -283,7 +283,11 @@
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
         animation.timingFunction = [[CAMediaTimingFunction new] performSelector:NSSelectorFromString([_timing titleForState:UIControlStateNormal])];
 #pragma clang diagnostic pop
-        [_keyframeTransitionView.layer addAnimation:[CAKeyframeAnimation animationWithBasic:animation usingValuesFunction:[CAMediaTimingFunction decayValuesFunction]] forKey:@"position"];
+        CAKeyframeAnimation *keyframe = [CAKeyframeAnimation animationWithBasic:animation usingValuesFunction:[CAMediaTimingFunction decayValuesFunction]];
+        NSMutableArray *values = [keyframe.values mutableCopy];
+        [values removeLastObject];
+        keyframe.values = values;
+        [_keyframeTransitionView.layer addAnimation:keyframe forKey:@"position"];
         animation.fromValue = [NSValue valueWithCGPoint:CGPointMake(self.transitionView.center.x, CGRectGetHeight(_transitionView.frame)*.5+64)];
         animation.toValue = [NSValue valueWithCGPoint:CGPointMake(self.transitionView.center.x, CGRectGetHeight(self.view.frame)-64-CGRectGetHeight(_transitionView.frame)*.5)];
         [_transitionView.layer addAnimation:animation forKey:@"position"];
