@@ -405,7 +405,7 @@ static double AXRootsForXValueOnTimeLine(double x0, double x1, double x2, double
 
 + (double (^)(double, double, double, double))gravity {
     return ^double (double t, double b, double c, double d) {
-        return 0.998*pow(t/=d, 2.0)/2.0;
+        return 9.98*pow(t/=d, 2.0)/2.0;
     };
 }
 #pragma clang diagnostic pop
