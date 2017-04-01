@@ -165,7 +165,7 @@ static NSArray * CATransform3DValuesWithComponents(NSArray *m11, NSArray *m12, N
     return values;
 }
 
-NSArray * AnimationValuesForCAKeyframeAnimationWithFrames(id fromValue, id toValue, NSTimeInterval duration, CAMediaTimingFunction *timing, _ function) {
+NSArray * CAKeyframeValuesWithFrames(id fromValue, id toValue, NSTimeInterval duration, CAMediaTimingFunction *timing, _ function) {
     id beginValue;
     id endValue;
     beginValue = fromValue;
@@ -270,11 +270,11 @@ id ToValueByValueWithValue(id value, id byValue, BOOL plus) {
     keyframe.convertedTimingFunction = basicAnimation.timingFunction;
     keyframe.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
     if (basicAnimation.fromValue && basicAnimation.toValue) {
-        keyframe.values = AnimationValuesForCAKeyframeAnimationWithFrames(basicAnimation.fromValue, basicAnimation.toValue, basicAnimation.duration, basicAnimation.timingFunction, valuesFunction);
+        keyframe.values = CAKeyframeValuesWithFrames(basicAnimation.fromValue, basicAnimation.toValue, basicAnimation.duration, basicAnimation.timingFunction, valuesFunction);
     } else if (basicAnimation.fromValue && basicAnimation.byValue) {
-        keyframe.values = AnimationValuesForCAKeyframeAnimationWithFrames(basicAnimation.fromValue, ToValueByValueWithValue(basicAnimation.fromValue, basicAnimation.byValue, YES), basicAnimation.duration, basicAnimation.timingFunction, valuesFunction);
+        keyframe.values = CAKeyframeValuesWithFrames(basicAnimation.fromValue, ToValueByValueWithValue(basicAnimation.fromValue, basicAnimation.byValue, YES), basicAnimation.duration, basicAnimation.timingFunction, valuesFunction);
     } else if (basicAnimation.byValue && basicAnimation.toValue) {
-        keyframe.values = AnimationValuesForCAKeyframeAnimationWithFrames(ToValueByValueWithValue(basicAnimation.toValue, basicAnimation.byValue, NO), basicAnimation.toValue, basicAnimation.duration, basicAnimation.timingFunction, valuesFunction);
+        keyframe.values = CAKeyframeValuesWithFrames(ToValueByValueWithValue(basicAnimation.toValue, basicAnimation.byValue, NO), basicAnimation.toValue, basicAnimation.duration, basicAnimation.timingFunction, valuesFunction);
     } /* else if (basicAnimation.fromValue) {
        keyframe.values = AnimationValuesForCAKeyframeAnimationWithFrames(basicAnimation.fromValue, basicAnimation.fromValue, basicAnimation.duration, basicAnimation.timingFunction);
        } else if (basicAnimation.toValue) {

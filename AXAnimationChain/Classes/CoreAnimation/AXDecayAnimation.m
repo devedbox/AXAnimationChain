@@ -25,6 +25,17 @@
 
 #import "AXDecayAnimation.h"
 
-@implementation AXDecayAnimation
+typedef double (^_)(double t, double b, double c, double d);
+extern NSArray * CAKeyframeValuesWithFrames(id fromValue, id toValue, NSTimeInterval duration, CAMediaTimingFunction *timing, _ function);
 
+@implementation AXDecayAnimation
+- (CFTimeInterval)settlingDuration {
+    return log(0.0001)/log(_deceleration);
+}
+
+- (void)_setValues {
+    super.values = CAKeyframeValuesWithFrames(self.fromValue, nil, self.settlingDuration, self.timingFunction, ^double(double t, double b, double c, double d) {
+        return 0;
+    });
+}
 @end

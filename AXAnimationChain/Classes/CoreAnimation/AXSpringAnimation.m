@@ -27,7 +27,7 @@
 
 typedef double (^_)(double t, double b, double c, double d);
 
-extern NSArray * AnimationValuesForCAKeyframeAnimationWithFrames(id fromValue, id toValue, NSTimeInterval duration, CAMediaTimingFunction *timing, _ function);
+extern NSArray * CAKeyframeValuesWithFrames(id fromValue, id toValue, NSTimeInterval duration, CAMediaTimingFunction *timing, _ function);
 extern id ToValueByValueWithValue(id value, id byValue, BOOL plus);
 
 @implementation AXSpringAnimation
@@ -108,7 +108,7 @@ extern id ToValueByValueWithValue(id value, id byValue, BOOL plus);
     }
     
     if (fromValue && toValue) {
-        super.values = AnimationValuesForCAKeyframeAnimationWithFrames(fromValue, toValue, self.settlingDuration, self.timingFunction, ^double (double t, double b, double c, double d) {
+        super.values = CAKeyframeValuesWithFrames(fromValue, toValue, self.settlingDuration, self.timingFunction, ^double (double t, double b, double c, double d) {
             t = t/d*self.settlingDuration;
             double beta = _damping/(2*_mass);
             double omega0 = sqrt(_stiffness/_mass);
