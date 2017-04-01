@@ -244,10 +244,10 @@
 				DC385F691E8E999C004E2448 /* AXDecayAnimation.m */,
 				DC788CF11E25CE5F001AF0B4 /* AXSpringAnimation.h */,
 				DC788CF21E25CE5F001AF0B4 /* AXSpringAnimation.m */,
-				DCAFFF2B1E8FF85B00D42AF1 /* CAAnimation+ImmediateValue.h */,
-				DCAFFF2C1E8FF85B00D42AF1 /* CAAnimation+ImmediateValue.m */,
 				DC788CF31E25CE5F001AF0B4 /* CAAnimation+Convertable.h */,
 				DC788CF41E25CE5F001AF0B4 /* CAAnimation+Convertable.m */,
+				DCAFFF2B1E8FF85B00D42AF1 /* CAAnimation+ImmediateValue.h */,
+				DCAFFF2C1E8FF85B00D42AF1 /* CAAnimation+ImmediateValue.m */,
 				DC788CF51E25CE5F001AF0B4 /* CAMediaTimingFunction+Extends.h */,
 				DC788CF61E25CE5F001AF0B4 /* CAMediaTimingFunction+Extends.m */,
 			);
