@@ -476,6 +476,10 @@ id CalculateToValueWithByValue(id value, id byValue, BOOL plus) {
 @end
 
 @implementation AXDecayAnimation (Convertable)
++ (instancetype)animationWithSpring:(AXCASpringAnimation *)animation {
+    return [self animationWithBasic:animation];
+}
+
 + (instancetype)animationWithBasic:(CABasicAnimation *)animation {
     AXDecayAnimation *decay = [AXDecayAnimation new];
     decay.beginTime = animation.beginTime;
