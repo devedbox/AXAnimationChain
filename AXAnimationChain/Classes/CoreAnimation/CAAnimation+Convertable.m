@@ -201,7 +201,7 @@ NSArray * CAKeyframeValuesWithFrames(id fromValue, id toValue, NSTimeInterval du
     return nil;
 }
 
-id ToValueByValueWithValue(id value, id byValue, BOOL plus) {
+id CalculateToValueWithByValue(id value, id byValue, BOOL plus) {
     if (!value) @throw @"From value can not be nil.";
     if (!byValue) @throw @"By value can not be nil";
     if ([value isKindOfClass:[NSNumber class]] && [byValue isKindOfClass:[NSNumber class]]) {
@@ -272,9 +272,9 @@ id ToValueByValueWithValue(id value, id byValue, BOOL plus) {
     if (basicAnimation.fromValue && basicAnimation.toValue) {
         keyframe.values = CAKeyframeValuesWithFrames(basicAnimation.fromValue, basicAnimation.toValue, basicAnimation.duration, basicAnimation.timingFunction, valuesFunction);
     } else if (basicAnimation.fromValue && basicAnimation.byValue) {
-        keyframe.values = CAKeyframeValuesWithFrames(basicAnimation.fromValue, ToValueByValueWithValue(basicAnimation.fromValue, basicAnimation.byValue, YES), basicAnimation.duration, basicAnimation.timingFunction, valuesFunction);
+        keyframe.values = CAKeyframeValuesWithFrames(basicAnimation.fromValue, CalculateToValueWithByValue(basicAnimation.fromValue, basicAnimation.byValue, YES), basicAnimation.duration, basicAnimation.timingFunction, valuesFunction);
     } else if (basicAnimation.byValue && basicAnimation.toValue) {
-        keyframe.values = CAKeyframeValuesWithFrames(ToValueByValueWithValue(basicAnimation.toValue, basicAnimation.byValue, NO), basicAnimation.toValue, basicAnimation.duration, basicAnimation.timingFunction, valuesFunction);
+        keyframe.values = CAKeyframeValuesWithFrames(CalculateToValueWithByValue(basicAnimation.toValue, basicAnimation.byValue, NO), basicAnimation.toValue, basicAnimation.duration, basicAnimation.timingFunction, valuesFunction);
     } /* else if (basicAnimation.fromValue) {
        keyframe.values = AnimationValuesForCAKeyframeAnimationWithFrames(basicAnimation.fromValue, basicAnimation.fromValue, basicAnimation.duration, basicAnimation.timingFunction);
        } else if (basicAnimation.toValue) {

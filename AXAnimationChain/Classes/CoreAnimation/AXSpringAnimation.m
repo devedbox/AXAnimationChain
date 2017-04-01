@@ -28,7 +28,7 @@
 typedef double (^_)(double t, double b, double c, double d);
 
 extern NSArray * CAKeyframeValuesWithFrames(id fromValue, id toValue, NSTimeInterval duration, CAMediaTimingFunction *timing, _ function);
-extern id ToValueByValueWithValue(id value, id byValue, BOOL plus);
+extern id CalculateToValueWithByValue(id value, id byValue, BOOL plus);
 
 @implementation AXSpringAnimation
 - (instancetype)init {
@@ -101,9 +101,9 @@ extern id ToValueByValueWithValue(id value, id byValue, BOOL plus);
         toValue = self.toValue;
     } else if (self.fromValue && self.byValue) {
         fromValue = self.fromValue;
-        toValue = ToValueByValueWithValue(self.fromValue, self.byValue, YES);
+        toValue = CalculateToValueWithByValue(self.fromValue, self.byValue, YES);
     } else if (self.byValue && self.toValue) {
-        fromValue = ToValueByValueWithValue(self.toValue, self.byValue, NO);
+        fromValue = CalculateToValueWithByValue(self.toValue, self.byValue, NO);
         toValue = self.toValue;
     }
     
