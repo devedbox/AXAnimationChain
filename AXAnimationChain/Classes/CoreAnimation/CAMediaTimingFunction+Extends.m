@@ -337,6 +337,7 @@ static double AXRootsForXValueOnTimeLine(double x0, double x1, double x2, double
 }
 
 + (double (^)(double, double, double, double, double, double, double))springValuesFunction {
+    @throw @"Spring values function is unavaiable. Please use AXSpringAnimation instead.";
     return ^double (double t, double b, double c, double d, double mass, double stiffness, double damping) {
         return (1-exp(-damping/(2*mass)*t)*cos(sqrt(fabs(stiffness/mass-pow(damping/(2*mass), 2.0)))*t/(d/(-(2.0*mass*log(0.001))/damping))))*(c-b)+b;
     };

@@ -63,7 +63,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (double (^)(double t, double b, double c, double d))valuesFuntion;
 
-+ (double (^)(double t, double b, double c, double d, double mass, double stiffness, double damping))springValuesFunction;
++ (double (^)(double t, double b, double c, double d, double mass, double stiffness, double damping))springValuesFunction __attribute__((unavailable));
 
 + (double (^)(double t, double b, double c, double d))easeInElasticValuesFuntion;
 + (double (^)(double t, double b, double c, double d))easeOutElasticValuesFuntion;
