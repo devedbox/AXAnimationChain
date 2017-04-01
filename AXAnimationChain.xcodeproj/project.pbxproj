@@ -29,12 +29,14 @@
 		DC92E3101E4EA43B009AE2A5 /* AXChainAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC92E30F1E4EA43A009AE2A5 /* AXChainAnimator.swift */; };
 		DC92E3121E4ED98B009AE2A5 /* UIView+AnimationChain.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC92E3111E4ED98B009AE2A5 /* UIView+AnimationChain.swift */; };
 		DCAEB20F1E0C140D00E3AF99 /* UIView+AnimationChain.m in Sources */ = {isa = PBXBuildFile; fileRef = DCAEB20E1E0C140D00E3AF99 /* UIView+AnimationChain.m */; };
+		DCAFFF2A1E8FB7B400D42AF1 /* DecayAnimationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCAFFF291E8FB7B400D42AF1 /* DecayAnimationViewController.swift */; };
+		DCAFFF2D1E8FF85B00D42AF1 /* CAAnimation+ImmediateValue.h in Headers */ = {isa = PBXBuildFile; fileRef = DCAFFF2B1E8FF85B00D42AF1 /* CAAnimation+ImmediateValue.h */; };
+		DCAFFF2E1E8FF85B00D42AF1 /* CAAnimation+ImmediateValue.m in Sources */ = {isa = PBXBuildFile; fileRef = DCAFFF2C1E8FF85B00D42AF1 /* CAAnimation+ImmediateValue.m */; };
 		DCC749871E2A506C00237548 /* UIView+Effects.m in Sources */ = {isa = PBXBuildFile; fileRef = DCC749861E2A506C00237548 /* UIView+Effects.m */; };
 		DCC749891E2B436C00237548 /* AXChainAnimator+Block.m in Sources */ = {isa = PBXBuildFile; fileRef = DCC749881E2B436C00237548 /* AXChainAnimator+Block.m */; };
 		DCC749A41E2B88D900237548 /* AXAnimationChain.h in Headers */ = {isa = PBXBuildFile; fileRef = DCC749A21E2B879D00237548 /* AXAnimationChain.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DCC749A61E2B899400237548 /* StageAnimationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC749A51E2B899400237548 /* StageAnimationsViewController.swift */; };
 		DCD8D6231E2B91E90017B993 /* UIView+Effects.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCD8D6221E2B91E90017B993 /* UIView+Effects.swift */; };
-		DCDA79C11E8FA07D00173A28 /* DecayAnimationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDA79C01E8FA07D00173A28 /* DecayAnimationViewController.swift */; };
 		DCF43E3F1E46F0C000FD79FB /* AXAnimationChain.h in Sources */ = {isa = PBXBuildFile; fileRef = DCC749A21E2B879D00237548 /* AXAnimationChain.h */; };
 		DCF43E401E46F35D00FD79FB /* UIView+Effects.h in Headers */ = {isa = PBXBuildFile; fileRef = DCC749851E2A506C00237548 /* UIView+Effects.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DCF43E411E46F35F00FD79FB /* UIView+AnimationChain.h in Headers */ = {isa = PBXBuildFile; fileRef = DCAEB20D1E0C140D00E3AF99 /* UIView+AnimationChain.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -105,6 +107,9 @@
 		DC92E3111E4ED98B009AE2A5 /* UIView+AnimationChain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+AnimationChain.swift"; sourceTree = "<group>"; };
 		DCAEB20D1E0C140D00E3AF99 /* UIView+AnimationChain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+AnimationChain.h"; sourceTree = "<group>"; };
 		DCAEB20E1E0C140D00E3AF99 /* UIView+AnimationChain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+AnimationChain.m"; sourceTree = "<group>"; };
+		DCAFFF291E8FB7B400D42AF1 /* DecayAnimationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DecayAnimationViewController.swift; sourceTree = "<group>"; };
+		DCAFFF2B1E8FF85B00D42AF1 /* CAAnimation+ImmediateValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CAAnimation+ImmediateValue.h"; sourceTree = "<group>"; };
+		DCAFFF2C1E8FF85B00D42AF1 /* CAAnimation+ImmediateValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CAAnimation+ImmediateValue.m"; sourceTree = "<group>"; };
 		DCC749851E2A506C00237548 /* UIView+Effects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Effects.h"; sourceTree = "<group>"; };
 		DCC749861E2A506C00237548 /* UIView+Effects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Effects.m"; sourceTree = "<group>"; };
 		DCC749881E2B436C00237548 /* AXChainAnimator+Block.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AXChainAnimator+Block.m"; sourceTree = "<group>"; };
@@ -112,7 +117,6 @@
 		DCC749A21E2B879D00237548 /* AXAnimationChain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AXAnimationChain.h; sourceTree = "<group>"; };
 		DCC749A51E2B899400237548 /* StageAnimationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StageAnimationsViewController.swift; sourceTree = "<group>"; };
 		DCD8D6221E2B91E90017B993 /* UIView+Effects.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Effects.swift"; sourceTree = "<group>"; };
-		DCDA79C01E8FA07D00173A28 /* DecayAnimationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DecayAnimationViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -172,7 +176,7 @@
 				DC4786181E29C4A500DC3055 /* ImageAnimationViewController.h */,
 				DC4786191E29C4A500DC3055 /* ImageAnimationViewController.m */,
 				DCC749A51E2B899400237548 /* StageAnimationsViewController.swift */,
-				DCDA79C01E8FA07D00173A28 /* DecayAnimationViewController.swift */,
+				DCAFFF291E8FB7B400D42AF1 /* DecayAnimationViewController.swift */,
 				DC5E8AD41DFBEC6A00597663 /* Classes */,
 				DC5E8AAA1DFBEBC400597663 /* Main.storyboard */,
 				DC5E8AAD1DFBEBC400597663 /* Assets.xcassets */,
@@ -240,6 +244,8 @@
 				DC385F691E8E999C004E2448 /* AXDecayAnimation.m */,
 				DC788CF11E25CE5F001AF0B4 /* AXSpringAnimation.h */,
 				DC788CF21E25CE5F001AF0B4 /* AXSpringAnimation.m */,
+				DCAFFF2B1E8FF85B00D42AF1 /* CAAnimation+ImmediateValue.h */,
+				DCAFFF2C1E8FF85B00D42AF1 /* CAAnimation+ImmediateValue.m */,
 				DC788CF31E25CE5F001AF0B4 /* CAAnimation+Convertable.h */,
 				DC788CF41E25CE5F001AF0B4 /* CAAnimation+Convertable.m */,
 				DC788CF51E25CE5F001AF0B4 /* CAMediaTimingFunction+Extends.h */,
@@ -275,6 +281,7 @@
 				DCF43E451E46F36A00FD79FB /* AXCoreAnimation.h in Headers */,
 				DCF43E431E46F36500FD79FB /* AXChainAnimator+Block.h in Headers */,
 				DCF43E471E46F36F00FD79FB /* CAAnimation+Convertable.h in Headers */,
+				DCAFFF2D1E8FF85B00D42AF1 /* CAAnimation+ImmediateValue.h in Headers */,
 				DCF43E461E46F36D00FD79FB /* AXSpringAnimation.h in Headers */,
 				DC385F6A1E8E999C004E2448 /* AXDecayAnimation.h in Headers */,
 			);
@@ -420,10 +427,11 @@
 			files = (
 				DCF43E3F1E46F0C000FD79FB /* AXAnimationChain.h in Sources */,
 				DCD8D6231E2B91E90017B993 /* UIView+Effects.swift in Sources */,
+				DCAFFF2E1E8FF85B00D42AF1 /* CAAnimation+ImmediateValue.m in Sources */,
 				DC788CF81E25CE5F001AF0B4 /* CAAnimation+Convertable.m in Sources */,
 				DC788CF91E25CE5F001AF0B4 /* CAMediaTimingFunction+Extends.m in Sources */,
 				DC92E30E1E4D9D1E009AE2A5 /* CALayer+AnchorPoint.m in Sources */,
-				DCDA79C11E8FA07D00173A28 /* DecayAnimationViewController.swift in Sources */,
+				DCAFFF2A1E8FB7B400D42AF1 /* DecayAnimationViewController.swift in Sources */,
 				DC92E3101E4EA43B009AE2A5 /* AXChainAnimator.swift in Sources */,
 				DC80A97B1E1F2ED200729EAA /* AnimationConvertableViewController.m in Sources */,
 				DC5E8AA91DFBEBC400597663 /* ViewController.m in Sources */,
