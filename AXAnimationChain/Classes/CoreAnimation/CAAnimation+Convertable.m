@@ -61,6 +61,32 @@ static NSArray * NSNumberValuesCalculation(CGFloat beginNumber, CGFloat endNumbe
     return [numbers copy];
 }
 
+static NSArray * NSNumberValuesCaculationWithBeginValue(CGFloat beginNumber, NSTimeInterval duration, CAMediaTimingFunction *timing, CAKeyframeValuesFunction function) {
+    // 69 FPS per second.
+    NSUInteger components = (NSUInteger)ceil(69 * duration)+2;
+    
+    NSMutableArray *numbers = [NSMutableArray arrayWithCapacity:components];
+    
+    const double increment = 1.0 / (double)(components - 1);
+    
+    double progress = 0.0,
+    value = 0.0;
+    
+    NSUInteger i;
+    // Add the begin number to the numbers in case of losing first frame.
+    [numbers addObject:@(beginNumber)];
+    for (i = 1; i < components; i++)
+    {
+        value = (function?:timing.valuesFuntion)(duration * progress * 1000, 0, 1, duration * 1000);
+        
+        [numbers addObject:@(value)];
+        
+        progress += increment;
+    }
+    
+    return [numbers copy];
+}
+
 static NSArray * UIColorValuesWithComponents(NSArray *redValues, NSArray *greenValues, NSArray *blueValues, NSArray *alphaValues) {
     if (!(redValues.count == blueValues.count && redValues.count == greenValues.count && redValues.count == alphaValues.count)) return nil;
     
@@ -194,6 +220,36 @@ NSArray * CAKeyframeValuesWithFrames(id fromValue, id toValue, NSTimeInterval du
             CGSize fromSize = [beginValue CGSizeValue];
             CGSize toSize = [endValue CGSizeValue];
             return CGSizeValuesWithComponents(NSNumberValuesCalculation(fromSize.width, toSize.width, duration, timing, function), NSNumberValuesCalculation(fromSize.height, toSize.height, duration, timing, function));
+        }
+    }
+    return nil;
+}
+
+NSArray * CAKeyframeValuesWithBeginFrame(id fromValue, NSTimeInterval duration, CAMediaTimingFunction *timing, CAKeyframeValuesFunction function) {
+    id beginValue;
+    beginValue = fromValue;
+
+    if ([beginValue isKindOfClass:[NSNumber class]]) {
+        return NSNumberValuesCaculationWithBeginValue([beginValue floatValue], duration, timing, function);
+    } else if ([beginValue isKindOfClass:[UIColor class]]) {
+        const CGFloat *fromComponents = CGColorGetComponents(((UIColor*)beginValue).CGColor);
+        return UIColorValuesWithComponents(NSNumberValuesCaculationWithBeginValue(fromComponents[0], duration, timing, function), NSNumberValuesCaculationWithBeginValue(fromComponents[1], duration, timing, function), NSNumberValuesCaculationWithBeginValue(fromComponents[2], duration, timing, function), NSNumberValuesCaculationWithBeginValue(fromComponents[3], duration, timing, function));
+    } else if ([beginValue isKindOfClass:[NSValue class]]) {
+        NSString *valueType = [NSString stringWithCString:[beginValue objCType] encoding:NSStringEncodingConversionAllowLossy];
+        if ([valueType rangeOfString:@"CGRect"].location == 1) {
+            CGRect fromRect = [beginValue CGRectValue];
+            return CGRectValuesWithComponents(NSNumberValuesCaculationWithBeginValue(fromRect.origin.x, duration, timing, function), NSNumberValuesCaculationWithBeginValue(fromRect.origin.y, duration, timing, function), NSNumberValuesCaculationWithBeginValue(fromRect.size.width, duration, timing, function), NSNumberValuesCaculationWithBeginValue(fromRect.size.height, duration, timing, function));
+            
+        } else if ([valueType rangeOfString:@"CGPoint"].location == 1) {
+            CGPoint fromPoint = [beginValue CGPointValue];
+            return CGPointValuesWithComponents(NSNumberValuesCaculationWithBeginValue(fromPoint.x, duration, timing, function), NSNumberValuesCaculationWithBeginValue(fromPoint.y, duration, timing, function));
+            
+        } else if ([valueType rangeOfString:@"CATransform3D"].location == 1) {
+            CATransform3D fromTransform = [beginValue CATransform3DValue];
+            return CATransform3DValuesWithComponents(NSNumberValuesCaculationWithBeginValue(fromTransform.m11, duration, timing, function), NSNumberValuesCaculationWithBeginValue(fromTransform.m12, duration, timing, function), NSNumberValuesCaculationWithBeginValue(fromTransform.m13, duration, timing, function), NSNumberValuesCaculationWithBeginValue(fromTransform.m14, duration, timing, function), NSNumberValuesCaculationWithBeginValue(fromTransform.m21, duration, timing, function), NSNumberValuesCaculationWithBeginValue(fromTransform.m22, duration, timing, function), NSNumberValuesCaculationWithBeginValue(fromTransform.m23, duration, timing, function), NSNumberValuesCaculationWithBeginValue(fromTransform.m24, duration, timing, function), NSNumberValuesCaculationWithBeginValue(fromTransform.m31, duration, timing, function), NSNumberValuesCaculationWithBeginValue(fromTransform.m32, duration, timing, function), NSNumberValuesCaculationWithBeginValue(fromTransform.m33, duration, timing, function), NSNumberValuesCaculationWithBeginValue(fromTransform.m34, duration, timing, function), NSNumberValuesCaculationWithBeginValue(fromTransform.m41, duration, timing, function), NSNumberValuesCaculationWithBeginValue(fromTransform.m42, duration, timing, function), NSNumberValuesCaculationWithBeginValue(fromTransform.m43, duration, timing, function), NSNumberValuesCaculationWithBeginValue(fromTransform.m44, duration, timing, function));
+        } else if ([valueType rangeOfString:@"CGSize"].location == 1) {
+            CGSize fromSize = [beginValue CGSizeValue];
+            return CGSizeValuesWithComponents(NSNumberValuesCaculationWithBeginValue(fromSize.width, duration, timing, function), NSNumberValuesCaculationWithBeginValue(fromSize.height, duration, timing, function));
         }
     }
     return nil;
