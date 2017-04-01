@@ -87,7 +87,7 @@ static NSArray * NSNumberValuesCaculationWithBeginValue(CGFloat beginNumber, NST
     return [numbers copy];
 }
 
-static NSArray * UIColorValuesWithComponents(NSArray *redValues, NSArray *greenValues, NSArray *blueValues, NSArray *alphaValues) {
+NSArray * UIColorValuesWithComponents(NSArray *redValues, NSArray *greenValues, NSArray *blueValues, NSArray *alphaValues) {
     if (!(redValues.count == blueValues.count && redValues.count == greenValues.count && redValues.count == alphaValues.count)) return nil;
     
     NSUInteger numberOfColors = redValues.count;
@@ -104,7 +104,7 @@ static NSArray * UIColorValuesWithComponents(NSArray *redValues, NSArray *greenV
     return values;
 }
 
-static NSArray * CGRectValuesWithComponents(NSArray *xValues, NSArray *yValues, NSArray *widths, NSArray *heights) {
+NSArray * CGRectValuesWithComponents(NSArray *xValues, NSArray *yValues, NSArray *widths, NSArray *heights) {
     if (!(xValues.count == yValues.count && xValues.count == widths.count && xValues.count == heights.count)) return nil;
     
     NSUInteger numberOfRects = xValues.count;
@@ -123,7 +123,7 @@ static NSArray * CGRectValuesWithComponents(NSArray *xValues, NSArray *yValues, 
     return values;
 }
 
-static NSArray * CGPointValuesWithComponents(NSArray *xValues, NSArray *yValues) {
+NSArray * CGPointValuesWithComponents(NSArray *xValues, NSArray *yValues) {
     if (xValues.count != yValues.count) return nil;
     
     NSUInteger numberOfPoints = xValues.count;
@@ -140,7 +140,7 @@ static NSArray * CGPointValuesWithComponents(NSArray *xValues, NSArray *yValues)
     return values;
 }
 
-static NSArray * CGSizeValuesWithComponents(NSArray *widthValues, NSArray *heightValues) {
+NSArray * CGSizeValuesWithComponents(NSArray *widthValues, NSArray *heightValues) {
     if (widthValues.count != heightValues.count) return nil;
     
     NSUInteger numberOfSizes = widthValues.count;
@@ -157,7 +157,7 @@ static NSArray * CGSizeValuesWithComponents(NSArray *widthValues, NSArray *heigh
     return values;
 }
 
-static NSArray * CATransform3DValuesWithComponents(NSArray *m11, NSArray *m12, NSArray *m13, NSArray *m14, NSArray *m21, NSArray *m22, NSArray *m23, NSArray *m24, NSArray *m31, NSArray *m32, NSArray *m33, NSArray *m34, NSArray *m41, NSArray *m42, NSArray *m43, NSArray *m44) {
+NSArray * CATransform3DValuesWithComponents(NSArray *m11, NSArray *m12, NSArray *m13, NSArray *m14, NSArray *m21, NSArray *m22, NSArray *m23, NSArray *m24, NSArray *m31, NSArray *m32, NSArray *m33, NSArray *m34, NSArray *m41, NSArray *m42, NSArray *m43, NSArray *m44) {
     NSUInteger numberOfTransforms = m11.count;
     NSMutableArray *values = [NSMutableArray arrayWithCapacity:numberOfTransforms];
     CATransform3D value;
