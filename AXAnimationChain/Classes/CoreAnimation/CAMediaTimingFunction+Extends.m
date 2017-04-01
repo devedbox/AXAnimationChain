@@ -176,7 +176,7 @@ static double AXRootsForXValueOnTimeLine(double x0, double x1, double x2, double
 /// b the begin value.
 /// c the delta value.
 /// d the total time.
-- (double (^)(double, double, double, double))valuesFuntion {
+- (CAKeyframeValuesFunction)valuesFuntion {
     CGPoint p0, p1, p2, p3;
     float v0[2], v1[2], v2[2], v3[2];
     
@@ -336,14 +336,14 @@ static double AXRootsForXValueOnTimeLine(double x0, double x1, double x2, double
      */
 }
 
-+ (double (^)(double, double, double, double, double, double, double))springValuesFunction {
++ (AXCASpringValuesFunction)springValuesFunction {
     @throw @"Spring values function is unavaiable. Please use AXSpringAnimation instead.";
     return ^double (double t, double b, double c, double d, double mass, double stiffness, double damping) {
         return (1-exp(-damping/(2*mass)*t)*cos(sqrt(fabs(stiffness/mass-pow(damping/(2*mass), 2.0)))*t/(d/(-(2.0*mass*log(0.001))/damping))))*(c-b)+b;
     };
 }
 
-+ (double (^)(double, double, double, double))easeInElasticValuesFuntion {
++ (CAKeyframeValuesFunction)easeInElasticValuesFuntion {
     return ^double (double t, double b, double c, double d) {
         double s = 1.70158; double p=0; double a=c;
         
@@ -354,7 +354,7 @@ static double AXRootsForXValueOnTimeLine(double x0, double x1, double x2, double
     };
 }
 
-+ (double (^)(double, double, double, double))easeOutElasticValuesFuntion {
++ (CAKeyframeValuesFunction)easeOutElasticValuesFuntion {
     return ^double (double t, double b, double c, double d) {
         double s=1.70158, p=0, a=c;
         if (t==0) return b;  if ((t/=d)==1) return b+c;  if (!p) p=d*.3;
@@ -364,7 +364,7 @@ static double AXRootsForXValueOnTimeLine(double x0, double x1, double x2, double
     };
 }
 
-+ (double (^)(double, double, double, double))easeInOutElasticValuesFuntion {
++ (CAKeyframeValuesFunction)easeInOutElasticValuesFuntion {
     return ^double (double t, double b, double c, double d) {
         double s=1.70158, p=0, a=c;
         if (t==0) return b;  if ((t/=d/2)==2) return b+c;  if (!p) p=d*(.3*1.5);
@@ -375,13 +375,13 @@ static double AXRootsForXValueOnTimeLine(double x0, double x1, double x2, double
     };
 }
 
-+ (double (^)(double, double, double, double))easeInBounceValuesFuntion {
++ (CAKeyframeValuesFunction)easeInBounceValuesFuntion {
     return ^double (double t, double b, double c, double d) {
         return c - [self easeOutBounceValuesFuntion](d-t, 0, c, d) + b;
     };
 }
 
-+ (double (^)(double, double, double, double))easeOutBounceValuesFuntion {
++ (CAKeyframeValuesFunction)easeOutBounceValuesFuntion {
     return ^double (double t, double b, double c, double d) {
         if ((t/=d) < (1/2.75)) {
             return c*(7.5625*t*t) + b;
@@ -395,7 +395,7 @@ static double AXRootsForXValueOnTimeLine(double x0, double x1, double x2, double
     };
 }
 
-+ (double (^)(double, double, double, double))easeInOutBounceValuesFuntion {
++ (CAKeyframeValuesFunction)easeInOutBounceValuesFuntion {
     return ^double (double t, double b, double c, double d) {
         if (t < d/2)
             return [self easeInBounceValuesFuntion](t*2, 0, c, d) * .5 + b;
@@ -404,13 +404,13 @@ static double AXRootsForXValueOnTimeLine(double x0, double x1, double x2, double
     };
 }
 
-+ (double (^)(double, double, double, double))gravityValuesFunction {
++ (CAKeyframeValuesFunction)gravityValuesFunction {
     return ^double (double t, double b, double c, double d) {
         return MIN(9.98*pow(t/=d, 2.0)/2.0, 1.0)*c+b;
     };
 }
 
-+ (double (^)(double, double, double, double))decayValuesFunction {
++ (CAKeyframeValuesFunction)decayValuesFunction {
     return ^double (double t, double b, double c, double d) {
         // v0 = v / 1000
         // v = v0 * powf(deceleration, dt);
@@ -418,7 +418,10 @@ static double AXRootsForXValueOnTimeLine(double x0, double x1, double x2, double
         
         // x0 = x;
         // x = x0 + v0 * deceleration * (1 - powf(deceleration, dt)) / (1 - deceleration)
-        return (0+0.1*0.998*(1-powf(0.998, t/=d))/(1-0.998))*c+b;
+        CGFloat deceleration = 0.4;
+        CGFloat duration = (log(0.001)/log(deceleration));
+        return (0+1*deceleration*(1-powf(deceleration, (t/=d)*duration))/(1-deceleration))*(c-b)+b;
+        // return (5*(t/=d)-9.98*pow(t, 2.0)/2.0)*c+b;
     };
 }
 #pragma clang diagnostic pop

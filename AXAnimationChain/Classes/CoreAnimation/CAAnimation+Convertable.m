@@ -31,9 +31,7 @@
 @property(strong, nonatomic, nullable) CAMediaTimingFunction *convertedTimingFunction;
 @end
 
-typedef double (^_)(double t, double b, double c, double d);
-
-static NSArray * NSNumberValuesCalculation(CGFloat beginNumber, CGFloat endNumber, NSTimeInterval duration, CAMediaTimingFunction *timing, _ function) {
+static NSArray * NSNumberValuesCalculation(CGFloat beginNumber, CGFloat endNumber, NSTimeInterval duration, CAMediaTimingFunction *timing, CAKeyframeValuesFunction function) {
     // 69 FPS per second.
     NSUInteger components = (NSUInteger)ceil(69 * duration)+2;
     
@@ -165,7 +163,7 @@ static NSArray * CATransform3DValuesWithComponents(NSArray *m11, NSArray *m12, N
     return values;
 }
 
-NSArray * CAKeyframeValuesWithFrames(id fromValue, id toValue, NSTimeInterval duration, CAMediaTimingFunction *timing, _ function) {
+NSArray * CAKeyframeValuesWithFrames(id fromValue, id toValue, NSTimeInterval duration, CAMediaTimingFunction *timing, CAKeyframeValuesFunction function) {
     id beginValue;
     id endValue;
     beginValue = fromValue;

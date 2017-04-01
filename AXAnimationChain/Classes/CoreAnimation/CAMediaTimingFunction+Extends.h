@@ -25,6 +25,8 @@
 
 #import <QuartzCore/QuartzCore.h>
 NS_ASSUME_NONNULL_BEGIN
+typedef double (^CAKeyframeValuesFunction)(double t, double b, double c, double d);
+typedef double (^AXCASpringValuesFunction)(double t, double b, double c, double d, double mass, double stiffness, double damping);
 /// Timing functions for easings: http://easings.net/zh-cn
 @interface CAMediaTimingFunction (Extends)
 // System default:
@@ -61,20 +63,20 @@ NS_ASSUME_NONNULL_BEGIN
 + (instancetype)easeOutBack;
 + (instancetype)easeInOutBack;
 
-- (double (^)(double t, double b, double c, double d))valuesFuntion;
+- (CAKeyframeValuesFunction)valuesFuntion;
 
-+ (double (^)(double t, double b, double c, double d, double mass, double stiffness, double damping))springValuesFunction __attribute__((unavailable));
++ (AXCASpringValuesFunction)springValuesFunction __attribute__((unavailable));
 
-+ (double (^)(double t, double b, double c, double d))easeInElasticValuesFuntion;
-+ (double (^)(double t, double b, double c, double d))easeOutElasticValuesFuntion;
-+ (double (^)(double t, double b, double c, double d))easeInOutElasticValuesFuntion;
-+ (double (^)(double t, double b, double c, double d))easeInBounceValuesFuntion;
-+ (double (^)(double t, double b, double c, double d))easeOutBounceValuesFuntion;
-+ (double (^)(double t, double b, double c, double d))easeInOutBounceValuesFuntion;
++ (CAKeyframeValuesFunction)easeInElasticValuesFuntion;
++ (CAKeyframeValuesFunction)easeOutElasticValuesFuntion;
++ (CAKeyframeValuesFunction)easeInOutElasticValuesFuntion;
++ (CAKeyframeValuesFunction)easeInBounceValuesFuntion;
++ (CAKeyframeValuesFunction)easeOutBounceValuesFuntion;
++ (CAKeyframeValuesFunction)easeInOutBounceValuesFuntion;
 //
 // Not affected by time.
 //
-+ (double (^)(double t, double b, double c, double d))gravityValuesFunction;
-+ (double (^)(double t, double b, double c, double d))decayValuesFunction;
++ (CAKeyframeValuesFunction)gravityValuesFunction;
++ (CAKeyframeValuesFunction)decayValuesFunction;
 @end
 NS_ASSUME_NONNULL_END
