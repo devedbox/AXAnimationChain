@@ -474,3 +474,22 @@ id CalculateToValueWithByValue(id value, id byValue, BOOL plus) {
     return spring;
 }
 @end
+
+@implementation AXDecayAnimation (Convertable)
++ (instancetype)animationWithBasic:(CABasicAnimation *)animation {
+    AXDecayAnimation *decay = [AXDecayAnimation new];
+    decay.beginTime = animation.beginTime;
+    decay.duration = animation.duration;
+    decay.speed = animation.speed;
+    decay.timeOffset = animation.timeOffset;
+    decay.repeatCount = animation.repeatCount;
+    decay.repeatDuration= animation.repeatDuration;
+    decay.autoreverses = animation.autoreverses;
+    decay.removedOnCompletion = animation.removedOnCompletion;
+    decay.fillMode = animation.fillMode;
+    decay.keyPath = animation.keyPath;
+    decay.timingFunction = animation.timingFunction;
+    decay.fromValue = animation.fromValue;
+    return decay;
+}
+@end

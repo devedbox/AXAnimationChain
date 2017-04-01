@@ -27,6 +27,7 @@
 #import <UIKit/UIKit.h>
 #import "CAMediaTimingFunction+Extends.h"
 #import "AXSpringAnimation.h"
+#import "AXDecayAnimation.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface CAKeyframeAnimation (Convertable)
@@ -63,6 +64,12 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 @interface AXCASpringAnimation (Convertable)
+/// Convert animation from CABasicAnimation.
+///
++ (nullable instancetype)animationWithBasic:(nullable CABasicAnimation *)animation;
+@end
+
+@interface AXDecayAnimation (Convertable)
 /// Convert animation from CABasicAnimation.
 ///
 + (nullable instancetype)animationWithBasic:(nullable CABasicAnimation *)animation;
