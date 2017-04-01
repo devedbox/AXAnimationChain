@@ -10,6 +10,7 @@
 #import "CAMediaTimingFunction+Extends.h"
 #import "CAAnimation+Convertable.h"
 #import "AXSpringAnimation.h"
+#import "AXDecayAnimation.h"
 
 @interface AnimationConvertableViewController ()
 /// Keyframe.
@@ -121,7 +122,7 @@
         AXCASpringAnimation *animation = [AXCASpringAnimation animationWithKeyPath:@"position"];
         animation.removedOnCompletion = NO;
         animation.fillMode = kCAFillModeForwards;
-//        animation.initialVelocity = -10;
+        animation.initialVelocity = 50;
 //        animation.mass = 500;
 //        animation.damping = 100;
 //        animation.stiffness = 50;
@@ -136,7 +137,7 @@
         spring.fillMode = kCAFillModeForwards;
         spring.fromValue = [NSValue valueWithCGPoint:CGPointMake(self.keyframeTransitionView.center.x, CGRectGetHeight(_keyframeTransitionView.frame)*.5+64)];
         spring.toValue = [NSValue valueWithCGPoint:CGPointMake(self.keyframeTransitionView.center.x, CGRectGetHeight(self.view.frame)-64-CGRectGetHeight(_keyframeTransitionView.frame)*.5)];
-//        spring.initialVelocity = -10;
+        spring.initialVelocity = 50;
 //        spring.mass = 500;
 //        spring.damping = 100;
 //        spring.stiffness = 50;
@@ -283,11 +284,14 @@
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
         animation.timingFunction = [[CAMediaTimingFunction new] performSelector:NSSelectorFromString([_timing titleForState:UIControlStateNormal])];
 #pragma clang diagnostic pop
-        CAKeyframeAnimation *keyframe = [CAKeyframeAnimation animationWithBasic:animation usingValuesFunction:[CAMediaTimingFunction decayValuesFunction]];
-        NSMutableArray *values = [keyframe.values mutableCopy];
-        [values removeLastObject];
-        keyframe.values = values;
-        [_keyframeTransitionView.layer addAnimation:keyframe forKey:@"position"];
+        AXDecayAnimation *decay = [AXDecayAnimation animationWithKeyPath:@"position.y"];
+        decay.fromValue = @(CGRectGetHeight(_keyframeTransitionView.frame)*.5+64);
+        decay.velocity = 500;
+        decay.deceleration = 0.998;
+        decay.removedOnCompletion = NO;
+        decay.fillMode = kCAFillModeForwards;
+
+        [_keyframeTransitionView.layer addAnimation:decay forKey:@"position"];
         animation.fromValue = [NSValue valueWithCGPoint:CGPointMake(self.transitionView.center.x, CGRectGetHeight(_transitionView.frame)*.5+64)];
         animation.toValue = [NSValue valueWithCGPoint:CGPointMake(self.transitionView.center.x, CGRectGetHeight(self.view.frame)-64-CGRectGetHeight(_transitionView.frame)*.5)];
         [_transitionView.layer addAnimation:animation forKey:@"position"];

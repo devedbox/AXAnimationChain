@@ -24,7 +24,7 @@
 //  SOFTWARE.
 
 #import <QuartzCore/QuartzCore.h>
-
+NS_ASSUME_NONNULL_BEGIN
 @interface AXDecayAnimation : CAKeyframeAnimation
 
 @end
@@ -40,3 +40,4 @@
 - (void)setBiasValues:(NSArray<NSNumber *> *)biasValues __attribute__((unavailable));
 - (void)setRotationMode:(NSString *)rotationMode __attribute__((unavailable));
 @end
+NS_ASSUME_NONNULL_END
