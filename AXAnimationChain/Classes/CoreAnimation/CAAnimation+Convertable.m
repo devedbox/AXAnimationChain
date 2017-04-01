@@ -308,7 +308,7 @@ id CalculateToValueWithByValue(id value, id byValue, BOOL plus) {
 }
 
 @implementation CAKeyframeAnimation (Convertable)
-+ (instancetype)animationWithBasic:(CABasicAnimation *)basicAnimation usingValuesFunction:(double (^)(double, double, double, double))valuesFunction {
++ (instancetype)animationWithBasic:(CABasicAnimation *)basicAnimation usingValuesFunction:(CAKeyframeValuesFunction)valuesFunction {
     if (!basicAnimation) return nil;
     CAKeyframeAnimation *keyframe = [CAKeyframeAnimation animation];
     keyframe.beginTime = basicAnimation.beginTime;
@@ -476,6 +476,11 @@ id CalculateToValueWithByValue(id value, id byValue, BOOL plus) {
 @end
 
 @implementation AXDecayAnimation (Convertable)
++ (instancetype)animationWithBasic:(CABasicAnimation *)basicAnimation usingValuesFunction:(CAKeyframeValuesFunction)valuesFunction {
+    if (!basicAnimation || ![basicAnimation isKindOfClass:CAKeyframeAnimation.class]) return nil;
+    return [super animationWithBasic:basicAnimation usingValuesFunction:valuesFunction];
+}
+
 + (instancetype)animationWithSpring:(AXCASpringAnimation *)animation {
     return [self animationWithBasic:animation];
 }

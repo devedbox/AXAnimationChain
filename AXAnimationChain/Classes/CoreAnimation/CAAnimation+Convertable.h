@@ -40,7 +40,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (nullable instancetype)animationWithBasic:(nullable CABasicAnimation *)basicAnimation;
 /// Convert animation from CABasicAnimation using custom values function.
 ///
-+ (nullable instancetype)animationWithBasic:(nullable CABasicAnimation *)basicAnimation usingValuesFunction:(nullable double (^)(double t, double b, double c, double d))valuesFunction;
++ (nullable instancetype)animationWithBasic:(nullable CABasicAnimation *)basicAnimation usingValuesFunction:(CAKeyframeValuesFunction _Nullable)valuesFunction;
 /// Convert animation from SpringAnimation.
 ///
 /// @param animation spring animation to convert.
