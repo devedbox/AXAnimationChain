@@ -26,6 +26,7 @@
 #ifndef AXCoreAnimation_h
 #define AXCoreAnimation_h
 
+#import "AXDecayAnimation.h"
 #import "AXSpringAnimation.h"
 #import "CAAnimation+Convertable.h"
 #import "CAMediaTimingFunction+Extends.h"
