@@ -77,6 +77,6 @@ typedef double (^AXCASpringValuesFunction)(double t, double b, double c, double 
 // Not affected by time.
 //
 + (CAKeyframeValuesFunction)gravityValuesFunction;
-+ (CAKeyframeValuesFunction)decayValuesFunction;
++ (CAKeyframeValuesFunction)decayValuesFunction __attribute__((unavailable));
 @end
 NS_ASSUME_NONNULL_END

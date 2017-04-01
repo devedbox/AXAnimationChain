@@ -411,6 +411,7 @@ static double AXRootsForXValueOnTimeLine(double x0, double x1, double x2, double
 }
 
 + (CAKeyframeValuesFunction)decayValuesFunction {
+    @throw @"Decay values function is unavailable. Please use AXDecayAnimation instead.";
     return ^double (double t, double b, double c, double d) {
         // v0 = v / 1000
         // v = v0 * powf(deceleration, dt);
