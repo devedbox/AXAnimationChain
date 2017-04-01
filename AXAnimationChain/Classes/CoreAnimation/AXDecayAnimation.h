@@ -26,7 +26,24 @@
 #import <QuartzCore/QuartzCore.h>
 NS_ASSUME_NONNULL_BEGIN
 @interface AXDecayAnimation : CAKeyframeAnimation
+/* The initial velocity of the object attached to the spring. Defaults
+ * to zero, which represents an unmoving object. Negative values
+ * represent the object moving away from the spring attachment point,
+ * positive values represent the object moving towards the spring
+ * attachment point. */
+@property(assign, nonatomic) CGFloat velocity;
+/**
+ @abstract The deceleration factor.
+ @discussion Values specifies should be in the range [0, 1]. Lower values results in faster deceleration. Defaults to 0.998.
+ */
+@property(assign, nonatomic) CGFloat deceleration;
+/**
+ @abstract The expected duration.
+ @discussion Derived based on input velocity and deceleration values.
+ */
+@property(readonly, nonatomic) CFTimeInterval settlingDuration;
 
+@property(nullable, strong, nonatomic) id fromValue;
 @end
 
 @interface AXDecayAnimation (Unavailable)
