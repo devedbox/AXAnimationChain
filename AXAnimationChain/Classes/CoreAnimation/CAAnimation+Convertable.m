@@ -26,6 +26,8 @@
 #import "CAAnimation+Convertable.h"
 #import <objc/runtime.h>
 
+NSUInteger const kAXCAKeyframeAnimationFrameCount = 69;
+
 @interface CAKeyframeAnimation (Convertable_Private)
 /// Converted timing function.
 @property(strong, nonatomic, nullable) CAMediaTimingFunction *convertedTimingFunction;
@@ -33,7 +35,7 @@
 
 static NSArray * NSNumberValuesCalculation(CGFloat beginNumber, CGFloat endNumber, NSTimeInterval duration, CAMediaTimingFunction *timing, CAKeyframeValuesFunction function) {
     // 69 FPS per second.
-    NSUInteger components = (NSUInteger)ceil(69 * duration)+2;
+    NSUInteger components = (NSUInteger)ceil(kAXCAKeyframeAnimationFrameCount * duration)+2;
     
     NSMutableArray *numbers = [NSMutableArray arrayWithCapacity:components];
     
