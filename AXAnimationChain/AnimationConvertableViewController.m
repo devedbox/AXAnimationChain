@@ -215,7 +215,7 @@
         [_keyframeTransitionView.layer addAnimation:[CAKeyframeAnimation animationWithBasic:animation usingValuesFunction:[CAMediaTimingFunction easeInBounceValuesFuntion]] forKey:@"position"];
         animation.fromValue = [NSValue valueWithCGPoint:CGPointMake(self.transitionView.center.x, CGRectGetHeight(_transitionView.frame)*.5+64)];
         animation.toValue = [NSValue valueWithCGPoint:CGPointMake(self.transitionView.center.x, CGRectGetHeight(self.view.frame)-64-CGRectGetHeight(_transitionView.frame)*.5)];
-        [_transitionView.layer addAnimation:animation forKey:@"position"];
+        // [_transitionView.layer addAnimation:animation forKey:@"position"];
     }]];
     [alert addAction:[UIAlertAction actionWithTitle:@"easeOutBounce" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [_transitionView.layer removeAllAnimations];
