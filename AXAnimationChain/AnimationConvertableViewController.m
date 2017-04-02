@@ -122,10 +122,10 @@
         AXCASpringAnimation *animation = [AXCASpringAnimation animationWithKeyPath:@"position"];
         animation.removedOnCompletion = NO;
         animation.fillMode = kCAFillModeForwards;
-        animation.initialVelocity = 50;
-//        animation.mass = 500;
-//        animation.damping = 100;
-//        animation.stiffness = 50;
+        // animation.initialVelocity = 50;
+        // animation.mass = 500;
+        // animation.damping = 100;
+        // animation.stiffness = 50;
         NSLog(@"settling duratuion: %@", @(animation.settlingDuration));
         animation.duration = animation.settlingDuration;
         animation.fromValue = [NSValue valueWithCGPoint:CGPointMake(self.transitionView.center.x, CGRectGetHeight(_transitionView.frame)*.5+64)];
@@ -137,10 +137,10 @@
         spring.fillMode = kCAFillModeForwards;
         spring.fromValue = [NSValue valueWithCGPoint:CGPointMake(self.keyframeTransitionView.center.x, CGRectGetHeight(_keyframeTransitionView.frame)*.5+64)];
         spring.toValue = [NSValue valueWithCGPoint:CGPointMake(self.keyframeTransitionView.center.x, CGRectGetHeight(self.view.frame)-64-CGRectGetHeight(_keyframeTransitionView.frame)*.5)];
-        spring.initialVelocity = 50;
-//        spring.mass = 500;
-//        spring.damping = 100;
-//        spring.stiffness = 50;
+        // spring.initialVelocity = 50;
+        // spring.mass = 500;
+        // spring.damping = 100;
+        // spring.stiffness = 50;
         spring.duration = spring.settlingDuration;
         NSLog(@"settling duratuion: %@", @(spring.settlingDuration));
         [_keyframeTransitionView.layer addAnimation:spring forKey:@"position"];
@@ -161,7 +161,7 @@
         [_keyframeTransitionView.layer addAnimation:[CAKeyframeAnimation animationWithBasic:animation usingValuesFunction:[CAMediaTimingFunction easeInElasticValuesFuntion]] forKey:@"position"];
         animation.fromValue = [NSValue valueWithCGPoint:CGPointMake(self.transitionView.center.x, CGRectGetHeight(_transitionView.frame)*.5+64)];
         animation.toValue = [NSValue valueWithCGPoint:CGPointMake(self.transitionView.center.x, CGRectGetHeight(self.view.frame)-64-CGRectGetHeight(_transitionView.frame)*.5)];
-        [_transitionView.layer addAnimation:animation forKey:@"position"];
+        // [_transitionView.layer addAnimation:animation forKey:@"position"];
     }]];
     [alert addAction:[UIAlertAction actionWithTitle:@"easeOutElastic" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [_transitionView.layer removeAllAnimations];
@@ -179,7 +179,7 @@
         [_keyframeTransitionView.layer addAnimation:[CAKeyframeAnimation animationWithBasic:animation usingValuesFunction:[CAMediaTimingFunction easeOutElasticValuesFuntion]] forKey:@"position"];
         animation.fromValue = [NSValue valueWithCGPoint:CGPointMake(self.transitionView.center.x, CGRectGetHeight(_transitionView.frame)*.5+64)];
         animation.toValue = [NSValue valueWithCGPoint:CGPointMake(self.transitionView.center.x, CGRectGetHeight(self.view.frame)-64-CGRectGetHeight(_transitionView.frame)*.5)];
-        [_transitionView.layer addAnimation:animation forKey:@"position"];
+        // [_transitionView.layer addAnimation:animation forKey:@"position"];
     }]];
     [alert addAction:[UIAlertAction actionWithTitle:@"easeInOutElastic" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [_transitionView.layer removeAllAnimations];
@@ -197,7 +197,7 @@
         [_keyframeTransitionView.layer addAnimation:[CAKeyframeAnimation animationWithBasic:animation usingValuesFunction:[CAMediaTimingFunction easeInOutElasticValuesFuntion]] forKey:@"position"];
         animation.fromValue = [NSValue valueWithCGPoint:CGPointMake(self.transitionView.center.x, CGRectGetHeight(_transitionView.frame)*.5+64)];
         animation.toValue = [NSValue valueWithCGPoint:CGPointMake(self.transitionView.center.x, CGRectGetHeight(self.view.frame)-64-CGRectGetHeight(_transitionView.frame)*.5)];
-        [_transitionView.layer addAnimation:animation forKey:@"position"];
+        // [_transitionView.layer addAnimation:animation forKey:@"position"];
     }]];
     [alert addAction:[UIAlertAction actionWithTitle:@"easeInBounce" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [_transitionView.layer removeAllAnimations];
@@ -233,7 +233,7 @@
         [_keyframeTransitionView.layer addAnimation:[CAKeyframeAnimation animationWithBasic:animation usingValuesFunction:[CAMediaTimingFunction easeOutBounceValuesFuntion]] forKey:@"position"];
         animation.fromValue = [NSValue valueWithCGPoint:CGPointMake(self.transitionView.center.x, CGRectGetHeight(_transitionView.frame)*.5+64)];
         animation.toValue = [NSValue valueWithCGPoint:CGPointMake(self.transitionView.center.x, CGRectGetHeight(self.view.frame)-64-CGRectGetHeight(_transitionView.frame)*.5)];
-        [_transitionView.layer addAnimation:animation forKey:@"position"];
+        // [_transitionView.layer addAnimation:animation forKey:@"position"];
     }]];
     [alert addAction:[UIAlertAction actionWithTitle:@"easeInOutBounce" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [_transitionView.layer removeAllAnimations];
@@ -251,7 +251,7 @@
         [_keyframeTransitionView.layer addAnimation:[CAKeyframeAnimation animationWithBasic:animation usingValuesFunction:[CAMediaTimingFunction easeInOutBounceValuesFuntion]] forKey:@"position"];
         animation.fromValue = [NSValue valueWithCGPoint:CGPointMake(self.transitionView.center.x, CGRectGetHeight(_transitionView.frame)*.5+64)];
         animation.toValue = [NSValue valueWithCGPoint:CGPointMake(self.transitionView.center.x, CGRectGetHeight(self.view.frame)-64-CGRectGetHeight(_transitionView.frame)*.5)];
-        [_transitionView.layer addAnimation:animation forKey:@"position"];
+        // [_transitionView.layer addAnimation:animation forKey:@"position"];
     }]];
     [alert addAction:[UIAlertAction actionWithTitle:@"gravity" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [_transitionView.layer removeAllAnimations];
@@ -269,7 +269,7 @@
         [_keyframeTransitionView.layer addAnimation:[CAKeyframeAnimation animationWithBasic:animation usingValuesFunction:[CAMediaTimingFunction gravityValuesFunction]] forKey:@"position"];
         animation.fromValue = [NSValue valueWithCGPoint:CGPointMake(self.transitionView.center.x, CGRectGetHeight(_transitionView.frame)*.5+64)];
         animation.toValue = [NSValue valueWithCGPoint:CGPointMake(self.transitionView.center.x, CGRectGetHeight(self.view.frame)-64-CGRectGetHeight(_transitionView.frame)*.5)];
-        [_transitionView.layer addAnimation:animation forKey:@"position"];
+        // [_transitionView.layer addAnimation:animation forKey:@"position"];
     }]];
     [alert addAction:[UIAlertAction actionWithTitle:@"decay" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [_transitionView.layer removeAllAnimations];
@@ -294,7 +294,7 @@
         [_keyframeTransitionView.layer addAnimation:decay forKey:@"position"];
         animation.fromValue = [NSValue valueWithCGPoint:CGPointMake(self.transitionView.center.x, CGRectGetHeight(_transitionView.frame)*.5+64)];
         animation.toValue = [NSValue valueWithCGPoint:CGPointMake(self.transitionView.center.x, CGRectGetHeight(self.view.frame)-64-CGRectGetHeight(_transitionView.frame)*.5)];
-        [_transitionView.layer addAnimation:animation forKey:@"position"];
+        // [_transitionView.layer addAnimation:animation forKey:@"position"];
     }]];
     [alert addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:NULL]];
     [self presentViewController:alert animated:YES completion:NULL];
