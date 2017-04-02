@@ -94,16 +94,16 @@ static NSString *const kAXKeyframeTimgingFunctionFlagGravity = @"gravity";
         } else if ([self isKindOfClass:[AXSpringChainAnimator class]]) {
             [animator _setAnimation:[CAKeyframeAnimation animationWithSpring:(AXCASpringAnimation *)self.animation]];
         }
-    } else if ([animator isKindOfClass:[AXBasicChainAnimator class]] && ![animator isKindOfClass:[AXCASpringAnimation class]]) {
-        if ([self isKindOfClass:[AXBasicChainAnimator class]] && ![self isKindOfClass:[AXCASpringAnimation class]]) return self;
+    } else if ([animator isKindOfClass:[AXBasicChainAnimator class]] && ![animator isKindOfClass:[AXSpringChainAnimator class]]) {
+        if ([self isKindOfClass:[AXBasicChainAnimator class]] && ![self isKindOfClass:[AXSpringChainAnimator class]]) return self;
         
         if ([self isKindOfClass:[AXKeyframeChainAnimator class]]) {
             [animator _setAnimation:[CABasicAnimation animationWithKeyframe:(CAKeyframeAnimation *)self.animation]];
-        } else if ([self isKindOfClass:[AXCASpringAnimation class]]) {
+        } else if ([self isKindOfClass:[AXSpringChainAnimator class]]) {
             [animator _setAnimation:[CABasicAnimation animationWithSpring:(AXCASpringAnimation *)self.animation]];
         }
-    } else if ([animator isKindOfClass:[AXCASpringAnimation class]]) {
-        if ([self isKindOfClass:[AXCASpringAnimation class]]) return self;
+    } else if ([animator isKindOfClass:[AXSpringChainAnimator class]]) {
+        if ([self isKindOfClass:[AXSpringChainAnimator class]]) return self;
         
         if ([self isKindOfClass:[AXKeyframeChainAnimator class]]) {
             [animator _setAnimation:[AXCASpringAnimation animationWithKeyframe:(CAKeyframeAnimation *)self.animation]];
