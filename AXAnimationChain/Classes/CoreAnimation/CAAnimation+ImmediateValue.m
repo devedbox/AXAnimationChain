@@ -24,7 +24,64 @@
 //  SOFTWARE.
 
 #import "CAAnimation+ImmediateValue.h"
+#import "CAAnimation+Convertable.h"
+#import "CAMediaTimingFunction+Extends.h"
+
+extern NSUInteger kAXCAKeyframeAnimationFrameCount;
+extern id CalculateToValueWithByValue(id value, id byValue, BOOL plus);
+extern NSArray * CAKeyframeValuesWithFrames(id fromValue, id toValue, NSTimeInterval duration, CAMediaTimingFunction *timing, CAKeyframeValuesFunction function);
+
+static id _ImmediateValueAtIndex(id fromValue, id toValue, NSTimeInterval duration, CFTimeInterval time, CAMediaTimingFunction *timing, CAKeyframeValuesFunction function) {
+    NSUInteger allFramesCount = ceil(kAXCAKeyframeAnimationFrameCount * duration)+2;
+    CGFloat pt = time/duration;
+    
+    NSArray *values = CAKeyframeValuesWithFrames(fromValue, toValue, duration, timing, NULL);
+    
+    NSUInteger index = ceil(pt * allFramesCount);
+    if (index > values.count-1) return nil;
+    
+    id value = values[index];
+    return value;
+}
 
 @implementation CAAnimation (ImmediateValue)
+- (id)immediateValueAtTime:(CFTimeInterval)time {
+    return nil;
+}
+@end
 
+@implementation CABasicAnimation (ImmediateValue)
+- (id)immediateValueAtTime:(CFTimeInterval)time {
+    id fromValue = self.fromValue;
+    id toValue = self.toValue;
+    id byValue = self.byValue;
+    
+    if (fromValue && toValue) {
+        return _ImmediateValueAtIndex(fromValue, toValue, self.duration, time, self.timingFunction, NULL);
+    } else if (fromValue && byValue) {
+        toValue = CalculateToValueWithByValue(fromValue, byValue, YES);
+        return _ImmediateValueAtIndex(fromValue, toValue, self.duration, time, self.timingFunction, NULL);
+    } else if (toValue && byValue) {
+        fromValue = CalculateToValueWithByValue(toValue, byValue, NO);
+        return _ImmediateValueAtIndex(fromValue, toValue, self.duration, time, self.timingFunction, NULL);
+    } else {
+        if (fromValue) return fromValue;
+        if (byValue) return byValue;
+        if (toValue) return toValue;
+    }
+    return nil;
+}
+@end
+
+@implementation CAKeyframeAnimation (ImmediateValue)
+- (id)immediateValueAtTime:(CFTimeInterval)time {
+    NSUInteger allFramesCount = self.values.count;
+    CGFloat pt = time/self.duration;
+    
+    NSUInteger index = ceil(pt * allFramesCount);
+    if (index > self.values.count-1) return nil;
+    
+    id value = self.values[index];
+    return value;
+}
 @end
