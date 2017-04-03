@@ -21,6 +21,9 @@ class DecayAnimationViewController: UIViewController, UIGestureRecognizerDelegat
         let pan = UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture(_:)))
         pan.delegate = self
         animatedView.addGestureRecognizer(pan)
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(handleTagGesture(_:)))
+        view.addGestureRecognizer(tap)
     }
     
     override func didReceiveMemoryWarning() {
@@ -30,14 +33,37 @@ class DecayAnimationViewController: UIViewController, UIGestureRecognizerDelegat
     
     // MARK: Actions.
     @objc
+    private func handleTagGesture(_ genture: UITapGestureRecognizer) {
+        defer {
+            animatedView.layer.removeAllAnimations()
+        }
+        guard let animationKeys = animatedView.layer.animationKeys() else { return }
+        for key in animationKeys {
+            guard let animation = animatedView.layer.animation(forKey: key) as? AXDecayAnimation else { continue }
+            
+            let beginTime = animation.beginTime
+            let timeOffset = animation.timeOffset
+            
+            print("begin time: \(beginTime), time offset: \(timeOffset)")
+            print("current time: \(CACurrentMediaTime())")
+            
+            let time = CACurrentMediaTime()-beginTime
+            guard let immediateValue = animation.immediateValue(atTime: time) else { continue }
+            
+            animatedView.layer.setValue(immediateValue, forKeyPath: animation.keyPath!)
+        }
+    }
+    
+    @objc
     private func handlePanGesture(_ gesture: UIPanGestureRecognizer) {
-        animatedView.layer.removeAllAnimations()
-        
         var point = gesture.location(in: view)
         
         switch gesture.state {
         case .began:
             point = gesture.location(in: view)
+            
+            let pauseTime = animatedView.layer.convertTime(CACurrentMediaTime(), from: nil)
+            print("pause time: \(pauseTime)")
         case .possible: break
         case .changed:
             /*
@@ -64,12 +90,12 @@ class DecayAnimationViewController: UIViewController, UIGestureRecognizerDelegat
             decayy.isRemovedOnCompletion=false
             decayy.fillMode=kCAFillModeForwards
             // decayy.isAdditive = true
-            CATransaction.setCompletionBlock({[weak self] () -> Void in
-                print("view's center:\(String(describing: self?.animatedView.center)), layer's position:\(String(describing: self?.animatedView.layer.position))")
-                self?.animatedView.layer.position = CGPoint(x: decayx.values?.last as! Double, y: decayy.values?.last as! Double)
-                self?.animatedView.layer.removeAllAnimations()
-                print("view's center:\(String(describing: self?.animatedView.center)), layer's position:\(String(describing: self?.animatedView.layer.position))")
-            })
+            // CATransaction.setCompletionBlock({[weak self] () -> Void in
+                // print("view's center:\(String(describing: self?.animatedView.center)), layer's position:\(String(describing: self?.animatedView.layer.position))")
+                // self?.animatedView.layer.position = CGPoint(x: decayx.values?.last as! Double, y: decayy.values?.last as! Double)
+                // self?.animatedView.layer.removeAllAnimations()
+                // print("view's center:\(String(describing: self?.animatedView.center)), layer's position:\(String(describing: self?.animatedView.layer.position))")
+            // })
             CATransaction.begin()
             CATransaction.setDisableActions(false)
             animatedView.layer.add(decayx, forKey: "position.x")

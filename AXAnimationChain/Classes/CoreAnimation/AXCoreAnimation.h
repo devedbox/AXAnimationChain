@@ -29,6 +29,7 @@
 #import "AXDecayAnimation.h"
 #import "AXSpringAnimation.h"
 #import "CAAnimation+Convertable.h"
+#import "CAAnimation+ImmediateValue.h"
 #import "CAMediaTimingFunction+Extends.h"
 
 #endif /* AXCoreAnimation_h */
