@@ -290,7 +290,8 @@
         decay.deceleration = 0.998;
         decay.removedOnCompletion = NO;
         decay.fillMode = kCAFillModeForwards;
-
+        // decay.timingFunction = [CAMediaTimingFunction easeInQuad];
+        
         [_keyframeTransitionView.layer addAnimation:decay forKey:@"position"];
         animation.fromValue = [NSValue valueWithCGPoint:CGPointMake(self.transitionView.center.x, CGRectGetHeight(_transitionView.frame)*.5+64)];
         animation.toValue = [NSValue valueWithCGPoint:CGPointMake(self.transitionView.center.x, CGRectGetHeight(self.view.frame)-64-CGRectGetHeight(_transitionView.frame)*.5)];
