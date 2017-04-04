@@ -290,6 +290,7 @@
         decay.deceleration = 0.998;
         decay.removedOnCompletion = NO;
         decay.fillMode = kCAFillModeForwards;
+        NSLog(@"setting duration: %@", @(decay.settlingDuration));
         // decay.timingFunction = [CAMediaTimingFunction easeInQuad];
         
         [_keyframeTransitionView.layer addAnimation:decay forKey:@"position"];
