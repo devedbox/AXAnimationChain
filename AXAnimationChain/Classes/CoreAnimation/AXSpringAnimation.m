@@ -24,10 +24,9 @@
 //  SOFTWARE.
 
 #import "AXSpringAnimation.h"
+#import "CAMediaTimingFunction+Extends.h"
 
-typedef double (^_)(double t, double b, double c, double d);
-
-extern NSArray * CAKeyframeValuesWithFrames(id fromValue, id toValue, NSTimeInterval duration, CAMediaTimingFunction *timing, _ function);
+extern NSArray * CAKeyframeValuesWithFrames(id fromValue, id toValue, NSTimeInterval duration, CAMediaTimingFunction *timing, CAKeyframeValuesFunction function);
 extern id CalculateToValueWithByValue(id value, id byValue, BOOL plus);
 
 @implementation AXSpringAnimation
