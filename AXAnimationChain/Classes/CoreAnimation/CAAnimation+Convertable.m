@@ -37,7 +37,15 @@ void CACVTSetFrameCountOfKeyframe(NSUInteger count) {
 /// Converted timing function.
 @property(strong, nonatomic, nullable) CAMediaTimingFunction *convertedTimingFunction;
 @end
-
+/// Calculate the numbers between begin number and end number based on the duration and timing control or custom values function.
+///
+/// @param beginNumber begin number of the calculation.
+/// @param endNumber   end number of the calculation.
+/// @param duration    duration of the animation.
+/// @param timing      timing function used to calculate.
+/// @param function    values calculation of the animation.
+///
+/// @return The result of calculation.
 static NSArray * NSNumberValuesCalculation(CGFloat beginNumber, CGFloat endNumber, NSTimeInterval duration, CAMediaTimingFunction *timing, CAKeyframeValuesFunction function) {
     // 69 FPS per second.
     NSUInteger components = (NSUInteger)ceil(MAX(kAXCAKeyframeAnimationFrameCount, _KeyframeCount) * duration)+2;
@@ -93,7 +101,8 @@ static NSArray * NSNumberValuesCaculationWithBeginValue(CGFloat beginNumber, NST
     
     return [numbers copy];
 }
-
+/// Get UIColors with components of r,g,b,a.
+///
 NSArray * UIColorValuesWithComponents(NSArray *redValues, NSArray *greenValues, NSArray *blueValues, NSArray *alphaValues) {
     if (!(redValues.count == blueValues.count && redValues.count == greenValues.count && redValues.count == alphaValues.count)) return nil;
     
@@ -110,7 +119,8 @@ NSArray * UIColorValuesWithComponents(NSArray *redValues, NSArray *greenValues, 
     }
     return values;
 }
-
+/// Get CGRect values with components.
+///
 NSArray * CGRectValuesWithComponents(NSArray *xValues, NSArray *yValues, NSArray *widths, NSArray *heights) {
     if (!(xValues.count == yValues.count && xValues.count == widths.count && xValues.count == heights.count)) return nil;
     
@@ -129,7 +139,8 @@ NSArray * CGRectValuesWithComponents(NSArray *xValues, NSArray *yValues, NSArray
     }
     return values;
 }
-
+/// Get CGPoint values with components.
+///
 NSArray * CGPointValuesWithComponents(NSArray *xValues, NSArray *yValues) {
     if (xValues.count != yValues.count) return nil;
     
@@ -146,7 +157,8 @@ NSArray * CGPointValuesWithComponents(NSArray *xValues, NSArray *yValues) {
     }
     return values;
 }
-
+/// Get CGSize values with components.
+///
 NSArray * CGSizeValuesWithComponents(NSArray *widthValues, NSArray *heightValues) {
     if (widthValues.count != heightValues.count) return nil;
     
@@ -163,7 +175,8 @@ NSArray * CGSizeValuesWithComponents(NSArray *widthValues, NSArray *heightValues
     }
     return values;
 }
-
+/// Get CATransform3D values with components.
+///
 NSArray * CATransform3DValuesWithComponents(NSArray *m11, NSArray *m12, NSArray *m13, NSArray *m14, NSArray *m21, NSArray *m22, NSArray *m23, NSArray *m24, NSArray *m31, NSArray *m32, NSArray *m33, NSArray *m34, NSArray *m41, NSArray *m42, NSArray *m43, NSArray *m44) {
     NSUInteger numberOfTransforms = m11.count;
     NSMutableArray *values = [NSMutableArray arrayWithCapacity:numberOfTransforms];
@@ -268,6 +281,7 @@ NSArray * CAKeyframeValuesWithFrames(id fromValue, id toValue, NSTimeInterval du
                                        );
         }
     }
+    @throw [NSException exceptionWithName:@"com.devedbox.animationchain_convertable_C" reason:[NSString stringWithFormat:@"The type of from value: %@ and to value: %@ is not supported.", fromValue, toValue] userInfo:nil];
     return nil;
 }
 
@@ -337,6 +351,7 @@ NSArray * CAKeyframeValuesWithBeginFrame(id fromValue, NSTimeInterval duration, 
                                        );
         }
     }
+    @throw [NSException exceptionWithName:@"com.devedbox.animationchain_convertable_C" reason:[NSString stringWithFormat:@"The type of from value: %@ is not supported.", fromValue] userInfo:nil];
     return nil;
 }
 
