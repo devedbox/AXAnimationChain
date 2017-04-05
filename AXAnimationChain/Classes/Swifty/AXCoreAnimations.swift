@@ -26,11 +26,22 @@
 import AXAnimationChainSwift
 
 extension AXDecayAnimation {
-    convenience init(velocity: CGFloat, deceleration: CGFloat, value: Any) {
+    convenience public init(velocity: CGFloat, deceleration: CGFloat, value: Any) {
         self.init()
         
         self.velocity = velocity
         self.deceleration = deceleration
         self.fromValue = value
+    }
+}
+
+extension AXSpringAnimation {
+    convenience public init(mass: CGFloat = 1.0, stiffness: CGFloat = 100.0, damping: CGFloat = 10.0, initialVelocity: CGFloat = 0.0) {
+        self.init()
+        
+        self.mass = mass
+        self.stiffness = stiffness
+        self.damping = damping
+        self.initialVelocity = initialVelocity
     }
 }
