@@ -74,4 +74,16 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 + (nullable instancetype)animationWithBasic:(nullable CABasicAnimation *)animation;
 @end
+
+@interface AXSpringAnimation (Convertable_Same)
+/// Convert core spring animation to AXSpringAnimation.
+///
++ (instancetype)animationWithCoreSpring:(CASpringAnimation *)animation;
+@end
+
+@interface CASpringAnimation (Convertable_Same)
+/// Convert AXSpringAnimation to core animation.
+///
++ (instancetype)animationWithAXSpring:(AXSpringAnimation *)animation;
+@end
 NS_ASSUME_NONNULL_END
