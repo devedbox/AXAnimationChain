@@ -157,6 +157,10 @@ NSArray * _AXDecayKeyframeValuesWithBeginFrame(id fromValue, NSTimeInterval dura
     [self _setValues];
 }
 
+- (void)setTimingFunction:(CAMediaTimingFunction *)timingFunction {
+    @throw @"Decay animation won't be effected by timing function.";
+}
+
 - (CFTimeInterval)settlingDuration {
     // compute duration till threshold velocity
     float scaledVelocity = _velocity / 1000.;

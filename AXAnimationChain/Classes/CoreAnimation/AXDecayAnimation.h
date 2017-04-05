@@ -47,6 +47,7 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 @interface AXDecayAnimation (Unavailable)
+- (void)setTimingFunction:(CAMediaTimingFunction *)timingFunction __attribute__((unavailable));
 - (void)setValues:(NSArray *)values __attribute__((unavailable));
 - (void)setPath:(CGPathRef)path __attribute__((unavailable));
 - (void)setKeyTimes:(NSArray<NSNumber *> *)keyTimes __attribute__((unavailable));
