@@ -35,6 +35,8 @@
 @interface CAAnimation (ImmediateValue)
 /// Immediate value from the value function.
 ///
+/// @importance `keyTimes` and `path` properties of keyframe animation is not allowed.
+///
 - (nullable id)immediateValueAtTime:(CFTimeInterval)time;
 @end
 
