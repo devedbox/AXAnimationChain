@@ -83,12 +83,14 @@ class DecayAnimationViewController: UIViewController, UIGestureRecognizerDelegat
             decayx.velocity = ve.x
             decayx.isRemovedOnCompletion=false
             decayx.fillMode=kCAFillModeForwards
+            // decayx.timingFunction = CAMediaTimingFunction.default()
             // decayx.isAdditive = true
             let decayy = AXDecayAnimation(keyPath: "position.y")
             decayy.fromValue = point.y
             decayy.velocity = ve.y
             decayy.isRemovedOnCompletion=false
             decayy.fillMode=kCAFillModeForwards
+            // decayy.timingFunction = CAMediaTimingFunction.default()
             // decayy.isAdditive = true
             // CATransaction.setCompletionBlock({[weak self] () -> Void in
                 // print("view's center:\(String(describing: self?.animatedView.center)), layer's position:\(String(describing: self?.animatedView.layer.position))")
