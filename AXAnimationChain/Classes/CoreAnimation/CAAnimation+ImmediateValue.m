@@ -72,17 +72,16 @@ static id _ImmediateValueAtIndex(id fromValue, id toValue, NSTimeInterval durati
     return nil;
 }
 @end
-
-@implementation AXCASpringAnimation (ImmediateValue)
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_9_0
+@implementation CASpringAnimation (ImmediateValue)
 - (id)immediateValueAtTime:(CFTimeInterval)time {
-    if ([self isKindOfClass:AXSpringAnimation.class]) return [super immediateValueAtTime:time];
-    if ([self isKindOfClass:CASpringAnimation.class]) {
-        
-    }
+    // Conver to AXSpringAnimation.
+    AXSpringAnimation *spring = [AXSpringAnimation animationWithCoreSpring:self];
+    return [spring immediateValueAtTime:time];
     return [super immediateValueAtTime:time];
 }
 @end
-
+#endif
 @implementation CAKeyframeAnimation (ImmediateValue)
 - (id)immediateValueAtTime:(CFTimeInterval)time {
     NSUInteger allFramesCount = self.values.count;
