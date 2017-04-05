@@ -30,9 +30,3 @@
 ///
 - (nullable id)immediateValueAtTime:(CFTimeInterval)time;
 @end
-
-@interface CABasicAnimation (ImmediateValue)
-@end
-
-@interface CAKeyframeAnimation (ImmediateValue)
-@end
