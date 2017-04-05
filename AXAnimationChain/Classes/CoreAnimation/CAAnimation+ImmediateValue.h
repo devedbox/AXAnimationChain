@@ -30,3 +30,7 @@
 ///
 - (nullable id)immediateValueAtTime:(CFTimeInterval)time;
 @end
+
+@interface CATransition (ImmediateValue)
+- (nullable id)immediateValueAtTime:(CFTimeInterval)time __attribute__((unavailable));
+@end
