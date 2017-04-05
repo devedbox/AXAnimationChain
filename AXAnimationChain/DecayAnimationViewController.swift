@@ -34,24 +34,7 @@ class DecayAnimationViewController: UIViewController, UIGestureRecognizerDelegat
     // MARK: Actions.
     @objc
     private func handleTagGesture(_ genture: UITapGestureRecognizer) {
-        defer {
-            animatedView.layer.removeAllAnimations()
-        }
-        guard let animationKeys = animatedView.layer.animationKeys() else { return }
-        for key in animationKeys {
-            guard let animation = animatedView.layer.animation(forKey: key) as? AXDecayAnimation else { continue }
-            
-            let beginTime = animation.beginTime
-            let timeOffset = animation.timeOffset
-            
-            print("begin time: \(beginTime), time offset: \(timeOffset)")
-            print("current time: \(CACurrentMediaTime())")
-            
-            let time = CACurrentMediaTime()-beginTime
-            guard let immediateValue = animation.immediateValue(atTime: time) else { continue }
-            
-            animatedView.layer.setValue(immediateValue, forKeyPath: animation.keyPath!)
-        }
+        _applyImmediateValueOfAnimatedView()
     }
     
     @objc
@@ -59,12 +42,14 @@ class DecayAnimationViewController: UIViewController, UIGestureRecognizerDelegat
         var point = gesture.location(in: view)
         
         switch gesture.state {
+        case .possible: fallthrough
         case .began:
+            _applyImmediateValueOfAnimatedView()
+            
             point = gesture.location(in: view)
             
             let pauseTime = animatedView.layer.convertTime(CACurrentMediaTime(), from: nil)
             print("pause time: \(pauseTime)")
-        case .possible: break
         case .changed:
             /*
             point.x = max(animatedView.frame.width/2+64, point.x)
@@ -107,6 +92,28 @@ class DecayAnimationViewController: UIViewController, UIGestureRecognizerDelegat
         case .cancelled: break
         case .failed: break
         // default: break
+        }
+    }
+    
+    // MARK: Private
+    private func _applyImmediateValueOfAnimatedView() {
+        defer {
+            animatedView.layer.removeAllAnimations()
+        }
+        guard let animationKeys = animatedView.layer.animationKeys() else { return }
+        for key in animationKeys {
+            guard let animation = animatedView.layer.animation(forKey: key) as? AXDecayAnimation else { continue }
+            
+            let beginTime = animation.beginTime
+            // let timeOffset = animation.timeOffset
+            
+            // print("begin time: \(beginTime), time offset: \(timeOffset)")
+            // print("current time: \(CACurrentMediaTime())")
+            
+            let time = CACurrentMediaTime()-beginTime
+            guard let immediateValue = animation.immediateValue(atTime: time) else { continue }
+            
+            animatedView.layer.setValue(immediateValue, forKeyPath: animation.keyPath!)
         }
     }
     
