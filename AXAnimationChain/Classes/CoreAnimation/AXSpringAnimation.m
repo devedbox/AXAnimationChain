@@ -125,9 +125,9 @@ extern id CalculateToValueWithByValue(id value, id byValue, BOOL plus);
     
     if (fromValue && toValue) {
         super.values = CAKeyframeValuesWithFrames(fromValue, toValue, self.settlingDuration, self.timingFunction, ^double (double t, double b, double c, double d) {
-            double flag = (_timingFunction?:super.timingFunction).valuesFuntion(t, 0, 1, d)/[CAMediaTimingFunction linear].valuesFuntion(t, 0, 1, d);
+            double flag = t > 0 ? (_timingFunction?:super.timingFunction).valuesFuntion(t, 0, 1, d)/[CAMediaTimingFunction linear].valuesFuntion(t, 0, 1, d) : 0.0;
             t = t/d*self.settlingDuration;
-            t *= flag;
+            if (!isnan(flag)) t *= flag;
             double beta = _damping/(2*_mass);
             double omega0 = sqrt(_stiffness/_mass);
             double omega  = sqrt(fabs(pow(omega0, 2.0)-pow(beta, 2.0)));
