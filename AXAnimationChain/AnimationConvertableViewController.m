@@ -119,7 +119,7 @@
         */
         [_transitionView.layer removeAllAnimations];
         [_keyframeTransitionView.layer removeAllAnimations];
-        AXCASpringAnimation *animation = [AXCASpringAnimation animationWithKeyPath:@"position"];
+        CASpringAnimation *animation = [CASpringAnimation animationWithKeyPath:@"position"];
         animation.removedOnCompletion = NO;
         animation.fillMode = kCAFillModeForwards;
         // animation.initialVelocity = 50;
