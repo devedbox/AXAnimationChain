@@ -24,6 +24,23 @@
 //  SOFTWARE.
 
 #import <QuartzCore/QuartzCore.h>
+
+#ifndef AXDecayAnimationUnavailable
+#define AXDecayAnimationUnavailable(AXDecayAnimationClass)\
+@interface AXDecayAnimationClass (Unavailable)\
+- (void)setTimingFunction:(CAMediaTimingFunction *)timingFunction __attribute__((unavailable));\
+- (void)setValues:(NSArray *)values __attribute__((unavailable));\
+- (void)setPath:(CGPathRef)path __attribute__((unavailable));\
+- (void)setKeyTimes:(NSArray<NSNumber *> *)keyTimes __attribute__((unavailable));\
+- (void)setTimingFunctions:(NSArray<CAMediaTimingFunction *> *)timingFunctions __attribute__((unavailable));\
+- (void)setCalculationMode:(NSString *)calculationMode __attribute__((unavailable));\
+- (void)setTensionValues:(NSArray<NSNumber *> *)tensionValues __attribute__((unavailable));\
+- (void)setContinuityValues:(NSArray<NSNumber *> *)continuityValues __attribute__((unavailable));\
+- (void)setBiasValues:(NSArray<NSNumber *> *)biasValues __attribute__((unavailable));\
+- (void)setRotationMode:(NSString *)rotationMode __attribute__((unavailable));\
+@end
+#endif
+
 NS_ASSUME_NONNULL_BEGIN
 @interface AXDecayAnimation : CAKeyframeAnimation
 /* The initial velocity of the object attached to the spring. Defaults
@@ -46,16 +63,5 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nullable, strong, nonatomic) id fromValue;
 @end
 
-@interface AXDecayAnimation (Unavailable)
-- (void)setTimingFunction:(CAMediaTimingFunction *)timingFunction __attribute__((unavailable));
-- (void)setValues:(NSArray *)values __attribute__((unavailable));
-- (void)setPath:(CGPathRef)path __attribute__((unavailable));
-- (void)setKeyTimes:(NSArray<NSNumber *> *)keyTimes __attribute__((unavailable));
-- (void)setTimingFunctions:(NSArray<CAMediaTimingFunction *> *)timingFunctions __attribute__((unavailable));
-- (void)setCalculationMode:(NSString *)calculationMode __attribute__((unavailable));
-- (void)setTensionValues:(NSArray<NSNumber *> *)tensionValues __attribute__((unavailable));
-- (void)setContinuityValues:(NSArray<NSNumber *> *)continuityValues __attribute__((unavailable));
-- (void)setBiasValues:(NSArray<NSNumber *> *)biasValues __attribute__((unavailable));
-- (void)setRotationMode:(NSString *)rotationMode __attribute__((unavailable));
-@end
+AXDecayAnimationUnavailable(AXDecayAnimation)
 NS_ASSUME_NONNULL_END
