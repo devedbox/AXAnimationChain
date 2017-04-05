@@ -592,3 +592,46 @@ id CalculateToValueWithByValue(id value, id byValue, BOOL plus) {
     return decay;
 }
 @end
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_9_0
+@implementation AXSpringAnimation (Convertable_Same)
++ (instancetype)animationWithCoreSpring:(CASpringAnimation *)animation {
+    AXSpringAnimation *spring = [AXSpringAnimation animationWithKeyPath:animation.keyPath];
+    spring.beginTime = animation.beginTime;
+    spring.duration = animation.duration;
+    spring.speed = animation.speed;
+    spring.timeOffset = animation.timeOffset;
+    spring.repeatCount = animation.repeatCount;
+    spring.repeatDuration= animation.repeatDuration;
+    spring.autoreverses = animation.autoreverses;
+    spring.removedOnCompletion = animation.removedOnCompletion;
+    spring.fillMode = animation.fillMode;
+    spring.keyPath = animation.keyPath;
+    spring.timingFunction = animation.timingFunction;
+    spring.fromValue = animation.fromValue;
+    spring.byValue = animation.byValue;
+    spring.toValue = animation.toValue;
+    return spring;
+}
+@end
+
+@implementation CASpringAnimation (Convertable_Same)
++ (instancetype)animationWithAXSpring:(AXSpringAnimation *)animation {
+    CASpringAnimation *spring = [CASpringAnimation animationWithKeyPath:animation.keyPath];
+    spring.beginTime = animation.beginTime;
+    spring.duration = animation.duration;
+    spring.speed = animation.speed;
+    spring.timeOffset = animation.timeOffset;
+    spring.repeatCount = animation.repeatCount;
+    spring.repeatDuration= animation.repeatDuration;
+    spring.autoreverses = animation.autoreverses;
+    spring.removedOnCompletion = animation.removedOnCompletion;
+    spring.fillMode = animation.fillMode;
+    spring.keyPath = animation.keyPath;
+    spring.timingFunction = animation.timingFunction;
+    spring.fromValue = animation.fromValue;
+    spring.byValue = animation.byValue;
+    spring.toValue = animation.toValue;
+    return spring;
+}
+@end
+#endif

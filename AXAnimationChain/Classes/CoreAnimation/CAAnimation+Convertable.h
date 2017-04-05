@@ -74,7 +74,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 + (nullable instancetype)animationWithBasic:(nullable CABasicAnimation *)animation;
 @end
-
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_9_0
 @interface AXSpringAnimation (Convertable_Same)
 /// Convert core spring animation to AXSpringAnimation.
 ///
@@ -86,4 +86,5 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 + (instancetype)animationWithAXSpring:(AXSpringAnimation *)animation;
 @end
+#endif
 NS_ASSUME_NONNULL_END
