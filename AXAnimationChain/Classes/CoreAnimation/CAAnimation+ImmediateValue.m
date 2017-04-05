@@ -84,6 +84,9 @@ static id _ImmediateValueAtIndex(id fromValue, id toValue, NSTimeInterval durati
 #endif
 @implementation CAKeyframeAnimation (ImmediateValue)
 - (id)immediateValueAtTime:(CFTimeInterval)time {
+    NSAssert(self.keyTimes.count==0&&self.path==NULL, @"`keyTimes` and `path` properties of keyframe animation should not be setted.");
+    
+    if (self.keyTimes.count != 0 || self.path != NULL) return nil;
     if (time >= self.duration) return self.values.lastObject;
     
     NSUInteger allFramesCount = self.values.count;
