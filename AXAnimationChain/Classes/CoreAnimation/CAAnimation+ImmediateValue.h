@@ -25,12 +25,18 @@
 
 #import <QuartzCore/QuartzCore.h>
 
+#ifndef AXDisableImmediateValue
+#define AXDisableImmediateValue(AnimationClass) \
+@interface AnimationClass (ImmediateValue)\
+- (nullable id)immediateValueAtTime:(CFTimeInterval)time __attribute__((unavailable));\
+@end
+#endif
+
 @interface CAAnimation (ImmediateValue)
 /// Immediate value from the value function.
 ///
 - (nullable id)immediateValueAtTime:(CFTimeInterval)time;
 @end
 
-@interface CATransition (ImmediateValue)
-- (nullable id)immediateValueAtTime:(CFTimeInterval)time __attribute__((unavailable));
-@end
+AXDisableImmediateValue(CATransition)
+AXDisableImmediateValue(CAAnimationGroup)
