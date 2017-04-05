@@ -33,6 +33,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface CAKeyframeAnimation (Convertable)
 /// Convert animation from CABasicAnimation.
 /// @discusstion Converting keyframe animation from basic animation will use the values function of the timing functions automatically.
+///              Animation with property instance of `CGPath` will be ignored.
 ///
 /// @param basicAnimation basic animation to convert.
 /// @return Converted keyframe animation.
