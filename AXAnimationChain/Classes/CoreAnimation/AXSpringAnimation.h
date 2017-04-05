@@ -32,6 +32,20 @@
 #define AXCASpringAnimation AXSpringAnimation
 #endif
 #endif
+#ifndef AXSpringAnimationUnavailable
+#define AXSpringAnimationUnavailable(AXSpringAnimationClass)\
+@interface AXSpringAnimationClass (Unavailable)\
+- (void)setValues:(NSArray *)values __attribute__((unavailable));\
+- (void)setPath:(CGPathRef)path __attribute__((unavailable));\
+- (void)setKeyTimes:(NSArray<NSNumber *> *)keyTimes __attribute__((unavailable));\
+- (void)setTimingFunctions:(NSArray<CAMediaTimingFunction *> *)timingFunctions __attribute__((unavailable));\
+- (void)setCalculationMode:(NSString *)calculationMode __attribute__((unavailable));\
+- (void)setTensionValues:(NSArray<NSNumber *> *)tensionValues __attribute__((unavailable));\
+- (void)setContinuityValues:(NSArray<NSNumber *> *)continuityValues __attribute__((unavailable));\
+- (void)setBiasValues:(NSArray<NSNumber *> *)biasValues __attribute__((unavailable));\
+- (void)setRotationMode:(NSString *)rotationMode __attribute__((unavailable));\
+@end
+#endif
 
 NS_ASSUME_NONNULL_BEGIN
 @interface AXSpringAnimation : CAKeyframeAnimation
@@ -84,15 +98,5 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nullable, strong, nonatomic) id byValue;
 @end
 
-@interface AXSpringAnimation (Unavailable)
-- (void)setValues:(NSArray *)values __attribute__((unavailable));
-- (void)setPath:(CGPathRef)path __attribute__((unavailable));
-- (void)setKeyTimes:(NSArray<NSNumber *> *)keyTimes __attribute__((unavailable));
-- (void)setTimingFunctions:(NSArray<CAMediaTimingFunction *> *)timingFunctions __attribute__((unavailable));
-- (void)setCalculationMode:(NSString *)calculationMode __attribute__((unavailable));
-- (void)setTensionValues:(NSArray<NSNumber *> *)tensionValues __attribute__((unavailable));
-- (void)setContinuityValues:(NSArray<NSNumber *> *)continuityValues __attribute__((unavailable));
-- (void)setBiasValues:(NSArray<NSNumber *> *)biasValues __attribute__((unavailable));
-- (void)setRotationMode:(NSString *)rotationMode __attribute__((unavailable));
-@end
+AXSpringAnimationUnavailable(AXSpringAnimation)
 NS_ASSUME_NONNULL_END
