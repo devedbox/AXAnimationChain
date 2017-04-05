@@ -261,8 +261,8 @@
 			children = (
 				DCD8D6221E2B91E90017B993 /* UIView+Effects.swift */,
 				DC92E30F1E4EA43A009AE2A5 /* AXChainAnimator.swift */,
-				DC92E3111E4ED98B009AE2A5 /* UIView+AnimationChain.swift */,
 				DCAFFF2F1E8FFAB500D42AF1 /* AXCoreAnimations.swift */,
+				DC92E3111E4ED98B009AE2A5 /* UIView+AnimationChain.swift */,
 			);
 			path = Swifty;
 			sourceTree = "<group>";
