@@ -33,3 +33,8 @@
 #import "CAMediaTimingFunction+Extends.h"
 
 #endif /* AXCoreAnimation_h */
+/// Set the frame count of keyframe animation. Default is 69ps.
+///
+/// @param count count of frames of keyframe animation.
+///
+extern void CACVTSetFrameCountOfKeyframe(NSUInteger count);
