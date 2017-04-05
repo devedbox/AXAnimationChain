@@ -122,6 +122,10 @@
         CASpringAnimation *animation = [CASpringAnimation animationWithKeyPath:@"position"];
         animation.removedOnCompletion = NO;
         animation.fillMode = kCAFillModeForwards;
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+        animation.timingFunction = [[CAMediaTimingFunction new] performSelector:NSSelectorFromString([_timing titleForState:UIControlStateNormal])];
+#pragma clang diagnostic pop
         // animation.initialVelocity = 50;
         // animation.mass = 500;
         // animation.damping = 100;
@@ -137,6 +141,10 @@
         spring.fillMode = kCAFillModeForwards;
         spring.fromValue = [NSValue valueWithCGPoint:CGPointMake(self.keyframeTransitionView.center.x, CGRectGetHeight(_keyframeTransitionView.frame)*.5+64)];
         spring.toValue = [NSValue valueWithCGPoint:CGPointMake(self.keyframeTransitionView.center.x, CGRectGetHeight(self.view.frame)-64-CGRectGetHeight(_keyframeTransitionView.frame)*.5)];
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+        spring.timingFunction = [[CAMediaTimingFunction new] performSelector:NSSelectorFromString([_timing titleForState:UIControlStateNormal])];
+#pragma clang diagnostic pop
         // spring.initialVelocity = 50;
         // spring.mass = 500;
         // spring.damping = 100;
