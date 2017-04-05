@@ -84,11 +84,13 @@ static id _ImmediateValueAtIndex(id fromValue, id toValue, NSTimeInterval durati
 #endif
 @implementation CAKeyframeAnimation (ImmediateValue)
 - (id)immediateValueAtTime:(CFTimeInterval)time {
+    if (time >= self.duration) return self.values.lastObject;
+    
     NSUInteger allFramesCount = self.values.count;
     CGFloat pt = time/self.duration;
     
     NSUInteger index = ceil(pt * allFramesCount);
-    if (index > self.values.count-1) return nil;
+    if (index > self.values.count-1) return self.values.lastObject;
     
     id value = self.values[index];
     return value;
