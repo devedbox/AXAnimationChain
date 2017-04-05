@@ -73,6 +73,16 @@ static id _ImmediateValueAtIndex(id fromValue, id toValue, NSTimeInterval durati
 }
 @end
 
+@implementation AXCASpringAnimation (ImmediateValue)
+- (id)immediateValueAtTime:(CFTimeInterval)time {
+    if ([self isKindOfClass:AXSpringAnimation.class]) return [super immediateValueAtTime:time];
+    if ([self isKindOfClass:CASpringAnimation.class]) {
+        
+    }
+    return [super immediateValueAtTime:time];
+}
+@end
+
 @implementation CAKeyframeAnimation (ImmediateValue)
 - (id)immediateValueAtTime:(CFTimeInterval)time {
     NSUInteger allFramesCount = self.values.count;

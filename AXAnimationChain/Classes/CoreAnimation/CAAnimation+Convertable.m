@@ -587,7 +587,7 @@ id CalculateToValueWithByValue(id value, id byValue, BOOL plus) {
     decay.removedOnCompletion = animation.removedOnCompletion;
     decay.fillMode = animation.fillMode;
     decay.keyPath = animation.keyPath;
-    decay.timingFunction = animation.timingFunction;
+    // decay.timingFunction = animation.timingFunction;
     decay.fromValue = animation.fromValue;
     return decay;
 }
