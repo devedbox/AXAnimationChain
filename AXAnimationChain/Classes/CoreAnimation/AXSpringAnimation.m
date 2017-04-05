@@ -29,6 +29,12 @@
 extern NSArray * CAKeyframeValuesWithFrames(id fromValue, id toValue, NSTimeInterval duration, CAMediaTimingFunction *timing, CAKeyframeValuesFunction function);
 extern id CalculateToValueWithByValue(id value, id byValue, BOOL plus);
 
+@interface AXSpringAnimation ()
+{
+    CAMediaTimingFunction *_timingFunction;
+}
+@end
+
 @implementation AXSpringAnimation
 - (instancetype)init {
     if (self = [super init]) {
@@ -42,6 +48,7 @@ extern id CalculateToValueWithByValue(id value, id byValue, BOOL plus);
     _stiffness = 100;
     _damping = 10;
     super.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
+    _timingFunction = super.timingFunction;
 }
 
 - (void)setMass:(CGFloat)mass {
@@ -79,6 +86,16 @@ extern id CalculateToValueWithByValue(id value, id byValue, BOOL plus);
     [self _setValues];
 }
 
+- (void)setTimingFunction:(CAMediaTimingFunction *)timingFunction {
+    [super setTimingFunction:[CAMediaTimingFunction linear]];
+    _timingFunction = timingFunction;
+    [self _setValues];
+}
+
+- (CAMediaTimingFunction *)timingFunction {
+    return _timingFunction;
+}
+
 - (CFTimeInterval)settlingDuration {
     double beta = _damping/(2*_mass);
     double omega0 = sqrt(_stiffness/_mass);
@@ -108,7 +125,9 @@ extern id CalculateToValueWithByValue(id value, id byValue, BOOL plus);
     
     if (fromValue && toValue) {
         super.values = CAKeyframeValuesWithFrames(fromValue, toValue, self.settlingDuration, self.timingFunction, ^double (double t, double b, double c, double d) {
+            double flag = (_timingFunction?:super.timingFunction).valuesFuntion(t, 0, 1, d)/[CAMediaTimingFunction linear].valuesFuntion(t, 0, 1, d);
             t = t/d*self.settlingDuration;
+            t *= flag;
             double beta = _damping/(2*_mass);
             double omega0 = sqrt(_stiffness/_mass);
             double omega  = sqrt(fabs(pow(omega0, 2.0)-pow(beta, 2.0)));
