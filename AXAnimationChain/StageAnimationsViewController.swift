@@ -104,7 +104,7 @@ class StageAnimationsViewController: UIViewController {
             self.stageView.drop()
         }))
         alert.addAction(UIAlertAction(title: "Morph", style: .default, handler: { [unowned self](action) in
-//            self.stageLabel.morph()
+            self.stageLabel.morph()
             self.stageView.morph()
         }))
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
