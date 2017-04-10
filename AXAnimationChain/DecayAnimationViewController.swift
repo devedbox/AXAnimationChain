@@ -9,6 +9,13 @@
 import UIKit
 import AXAnimationChainSwift
 
+extension UIView {
+    override open func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        print("\(#file)")
+    }
+}
+
 class DecayAnimationViewController: UIViewController, UIGestureRecognizerDelegate {
 
     @IBOutlet weak var animatedView: UIView!
@@ -23,6 +30,7 @@ class DecayAnimationViewController: UIViewController, UIGestureRecognizerDelegat
         animatedView.addGestureRecognizer(pan)
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(handleTagGesture(_:)))
+        tap.delegate = self
         view.addGestureRecognizer(tap)
     }
     
@@ -77,12 +85,13 @@ class DecayAnimationViewController: UIViewController, UIGestureRecognizerDelegat
             decayy.fillMode=kCAFillModeForwards
             // decayy.timingFunction = CAMediaTimingFunction.default()
             // decayy.isAdditive = true
-            // CATransaction.setCompletionBlock({[weak self] () -> Void in
+            CATransaction.setCompletionBlock({[weak self] () -> Void in
                 // print("view's center:\(String(describing: self?.animatedView.center)), layer's position:\(String(describing: self?.animatedView.layer.position))")
                 // self?.animatedView.layer.position = CGPoint(x: decayx.values?.last as! Double, y: decayy.values?.last as! Double)
                 // self?.animatedView.layer.removeAllAnimations()
                 // print("view's center:\(String(describing: self?.animatedView.center)), layer's position:\(String(describing: self?.animatedView.layer.position))")
-            // })
+                self?._applyImmediateValueOfAnimatedView()
+            })
             CATransaction.begin()
             CATransaction.setDisableActions(false)
             animatedView.layer.add(decayx, forKey: "position.x")
@@ -118,7 +127,12 @@ class DecayAnimationViewController: UIViewController, UIGestureRecognizerDelegat
     }
     
     // MARK: UIGestureRecognizerDelegate.
-
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        if gestureRecognizer.isKind(of: UITapGestureRecognizer.self) {
+            return false
+        }
+        return false
+    }
     /*
     // MARK: - Navigation
 
