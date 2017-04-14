@@ -25,41 +25,29 @@
 
 #import <QuartzCore/QuartzCore.h>
 /// Category to handler the anchor point.
-///
 @interface CALayer (AnchorPoint)
 /// Move anchor to a new anchor point. This will change the position of the layer.
 ///
 /// @param point a new anchor point. Between [0, 1].
-///
 - (void)moveAnchorToPoint:(CGPoint)point;
 /// Move anchor point to default anchor value.
-///
 - (void)anchorToDefault;
 /// Move anchor point to center point.
-///
 - (void)anchorToCenter;
 /// Move anchor point to top.
-///
 - (void)anchorToTop;
 /// Move anchor point to left.
-///
 - (void)anchorToLeft;
 /// Move anchor point to bottom.
-///
 - (void)anchorToBottom;
 /// Move anchor point to right.
-///
 - (void)anchorToRight;
 /// Move anchor point to left-top.
-///
 - (void)anchorToLeftTop;
 /// Move anchor point to left-bottom.
-///
 - (void)anchorToLeftBottom;
 /// Move anchor point to right-top.
-///
 - (void)anchorToRightTop;
 /// Move anchor point to right-bottom.
-///
 - (void)anchorToRightBottom;
 @end
