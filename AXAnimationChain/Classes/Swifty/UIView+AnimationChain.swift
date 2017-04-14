@@ -26,6 +26,30 @@
 import Foundation
 import AXAnimationChainSwift
 
+fileprivate let position        = "position"
+fileprivate let positionx       = "position.x"
+fileprivate let positiony       = "position.y"
+fileprivate let size            = "bounds.size"
+fileprivate let opacity         = "opacity"
+fileprivate let backgroundColor = "backgroundColor"
+fileprivate let borderColor     = "borderColor"
+fileprivate let borderWidth     = "borderWidth"
+fileprivate let cornerRadius    = "cornerRadius"
+fileprivate let scale           = "transform.scale"
+fileprivate let scalex          = "transform.scale.x"
+fileprivate let scaley          = "transform.scale.y"
+fileprivate let scalez          = "transform.scale.z"
+fileprivate let rotation        = "transform.rotation"
+fileprivate let rotationx       = "transform.rotation.x"
+fileprivate let rotationy       = "transform.rotation.y"
+fileprivate let rotationz       = "transform.rotation.z"
+fileprivate let translation     = "transform.translation"
+fileprivate let translationx    = "transform.translation.x"
+fileprivate let translationy    = "transform.translation.y"
+fileprivate let translationz    = "transform.translation.z"
+fileprivate let contents        = "contents"
+
+
 public extension UIView {
     /// Associate keys strtuct.
     private struct AssociateKeys {
