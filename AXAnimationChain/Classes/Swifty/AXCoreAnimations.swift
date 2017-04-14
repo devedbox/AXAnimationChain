@@ -26,7 +26,7 @@
 import AXAnimationChainSwift
 
 extension AXDecayAnimation {
-    convenience public init(velocity: CGFloat, deceleration: CGFloat, value: Any) {
+    convenience public init(velocity: CGFloat, deceleration: CGFloat = 0.998, value: Any) {
         self.init()
         
         self.velocity = velocity
