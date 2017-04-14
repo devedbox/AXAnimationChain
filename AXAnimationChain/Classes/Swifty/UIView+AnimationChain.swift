@@ -26,28 +26,28 @@
 import Foundation
 import AXAnimationChainSwift
 
-private let position_r        = "position"
-private let positionx         = "position.x"
-private let positiony         = "position.y"
-private let size_r            = "bounds.size"
-private let opacity_r         = "opacity"
-private let backgroundColor_r = "backgroundColor"
-private let borderColor_r     = "borderColor"
-private let borderWidth_r     = "borderWidth"
-private let cornerRadius_r    = "cornerRadius"
-private let scale_r           = "transform.scale"
-private let scalex            = "transform.scale.x"
-private let scaley            = "transform.scale.y"
-private let scalez            = "transform.scale.z"
-private let rotation          = "transform.rotation"
-private let rotationx         = "transform.rotation.x"
-private let rotationy         = "transform.rotation.y"
-private let rotationz         = "transform.rotation.z"
-private let translation       = "transform.translation"
-private let translationx      = "transform.translation.x"
-private let translationy      = "transform.translation.y"
-private let translationz      = "transform.translation.z"
-private let contents          = "contents"
+private let position_r        = "position"                // Position.
+private let positionx         = "position.x"              // Position x.
+private let positiony         = "position.y"              // Position y.
+private let size_r            = "bounds.size"             // Size of bounds.
+private let opacity_r         = "opacity"                 // Opacity.
+private let backgroundColor_r = "backgroundColor"         // Background color.
+private let borderColor_r     = "borderColor"             // Border color.
+private let borderWidth_r     = "borderWidth"             // Border width.
+private let cornerRadius_r    = "cornerRadius"            // Corner raduis.
+private let scale_r           = "transform.scale"         // Scale.
+private let scalex            = "transform.scale.x"       // Scale x.
+private let scaley            = "transform.scale.y"       // Scale y.
+private let scalez            = "transform.scale.z"       // Scale z.
+private let rotation          = "transform.rotation"      // Rotation.
+private let rotationx         = "transform.rotation.x"    // Rotation x.
+private let rotationy         = "transform.rotation.y"    // Rotation y.
+private let rotationz         = "transform.rotation.z"    // Rotation z.
+private let translation       = "transform.translation"   // Translation.
+private let translationx      = "transform.translation.x" // Translation x.
+private let translationy      = "transform.translation.y" // Translation y.
+private let translationz      = "transform.translation.z" // Translation z.
+private let contents          = "contents"                // Contents(Image).
 
 
 public extension UIView {
