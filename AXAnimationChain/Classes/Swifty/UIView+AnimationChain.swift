@@ -26,28 +26,28 @@
 import Foundation
 import AXAnimationChainSwift
 
-fileprivate let position        = "position"
-fileprivate let positionx       = "position.x"
-fileprivate let positiony       = "position.y"
-fileprivate let size            = "bounds.size"
-fileprivate let opacity         = "opacity"
-fileprivate let backgroundColor = "backgroundColor"
-fileprivate let borderColor     = "borderColor"
-fileprivate let borderWidth     = "borderWidth"
-fileprivate let cornerRadius    = "cornerRadius"
-fileprivate let scale           = "transform.scale"
-fileprivate let scalex          = "transform.scale.x"
-fileprivate let scaley          = "transform.scale.y"
-fileprivate let scalez          = "transform.scale.z"
-fileprivate let rotation        = "transform.rotation"
-fileprivate let rotationx       = "transform.rotation.x"
-fileprivate let rotationy       = "transform.rotation.y"
-fileprivate let rotationz       = "transform.rotation.z"
-fileprivate let translation     = "transform.translation"
-fileprivate let translationx    = "transform.translation.x"
-fileprivate let translationy    = "transform.translation.y"
-fileprivate let translationz    = "transform.translation.z"
-fileprivate let contents        = "contents"
+fileprivate let position_r        = "position"
+fileprivate let positionx         = "position.x"
+fileprivate let positiony         = "position.y"
+fileprivate let size_r            = "bounds.size"
+fileprivate let opacity_r         = "opacity"
+fileprivate let backgroundColor_r = "backgroundColor"
+fileprivate let borderColor_r     = "borderColor"
+fileprivate let borderWidth_r     = "borderWidth"
+fileprivate let cornerRadius_r    = "cornerRadius"
+fileprivate let scale_r           = "transform.scale"
+fileprivate let scalex            = "transform.scale.x"
+fileprivate let scaley            = "transform.scale.y"
+fileprivate let scalez            = "transform.scale.z"
+fileprivate let rotation          = "transform.rotation"
+fileprivate let rotationx         = "transform.rotation.x"
+fileprivate let rotationy         = "transform.rotation.y"
+fileprivate let rotationz         = "transform.rotation.z"
+fileprivate let translation       = "transform.translation"
+fileprivate let translationx      = "transform.translation.x"
+fileprivate let translationy      = "transform.translation.y"
+fileprivate let translationz      = "transform.translation.z"
+fileprivate let contents          = "contents"
 
 
 public extension UIView {
@@ -269,7 +269,7 @@ public extension UIView {
     ///
     /// - Parameter to: The point to move to.
     public func origin(to origin: CGPoint) -> Self {
-        chainAnimator.top.combineBasic().property("position").beginTime(afterContext ?? 0.0).toValue(position(from: origin))
+        chainAnimator.top.combineBasic().property(position_r).beginTime(afterContext ?? 0.0).toValue(position(from: origin))
         return self
     }
     /// Animate moving `origin.x` to a destined value.
@@ -277,7 +277,7 @@ public extension UIView {
     /// - Parameter to: The value to move to.
     ///
     public func originX(to originX: CGFloat) -> Self {
-        chainAnimator.top.combineBasic().property("position.x").beginTime(afterContext ?? 0.0).toValue(position(from: CGPoint(x: originX, y: layer.position.y)).x)
+        chainAnimator.top.combineBasic().property(positionx).beginTime(afterContext ?? 0.0).toValue(position(from: CGPoint(x: originX, y: layer.position.y)).x)
         return self
     }
     /// Animate moving `origin.y` to a destined value.
@@ -285,7 +285,7 @@ public extension UIView {
     /// - Parameter to: The value to move to.
     ///
     public func originY(to originY: CGFloat) -> Self {
-        chainAnimator.top.combineBasic().property("position.y").beginTime(afterContext ?? 0.0).toValue(position(from: CGPoint(x: layer.position.x, y: originY)).y)
+        chainAnimator.top.combineBasic().property(positiony).beginTime(afterContext ?? 0.0).toValue(position(from: CGPoint(x: layer.position.x, y: originY)).y)
         return self
     }
     /// Animate moving `center` to a destined point.
@@ -293,7 +293,7 @@ public extension UIView {
     /// - Parameter to: The point to move to.
     ///
     public func center(to center: CGPoint) -> Self {
-        chainAnimator.top.combineBasic().property("position").beginTime(afterContext ?? 0.0).toValue(center)
+        chainAnimator.top.combineBasic().property(position_r).beginTime(afterContext ?? 0.0).toValue(center)
         return self
     }
     /// Animate moving `center.x` to a destined value.
@@ -301,7 +301,7 @@ public extension UIView {
     /// - Parameter to: The value to move to.
     ///
     public func centerX(to centerX: CGFloat) -> Self {
-        chainAnimator.top.combineBasic().property("position.x").beginTime(afterContext ?? 0.0).toValue(CGPoint(x: centerX, y: layer.position.y))
+        chainAnimator.top.combineBasic().property(positionx).beginTime(afterContext ?? 0.0).toValue(CGPoint(x: centerX, y: layer.position.y))
         return self
     }
     /// Animate moving `center.y` to a destined value.
@@ -309,7 +309,7 @@ public extension UIView {
     /// - Parameter to: The value to move to.
     ///
     public func centerY(to centerY: CGFloat) -> Self {
-        chainAnimator.top.combineBasic().property("position.y").beginTime(afterContext ?? 0.0).toValue(CGPoint(x: layer.position.x, y: centerY))
+        chainAnimator.top.combineBasic().property(positiony).beginTime(afterContext ?? 0.0).toValue(CGPoint(x: layer.position.x, y: centerY))
         return self
     }
     /// Animate moving `size` to a destined size.
@@ -317,7 +317,7 @@ public extension UIView {
     /// - Parameter to: The size to move to.
     ///
     public func size(to size: CGSize) -> Self {
-        chainAnimator.top.combineBasic().property("bounds.size").beginTime(afterContext ?? 0.0).toValue(size)
+        chainAnimator.top.combineBasic().property(size_r).beginTime(afterContext ?? 0.0).toValue(size)
         return self
     }
     /// Animate moving `width` to a destined value.
@@ -325,7 +325,7 @@ public extension UIView {
     /// - Parameter to: The value to move to.
     ///
     public func width(to width: CGFloat) -> Self {
-        chainAnimator.top.combineBasic().property("bounds.size").beginTime(afterContext ?? 0.0).toValue(CGSize(width: width, height: layer.bounds.height))
+        chainAnimator.top.combineBasic().property(size_r).beginTime(afterContext ?? 0.0).toValue(CGSize(width: width, height: layer.bounds.height))
         return self
     }
     /// Animate moving `height` to a destined value.
@@ -333,7 +333,7 @@ public extension UIView {
     /// - Parameter to: The value to move to.
     ///
     public func height(to height: CGFloat) -> Self {
-        chainAnimator.top.combineBasic().property("bounds.size").beginTime(afterContext ?? 0.0).toValue(CGSize(width: layer.bounds.width, height: height))
+        chainAnimator.top.combineBasic().property(size_r).beginTime(afterContext ?? 0.0).toValue(CGSize(width: layer.bounds.width, height: height))
         return self;
     }
     /// Animate moving `frame` to a destined rect.
@@ -355,7 +355,7 @@ public extension UIView {
     /// - Parameter to: The value to change to.
     ///
     public func opacity(to opacity: Float) -> Self {
-        chainAnimator.top.combineBasic().property("opacity").beginTime(afterContext ?? 0.0).toValue(opacity)
+        chainAnimator.top.combineBasic().property(opacity_r).beginTime(afterContext ?? 0.0).toValue(opacity)
         return self
     }
     /// Animate changing `backgroundColor` to a destined color.
@@ -363,7 +363,7 @@ public extension UIView {
     /// - Parameter to: The color to change to.
     ///
     public func backgroundColor(to backgroundColor: UIColor) -> Self {
-        chainAnimator.top.combineBasic().property("backgroundColor").beginTime(afterContext ?? 0.0).toValue(backgroundColor.cgColor)
+        chainAnimator.top.combineBasic().property(backgroundColor_r).beginTime(afterContext ?? 0.0).toValue(backgroundColor.cgColor)
         return self
     }
     /// Animate changing `borderColor` to a destined color.
@@ -371,7 +371,7 @@ public extension UIView {
     /// - Parameter to: The color to change to.
     ///
     public func borderColor(to borderColor: UIColor) -> Self {
-        chainAnimator.top.combineBasic().property("borderColor").beginTime(afterContext ?? 0.0).toValue(borderColor.cgColor)
+        chainAnimator.top.combineBasic().property(borderColor_r).beginTime(afterContext ?? 0.0).toValue(borderColor.cgColor)
         return self
     }
     /// Animate changing `borderWidth` to a destined value.
@@ -379,7 +379,7 @@ public extension UIView {
     /// - Parameter to: The value to change to.
     ///
     public func borderWidth(to borderWidth: CGFloat) -> Self {
-        chainAnimator.top.combineBasic().property("borderWidth").beginTime(afterContext ?? 0.0).toValue(borderWidth)
+        chainAnimator.top.combineBasic().property(borderWidth_r).beginTime(afterContext ?? 0.0).toValue(borderWidth)
         return self
     }
     /// Animate changing `cornerRadius` to a destined value.
@@ -387,7 +387,7 @@ public extension UIView {
     /// - Parameter to: The value to change to.
     ///
     public func cornerRadius(to cornerRadius: CGFloat) -> Self {
-        chainAnimator.top.combineBasic().property("cornerRadius").beginTime(afterContext ?? 0.0).toValue(cornerRadius)
+        chainAnimator.top.combineBasic().property(cornerRadius_r).beginTime(afterContext ?? 0.0).toValue(cornerRadius)
         return self
     }
     /// Animate changing `scale` to a destined value.
@@ -395,7 +395,7 @@ public extension UIView {
     /// - Parameter to: The value to change to.
     ///
     public func scale(to scale: CGFloat) -> Self {
-        chainAnimator.top.combineBasic().property("transform.scale").beginTime(afterContext ?? 0.0).toValue(scale)
+        chainAnimator.top.combineBasic().property(scale_r).beginTime(afterContext ?? 0.0).toValue(scale)
         return self
     }
     /// Animate changing `scale.x` to a destined value.
@@ -403,7 +403,7 @@ public extension UIView {
     /// - Parameter to: The value to change to.
     ///
     public func scaleX(to scaleX: CGFloat) -> Self {
-        chainAnimator.top.combineBasic().property("transform.scale.x").beginTime(afterContext ?? 0.0).toValue(scaleX)
+        chainAnimator.top.combineBasic().property(scalex).beginTime(afterContext ?? 0.0).toValue(scaleX)
         return self
     }
     /// Animate changing `scale.y` to a destined value.
@@ -411,7 +411,7 @@ public extension UIView {
     /// - Parameter to: The value to change to.
     ///
     public func scaleY(to scaleY: CGFloat) -> Self {
-        chainAnimator.top.combineBasic().property("transform.scale.y").beginTime(afterContext ?? 0.0).toValue(scaleY)
+        chainAnimator.top.combineBasic().property(scaley).beginTime(afterContext ?? 0.0).toValue(scaleY)
         return self
     }
     /// Animate changing `scale.z` to a destined value.
@@ -419,7 +419,7 @@ public extension UIView {
     /// - Parameter to: The value to change to.
     ///
     public func scaleZ(to scaleZ: CGFloat) -> Self {
-        chainAnimator.top.combineBasic().property("transform.scale.z").beginTime(afterContext ?? 0.0).toValue(scaleZ)
+        chainAnimator.top.combineBasic().property(scalez).beginTime(afterContext ?? 0.0).toValue(scaleZ)
         return self
     }
     /// Animate changing `rotate` to a destined value.
@@ -427,7 +427,7 @@ public extension UIView {
     /// - Parameter to: The value to change to.
     ///
     public func rotate(to rotate: CGFloat) -> Self {
-        chainAnimator.top.combineBasic().property("transform.rotation").beginTime(afterContext ?? 0.0).toValue(rotate)
+        chainAnimator.top.combineBasic().property(rotation).beginTime(afterContext ?? 0.0).toValue(rotate)
         return self
     }
     /// Animate changing `rotate.x` to a destined value.
@@ -435,7 +435,7 @@ public extension UIView {
     /// - Parameter to: The value to change to.
     ///
     public func rotateX(to rotateX: CGFloat) -> Self {
-        chainAnimator.top.combineBasic().property("transform.rotation.x").beginTime(afterContext ?? 0.0).toValue(rotateX)
+        chainAnimator.top.combineBasic().property(rotationx).beginTime(afterContext ?? 0.0).toValue(rotateX)
         return self
     }
     /// Animate changing `rotate.y` to a destined value.
@@ -443,7 +443,7 @@ public extension UIView {
     /// - Parameter to: The value to change to.
     ///
     public func rotateY(to rotateY: CGFloat) -> Self {
-        chainAnimator.top.combineBasic().property("transform.rotation.y").beginTime(afterContext ?? 0.0).toValue(rotateY)
+        chainAnimator.top.combineBasic().property(rotationy).beginTime(afterContext ?? 0.0).toValue(rotateY)
         return self
     }
     /// Animate changing `rotate.z` to a destined value.
@@ -451,7 +451,7 @@ public extension UIView {
     /// - Parameter to: The value to change to.
     ///
     public func rotateZ(to rotateZ: CGFloat) -> Self {
-        chainAnimator.top.combineBasic().property("transform.rotation.z").beginTime(afterContext ?? 0.0).toValue(rotateZ)
+        chainAnimator.top.combineBasic().property(rotationz).beginTime(afterContext ?? 0.0).toValue(rotateZ)
         return self
     }
     /// Animate changing `translate` to a destined point.
@@ -459,7 +459,7 @@ public extension UIView {
     /// - Parameter to: The point to change to.
     ///
     public func translate(to translate: CGPoint) -> Self {
-        chainAnimator.top.combineBasic().property("transform.translation").beginTime(afterContext ?? 0.0).toValue(translate)
+        chainAnimator.top.combineBasic().property(translation).beginTime(afterContext ?? 0.0).toValue(translate)
         return self
     }
     /// Animate changing `translate.x` to a destined value.
@@ -467,7 +467,7 @@ public extension UIView {
     /// - Parameter to: The value to change to.
     ///
     public func translateX(to translateX: CGFloat) -> Self {
-        chainAnimator.top.combineBasic().property("transform.translation.x").beginTime(afterContext ?? 0.0).toValue(translateX)
+        chainAnimator.top.combineBasic().property(translationx).beginTime(afterContext ?? 0.0).toValue(translateX)
         return self
     }
     /// Animate changing `translate.y` to a destined value.
@@ -475,7 +475,7 @@ public extension UIView {
     /// - Parameter to: The value to change to.
     ///
     public func translateY(to translateY: CGFloat) -> Self {
-        chainAnimator.top.combineBasic().property("transform.translation.y").beginTime(afterContext ?? 0.0).toValue(translateY)
+        chainAnimator.top.combineBasic().property(translationy).beginTime(afterContext ?? 0.0).toValue(translateY)
         return self
     }
     /// Animate changing `translate.z` to a destined value.
@@ -483,7 +483,7 @@ public extension UIView {
     /// - Parameter to: The value to change to.
     ///
     public func translateZ(to translateZ: CGFloat) -> Self {
-        chainAnimator.top.combineBasic().property("transform.translation.z").beginTime(afterContext ?? 0.0).toValue(translateZ)
+        chainAnimator.top.combineBasic().property(translationz).beginTime(afterContext ?? 0.0).toValue(translateZ)
         return self
     }
     /// Animate changing `image` to a destined image of the UIImage.
@@ -491,7 +491,7 @@ public extension UIView {
     /// - Parameter to: The image to change to.
     ///
     public func image(to image: UIImage) -> Self {
-        chainAnimator.top.combineBasic().property("contents").beginTime(afterContext ?? 0.0).toValue(image.cgImage as Any)
+        chainAnimator.top.combineBasic().property(contents).beginTime(afterContext ?? 0.0).toValue(image.cgImage as Any)
         return self
     }
     
@@ -501,7 +501,7 @@ public extension UIView {
     /// - Parameter by: The point to move by.
     ///
     public func origin(by origin: CGPoint) -> Self {
-        chainAnimator.top.combineBasic().property("position").beginTime(afterContext ?? 0.0).byValue(position(from: origin))
+        chainAnimator.top.combineBasic().property(position_r).beginTime(afterContext ?? 0.0).byValue(position(from: origin))
         return self
     }
     /// Animate moving `origin.x` by a value.
@@ -509,7 +509,7 @@ public extension UIView {
     /// - Parameter by: The value to move by.
     ///
     public func originX(by originX: CGFloat) -> Self {
-        chainAnimator.top.combineBasic().property("position.x").beginTime(afterContext ?? 0.0).byValue(position(from: CGPoint(x: originX, y: layer.position.y)).x)
+        chainAnimator.top.combineBasic().property(positionx).beginTime(afterContext ?? 0.0).byValue(position(from: CGPoint(x: originX, y: layer.position.y)).x)
         return self
     }
     /// Animate moving `origin.y` by a value.
@@ -517,7 +517,7 @@ public extension UIView {
     /// - Parameter by: The value to move by.
     ///
     public func originY(by originY: CGFloat) -> Self {
-        chainAnimator.top.combineBasic().property("position.x").beginTime(afterContext ?? 0.0).byValue(position(from: CGPoint(x: layer.position.x, y: originY)).y)
+        chainAnimator.top.combineBasic().property(positiony).beginTime(afterContext ?? 0.0).byValue(position(from: CGPoint(x: layer.position.x, y: originY)).y)
         return self
     }
     /// Animate moving `center` by a point.
@@ -525,7 +525,7 @@ public extension UIView {
     /// - Parameter by: The point to move by.
     ///
     public func center(by center: CGPoint) -> Self {
-        chainAnimator.top.combineBasic().property("position").beginTime(afterContext ?? 0.0).byValue(center)
+        chainAnimator.top.combineBasic().property(position_r).beginTime(afterContext ?? 0.0).byValue(center)
         return self
     }
     /// Animate moving `center.x` by a value.
@@ -533,7 +533,7 @@ public extension UIView {
     /// - Parameter by: The value to move by.
     ///
     public func centerX(by centerX: CGFloat) -> Self {
-        chainAnimator.top.combineBasic().property("position.x").beginTime(afterContext ?? 0.0).byValue(CGPoint(x: centerX, y: layer.position.y))
+        chainAnimator.top.combineBasic().property(positionx).beginTime(afterContext ?? 0.0).byValue(CGPoint(x: centerX, y: layer.position.y))
         return self
     }
     /// Animate moving `center.y` by a value.
@@ -541,7 +541,7 @@ public extension UIView {
     /// - Parameter by: The value to move by.
     ///
     public func centerY(by centerY: CGFloat) -> Self {
-        chainAnimator.top.combineBasic().property("position.y").beginTime(afterContext ?? 0.0).byValue(CGPoint(x: layer.position.x, y: centerY))
+        chainAnimator.top.combineBasic().property(positiony).beginTime(afterContext ?? 0.0).byValue(CGPoint(x: layer.position.x, y: centerY))
         return self
     }
     /// Animate changing `size` by a size.
@@ -549,7 +549,7 @@ public extension UIView {
     /// - Parameter by: The size to change by.
     ///
     public func size(by size: CGSize) -> Self {
-        chainAnimator.top.combineBasic().property("bounds.size").beginTime(afterContext ?? 0.0).byValue(size)
+        chainAnimator.top.combineBasic().property(size_r).beginTime(afterContext ?? 0.0).byValue(size)
         return self
     }
     /// Animate changing `width` by a value.
@@ -557,7 +557,7 @@ public extension UIView {
     /// - Parameter by: The value to change by.
     ///
     public func width(by width: CGFloat) -> Self {
-        chainAnimator.top.combineBasic().property("bounds.size").beginTime(afterContext ?? 0.0).byValue(CGSize(width: width, height: layer.bounds.height))
+        chainAnimator.top.combineBasic().property(size_r).beginTime(afterContext ?? 0.0).byValue(CGSize(width: width, height: layer.bounds.height))
         return self
     }
     /// Animate changing `height` by a value.
@@ -565,7 +565,7 @@ public extension UIView {
     /// - Parameter by: The value to change by.
     ///
     public func height(by height: CGFloat) -> Self {
-        chainAnimator.top.combineBasic().property("bounds.size").beginTime(afterContext ?? 0.0).byValue(CGSize(width: layer.bounds.width, height: height))
+        chainAnimator.top.combineBasic().property(size_r).beginTime(afterContext ?? 0.0).byValue(CGSize(width: layer.bounds.width, height: height))
         return self;
     }
     /// Animate changing `frame` by a rect.
@@ -587,7 +587,7 @@ public extension UIView {
     /// - Parameter by: The value to change by.
     ///
     public func opacity(by opacity: Float) -> Self {
-        chainAnimator.top.combineBasic().property("opacity").beginTime(afterContext ?? 0.0).byValue(opacity)
+        chainAnimator.top.combineBasic().property(opacity_r).beginTime(afterContext ?? 0.0).byValue(opacity)
         return self
     }
     /// Animate changing `backgroundColor` by a color.
@@ -595,7 +595,7 @@ public extension UIView {
     /// - Parameter by: The color to change by.
     ///
     public func backgroundColor(by backgroundColor: UIColor) -> Self {
-        chainAnimator.top.combineBasic().property("backgroundColor").beginTime(afterContext ?? 0.0).byValue(backgroundColor.cgColor)
+        chainAnimator.top.combineBasic().property(backgroundColor_r).beginTime(afterContext ?? 0.0).byValue(backgroundColor.cgColor)
         return self
     }
     /// Animate changing `borderColor` by a color.
@@ -603,7 +603,7 @@ public extension UIView {
     /// - Parameter by: The color to change by.
     ///
     public func borderColor(by borderColor: UIColor) -> Self {
-        chainAnimator.top.combineBasic().property("borderColor").beginTime(afterContext ?? 0.0).byValue(borderColor.cgColor)
+        chainAnimator.top.combineBasic().property(borderColor_r).beginTime(afterContext ?? 0.0).byValue(borderColor.cgColor)
         return self
     }
     /// Animate changing `borderWidth` by a value.
@@ -611,7 +611,7 @@ public extension UIView {
     /// - Parameter by: The value to change by.
     ///
     public func borderWidth(by borderWidth: CGFloat) -> Self {
-        chainAnimator.top.combineBasic().property("borderWidth").beginTime(afterContext ?? 0.0).byValue(borderWidth)
+        chainAnimator.top.combineBasic().property(borderWidth_r).beginTime(afterContext ?? 0.0).byValue(borderWidth)
         return self
     }
     /// Animate changing `cornerRadius` by a value.
@@ -619,7 +619,7 @@ public extension UIView {
     /// - Parameter by: The value to change by.
     ///
     public func cornerRadius(by cornerRadius: CGFloat) -> Self {
-        chainAnimator.top.combineBasic().property("cornerRadius").beginTime(afterContext ?? 0.0).byValue(cornerRadius)
+        chainAnimator.top.combineBasic().property(cornerRadius_r).beginTime(afterContext ?? 0.0).byValue(cornerRadius)
         return self
     }
     /// Animate changing `transform.scale` by a value.
@@ -627,7 +627,7 @@ public extension UIView {
     /// - Parameter by: The value to change by.
     ///
     public func scale(by scale: CGFloat) -> Self {
-        chainAnimator.top.combineBasic().property("transform.scale").beginTime(afterContext ?? 0.0).byValue(scale)
+        chainAnimator.top.combineBasic().property(scale_r).beginTime(afterContext ?? 0.0).byValue(scale)
         return self
     }
     /// Animate changing `transform.scale.x` by a value.
@@ -635,7 +635,7 @@ public extension UIView {
     /// - Parameter by: The value to change by.
     ///
     public func scaleX(by scaleX: CGFloat) -> Self {
-        chainAnimator.top.combineBasic().property("transform.scale.x").beginTime(afterContext ?? 0.0).byValue(scaleX)
+        chainAnimator.top.combineBasic().property(scalex).beginTime(afterContext ?? 0.0).byValue(scaleX)
         return self
     }
     /// Animate changing `scale.y` by a value.
@@ -643,7 +643,7 @@ public extension UIView {
     /// - Parameter by: The value to change by.
     ///
     public func scaleY(by scaleY: CGFloat) -> Self {
-        chainAnimator.top.combineBasic().property("transform.scale.y").beginTime(afterContext ?? 0.0).byValue(scaleY)
+        chainAnimator.top.combineBasic().property(scaley).beginTime(afterContext ?? 0.0).byValue(scaleY)
         return self
     }
     /// Animate changing `transform.scale.z` by a value.
@@ -651,7 +651,7 @@ public extension UIView {
     /// - Parameter by: The value to change by.
     ///
     public func scaleZ(by scaleZ: CGFloat) -> Self {
-        chainAnimator.top.combineBasic().property("transform.scale.z").beginTime(afterContext ?? 0.0).byValue(scaleZ)
+        chainAnimator.top.combineBasic().property(scalez).beginTime(afterContext ?? 0.0).byValue(scaleZ)
         return self
     }
     /// Animate changing `transform.rotation` by a value.
@@ -659,7 +659,7 @@ public extension UIView {
     /// - Parameter by: The value to change by.
     ///
     public func rotate(by rotate: CGFloat) -> Self {
-        chainAnimator.top.combineBasic().property("transform.rotation").beginTime(afterContext ?? 0.0).byValue(rotate)
+        chainAnimator.top.combineBasic().property(rotation).beginTime(afterContext ?? 0.0).byValue(rotate)
         return self
     }
     /// Animate changing `transform.rotation.x` by a value.
@@ -667,7 +667,7 @@ public extension UIView {
     /// - Parameter by: The value to change by.
     ///
     public func rotateX(by rotateX: CGFloat) -> Self {
-        chainAnimator.top.combineBasic().property("transform.rotation.x").beginTime(afterContext ?? 0.0).byValue(rotateX)
+        chainAnimator.top.combineBasic().property(rotationx).beginTime(afterContext ?? 0.0).byValue(rotateX)
         return self
     }
     /// Animate changing `transform.rotation.y` by a value.
@@ -675,7 +675,7 @@ public extension UIView {
     /// - Parameter by: The value to change by.
     ///
     public func rotateY(by rotateY: CGFloat) -> Self {
-        chainAnimator.top.combineBasic().property("transform.rotation.y").beginTime(afterContext ?? 0.0).byValue(rotateY)
+        chainAnimator.top.combineBasic().property(rotationy).beginTime(afterContext ?? 0.0).byValue(rotateY)
         return self
     }
     /// Animate changing `transform.rotation.z` by a value.
@@ -683,7 +683,7 @@ public extension UIView {
     /// - Parameter by: The value to change by.
     ///
     public func rotateZ(by rotateZ: CGFloat) -> Self {
-        chainAnimator.top.combineBasic().property("transform.rotation.z").beginTime(afterContext ?? 0.0).byValue(rotateZ)
+        chainAnimator.top.combineBasic().property(rotationz).beginTime(afterContext ?? 0.0).byValue(rotateZ)
         return self
     }
     /// Animate changing `transform.translation` by a value.
@@ -691,7 +691,7 @@ public extension UIView {
     /// - Parameter by: The value to change by.
     ///
     public func translate(by translate: CGPoint) -> Self {
-        chainAnimator.top.combineBasic().property("transform.translation").beginTime(afterContext ?? 0.0).byValue(translate)
+        chainAnimator.top.combineBasic().property(translation).beginTime(afterContext ?? 0.0).byValue(translate)
         return self
     }
     /// Animate changing `transform.translation.x` by a value.
@@ -699,7 +699,7 @@ public extension UIView {
     /// - Parameter by: The value to change by.
     ///
     public func translateX(by translateX: CGFloat) -> Self {
-        chainAnimator.top.combineBasic().property("transform.translation.x").beginTime(afterContext ?? 0.0).byValue(translateX)
+        chainAnimator.top.combineBasic().property(translationx).beginTime(afterContext ?? 0.0).byValue(translateX)
         return self
     }
     /// Animate changing `transform.translation.y` by a value.
@@ -707,7 +707,7 @@ public extension UIView {
     /// - Parameter by: The value to change by.
     ///
     public func translateY(by translateY: CGFloat) -> Self {
-        chainAnimator.top.combineBasic().property("transform.translation.y").beginTime(afterContext ?? 0.0).byValue(translateY)
+        chainAnimator.top.combineBasic().property(translationy).beginTime(afterContext ?? 0.0).byValue(translateY)
         return self
     }
     /// Animate changing `transform.translation.z` by a value.
@@ -715,7 +715,7 @@ public extension UIView {
     /// - Parameter by: The value to change by.
     ///
     public func translateZ(by translateZ: CGFloat) -> Self {
-        chainAnimator.top.combineBasic().property("transform.translation.z").beginTime(afterContext ?? 0.0).byValue(translateZ)
+        chainAnimator.top.combineBasic().property(translationz).beginTime(afterContext ?? 0.0).byValue(translateZ)
         return self
     }
     
@@ -739,61 +739,61 @@ fileprivate extension CALayer {
     ///
     fileprivate func initial(_ keyPath: String) -> Any? {
         switch keyPath {
-        case "position":
+        case position_r:
             return position
-        case "position.x":
+        case positionx:
             return position.x
-        case "position.y":
+        case positiony:
             return position.y
-        case "bounds.size":
+        case size_r:
             return bounds.size
-        case "opacity":
+        case opacity_r:
             return opacity
-        case "backgroundColor":
+        case backgroundColor_r:
             return backgroundColor ?? UIColor.clear.cgColor
-        case "borderColor":
+        case borderColor_r:
             return borderColor ?? UIColor.clear.cgColor
-        case "borderWidth":
+        case borderWidth_r:
             return borderWidth
-        case "cornerRadius":
+        case cornerRadius_r:
             return cornerRadius
-        case "transform.scale":
+        case scale_r:
             /*
             return (transform.m11+transform.m22+transform.m33)/3 */
             return value(forKeyPath: keyPath)
-        case "transform.scale.x":
+        case scalex:
             /*
             return transform.m11 */
             return value(forKeyPath: keyPath)
-        case "transform.scale.y":
+        case scaley:
             /*
             return transform.m22 */
-            return value(forKeyPath: keyPath)
-        case "transform.scale.z":
+            return value(forKeyPath: keyPath) 
+        case scalez:
             /*
             return transform.m33 */
             return value(forKeyPath: keyPath)
-        case "transform.rotation":
+        case rotation:
             return value(forKeyPath: keyPath)
-        case "transform.rotation.x":
+        case rotationx:
             return value(forKeyPath: keyPath)
-        case "transform.rotation.y":
+        case rotationy:
             return value(forKeyPath: keyPath)
-        case "transform.rotation.z":
+        case rotationz:
             return value(forKeyPath: keyPath)
-        case "transform.translation":
+        case translation:
             /*
             return (transform.m41+transform.m42+transform.m43)/3 */
             return value(forKeyPath: keyPath)
-        case "transform.translation.x":
+        case translationx:
             /*
             return transform.m41 */
             return value(forKeyPath: keyPath)
-        case "transform.translation.y":
+        case translationy:
             /*
             return transform.m42 */
             return value(forKeyPath: keyPath)
-        case "transform.translation.z":
+        case translationz:
             /*
             return transform.m43 */
             return value(forKeyPath: keyPath)
