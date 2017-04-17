@@ -12,13 +12,17 @@ import AXAnimationChainSwift
 extension UIView {
     override open func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
-        print("\(#file)")
+        // print("\((String(#file) as NSString).lastPathComponent)")
     }
 }
 
 class DecayAnimationViewController: UIViewController, UIGestureRecognizerDelegate {
 
     @IBOutlet weak var animatedView: UIView!
+    weak var panGesture: UIPanGestureRecognizer?
+    weak var longPressGesture: UILongPressGestureRecognizer?
+    
+    var shouldBeginInactiveOfAnimatedView = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,11 +31,18 @@ class DecayAnimationViewController: UIViewController, UIGestureRecognizerDelegat
         // Add pan ges ture to the animated view.
         let pan = UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture(_:)))
         pan.delegate = self
-        animatedView.addGestureRecognizer(pan)
+        view.addGestureRecognizer(pan)
+        panGesture = pan
         
-        let tap = UITapGestureRecognizer(target: self, action: #selector(handleTagGesture(_:)))
-        tap.delegate = self
-        view.addGestureRecognizer(tap)
+        // let tap = UITapGestureRecognizer(target: self, action: #selector(handleTagGesture(_:)))
+        // tap.delegate = self
+        // view.addGestureRecognizer(tap)
+        
+        let longPress = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPressGesture(_:)))
+        longPress.delegate = self
+        longPress.minimumPressDuration = 0.0001
+        // view.addGestureRecognizer(longPress)
+        // longPressGesture = longPress
     }
     
     override func didReceiveMemoryWarning() {
@@ -43,6 +54,13 @@ class DecayAnimationViewController: UIViewController, UIGestureRecognizerDelegat
     @objc
     private func handleTagGesture(_ genture: UITapGestureRecognizer) {
         _applyImmediateValueOfAnimatedView()
+        print("State of tap gesture: \(genture.state.rawValue)")
+    }
+    
+    @objc
+    private func handleLongPressGesture(_ genture: UILongPressGestureRecognizer) {
+        _applyImmediateValueOfAnimatedView()
+        print("State of long press gesture: \(genture.state.rawValue)")
     }
     
     @objc
@@ -56,6 +74,12 @@ class DecayAnimationViewController: UIViewController, UIGestureRecognizerDelegat
             
             point = gesture.location(in: view)
             
+            if animatedView.frame.contains(point) {
+                shouldBeginInactiveOfAnimatedView = true
+            } else {
+                shouldBeginInactiveOfAnimatedView = false
+            }
+            
             let pauseTime = animatedView.layer.convertTime(CACurrentMediaTime(), from: nil)
             print("pause time: \(pauseTime)")
         case .changed:
@@ -65,8 +89,10 @@ class DecayAnimationViewController: UIViewController, UIGestureRecognizerDelegat
             point.x = min(view.frame.width-animatedView.frame.width/2, point.x)
             point.y = min(view.frame.height-animatedView.frame.height/2, point.y)
              */
+            guard shouldBeginInactiveOfAnimatedView else { break }
             animatedView.center = point
         case .ended:
+            guard shouldBeginInactiveOfAnimatedView else { break }
             point = gesture.location(in: view)
             print("view's center:\(String(describing: animatedView.center)), layer's position:\(String(describing: animatedView.layer.position))")
             
@@ -130,6 +156,20 @@ class DecayAnimationViewController: UIViewController, UIGestureRecognizerDelegat
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         if gestureRecognizer.isKind(of: UITapGestureRecognizer.self) {
             return false
+        }
+        return false
+    }
+    
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRequireFailureOf otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        if gestureRecognizer == longPressGesture && otherGestureRecognizer == panGesture {
+            return true
+        }
+        return false
+    }
+    
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldBeRequiredToFailBy otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        if gestureRecognizer == panGesture && otherGestureRecognizer == longPressGesture {
+            return true
         }
         return false
     }
