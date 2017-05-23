@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DC1859DA1ED3D1DE0046F025 /* ImmediateValueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1859D91ED3D1DE0046F025 /* ImmediateValueTests.swift */; };
 		DC385F6A1E8E999C004E2448 /* AXDecayAnimation.h in Headers */ = {isa = PBXBuildFile; fileRef = DC385F681E8E999C004E2448 /* AXDecayAnimation.h */; };
 		DC385F6B1E8E999C004E2448 /* AXDecayAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = DC385F691E8E999C004E2448 /* AXDecayAnimation.m */; };
 		DC47861A1E29C4A500DC3055 /* ImageAnimationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC4786191E29C4A500DC3055 /* ImageAnimationViewController.m */; };
@@ -68,6 +69,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		DC1859D91ED3D1DE0046F025 /* ImmediateValueTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImmediateValueTests.swift; sourceTree = "<group>"; };
 		DC385F681E8E999C004E2448 /* AXDecayAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AXDecayAnimation.h; sourceTree = "<group>"; };
 		DC385F691E8E999C004E2448 /* AXDecayAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AXDecayAnimation.m; sourceTree = "<group>"; };
 		DC4786181E29C4A500DC3055 /* ImageAnimationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageAnimationViewController.h; sourceTree = "<group>"; };
@@ -201,6 +203,7 @@
 			isa = PBXGroup;
 			children = (
 				DC5E8ABB1DFBEBC400597663 /* AXAnimationChainTests.m */,
+				DC1859D91ED3D1DE0046F025 /* ImmediateValueTests.swift */,
 				DC5E8ABD1DFBEBC400597663 /* Info.plist */,
 			);
 			path = AXAnimationChainTests;
@@ -365,6 +368,7 @@
 					DC5E8AB61DFBEBC400597663 = {
 						CreatedOnToolsVersion = 8.1;
 						DevelopmentTeam = TKA48YVS5T;
+						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
 						TestTargetID = DC5E8A9D1DFBEBC400597663;
 					};
@@ -459,6 +463,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DC5E8ABC1DFBEBC400597663 /* AXAnimationChainTests.m in Sources */,
+				DC1859DA1ED3D1DE0046F025 /* ImmediateValueTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -649,11 +654,14 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = TKA48YVS5T;
 				INFOPLIST_FILE = AXAnimationChainTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = devedbox.AXAnimationChainTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AXAnimationChain.app/AXAnimationChain";
 			};
 			name = Debug;
@@ -663,11 +671,13 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = TKA48YVS5T;
 				INFOPLIST_FILE = AXAnimationChainTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = devedbox.AXAnimationChainTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AXAnimationChain.app/AXAnimationChain";
 			};
 			name = Release;
