@@ -146,7 +146,7 @@ class DecayAnimationViewController: UIViewController, UIGestureRecognizerDelegat
             // print("current time: \(CACurrentMediaTime())")
             
             let time = CACurrentMediaTime()-beginTime
-            guard let immediateValue = animation.immediateValue(atTime: time) else { continue }
+            guard let immediateValue = try? animation.immediateValue(atTime: time) else { continue }
             
             animatedView.layer.setValue(immediateValue, forKeyPath: animation.keyPath!)
         }
