@@ -28,16 +28,23 @@
 #ifndef AXDisableImmediateValue
 #define AXDisableImmediateValue(AnimationClass) \
 @interface AnimationClass (ImmediateValue)\
-- (nullable id)immediateValueAtTime:(CFTimeInterval)time __attribute__((unavailable));\
+- (nullable id)immediateValueAtTime:(CFTimeInterval)time error:(NSError __autoreleasing * _Nullable *_Nullable)error __attribute__((unavailable));\
 @end
 #endif
 
+extern NSUInteger const kAXImmediateValueCannotBeCalculatedErrorCode;
+
+/// Get the immediate value of the animation values.
+/// @discusstion Do not using this method on `CAAnimation`, `CATransition` and `CAAnimationGroup`, because these
+/// animations cannot be calculated. if u try to call `immediateValueAtTime` on those animations,
+/// There will be an exception throwed.
+///
 @interface CAAnimation (ImmediateValue)
 /// Immediate value from the value function.
 ///
 /// @importance `keyTimes` and `path` properties of keyframe animation is not allowed.
 ///
-- (nullable id)immediateValueAtTime:(CFTimeInterval)time;
+- (nullable id)immediateValueAtTime:(CFTimeInterval)time error:(NSError __autoreleasing * _Nullable *_Nullable)error;
 @end
 
 AXDisableImmediateValue(CATransition)
