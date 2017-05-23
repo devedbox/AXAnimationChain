@@ -27,6 +27,18 @@
 #import "CAAnimation+Convertable.h"
 #import "CAMediaTimingFunction+Extends.h"
 
+#ifndef _imp_AXDisableImmediateValue
+#define _imp_AXDisableImmediateValue(AnimationClass) \
+@implementation AnimationClass (ImmediateValue)\
+- (id)immediateValueAtTime:(CFTimeInterval)time error:(NSError *__autoreleasing  _Nullable * _Nullable)error {\
+if (error != NULL) *error = [NSError errorWithDomain:@"axanimation_chain.caanimation.immediatevalue" code:kAXImmediateValueCannotBeCalculatedErrorCode userInfo:@{NSLocalizedFailureReasonErrorKey:[NSString stringWithFormat:@"Values of instance of animation class `%@` cannot be calculated.", NSStringFromClass(self.class)]}];\
+return nil;\
+}\
+@end
+#endif
+
+NSUInteger const kAXImmediateValueCannotBeCalculatedErrorCode = 0x2711; //10001
+
 extern NSUInteger kAXCAKeyframeAnimationFrameCount;
 extern id CalculateToValueWithByValue(id value, id byValue, BOOL plus);
 extern NSArray * CAKeyframeValuesWithFrames(id fromValue, id toValue, NSTimeInterval duration, CAMediaTimingFunction *timing, CAKeyframeValuesFunction function);
@@ -44,14 +56,8 @@ static id _ImmediateValueAtIndex(id fromValue, id toValue, NSTimeInterval durati
     return value;
 }
 
-@implementation CAAnimation (ImmediateValue)
-- (id)immediateValueAtTime:(CFTimeInterval)time {
-    return nil;
-}
-@end
-
 @implementation CABasicAnimation (ImmediateValue)
-- (id)immediateValueAtTime:(CFTimeInterval)time {
+- (id)immediateValueAtTime:(CFTimeInterval)time error:(NSError *__autoreleasing  _Nullable * _Nullable)error {
     id fromValue = self.fromValue;
     id toValue = self.toValue;
     id byValue = self.byValue;
@@ -74,16 +80,16 @@ static id _ImmediateValueAtIndex(id fromValue, id toValue, NSTimeInterval durati
 @end
 #if __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_9_0
 @implementation CASpringAnimation (ImmediateValue)
-- (id)immediateValueAtTime:(CFTimeInterval)time {
+- (id)immediateValueAtTime:(CFTimeInterval)time error:(NSError *__autoreleasing  _Nullable * _Nullable)error {
     // Conver to AXSpringAnimation.
     AXSpringAnimation *spring = [AXSpringAnimation animationWithCoreSpring:self];
-    return [spring immediateValueAtTime:time];
-    return [super immediateValueAtTime:time];
+    return [spring immediateValueAtTime:time error:error];
+    return [super immediateValueAtTime:time error:error];
 }
 @end
 #endif
 @implementation CAKeyframeAnimation (ImmediateValue)
-- (id)immediateValueAtTime:(CFTimeInterval)time {
+- (id)immediateValueAtTime:(CFTimeInterval)time error:(NSError *__autoreleasing  _Nullable * _Nullable)error {
     NSAssert(self.keyTimes.count==0&&self.path==NULL, @"`keyTimes` and `path` properties of keyframe animation should not be setted.");
     
     if (self.keyTimes.count != 0 || self.path != NULL) return nil;
@@ -99,3 +105,11 @@ static id _ImmediateValueAtIndex(id fromValue, id toValue, NSTimeInterval durati
     return value;
 }
 @end
+
+#pragma mark - Disabled.
+/// Exception for `CAAnimation`.
+_imp_AXDisableImmediateValue(CAAnimation)
+/// Exception for `CATransition`.
+_imp_AXDisableImmediateValue(CATransition)
+/// Exception for `CAAnimationGroup`.
+_imp_AXDisableImmediateValue(CAAnimationGroup)
