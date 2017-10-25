@@ -7,12 +7,21 @@
 //
 
 import UIKit
+import ObjectiveC
 import AXAnimationChainSwift
 
 extension UIView {
+    private struct _AssociatedObjectKey {
+        static let touchsBeganKey = "touchsBegan"
+    }
+    internal var touchsBegan: ((Set<UITouch>, UIEvent?) -> Void)? {
+        get { return objc_getAssociatedObject(self, _AssociatedObjectKey.touchsBeganKey) as? ((Set<UITouch>, UIEvent?) -> Void) }
+        set { objc_setAssociatedObject(self, _AssociatedObjectKey.touchsBeganKey, newValue, .OBJC_ASSOCIATION_COPY_NONATOMIC) }
+    }
     override open func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
         // print("\((String(#file) as NSString).lastPathComponent)")
+        touchsBegan?(touches, event)
     }
 }
 
@@ -43,6 +52,10 @@ class DecayAnimationViewController: UIViewController, UIGestureRecognizerDelegat
         longPress.minimumPressDuration = 0.0001
         // view.addGestureRecognizer(longPress)
         // longPressGesture = longPress
+        
+        view.touchsBegan = { [unowned self] touchs, event in
+            self._applyImmediateValueOfAnimatedView()
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -53,13 +66,13 @@ class DecayAnimationViewController: UIViewController, UIGestureRecognizerDelegat
     // MARK: Actions.
     @objc
     private func handleTagGesture(_ genture: UITapGestureRecognizer) {
-        _applyImmediateValueOfAnimatedView()
+        // _applyImmediateValueOfAnimatedView()
         print("State of tap gesture: \(genture.state.rawValue)")
     }
     
     @objc
     private func handleLongPressGesture(_ genture: UILongPressGestureRecognizer) {
-        _applyImmediateValueOfAnimatedView()
+        // _applyImmediateValueOfAnimatedView()
         print("State of long press gesture: \(genture.state.rawValue)")
     }
     
